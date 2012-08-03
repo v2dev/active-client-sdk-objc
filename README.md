@@ -12,8 +12,8 @@ There are two ways to use the library in a dependent project: as a linked binary
 
 ### As a linked Binary
 
-1. Drag the Percero.framework folder into your project's Frameworks group.
-2. Add `#import <Serenity/Serenity.h>` in any file where you reference Percero APIs.
+1. Drag the Percero.framework from the distribution folder into your project's Frameworks group.
+2. Add `#import <Percero/Percero.h>` in any file where you reference Percero APIs.
 
 ### As a dependent project
 
@@ -22,7 +22,7 @@ The Percero client library needs development too… and the best way to test it 
 1. From Finder drag the Percero.xcodeproj file into the frameworks group in your dependent project.
 2. Select your Project's target and add Percero as a Target Dependency.
 3. Expand the "Link Binary With Libraries" phase and click the + button. Select the libPercero.a and then click add.
-2. Add `#import <Serenity/Serenity.h>` in any file where you reference Percero APIs.
+4. Add `#import <Percero/Percero.h>` in any file where you reference Percero APIs.
 
 
 Instrutions compliments of https://github.com/jverkoey/iOS-Framework
