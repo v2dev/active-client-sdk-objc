@@ -14,15 +14,21 @@
 	NSString* token;
     NSString* clientType;
 	NSString* clientId;
+	NSString* deviceId;
 	NSString* responseChannel;
 	NSString* messageId;
+	NSString* regAppKey;
+	NSString* svcOauthKey;
 }
 
 @property(nonatomic, retain) NSString* userName;
 @property(nonatomic, retain) NSString* token;
 @property(nonatomic, retain) NSString* clientType;
 @property(nonatomic, retain) NSString* clientId;
+@property(nonatomic, retain) NSString* deviceId;
 @property(nonatomic, retain) NSString* responseChannel;
 @property(nonatomic, retain) NSString* messageId;
+@property(nonatomic, retain) NSString* regAppKey;
+@property(nonatomic, retain) NSString* svcOauthKey;
 
 @end

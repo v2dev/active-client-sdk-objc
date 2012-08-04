@@ -14,6 +14,7 @@
     NSString* token;
     NSString* clientType;
     NSString* clientId;
+    NSString* deviceId;
     NSString* messageId;
 }
 
@@ -21,6 +22,7 @@
 @property(nonatomic, retain) NSString* token;
 @property(nonatomic, retain) NSString* clientType;
 @property(nonatomic, retain) NSString* clientId;
+@property(nonatomic, retain) NSString* deviceId;
 @property(nonatomic, retain) NSString* messageId;
 
 @end
