@@ -118,6 +118,10 @@ static PFSocketManager* sharedInstance;
     id message = [args objectAtIndex:0]; // The real data is in the first element
     id<Serializable> result = [self deserializeObject:message];
     
+    if([[packet name] isEqualToString:@"gatewayConnectAck"]){
+        
+    }
+    
     if(result){
         NSNotificationCenter *nc = [NSNotificationCenter defaultCenter];
         [nc postNotificationName:[NSString stringWithFormat:@"didReceive%@", [[result class] description]] 
