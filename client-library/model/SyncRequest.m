@@ -9,7 +9,7 @@
 #import "SyncRequest.h"
 
 @implementation SyncRequest
-@synthesize token,clientId,userName,messageId,clientType,responseChannel,deviceId,regAppKey,svcOauthKey;
+@synthesize token,clientId,userId,messageId,clientType,responseChannel,deviceId,regAppKey,svcOauthKey;
 
 - (id) init{
     self = [super init];
@@ -17,7 +17,7 @@
         token = @"";
         clientId = @"";
         deviceId = @"";
-        userName = @"";
+        userId = @"";
         messageId = @"";
         clientType = @"";
         responseChannel = @"";
@@ -34,7 +34,7 @@
         token = [dict objectForKey:@"token"];
         clientId = [dict objectForKey:@"clientId"];
         deviceId = [dict objectForKey:@"deviceId"];
-        userName = [dict objectForKey:@"userName"];
+        userId = [dict objectForKey:@"userId"];
         messageId = [dict objectForKey:@"messageId"];
         clientType = [dict objectForKey:@"clientType"];
         responseChannel = [dict objectForKey:@"responseChannel"];
@@ -53,7 +53,7 @@
         [dict setObject:token forKey:@"token"];
         [dict setObject:clientId forKey:@"clientId"];
         [dict setObject:deviceId forKey:@"deviceId"];
-        [dict setObject:userName  forKey:@"userName"];
+        [dict setObject:userId  forKey:@"userId"];
         [dict setObject:messageId  forKey:@"messageId"];
         [dict setObject:clientType  forKey:@"clientType"];
         [dict setObject:responseChannel  forKey:@"responseChannel"];

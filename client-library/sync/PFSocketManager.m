@@ -15,6 +15,7 @@
 #import "SyncRequest.h"
 #import "AuthResponse.h"
 #import "SyncResponse.h"
+#import "ConnectResponse.h"
 
 static PFSocketManager* sharedInstance;
 
@@ -129,6 +130,10 @@ static PFSocketManager* sharedInstance;
         }
         else if([result isKindOfClass:[SyncResponse class]]){
             coorMessageId = ((SyncResponse*)result).coorespondingMessageId;
+            if([result isKindOfClass:[ConnectResponse class]]){
+                NSNotificationCenter *nc = [NSNotificationCenter defaultCenter];
+                [nc postNotificationName:@"PFSocketReady" object:nil];
+            }
         }
         
         PFInvocation* callback = [callbacks objectForKey:coorMessageId];
@@ -152,6 +157,17 @@ static PFSocketManager* sharedInstance;
     
     [nc addObserver:target selector:selector name:@"PFSocketConnected" object:nil];
 
+}
+
+/**
+ * Add a listener for the ConnectResponse object, which is what signifies that we are read
+ * to start sending traffic.
+ */
++ (void) addListenerForReadyEvent:(NSObject*) target method:(SEL) selector{
+    // Register any events that we are interested in.
+    NSNotificationCenter *nc = [NSNotificationCenter defaultCenter];
+    
+    [nc addObserver:target selector:selector name:@"PFSocketReady" object:nil];
 }
 
 

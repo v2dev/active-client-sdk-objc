@@ -10,7 +10,7 @@
 #import "Serializable.h"
 
 @interface SyncRequest : NSObject <Serializable>{
-    NSString* userName;
+    NSString* userId;
 	NSString* token;
     NSString* clientType;
 	NSString* clientId;
@@ -21,7 +21,7 @@
 	NSString* svcOauthKey;
 }
 
-@property(nonatomic, retain) NSString* userName;
+@property(nonatomic, retain) NSString* userId;
 @property(nonatomic, retain) NSString* token;
 @property(nonatomic, retain) NSString* clientType;
 @property(nonatomic, retain) NSString* clientId;

@@ -37,6 +37,7 @@ static PFClient* _sharedInstance;
 
     // The PFSocketManager will issue this message when it gets connected
     [PFSocketManager addListenerForConnectEvent:self method:@selector(socketConnected)];
+    [PFSocketManager addListenerForReadyEvent:self method:@selector(socketReady)];
     
     // Pull some config values out of the configuration file
     EnvConfig* config = [EnvConfig sharedInstance];
@@ -45,6 +46,7 @@ static PFClient* _sharedInstance;
     
     // Get the SocketManager
     syncManager = [PFSocketManager sharedInstance];
+    
 
 }
 
@@ -113,11 +115,6 @@ static PFClient* _sharedInstance;
         accessToken = response.accessToken;
         
         [PFClient save];
-        [self announceAuthenticated:userToken?true:false];
-    }
-    else{
-        NSLog(@"PFClient got invalid object in authenticate oauth code callback");
-        [self announceAuthenticated:false];
     }
 }
 
@@ -153,12 +150,20 @@ static PFClient* _sharedInstance;
     request.token = @"";
     request.clientType = @"N";
     request.clientId = @"";
+    request.deviceId = @"";
     
     PFInvocation* callback = [[PFInvocation alloc] initWithTarget:self method:@selector(receivedGetRegAppOAuthsResponse)];
     
     [syncManager sendEvent:@"getRegAppOAuths" data:request callback:callback];
-    
-    
+}
+
+/**
+ * Callback method for when we recieve the ConnectResponse
+ * object from the server... this signifies that we are ready to
+ * start generating activity on the wire.
+ */
+- (void) socketReady{
+    [self announceAuthenticated:true];
 }
 
 + (void) addListenerForAuthEvents:(NSObject*)target method:(SEL)selector{
@@ -184,6 +189,7 @@ static PFClient* _sharedInstance;
     req.code = oauthCode;
     req.svcOauthKey = saOAuth.appKey; //saOAuth.serviceApplication.serviceProvider.;//@"psiglobal";
     req.regAppKey = @"PSI_29V97G";
+    req.deviceId = @"";
     
     PFInvocation* callback = [[PFInvocation alloc] initWithTarget:[PFClient sharedInstance] method:@selector(receivedAuthenticateOAuthCodeResponse:)];
 
@@ -211,6 +217,7 @@ static PFClient* _sharedInstance;
         req.refreshToken = [PFClient sharedInstance].refreshToken; //saOAuth.serviceApplication.serviceProvider.;//@"psiglobal";
         req.svcOauthKey = saOAuth.appKey; //saOAuth.serviceApplication.serviceProvider.;//@"psiglobal";
         req.regAppKey = @"PSI_29V97G";
+        req.deviceId = @"";
     
         PFInvocation* callback = [[PFInvocation alloc] initWithTarget:[PFClient sharedInstance] method:@selector(autoLoginCallback:)];
     
@@ -234,13 +241,10 @@ static PFClient* _sharedInstance;
         refreshToken = response.refreshToken;
         accessToken = response.accessToken;
         [PFClient save];
-        [self announceAuthenticated:userToken?true:false];
     }
     else{
         NSLog(@"autoLoginCallback got invalid type of object");
-        [self announceAuthenticated:false];
     }
-    
 }
 
 /**
@@ -250,7 +254,7 @@ static PFClient* _sharedInstance;
     GetAllByNameRequest* request = [[GetAllByNameRequest alloc] init];
     [request setClientId:[PFClient sharedInstance].clientId];
     [request setToken:[PFClient sharedInstance].token];
-    [request setUserName:[PFClient sharedInstance].userId];
+    [request setUserId:[PFClient sharedInstance].userId];
     [request setTheClassName:className];
     
     PFInvocation* callback = nil;
@@ -269,19 +273,19 @@ static PFClient* _sharedInstance;
 }
 
 - (id) initWithCoder:(NSCoder *)aDecoder{
-    self = [super init];
-    if(self){
-        clientId = [aDecoder decodeObjectForKey:@"clientId"];
-        userId = [aDecoder decodeObjectForKey:@"userId"];
-        token = [aDecoder decodeObjectForKey:@"token"];
-        appKey = [aDecoder decodeObjectForKey:@"appKey"];
-        appSecret = [aDecoder decodeObjectForKey:@"appSecret"];
-        accessToken = [aDecoder decodeObjectForKey:@"accessToken"];
-        refreshToken = [aDecoder decodeObjectForKey:@"refreshToken"];
+    self = [self init];
+//    if(self){
+//        clientId = [aDecoder decodeObjectForKey:@"clientId"];
+//        userId = [aDecoder decodeObjectForKey:@"userId"];
+//        token = [aDecoder decodeObjectForKey:@"token"];
+//        appKey = [aDecoder decodeObjectForKey:@"appKey"];
+//        appSecret = [aDecoder decodeObjectForKey:@"appSecret"];
+//        accessToken = [aDecoder decodeObjectForKey:@"accessToken"];
+//        refreshToken = [aDecoder decodeObjectForKey:@"refreshToken"];
         
-        [self setup];
-        _sharedInstance = self;
-    }
+//        [self setup];
+//        _sharedInstance = self;
+//    }
     
     return self;
 }

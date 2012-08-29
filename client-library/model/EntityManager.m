@@ -128,7 +128,7 @@ static EntityManager* sharedInstance;
     req.theClassId = entity.ID;
     req.theClassName = [entity remoteClassName];
     req.clientId = ad.clientId;
-    req.userName = ad.userId;
+    req.userId = ad.userId;
 
     [[PFSocketManager sharedInstance] sendEvent:@"findById" data:req callback:nil];
 }

@@ -28,5 +28,7 @@
 - (void) sendEvent:(NSString*)eventName data:(id<Serializable>)data callback:(PFInvocation*) inv;
 - (void) connect;
 + (void) addListenerForConnectEvent:(NSObject*) target method:(SEL) selector;
++ (void) addListenerForReadyEvent:(NSObject*) target method:(SEL) selector;
+
 
 @end
