@@ -36,6 +36,7 @@
 + (bool) loginWithOAuthCode:(NSString*) oauthCode callbackTarget:(NSObject*) target method:(SEL) selector;
 + (void) loginSavedSessionWithCallbackTarget:(NSObject*) target method:(SEL) selector;
 + (void) sendGetAllByNameRequest:(NSString*)className target:(NSObject*) target method:(SEL) selector;
++ (void) sendGetByIdRequest:(NSString*)className id:(NSString*)id target:(NSObject*) target method:(SEL) selector;
 + (bool) isAuthenticated;
 + (void) autoLogin;
 + (void) logout;

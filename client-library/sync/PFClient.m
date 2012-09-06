@@ -20,6 +20,7 @@
 #import "EntityManager.h"
 #import "PFSocketManager.h"
 #import "GetAllByNameRequest.h"
+#import "FindByIdRequest.h"
 
 // The singleton
 static PFClient* _sharedInstance;
@@ -263,6 +264,22 @@ static PFClient* _sharedInstance;
     
     [[PFSocketManager sharedInstance] sendEvent:@"getAllByName" data:request callback:callback];
 }
+
++ (void) sendGetByIdRequest:(NSString*)className id:(NSString*)id target:(NSObject*) target method:(SEL) selector{
+    FindByIdRequest* request = [[FindByIdRequest alloc] init];
+    [request setClientId:[PFClient sharedInstance].clientId];
+    [request setToken:[PFClient sharedInstance].token];
+    [request setUserId:[PFClient sharedInstance].userId];
+    [request setTheClassName:className];
+    
+    PFInvocation* callback = nil;
+    if(target && selector)
+        callback = [[PFInvocation alloc] initWithTarget:target method:selector];
+    
+    [[PFSocketManager sharedInstance] sendEvent:@"findById" data:request callback:callback];
+
+}
+
 
 + (bool) isAuthenticated{
     return (bool)[PFClient sharedInstance].token;
