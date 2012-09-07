@@ -271,6 +271,7 @@ static PFClient* _sharedInstance;
     [request setToken:[PFClient sharedInstance].token];
     [request setUserId:[PFClient sharedInstance].userId];
     [request setTheClassName:className];
+    [request setTheClassId:id];
     
     PFInvocation* callback = nil;
     if(target && selector)
