@@ -20,7 +20,7 @@
 @property(nonatomic, retain) NSString* clientId;
 @property(nonatomic, retain) id data;
 @property(nonatomic, retain) NSString* type;
-@property(nonatomic, retain) NSString* coorespondingMessageId;
+@property(nonatomic, retain) NSString* correspondingMessageId;
 @property(nonatomic, retain) NSString* gatewayMessageId;
 
 @end

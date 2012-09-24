@@ -9,7 +9,7 @@
 #import "SyncResponse.h"
 
 @implementation SyncResponse
-@synthesize clientId, data,type,gatewayMessageId,coorespondingMessageId;
+@synthesize clientId, data,type,gatewayMessageId,correspondingMessageId;
 
 - (id) initFromDictionary:(NSDictionary *)dict{
     self = [super init];
@@ -18,7 +18,7 @@
         data = [dict objectForKey:@"data"];
         type = [dict objectForKey:@"type"];
         gatewayMessageId = [dict objectForKey:@"gatewayMessageId"];
-        coorespondingMessageId = [dict valueForKey:@"coorespondingMessageId"];
+        correspondingMessageId = [dict valueForKey:@"correspondingMessageId"];
     }
     
     return self;
@@ -33,7 +33,7 @@
         [dict setObject:data forKey:@"data"];
         [dict setObject:type  forKey:@"type"];
         [dict setObject:gatewayMessageId forKey:@"gatewayMessageId"];
-        [dict setObject:coorespondingMessageId forKey:@"coorespondingMessageId"];
+        [dict setObject:correspondingMessageId forKey:@"correspondingMessageId"];
     }
     return dict;
 }

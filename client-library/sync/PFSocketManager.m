@@ -133,7 +133,7 @@ static PFSocketManager* sharedInstance;
             coorMessageId = ((AuthResponse*)result).correspondingMessageId;
         }
         else if([result isKindOfClass:[SyncResponse class]]){
-            coorMessageId = ((SyncResponse*)result).coorespondingMessageId;
+            coorMessageId = ((SyncResponse*)result).correspondingMessageId;
             if([result isKindOfClass:[ConnectResponse class]]){
                 NSNotificationCenter *nc = [NSNotificationCenter defaultCenter];
                 [nc postNotificationName:@"PFSocketReady" object:nil];
