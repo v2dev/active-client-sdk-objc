@@ -22,6 +22,7 @@
 /* End PBXAggregateTarget section */
 
 /* Begin PBXBuildFile section */
+		5236884E161B60B4005993AE /* User.h in Headers */ = {isa = PBXBuildFile; fileRef = F2721ED715C9B20E0040FC3E /* User.h */; };
 		F2300F0115EE8D990037A4A4 /* SocketIO.h in Headers */ = {isa = PBXBuildFile; fileRef = F2300CD715EE8D980037A4A4 /* SocketIO.h */; };
 		F2300F0215EE8D990037A4A4 /* SocketIO.m in Sources */ = {isa = PBXBuildFile; fileRef = F2300CD815EE8D980037A4A4 /* SocketIO.m */; };
 		F2300F0315EE8D990037A4A4 /* SocketIOJSONSerialization.h in Headers */ = {isa = PBXBuildFile; fileRef = F2300CD915EE8D980037A4A4 /* SocketIOJSONSerialization.h */; };
@@ -117,9 +118,8 @@
 		F2721F2215C9B20E0040FC3E /* SyncRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = F2721ED415C9B20E0040FC3E /* SyncRequest.m */; };
 		F2721F2315C9B20E0040FC3E /* SyncResponse.h in Headers */ = {isa = PBXBuildFile; fileRef = F2721ED515C9B20E0040FC3E /* SyncResponse.h */; };
 		F2721F2415C9B20E0040FC3E /* SyncResponse.m in Sources */ = {isa = PBXBuildFile; fileRef = F2721ED615C9B20E0040FC3E /* SyncResponse.m */; };
-		F2721F2515C9B20E0040FC3E /* User.h in Headers */ = {isa = PBXBuildFile; fileRef = F2721ED715C9B20E0040FC3E /* User.h */; };
 		F2721F2615C9B20E0040FC3E /* User.m in Sources */ = {isa = PBXBuildFile; fileRef = F2721ED815C9B20E0040FC3E /* User.m */; };
-		F2721F2715C9B20E0040FC3E /* UserAccount.h in Headers */ = {isa = PBXBuildFile; fileRef = F2721ED915C9B20E0040FC3E /* UserAccount.h */; };
+		F2721F2715C9B20E0040FC3E /* UserAccount.h in Headers */ = {isa = PBXBuildFile; fileRef = F2721ED915C9B20E0040FC3E /* UserAccount.h */; settings = {ATTRIBUTES = (); }; };
 		F2721F2815C9B20E0040FC3E /* UserAccount.m in Sources */ = {isa = PBXBuildFile; fileRef = F2721EDA15C9B20E0040FC3E /* UserAccount.m */; };
 		F2721F2915C9B20E0040FC3E /* UserToken.h in Headers */ = {isa = PBXBuildFile; fileRef = F2721EDB15C9B20E0040FC3E /* UserToken.h */; };
 		F2721F2A15C9B20E0040FC3E /* UserToken.m in Sources */ = {isa = PBXBuildFile; fileRef = F2721EDC15C9B20E0040FC3E /* UserToken.m */; };
@@ -673,7 +673,6 @@
 				F2721F1F15C9B20E0040FC3E /* ServiceProvider.h in Headers */,
 				F2721F2115C9B20E0040FC3E /* SyncRequest.h in Headers */,
 				F2721F2315C9B20E0040FC3E /* SyncResponse.h in Headers */,
-				F2721F2515C9B20E0040FC3E /* User.h in Headers */,
 				F2721F2715C9B20E0040FC3E /* UserAccount.h in Headers */,
 				F2721F2915C9B20E0040FC3E /* UserToken.h in Headers */,
 				F2721F3915C9B3F70040FC3E /* PFClient.h in Headers */,
@@ -702,6 +701,7 @@
 				F2300F4115EE8D990037A4A4 /* NSData+SRB64Additions.h in Headers */,
 				F2300F4315EE8D990037A4A4 /* SocketRocket-Prefix.pch in Headers */,
 				F2300F4415EE8D990037A4A4 /* SRWebSocket.h in Headers */,
+				5236884E161B60B4005993AE /* User.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

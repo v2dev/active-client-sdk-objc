@@ -34,6 +34,8 @@
 
 -(void) invokeWithArgument:(NSObject*) obj{
     [target performSelector:selector withObject:obj];
+    
+    DLog(@"[target performSelector:selector withObject:obj] where: obj.description=%@ target.description=%@",obj.description,target.description);
 }
 
 @end

@@ -23,6 +23,7 @@ static PFSocketManager* sharedInstance;
 @synthesize socketIO, model, isConnected;
 
 + (PFSocketManager*) sharedInstance{
+    DLog(@"");
     if(!sharedInstance){
         sharedInstance = [[PFSocketManager alloc] init];
     }
@@ -150,9 +151,11 @@ static PFSocketManager* sharedInstance;
 
 - (void) socketIO:(SocketIO *)socket didSendMessage:(SocketIOPacket *)packet{
     NSLog(@"didSendMessage: %@", packet);    
-}
+}   
+
 
 /**
+ 
  * Add a listener for the connect event
  */
 + (void) addListenerForConnectEvent:(NSObject*) target method:(SEL) selector{
