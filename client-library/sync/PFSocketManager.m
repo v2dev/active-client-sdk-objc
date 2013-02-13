@@ -129,22 +129,31 @@ static PFSocketManager* sharedInstance;
                           object:nil 
                         userInfo:[NSDictionary dictionaryWithObject:result forKey:@"response"]];
         
-        NSString* coorMessageId;
+        NSString* corrMessageId;
         if([result isKindOfClass:[AuthResponse class]]){
-            coorMessageId = ((AuthResponse*)result).correspondingMessageId;
+            corrMessageId = ((AuthResponse*)result).correspondingMessageId;
         }
         else if([result isKindOfClass:[SyncResponse class]]){
-            coorMessageId = ((SyncResponse*)result).correspondingMessageId;
+            corrMessageId = ((SyncResponse*)result).correspondingMessageId;
             if([result isKindOfClass:[ConnectResponse class]]){
                 NSNotificationCenter *nc = [NSNotificationCenter defaultCenter];
                 [nc postNotificationName:@"PFSocketReady" object:nil];
             }
         }
         
-        PFInvocation* callback = [callbacks objectForKey:coorMessageId];
+        if (corrMessageId){
+            // build ack
+            NSDictionary *corrId = @{@"correspondingMessageId" : corrMessageId};
+            NSDictionary *ack = @{@"ack": corrId};
+            
+            // send ack
+            [socketIO sendJSON:ack];
+        }
+        
+        PFInvocation* callback = [callbacks objectForKey:corrMessageId];
         if(callback){
             [callback invokeWithArgument:result];
-            [callbacks removeObjectForKey:coorMessageId];
+            [callbacks removeObjectForKey:corrMessageId];
         }
     }
 }
