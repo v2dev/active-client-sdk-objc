@@ -29,13 +29,22 @@
 
 
 -(void) invoke{
+
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Warc-performSelector-leaks"
     [target performSelector:selector];
+#pragma clang diagnostic pop
+
 }
 
 -(void) invokeWithArgument:(NSObject*) obj{
+
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Warc-performSelector-leaks"
     [target performSelector:selector withObject:obj];
+#pragma clang diagnostic pop
     
-    DLog(@"[target performSelector:selector withObject:obj] where: obj.description=%@ target.description=%@",obj.description,target.description);
+//    DLog(@"[target performSelector:selector withObject:obj] where: obj.description=%@ target.description=%@",obj.description,target.description);
 }
 
 @end
