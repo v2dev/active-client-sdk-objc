@@ -85,12 +85,15 @@ static EntityManager* sharedInstance;
 }
 
 - (id) deserializeObject:(id) obj{
-    id result;
+    id <Serializable> result;
     if([obj isKindOfClass:[NSDictionary class]]){
+        BOOL isShell = NO;
+
         NSString* className = [obj objectForKey:@"cn"];
         // sometimes cn is not used... erg.
         if(!className){
             className = [obj objectForKey:@"className"];
+            isShell = YES;
         }
         
         if(!className){
@@ -100,8 +103,10 @@ static EntityManager* sharedInstance;
         
         Class c = NSClassFromString([Utility translateRemoteClassName:className]);
         result = [c alloc];
-        result = [result initFromDictionary:obj];       
-        
+        result = [result initFromDictionary:obj];
+        if ([result conformsToProtocol:@protocol(PFModelObject)]){
+            ((id<PFModelObject>)result).isShell = isShell;
+        }
         // If the object 
         if([result conformsToProtocol:@protocol(PFModelObject)]){
             result = (id<Serializable>) [self getEntity:(id<PFModelObject>)result];
@@ -111,10 +116,11 @@ static EntityManager* sharedInstance;
         NSMutableArray* obArray = [[NSMutableArray alloc] init];
                     
         for(id o in obj){
-            [obArray addObject:[self deserializeObject:o]];
+            id deserializedObject = [self deserializeObject:o];
+            if (deserializedObject) [obArray addObject:deserializedObject];
         }
         
-        result = obArray;
+        result = (id <Serializable>)obArray;
     }
     
     return result;

@@ -13,7 +13,8 @@
 
 @property (nonatomic, retain) NSString* ID;
 
+@property(nonatomic) BOOL isShell;
+
 - (void) overwriteWith:(id<PFModelObject>) object;
-- (BOOL) isShell;
 
 @end
