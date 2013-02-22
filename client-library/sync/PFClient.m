@@ -327,7 +327,9 @@ static PFClient* _sharedInstance;
     [PFClient save];
 }
 
-
++ (void)loginSavedSessionWithCallbackTarget:(NSObject *)target method:(SEL)selector{
+    // !!!: not yet implemented
+}
 
 
 
