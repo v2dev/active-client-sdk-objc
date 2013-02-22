@@ -15,13 +15,13 @@
     NSDate* dateCreated;
     NSDate* dateModified;
     NSString* name;
-    bool isShell;
+    BOOL isShell;
 }
 
 @property(nonatomic, retain) NSString* ID;
 @property(nonatomic, retain) NSString* name;
 @property(nonatomic, retain) NSDate* dateCreated;
 @property(nonatomic, retain) NSDate* dateModified;
-@property(nonatomic) bool isShell;
+@property(nonatomic) BOOL isShell;
 
 @end

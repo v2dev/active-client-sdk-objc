@@ -12,12 +12,12 @@
 @interface _Super_RegisteredApplication : NSObject <Serializable, PFModelObject>{
     NSString* ID;
     NSString* appName;
-    bool isShell;
+    BOOL isShell;
 }
 
 @property(nonatomic, retain) NSString* ID;
 @property(nonatomic,retain) NSString* appName;
-@property(nonatomic) bool isShell;
+@property(nonatomic) BOOL isShell;
 
 
 @end

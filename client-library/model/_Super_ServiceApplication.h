@@ -17,13 +17,13 @@
     NSString* appDomain;
     ServiceProvider* serviceProvider;
     RegisteredApplication* registeredApplication;
-    bool isShell;
+    BOOL isShell;
 }
 
 @property(nonatomic, retain) NSString* ID;
 @property(nonatomic, retain) NSString* appDomain;
 @property(nonatomic, retain) ServiceProvider* serviceProvider;
 @property(nonatomic, retain) RegisteredApplication* registeredApplication;
-@property(nonatomic) bool isShell;
+@property(nonatomic) BOOL isShell;
 
 @end
