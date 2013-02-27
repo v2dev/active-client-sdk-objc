@@ -13,7 +13,7 @@
 @interface PFConnection ()
 @property (nonatomic, strong)ServiceApplicationOAuth* saOAuth;
 @property (strong,nonatomic)  GTMOAuth2ViewControllerTouch *oathViewController;
-@property (strong,nonatomic) UIViewController *clientViewController;
+@property (weak,nonatomic) UIViewController *clientViewController;
 @end
 
 @implementation PFConnection
