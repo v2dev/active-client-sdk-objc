@@ -555,8 +555,8 @@ static NSString* gLoggingProcessName = nil;
     [outputHTML appendFormat:@"&nbsp;&nbsp; headers: %d  %@<br>",
      (int)numberOfRequestHeaders, headerDetails];
   } else {
-    [outputHTML appendFormat:@"&nbsp;&nbsp; headers: none<br>",
-     (int)numberOfRequestHeaders];
+    [outputHTML appendFormat:@"&nbsp;&nbsp; headers: none<br>"/*,
+     (int)numberOfRequestHeaders*/];
   }
 
   // write the request post data, toggleable
@@ -820,7 +820,11 @@ static NSString* gLoggingProcessName = nil;
   return YES;
 }
 
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Wobjc-protocol-method-implementation"
+
 - (void)inputStream:(GTMReadMonitorInputStream *)stream
+#pragma clang diagnostic pop
      readIntoBuffer:(void *)buffer
              length:(NSUInteger)length {
   // append the captured data
@@ -832,13 +836,23 @@ static NSString* gLoggingProcessName = nil;
 // We implement plain Unix versions of NSFileManager methods to avoid
 // NSFileManager's issues with being used from multiple threads
 
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Wobjc-protocol-method-implementation"
+
 + (BOOL)fileOrDirExistsAtPath:(NSString *)path {
+#pragma clang diagnostic pop
+
   struct stat buffer;
   int result = stat([path fileSystemRepresentation], &buffer);
   return (result == 0);
 }
 
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Wobjc-protocol-method-implementation"
+
 + (BOOL)makeDirectoryUpToPath:(NSString *)path {
+#pragma clang diagnostic pop
+
   int result = 0;
 
   // Recursively create the parent directory of the requested path
@@ -854,12 +868,22 @@ static NSString* gLoggingProcessName = nil;
   return (result == 0);
 }
 
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Wobjc-protocol-method-implementation"
+
 + (BOOL)removeItemAtPath:(NSString *)path {
+#pragma clang diagnostic pop
+
   int result = unlink([path fileSystemRepresentation]);
   return (result == 0);
 }
 
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Wobjc-protocol-method-implementation"
+
 + (BOOL)createSymbolicLinkAtPath:(NSString *)newPath
+#pragma clang diagnostic pop
+
              withDestinationPath:(NSString *)targetPath {
   int result = symlink([targetPath fileSystemRepresentation],
                        [newPath fileSystemRepresentation]);
@@ -868,9 +892,13 @@ static NSString* gLoggingProcessName = nil;
 
 #pragma mark Formatting utilities
 
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Wobjc-protocol-method-implementation"
+
 + (NSString *)snipSubtringOfString:(NSString *)originalStr
                 betweenStartString:(NSString *)startStr
                          endString:(NSString *)endStr {
+#pragma clang diagnostic pop
 
   if (originalStr == nil) return nil;
 
@@ -902,7 +930,12 @@ static NSString* gLoggingProcessName = nil;
   return result;
 }
 
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Wobjc-protocol-method-implementation"
+
 + (NSString *)headersStringForDictionary:(NSDictionary *)dict {
+#pragma clang diagnostic pop
+
   // Format the dictionary in http header style, like
   //   Accept:        application/json
   //   Cache-Control: no-cache
@@ -939,7 +972,12 @@ static NSString* gLoggingProcessName = nil;
   return str;
 }
 
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Wobjc-protocol-method-implementation"
+
 + (id)JSONObjectWithData:(NSData *)data {
+#pragma clang diagnostic pop
+
   Class serializer = NSClassFromString(@"NSJSONSerialization");
   if (serializer) {
     const NSUInteger kOpts = (1UL << 0); // NSJSONReadingMutableContainers
@@ -967,7 +1005,12 @@ static NSString* gLoggingProcessName = nil;
   return nil;
 }
 
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Wobjc-protocol-method-implementation"
+
 + (id)stringWithJSONObject:(id)obj {
+#pragma clang diagnostic pop
+
   Class serializer = NSClassFromString(@"NSJSONSerialization");
   if (serializer) {
     const NSUInteger kOpts = (1UL << 0); // NSJSONWritingPrettyPrinted

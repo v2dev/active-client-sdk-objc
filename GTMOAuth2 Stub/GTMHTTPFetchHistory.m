@@ -238,8 +238,8 @@ static NSString* const kGTMETagHeader = @"Etag";
           [self class], self,
           data_ ? [NSNumber numberWithInt:(int)[data_ length]] : nil,
           useDate_,
-          reservationStr,
-          [response_ URL]];
+          reservationStr/*,
+          [response_ URL]*/];
 }
 
 - (NSComparisonResult)compareUseDate:(GTMCachedURLResponse *)other {
