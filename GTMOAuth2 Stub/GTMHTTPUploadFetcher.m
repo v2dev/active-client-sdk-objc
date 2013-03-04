@@ -447,14 +447,14 @@ totalBytesExpectedToSend:totalBytesExpectedToWrite];
     // resuming, so we'll initially send an empty data block and wait for the
     // server to tell us where the current offset really is
     chunkData = [NSData data];
-    rangeStr = [NSString stringWithFormat:@"bytes */%lu", dataLen];
+    rangeStr = [NSString stringWithFormat:@"bytes */%lu", (unsigned long) dataLen];
     lengthStr = @"0";
     offset = 0;
   } else {
     // uploading the next data chunk
 #if DEBUG
     NSAssert2(offset < dataLen, @"offset %lu exceeds data length %lu",
-              offset, dataLen);
+              (unsigned long)offset,(unsigned long) dataLen);
 #endif
 
     NSUInteger thisChunkSize = chunkSize;
@@ -473,9 +473,9 @@ totalBytesExpectedToSend:totalBytesExpectedToWrite];
     chunkData = [self uploadSubdataWithOffset:offset
                                        length:thisChunkSize];
 
-    rangeStr = [NSString stringWithFormat:@"bytes %lu-%lu/%lu",
-                          offset, offset + thisChunkSize - 1, dataLen];
-    lengthStr = [NSString stringWithFormat:@"%lu", thisChunkSize];
+    rangeStr = [NSString stringWithFormat:@"bytes %lu-%u/%lu",
+                          (unsigned long)offset, offset + thisChunkSize - 1, (unsigned long)dataLen];
+    lengthStr = [NSString stringWithFormat:@"%lu", (unsigned long)thisChunkSize];
   }
 
   // track the current offset for progress reporting
@@ -712,7 +712,7 @@ totalBytesExpectedToSend:0];
     NSMutableURLRequest *chunkRequest = [chunkFetcher mutableRequest];
 
     NSUInteger dataLen = [self fullUploadLength];
-    NSString *rangeStr = [NSString stringWithFormat:@"bytes */%lu", dataLen];
+    NSString *rangeStr = [NSString stringWithFormat:@"bytes */%lu", (unsigned long)dataLen];
 
     [chunkRequest setValue:rangeStr forHTTPHeaderField:@"Content-Range"];
     [chunkRequest setValue:@"0" forHTTPHeaderField:@"Content-Length"];
