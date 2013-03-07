@@ -39,6 +39,17 @@
 }
 
 
+- (void) receivedConnectCallback:(UIViewController *)target
+{
+    //Remove Observer
+    NSNotificationCenter *nc = [NSNotificationCenter defaultCenter];
+    
+    [nc removeObserver:target
+                  name:@"ConnectCompleted"
+                object:nil];
+}
+
+
 - (void) loginWithCallback:(SEL)selector target:(id)target{
     
     if(target && selector){
@@ -64,7 +75,18 @@
     [target presentViewController:viewController animated:YES completion:nil];
 }
 
+
+- (void) receivedLoginCallback:(UIViewController *)target
+{
+    //Remove Observer
+    NSNotificationCenter *nc = [NSNotificationCenter defaultCenter];
     
+    [nc removeObserver:target
+                  name:@"LoginCompleted"
+                object:nil];
+}
+
+
 - (void) modelDidChangeServiceApplicationOAuth:(NSNotification*)n{
     EntityManager* em = [EntityManager sharedInstance];
     NSDictionary* saOAuths = [em dictionaryForClass:@"ServiceApplicationOAuth"];

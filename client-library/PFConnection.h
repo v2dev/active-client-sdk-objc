@@ -10,6 +10,10 @@
 
 @interface PFConnection : NSObject 
 - (void) connectWithCallback:(SEL)selector target:(UIViewController *)target;
+- (void) receivedConnectCallback:(UIViewController *)target;
+
 - (void) loginWithCallback:(SEL)selector target:(UIViewController *)clientViewController;
+- (void) receivedLoginCallback:(UIViewController *)target;
+
 @end
                 
