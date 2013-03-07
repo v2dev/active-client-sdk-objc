@@ -8,6 +8,7 @@
 
 #import <Foundation/Foundation.h>
 #import <Percero/PFClient.h>
+#import <Percero/PFConnection.h>
 #import <Percero/EntityManager.h>
 #import <Percero/Serializable.h>
 #import <Percero/PFModelObject.h>
@@ -16,3 +17,5 @@
 #import <Percero/ServiceProvider.h>
 #import <Percero/RegisteredApplication.h>
 #import <Percero/EnvConfig.h>
+#import <Percero/IUserAnchor.h>
+#import <Percero/IUserRole.h>
