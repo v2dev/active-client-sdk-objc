@@ -14,22 +14,23 @@
 @property (nonatomic, strong)ServiceApplicationOAuth* saOAuth;
 @property (strong,nonatomic)  GTMOAuth2ViewControllerTouch *oathViewController;
 @property (weak,nonatomic) UIViewController *clientViewController;
+@property (assign, nonatomic) SEL connectionCallbackSelector;
+@property (assign, nonatomic) SEL loginCallbackSelector;
 @end
 
 @implementation PFConnection
 
-- (void) connectWithCallback:(SEL)selector target:(UIViewController *)clientViewController{
+
+- (void) listenForConnection:(SEL)selector target:(UIViewController *)clientViewController{
     
     if(clientViewController && selector){
+        
+        self.clientViewController=clientViewController;
+        self.connectionCallbackSelector = selector;
+        
         NSNotificationCenter *nc = [NSNotificationCenter defaultCenter];
         
-        //Register for the "ConnectCompleted" notification on behalf of the client
-        [nc addObserver:clientViewController
-               selector:selector
-                   name:@"ConnectCompleted"
-                 object:nil];
-        
-        //Register for the "modelDidChangeServiceApplicationOAuth" for self
+        //Register for the "modelDidChangeServiceApplicationOAuth"
         [nc addObserver:self
                selector:@selector(modelDidChangeServiceApplicationOAuth:)
                    name:@"modelDidChangeServiceApplicationOAuth"
@@ -39,27 +40,10 @@
 }
 
 
-- (void) receivedConnectCallback:(UIViewController *)target
-{
-    //Remove Observer
-    NSNotificationCenter *nc = [NSNotificationCenter defaultCenter];
+- (void) loginAndListenForCompletion:(SEL)selector target:(UIViewController *)clientViewController{
     
-    [nc removeObserver:target
-                  name:@"ConnectCompleted"
-                object:nil];
-}
-
-
-- (void) loginWithCallback:(SEL)selector target:(id)target{
-    
-    if(target && selector){
-        NSNotificationCenter *nc = [NSNotificationCenter defaultCenter];
-    
-    [nc addObserver:target
-           selector:selector
-               name:@"LoginCompleted"
-             object:nil];
-    }
+    self.clientViewController=clientViewController;
+    self.loginCallbackSelector=selector;
     
     EnvConfig* config = [EnvConfig sharedInstance];
     
@@ -71,19 +55,7 @@
                                                delegate:self
                                        finishedSelector:@selector(viewController:finishedWithAuth:error:)];
     
-    self.clientViewController=target;
-    [target presentViewController:viewController animated:YES completion:nil];
-}
-
-
-- (void) receivedLoginCallback:(UIViewController *)target
-{
-    //Remove Observer
-    NSNotificationCenter *nc = [NSNotificationCenter defaultCenter];
-    
-    [nc removeObserver:target
-                  name:@"LoginCompleted"
-                object:nil];
+    [self.clientViewController presentViewController:viewController animated:YES completion:nil];
 }
 
 
@@ -93,17 +65,16 @@
     for (NSString* oa in saOAuths) {
         self.saOAuth = [saOAuths valueForKey:oa];
         if([self.saOAuth.serviceApplication.serviceProvider.name isEqualToString:@"google"]){
-            NSNotificationCenter *nc = [NSNotificationCenter defaultCenter];
-            [nc postNotificationName:@"ConnectCompleted" object:nil userInfo:nil];
+            [self pfConnectionCompleted];
         }
     }
 }
 
-/**
- * This is the callback function that will be called when OAuth completes.
- * If success then we want to send the authCode to the server and start the login process there.
- * If fail then report the failure.
- */
+
+
+// This is the callback function that will be called when login OAuth completes.
+// If success then we want to send the authCode to the server and start the login process there.
+// If fail then report the failure.
 - (void)viewController:(GTMOAuth2ViewControllerTouch *)viewController
       finishedWithAuth:(GTMOAuth2Authentication *)auth
                  error:(NSError *)error {
@@ -117,20 +88,24 @@
 }
 
 
--(void) pfLoginCompleted:(NSNumber*) result
+-(void) pfConnectionCompleted
 {
-    NSNotificationCenter *nc = [NSNotificationCenter defaultCenter];
-    if([result boolValue]){
-        [nc postNotificationName:@"LoginCompleted" object:self userInfo:nil];//TODO: We may want to send user information indicating pass/fail
-    }
-    else{
-        [nc postNotificationName:@"LoginCompleted" object:self userInfo:nil];//TODO: We may want to send user information indicating pass/fail
+    if(self.clientViewController && self.connectionCallbackSelector){
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Warc-performSelector-leaks"
+        [self.clientViewController performSelector:self.connectionCallbackSelector];
+#pragma clang diagnostic pop
     }
 }
 
 
-
-
-
-
+-(void) pfLoginCompleted:(NSNumber*) result
+{
+    if(self.clientViewController && self.loginCallbackSelector){
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Warc-performSelector-leaks"
+        [self.clientViewController performSelector:self.loginCallbackSelector withObject:result];
+#pragma clang diagnostic pop
+    }
+}
 @end
