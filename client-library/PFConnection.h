@@ -9,7 +9,7 @@
 #import <UIKit/UIKit.h>
 
 @interface PFConnection : NSObject 
-- (void) connectWithCallback:(SEL)selector target:(UIViewController *)target;
-- (void) loginWithCallback:(SEL)selector target:(UIViewController *)clientViewController;
+- (void) listenForConnection:(SEL)selector target:(UIViewController *)clientViewController;
+- (void) loginAndListenForCompletion:(SEL)selector target:(UIViewController *)clientViewController;
 @end
                 
