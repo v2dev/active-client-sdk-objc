@@ -140,6 +140,7 @@
 		F2B0265F15C9A495000375CE /* libPercero.a in Frameworks */ = {isa = PBXBuildFile; fileRef = F2B0264715C9A495000375CE /* libPercero.a */; };
 		F2B0266515C9A495000375CE /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = F2B0266315C9A495000375CE /* InfoPlist.strings */; };
 		F2B0266815C9A495000375CE /* client_libraryTests.m in Sources */ = {isa = PBXBuildFile; fileRef = F2B0266715C9A495000375CE /* client_libraryTests.m */; };
+		F88EB05516ED54E800C999CF /* PFConnection.h in Headers */ = {isa = PBXBuildFile; fileRef = F8BFB12516DEAF57000C9808 /* PFConnection.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		F8BFB12816DEAF57000C9808 /* PFConnection.m in Sources */ = {isa = PBXBuildFile; fileRef = F8BFB12616DEAF57000C9808 /* PFConnection.m */; };
 		F8BFB12916DEAF57000C9808 /* PFConnection.m in Sources */ = {isa = PBXBuildFile; fileRef = F8BFB12616DEAF57000C9808 /* PFConnection.m */; };
 		F8BFB14216DEB53A000C9808 /* GTMGatherInputStream.h in Headers */ = {isa = PBXBuildFile; fileRef = F8BFB12B16DEB53A000C9808 /* GTMGatherInputStream.h */; };
@@ -176,7 +177,6 @@
 		F8BFB16116DEB53A000C9808 /* GTMReadMonitorInputStream.h in Headers */ = {isa = PBXBuildFile; fileRef = F8BFB14016DEB53A000C9808 /* GTMReadMonitorInputStream.h */; };
 		F8BFB16216DEB53A000C9808 /* GTMReadMonitorInputStream.m in Sources */ = {isa = PBXBuildFile; fileRef = F8BFB14116DEB53A000C9808 /* GTMReadMonitorInputStream.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		F8BFB16316DEB53A000C9808 /* GTMReadMonitorInputStream.m in Sources */ = {isa = PBXBuildFile; fileRef = F8BFB14116DEB53A000C9808 /* GTMReadMonitorInputStream.m */; };
-		F8C2CC5116E1357F00F5F83A /* PFConnection.h in Headers */ = {isa = PBXBuildFile; fileRef = F8BFB12516DEAF57000C9808 /* PFConnection.h */; settings = {ATTRIBUTES = (Public, ); }; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -716,7 +716,6 @@
 			files = (
 				F2721EDF15C9B20E0040FC3E /* _Super_ServiceProvider.h in Headers */,
 				F2721EE115C9B20E0040FC3E /* AuthenticateOAuthAccessTokenRequest.h in Headers */,
-				F8BFB12716DEAF57000C9808 /* PFConnection.h in Headers */,
 				F2721EE915C9B20E0040FC3E /* _Super_RegisteredApplication.h in Headers */,
 				F2721EEB15C9B20E0040FC3E /* _Super_ServiceApplication.h in Headers */,
 				F2721EED15C9B20E0040FC3E /* _Super_ServiceApplicationOAuth.h in Headers */,
@@ -730,6 +729,7 @@
 				F2721F0115C9B20E0040FC3E /* AuthResponse.h in Headers */,
 				6ACA5BCD16E9000200CB8FBD /* IUserRole.h in Headers */,
 				F2721F0315C9B20E0040FC3E /* ConnectResponse.h in Headers */,
+				F88EB05516ED54E800C999CF /* PFConnection.h in Headers */,
 				6ACA5BCC16E8FFFE00CB8FBD /* IUserAnchor.h in Headers */,
 				F2721F0515C9B20E0040FC3E /* EntityManager.h in Headers */,
 				F2721F0915C9B20E0040FC3E /* FindByIdRequest.h in Headers */,
