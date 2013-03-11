@@ -8,8 +8,11 @@
 
 #import <UIKit/UIKit.h>
 
-@interface PFConnection : NSObject 
-- (void) listenForConnection:(SEL)selector target:(UIViewController *)clientViewController;
+@interface PFConnection : NSObject
+@property (assign, nonatomic) BOOL isConnected;
++ (PFConnection*) sharedInstance;
++ (void) initialize;
+- (void) listenForConnection:(SEL)selector target:(id)target;
 - (void) loginAndListenForCompletion:(SEL)selector target:(UIViewController *)clientViewController;
 @end
                 
