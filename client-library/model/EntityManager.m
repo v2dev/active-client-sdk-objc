@@ -147,9 +147,9 @@ static EntityManager* sharedInstance;
     // Register any events that we are interested in.
     NSNotificationCenter *nc = [NSNotificationCenter defaultCenter];
         
-    [nc addObserver:self 
+    [nc addObserver:target
            selector:selector 
-               name:[NSString stringWithFormat:@"didReceive%@", className] 
+               name:[NSString stringWithFormat:@"modelDidChange%@", className] 
              object:nil];
 
 }
