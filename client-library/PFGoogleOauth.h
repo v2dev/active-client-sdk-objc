@@ -1,5 +1,5 @@
 //
-//  PFConnection.h
+//  PFGoogleOauth.h
 //  PerceroFramework
 //
 //  Created by John Coumerilh on 2/26/13.
@@ -8,11 +8,11 @@
 
 #import <UIKit/UIKit.h>
 
-@interface PFConnection : NSObject
-@property (assign, nonatomic) BOOL isConnected;
-+ (PFConnection*) sharedInstance;
+@interface PFGoogleOauth : NSObject
+@property (assign, nonatomic) BOOL isAuthenticatedWithGoogle;
++ (PFGoogleOauth*) sharedInstance;
 + (void) initialize;
-- (void) listenForConnection:(SEL)selector target:(id)target;
+- (void) listenForGoogleOauth:(SEL)selector target:(id)target;
 - (void) loginAndListenForCompletion:(SEL)selector target:(UIViewController *)clientViewController;
 @end
                 

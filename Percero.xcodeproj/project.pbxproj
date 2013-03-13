@@ -140,9 +140,9 @@
 		F2B0265F15C9A495000375CE /* libPercero.a in Frameworks */ = {isa = PBXBuildFile; fileRef = F2B0264715C9A495000375CE /* libPercero.a */; };
 		F2B0266515C9A495000375CE /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = F2B0266315C9A495000375CE /* InfoPlist.strings */; };
 		F2B0266815C9A495000375CE /* client_libraryTests.m in Sources */ = {isa = PBXBuildFile; fileRef = F2B0266715C9A495000375CE /* client_libraryTests.m */; };
-		F88EB05516ED54E800C999CF /* PFConnection.h in Headers */ = {isa = PBXBuildFile; fileRef = F8BFB12516DEAF57000C9808 /* PFConnection.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		F8BFB12816DEAF57000C9808 /* PFConnection.m in Sources */ = {isa = PBXBuildFile; fileRef = F8BFB12616DEAF57000C9808 /* PFConnection.m */; };
-		F8BFB12916DEAF57000C9808 /* PFConnection.m in Sources */ = {isa = PBXBuildFile; fileRef = F8BFB12616DEAF57000C9808 /* PFConnection.m */; };
+		F88EB05516ED54E800C999CF /* PFGoogleOauth.h in Headers */ = {isa = PBXBuildFile; fileRef = F8BFB12516DEAF57000C9808 /* PFGoogleOauth.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		F8BFB12816DEAF57000C9808 /* PFGoogleOauth.m in Sources */ = {isa = PBXBuildFile; fileRef = F8BFB12616DEAF57000C9808 /* PFGoogleOauth.m */; };
+		F8BFB12916DEAF57000C9808 /* PFGoogleOauth.m in Sources */ = {isa = PBXBuildFile; fileRef = F8BFB12616DEAF57000C9808 /* PFGoogleOauth.m */; };
 		F8BFB14216DEB53A000C9808 /* GTMGatherInputStream.h in Headers */ = {isa = PBXBuildFile; fileRef = F8BFB12B16DEB53A000C9808 /* GTMGatherInputStream.h */; };
 		F8BFB14316DEB53A000C9808 /* GTMGatherInputStream.m in Sources */ = {isa = PBXBuildFile; fileRef = F8BFB12C16DEB53A000C9808 /* GTMGatherInputStream.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		F8BFB14416DEB53A000C9808 /* GTMGatherInputStream.m in Sources */ = {isa = PBXBuildFile; fileRef = F8BFB12C16DEB53A000C9808 /* GTMGatherInputStream.m */; };
@@ -327,8 +327,8 @@
 		F2B0266415C9A495000375CE /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		F2B0266615C9A495000375CE /* client_libraryTests.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = client_libraryTests.h; sourceTree = "<group>"; };
 		F2B0266715C9A495000375CE /* client_libraryTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = client_libraryTests.m; sourceTree = "<group>"; };
-		F8BFB12516DEAF57000C9808 /* PFConnection.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PFConnection.h; sourceTree = "<group>"; };
-		F8BFB12616DEAF57000C9808 /* PFConnection.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PFConnection.m; sourceTree = "<group>"; };
+		F8BFB12516DEAF57000C9808 /* PFGoogleOauth.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PFGoogleOauth.h; sourceTree = "<group>"; };
+		F8BFB12616DEAF57000C9808 /* PFGoogleOauth.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PFGoogleOauth.m; sourceTree = "<group>"; };
 		F8BFB12B16DEB53A000C9808 /* GTMGatherInputStream.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GTMGatherInputStream.h; sourceTree = "<group>"; };
 		F8BFB12C16DEB53A000C9808 /* GTMGatherInputStream.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GTMGatherInputStream.m; sourceTree = "<group>"; };
 		F8BFB12D16DEB53A000C9808 /* GTMHTTPFetcher.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GTMHTTPFetcher.h; sourceTree = "<group>"; };
@@ -588,8 +588,8 @@
 				F2721F2F15C9B3F70040FC3E /* PFClient.m */,
 				F2721F3015C9B3F70040FC3E /* PFSocketManager.h */,
 				F2721F3115C9B3F70040FC3E /* PFSocketManager.m */,
-				F8BFB12516DEAF57000C9808 /* PFConnection.h */,
-				F8BFB12616DEAF57000C9808 /* PFConnection.m */,
+				F8BFB12516DEAF57000C9808 /* PFGoogleOauth.h */,
+				F8BFB12616DEAF57000C9808 /* PFGoogleOauth.m */,
 			);
 			name = Controller;
 			sourceTree = "<group>";
@@ -729,7 +729,7 @@
 				F2721F0115C9B20E0040FC3E /* AuthResponse.h in Headers */,
 				6ACA5BCD16E9000200CB8FBD /* IUserRole.h in Headers */,
 				F2721F0315C9B20E0040FC3E /* ConnectResponse.h in Headers */,
-				F88EB05516ED54E800C999CF /* PFConnection.h in Headers */,
+				F88EB05516ED54E800C999CF /* PFGoogleOauth.h in Headers */,
 				6ACA5BCC16E8FFFE00CB8FBD /* IUserAnchor.h in Headers */,
 				F2721F0515C9B20E0040FC3E /* EntityManager.h in Headers */,
 				F2721F0915C9B20E0040FC3E /* FindByIdRequest.h in Headers */,
@@ -971,7 +971,7 @@
 				EAF93FC816640C3000F581F4 /* base64.c in Sources */,
 				EAF93FCB16640C3000F581F4 /* NSData+SRB64Additions.m in Sources */,
 				EAF93FCE16640C3000F581F4 /* SRWebSocket.m in Sources */,
-				F8BFB12816DEAF57000C9808 /* PFConnection.m in Sources */,
+				F8BFB12816DEAF57000C9808 /* PFGoogleOauth.m in Sources */,
 				F8BFB14316DEB53A000C9808 /* GTMGatherInputStream.m in Sources */,
 				F8BFB14616DEB53A000C9808 /* GTMHTTPFetcher.m in Sources */,
 				F8BFB14916DEB53A000C9808 /* GTMHTTPFetcherLogging.m in Sources */,
@@ -991,7 +991,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				F2B0266815C9A495000375CE /* client_libraryTests.m in Sources */,
-				F8BFB12916DEAF57000C9808 /* PFConnection.m in Sources */,
+				F8BFB12916DEAF57000C9808 /* PFGoogleOauth.m in Sources */,
 				F8BFB14416DEB53A000C9808 /* GTMGatherInputStream.m in Sources */,
 				F8BFB14716DEB53A000C9808 /* GTMHTTPFetcher.m in Sources */,
 				F8BFB14A16DEB53A000C9808 /* GTMHTTPFetcherLogging.m in Sources */,

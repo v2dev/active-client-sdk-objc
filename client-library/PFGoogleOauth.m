@@ -1,5 +1,5 @@
 //
-//  PFConnection.m
+//  PFGoogleOauth.m
 //  PerceroFramework
 //
 //  Created by John Coumerilh on 2/26/13.
@@ -9,22 +9,22 @@
 #import <Percero/Percero.h>
 #import "GTMOAuth2ViewControllerTouch.h"
 
-static PFConnection* sharedInstance=nil;
+static PFGoogleOauth* sharedInstance=nil;
 
-@interface PFConnection ()
+@interface PFGoogleOauth ()
 @property (nonatomic, strong)ServiceApplicationOAuth* saOAuth;
 @property (strong,nonatomic)  GTMOAuth2ViewControllerTouch *oathViewController;
 @property (weak,nonatomic) UIViewController *clientViewController;
 @property (assign, nonatomic) SEL loginCallbackSelector;
-@property (assign, nonatomic) id connectionCallbackTarget;
-@property (assign, nonatomic) SEL connectionCallbackSelector;
+@property (assign, nonatomic) id pfGoogleOauthCallbackTarget;
+@property (assign, nonatomic) SEL pfGoogleOauthCallbackSelector;
 
 @end
 
-@implementation PFConnection
+@implementation PFGoogleOauth
 
 
-+ (PFConnection*) sharedInstance{
++ (PFGoogleOauth*) sharedInstance{
     if(sharedInstance==nil){
         sharedInstance = [[super allocWithZone:NULL] init];
     }
@@ -33,7 +33,7 @@ static PFConnection* sharedInstance=nil;
 
 
 + (void) initialize{
-    [PFConnection sharedInstance];
+    [PFGoogleOauth sharedInstance];
     
     NSNotificationCenter *nc = [NSNotificationCenter defaultCenter];
     
@@ -51,7 +51,7 @@ static PFConnection* sharedInstance=nil;
     
     if(self && !sharedInstance){
         sharedInstance = self;
-        self.isConnected=NO;
+        self.isAuthenticatedWithGoogle=NO;
     }
     return sharedInstance;
 }
@@ -69,18 +69,18 @@ static PFConnection* sharedInstance=nil;
     for (NSString* oa in saOAuths) {
         self.saOAuth = [saOAuths valueForKey:oa];
         if([self.saOAuth.serviceApplication.serviceProvider.name isEqualToString:@"google"]){
-            self.isConnected=YES;
-            [self pfConnectionCompleted];
+            self.isAuthenticatedWithGoogle=YES;
+            [self pfGoogleOAuthCompleted];
         }
     }
 }
 
 
-- (void) listenForConnection:(SEL)selector target:(id)target{
+- (void) listenForGoogleOauth:(SEL)selector target:(id)target{
     
     if(target && selector){
-        self.connectionCallbackSelector=selector;
-        self.connectionCallbackTarget=target;
+        self.pfGoogleOauthCallbackSelector=selector;
+        self.pfGoogleOauthCallbackTarget=target;
     }
 }
 
@@ -121,12 +121,12 @@ static PFConnection* sharedInstance=nil;
 }
 
 
--(void) pfConnectionCompleted
+-(void) pfGoogleOAuthCompleted
 {
-    if(self.connectionCallbackTarget && self.connectionCallbackSelector){
+    if(self.pfGoogleOauthCallbackTarget && self.pfGoogleOauthCallbackSelector){
 #pragma clang diagnostic push
 #pragma clang diagnostic ignored "-Warc-performSelector-leaks"
-        [self.connectionCallbackTarget performSelector:self.connectionCallbackSelector];
+        [self.pfGoogleOauthCallbackTarget performSelector:self.pfGoogleOauthCallbackSelector];
 #pragma clang diagnostic pop
     }
 }
