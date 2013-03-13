@@ -141,15 +141,18 @@ static EntityManager* sharedInstance;
 
 /**
  * We have a helper function for setting up listeners for types of events that the EntityManager will emit
- * Specifically, the entity manager will emit an even for every object that it gets with the event name: didReceive{className}
+ * Specifically, the entity manager will emit an event for every object that it gets with the event name: didReceive{className}
  */
+
+//JGC - target:(NSObject*)target is not used here?
+
 + (void) addListenerForObjectType:(NSString*) className target:(NSObject*)target method:(SEL) selector{
     // Register any events that we are interested in.
     NSNotificationCenter *nc = [NSNotificationCenter defaultCenter];
         
-    [nc addObserver:target
+    [nc addObserver:self
            selector:selector 
-               name:[NSString stringWithFormat:@"modelDidChange%@", className] 
+               name:[NSString stringWithFormat:@"didReceive%@", className] 
              object:nil];
 
 }

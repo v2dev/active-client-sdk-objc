@@ -9,7 +9,7 @@
 #import <Percero/Percero.h>
 #import "GTMOAuth2ViewControllerTouch.h"
 
-static PFConnection* sharedInstance;
+static PFConnection* sharedInstance=nil;
 
 @interface PFConnection ()
 @property (nonatomic, strong)ServiceApplicationOAuth* saOAuth;
@@ -25,14 +25,12 @@ static PFConnection* sharedInstance;
 
 
 + (PFConnection*) sharedInstance{
-    if(!sharedInstance){
-        sharedInstance = [[PFConnection alloc] init];
+    if(sharedInstance==nil){
+        sharedInstance = [[super allocWithZone:NULL] init];
     }
     return sharedInstance;
 }
 
-
-// A convenience method to help the client application initialize the connection to Percero Framework
 
 + (void) initialize{
     [PFConnection sharedInstance];
@@ -56,6 +54,12 @@ static PFConnection* sharedInstance;
         self.isConnected=NO;
     }
     return sharedInstance;
+}
+
+
+- (id)copyWithZone:(NSZone *)zone
+{
+    return self;
 }
 
 
