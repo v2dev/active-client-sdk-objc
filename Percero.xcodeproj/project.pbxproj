@@ -25,6 +25,9 @@
 		5236884E161B60B4005993AE /* User.h in Headers */ = {isa = PBXBuildFile; fileRef = F2721ED715C9B20E0040FC3E /* User.h */; };
 		6ACA5BCC16E8FFFE00CB8FBD /* IUserAnchor.h in Headers */ = {isa = PBXBuildFile; fileRef = 6ACA5BCA16E8FFB700CB8FBD /* IUserAnchor.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		6ACA5BCD16E9000200CB8FBD /* IUserRole.h in Headers */ = {isa = PBXBuildFile; fileRef = 6ACA5BCB16E8FFE700CB8FBD /* IUserRole.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		6AF998E416F0F56700C962A4 /* PushUpdateResponse.h in Headers */ = {isa = PBXBuildFile; fileRef = 6AF998E216F0F56700C962A4 /* PushUpdateResponse.h */; };
+		6AF998E516F0F56700C962A4 /* PushUpdateResponse.m in Sources */ = {isa = PBXBuildFile; fileRef = 6AF998E316F0F56700C962A4 /* PushUpdateResponse.m */; };
+		6AF998E616F0F56700C962A4 /* PushUpdateResponse.m in Sources */ = {isa = PBXBuildFile; fileRef = 6AF998E316F0F56700C962A4 /* PushUpdateResponse.m */; };
 		EAF93FA516640BB600F581F4 /* NSObject+SBJson.h in Headers */ = {isa = PBXBuildFile; fileRef = EAF93F8C16640BB500F581F4 /* NSObject+SBJson.h */; };
 		EAF93FA616640BB600F581F4 /* NSObject+SBJson.m in Sources */ = {isa = PBXBuildFile; fileRef = EAF93F8D16640BB500F581F4 /* NSObject+SBJson.m */; };
 		EAF93FA716640BB600F581F4 /* SBJson.h in Headers */ = {isa = PBXBuildFile; fileRef = EAF93F8E16640BB500F581F4 /* SBJson.h */; };
@@ -176,7 +179,6 @@
 		F8BFB16116DEB53A000C9808 /* GTMReadMonitorInputStream.h in Headers */ = {isa = PBXBuildFile; fileRef = F8BFB14016DEB53A000C9808 /* GTMReadMonitorInputStream.h */; };
 		F8BFB16216DEB53A000C9808 /* GTMReadMonitorInputStream.m in Sources */ = {isa = PBXBuildFile; fileRef = F8BFB14116DEB53A000C9808 /* GTMReadMonitorInputStream.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		F8BFB16316DEB53A000C9808 /* GTMReadMonitorInputStream.m in Sources */ = {isa = PBXBuildFile; fileRef = F8BFB14116DEB53A000C9808 /* GTMReadMonitorInputStream.m */; };
-		F8C2CC5116E1357F00F5F83A /* PFConnection.h in Headers */ = {isa = PBXBuildFile; fileRef = F8BFB12516DEAF57000C9808 /* PFConnection.h */; settings = {ATTRIBUTES = (Public, ); }; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -199,6 +201,8 @@
 /* Begin PBXFileReference section */
 		6ACA5BCA16E8FFB700CB8FBD /* IUserAnchor.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = IUserAnchor.h; sourceTree = "<group>"; };
 		6ACA5BCB16E8FFE700CB8FBD /* IUserRole.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = IUserRole.h; sourceTree = "<group>"; };
+		6AF998E216F0F56700C962A4 /* PushUpdateResponse.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PushUpdateResponse.h; path = model/PushUpdateResponse.h; sourceTree = "<group>"; };
+		6AF998E316F0F56700C962A4 /* PushUpdateResponse.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PushUpdateResponse.m; path = model/PushUpdateResponse.m; sourceTree = "<group>"; };
 		EAF93F8C16640BB500F581F4 /* NSObject+SBJson.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSObject+SBJson.h"; sourceTree = "<group>"; };
 		EAF93F8D16640BB500F581F4 /* NSObject+SBJson.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSObject+SBJson.m"; sourceTree = "<group>"; };
 		EAF93F8E16640BB500F581F4 /* SBJson.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SBJson.h; sourceTree = "<group>"; };
@@ -546,6 +550,8 @@
 				F2721EBB15C9B20E0040FC3E /* FindByIdRequest.h */,
 				F2721EBC15C9B20E0040FC3E /* FindByIdRequest.m */,
 				F2721EBD15C9B20E0040FC3E /* FindByIdResponse.h */,
+				6AF998E216F0F56700C962A4 /* PushUpdateResponse.h */,
+				6AF998E316F0F56700C962A4 /* PushUpdateResponse.m */,
 				F2721EBE15C9B20E0040FC3E /* FindByIdResponse.m */,
 				F2721EBF15C9B20E0040FC3E /* GetAllByNameRequest.h */,
 				F2721EC015C9B20E0040FC3E /* GetAllByNameRequest.m */,
@@ -716,7 +722,6 @@
 			files = (
 				F2721EDF15C9B20E0040FC3E /* _Super_ServiceProvider.h in Headers */,
 				F2721EE115C9B20E0040FC3E /* AuthenticateOAuthAccessTokenRequest.h in Headers */,
-				F8BFB12716DEAF57000C9808 /* PFConnection.h in Headers */,
 				F2721EE915C9B20E0040FC3E /* _Super_RegisteredApplication.h in Headers */,
 				F2721EEB15C9B20E0040FC3E /* _Super_ServiceApplication.h in Headers */,
 				F2721EED15C9B20E0040FC3E /* _Super_ServiceApplicationOAuth.h in Headers */,
@@ -786,6 +791,7 @@
 				F8BFB15A16DEB53A000C9808 /* GTMOAuth2SignIn.h in Headers */,
 				F8BFB15D16DEB53A000C9808 /* GTMOAuth2ViewControllerTouch.h in Headers */,
 				F8BFB16116DEB53A000C9808 /* GTMReadMonitorInputStream.h in Headers */,
+				6AF998E416F0F56700C962A4 /* PushUpdateResponse.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -983,6 +989,7 @@
 				F8BFB15B16DEB53A000C9808 /* GTMOAuth2SignIn.m in Sources */,
 				F8BFB15E16DEB53A000C9808 /* GTMOAuth2ViewControllerTouch.m in Sources */,
 				F8BFB16216DEB53A000C9808 /* GTMReadMonitorInputStream.m in Sources */,
+				6AF998E516F0F56700C962A4 /* PushUpdateResponse.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1003,6 +1010,7 @@
 				F8BFB15C16DEB53A000C9808 /* GTMOAuth2SignIn.m in Sources */,
 				F8BFB15F16DEB53A000C9808 /* GTMOAuth2ViewControllerTouch.m in Sources */,
 				F8BFB16316DEB53A000C9808 /* GTMReadMonitorInputStream.m in Sources */,
+				6AF998E616F0F56700C962A4 /* PushUpdateResponse.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
