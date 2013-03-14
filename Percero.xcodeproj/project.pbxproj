@@ -28,6 +28,9 @@
 		6AF998E416F0F56700C962A4 /* PushUpdateResponse.h in Headers */ = {isa = PBXBuildFile; fileRef = 6AF998E216F0F56700C962A4 /* PushUpdateResponse.h */; };
 		6AF998E516F0F56700C962A4 /* PushUpdateResponse.m in Sources */ = {isa = PBXBuildFile; fileRef = 6AF998E316F0F56700C962A4 /* PushUpdateResponse.m */; };
 		6AF998E616F0F56700C962A4 /* PushUpdateResponse.m in Sources */ = {isa = PBXBuildFile; fileRef = 6AF998E316F0F56700C962A4 /* PushUpdateResponse.m */; };
+		6AF998E916F10E2D00C962A4 /* PushDeleteResonse.h in Headers */ = {isa = PBXBuildFile; fileRef = 6AF998E716F10E2D00C962A4 /* PushDeleteResonse.h */; };
+		6AF998EA16F10E2D00C962A4 /* PushDeleteResonse.m in Sources */ = {isa = PBXBuildFile; fileRef = 6AF998E816F10E2D00C962A4 /* PushDeleteResonse.m */; };
+		6AF998EB16F10E2D00C962A4 /* PushDeleteResonse.m in Sources */ = {isa = PBXBuildFile; fileRef = 6AF998E816F10E2D00C962A4 /* PushDeleteResonse.m */; };
 		EAF93FA516640BB600F581F4 /* NSObject+SBJson.h in Headers */ = {isa = PBXBuildFile; fileRef = EAF93F8C16640BB500F581F4 /* NSObject+SBJson.h */; };
 		EAF93FA616640BB600F581F4 /* NSObject+SBJson.m in Sources */ = {isa = PBXBuildFile; fileRef = EAF93F8D16640BB500F581F4 /* NSObject+SBJson.m */; };
 		EAF93FA716640BB600F581F4 /* SBJson.h in Headers */ = {isa = PBXBuildFile; fileRef = EAF93F8E16640BB500F581F4 /* SBJson.h */; };
@@ -203,6 +206,8 @@
 		6ACA5BCB16E8FFE700CB8FBD /* IUserRole.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = IUserRole.h; sourceTree = "<group>"; };
 		6AF998E216F0F56700C962A4 /* PushUpdateResponse.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PushUpdateResponse.h; path = model/PushUpdateResponse.h; sourceTree = "<group>"; };
 		6AF998E316F0F56700C962A4 /* PushUpdateResponse.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PushUpdateResponse.m; path = model/PushUpdateResponse.m; sourceTree = "<group>"; };
+		6AF998E716F10E2D00C962A4 /* PushDeleteResonse.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PushDeleteResonse.h; path = model/PushDeleteResonse.h; sourceTree = "<group>"; };
+		6AF998E816F10E2D00C962A4 /* PushDeleteResonse.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PushDeleteResonse.m; path = model/PushDeleteResonse.m; sourceTree = "<group>"; };
 		EAF93F8C16640BB500F581F4 /* NSObject+SBJson.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSObject+SBJson.h"; sourceTree = "<group>"; };
 		EAF93F8D16640BB500F581F4 /* NSObject+SBJson.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSObject+SBJson.m"; sourceTree = "<group>"; };
 		EAF93F8E16640BB500F581F4 /* SBJson.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SBJson.h; sourceTree = "<group>"; };
@@ -550,8 +555,6 @@
 				F2721EBB15C9B20E0040FC3E /* FindByIdRequest.h */,
 				F2721EBC15C9B20E0040FC3E /* FindByIdRequest.m */,
 				F2721EBD15C9B20E0040FC3E /* FindByIdResponse.h */,
-				6AF998E216F0F56700C962A4 /* PushUpdateResponse.h */,
-				6AF998E316F0F56700C962A4 /* PushUpdateResponse.m */,
 				F2721EBE15C9B20E0040FC3E /* FindByIdResponse.m */,
 				F2721EBF15C9B20E0040FC3E /* GetAllByNameRequest.h */,
 				F2721EC015C9B20E0040FC3E /* GetAllByNameRequest.m */,
@@ -562,6 +565,10 @@
 				F2721EC515C9B20E0040FC3E /* GetRegAppOAuthsResponse.h */,
 				F2721EC615C9B20E0040FC3E /* GetRegAppOAuthsResponse.m */,
 				F2721EC915C9B20E0040FC3E /* PFModelObject.h */,
+				6AF998E716F10E2D00C962A4 /* PushDeleteResonse.h */,
+				6AF998E816F10E2D00C962A4 /* PushDeleteResonse.m */,
+				6AF998E216F0F56700C962A4 /* PushUpdateResponse.h */,
+				6AF998E316F0F56700C962A4 /* PushUpdateResponse.m */,
 				F2721ECA15C9B20E0040FC3E /* RegisteredApplication.h */,
 				F2721ECB15C9B20E0040FC3E /* RegisteredApplication.m */,
 				F2721ECC15C9B20E0040FC3E /* Serializable.h */,
@@ -792,6 +799,7 @@
 				F8BFB15D16DEB53A000C9808 /* GTMOAuth2ViewControllerTouch.h in Headers */,
 				F8BFB16116DEB53A000C9808 /* GTMReadMonitorInputStream.h in Headers */,
 				6AF998E416F0F56700C962A4 /* PushUpdateResponse.h in Headers */,
+				6AF998E916F10E2D00C962A4 /* PushDeleteResonse.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -990,6 +998,7 @@
 				F8BFB15E16DEB53A000C9808 /* GTMOAuth2ViewControllerTouch.m in Sources */,
 				F8BFB16216DEB53A000C9808 /* GTMReadMonitorInputStream.m in Sources */,
 				6AF998E516F0F56700C962A4 /* PushUpdateResponse.m in Sources */,
+				6AF998EA16F10E2D00C962A4 /* PushDeleteResonse.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1011,6 +1020,7 @@
 				F8BFB15F16DEB53A000C9808 /* GTMOAuth2ViewControllerTouch.m in Sources */,
 				F8BFB16316DEB53A000C9808 /* GTMReadMonitorInputStream.m in Sources */,
 				6AF998E616F0F56700C962A4 /* PushUpdateResponse.m in Sources */,
+				6AF998EB16F10E2D00C962A4 /* PushDeleteResonse.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
