@@ -21,6 +21,7 @@
 #import "PFSocketManager.h"
 #import "GetAllByNameRequest.h"
 #import "FindByIdRequest.h"
+#import "PFGoogleOauth.h"
 
 // The singleton
 static PFClient* _sharedInstance;
@@ -87,6 +88,7 @@ static PFClient* _sharedInstance;
  * A convenience method to help the client application initialize the connection the PF
  */
 + (void) initialize{
+    [PFGoogleOauth initialize];
     [PFClient sharedInstance];
 }
 

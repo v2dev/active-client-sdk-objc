@@ -9,10 +9,8 @@
 #import <UIKit/UIKit.h>
 
 @interface PFGoogleOauth : NSObject
-@property (assign, nonatomic) BOOL isAuthenticatedWithGoogle;
-+ (PFGoogleOauth*) sharedInstance;
-+ (void) initialize;
-- (void) listenForGoogleOauth:(SEL)selector target:(id)target;
-- (void) loginAndListenForCompletion:(SEL)selector target:(UIViewController *)clientViewController;
++ (void) setUp;
++ (void) listenForGoogleOauthWithSelector:(SEL)selector andTarget:(id)target;
++ (void) loginAndListenForCompletionWithSelector:(SEL)selector andTarget:(UIViewController *)clientViewController;
 @end
                 

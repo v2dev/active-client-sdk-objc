@@ -18,7 +18,7 @@ static PFGoogleOauth* sharedInstance=nil;
 @property (assign, nonatomic) SEL loginCallbackSelector;
 @property (assign, nonatomic) id pfGoogleOauthCallbackTarget;
 @property (assign, nonatomic) SEL pfGoogleOauthCallbackSelector;
-
+@property (assign, nonatomic) BOOL isAuthenticatedWithGoogle;
 @end
 
 @implementation PFGoogleOauth
@@ -32,16 +32,18 @@ static PFGoogleOauth* sharedInstance=nil;
 }
 
 
-+ (void) initialize{
++ (void) setUp{
     [PFGoogleOauth sharedInstance];
     
     NSNotificationCenter *nc = [NSNotificationCenter defaultCenter];
     
     //Register for the "modelDidChangeServiceApplicationOAuth"
-    [nc addObserver:[self sharedInstance]
+    [nc addObserver:[PFGoogleOauth sharedInstance]
            selector:@selector(modelDidChangeServiceApplicationOAuth:)
                name:@"modelDidChangeServiceApplicationOAuth"
              object:nil];
+    [PFClient initialize];
+
 }
 
 
@@ -52,6 +54,9 @@ static PFGoogleOauth* sharedInstance=nil;
     if(self && !sharedInstance){
         sharedInstance = self;
         self.isAuthenticatedWithGoogle=NO;
+        self.loginCallbackSelector=nil;
+        self.pfGoogleOauthCallbackSelector=nil;
+        self.pfGoogleOauthCallbackTarget=nil;
     }
     return sharedInstance;
 }
@@ -67,40 +72,45 @@ static PFGoogleOauth* sharedInstance=nil;
     EntityManager* em = [EntityManager sharedInstance];
     NSDictionary* saOAuths = [em dictionaryForClass:@"ServiceApplicationOAuth"];
     for (NSString* oa in saOAuths) {
-        self.saOAuth = [saOAuths valueForKey:oa];
-        if([self.saOAuth.serviceApplication.serviceProvider.name isEqualToString:@"google"]){
-            self.isAuthenticatedWithGoogle=YES;
-            [self pfGoogleOAuthCompleted];
+        [PFGoogleOauth sharedInstance].saOAuth = [saOAuths valueForKey:oa];
+        if([[PFGoogleOauth sharedInstance].saOAuth.serviceApplication.serviceProvider.name isEqualToString:@"google"]){
+            [PFGoogleOauth sharedInstance].isAuthenticatedWithGoogle=YES;
+            DLog(@"");
+            [[PFGoogleOauth sharedInstance] pfGoogleOAuthCompleted];
         }
     }
 }
 
 
-- (void) listenForGoogleOauth:(SEL)selector target:(id)target{
++ (void) listenForGoogleOauthWithSelector:(SEL)selector andTarget:(id)target{
     
     if(target && selector){
-        self.pfGoogleOauthCallbackSelector=selector;
-        self.pfGoogleOauthCallbackTarget=target;
+        [PFGoogleOauth sharedInstance].pfGoogleOauthCallbackSelector=selector;
+        [PFGoogleOauth sharedInstance].pfGoogleOauthCallbackTarget=target;
     }
+    if ([PFGoogleOauth sharedInstance].isAuthenticatedWithGoogle){
+        [[PFGoogleOauth sharedInstance] pfGoogleOAuthCompleted];
+    }
+    DLog(@"");
 }
 
 
-- (void) loginAndListenForCompletion:(SEL)selector target:(UIViewController *)clientViewController{
++ (void) loginAndListenForCompletionWithSelector:(SEL)selector andTarget:(UIViewController *)clientViewController{
     
-    self.clientViewController=clientViewController;
-    self.loginCallbackSelector=selector;
+    [PFGoogleOauth sharedInstance].clientViewController=clientViewController;
+    [PFGoogleOauth sharedInstance].loginCallbackSelector=selector;
     
     EnvConfig* config = [EnvConfig sharedInstance];
     
     GTMOAuth2ViewControllerTouch *viewController =
     [[GTMOAuth2ViewControllerTouch alloc] initWithScope:[config getEnvProperty:@"oauth.google.scope"]
-                                               clientID:self.saOAuth.appKey
+                                               clientID:[PFGoogleOauth sharedInstance].saOAuth.appKey
                                            clientSecret:@""
                                        keychainItemName:[config getEnvProperty:@"oauth.google.keychain_item_name"]
-                                               delegate:self
+                                               delegate:[PFGoogleOauth sharedInstance]
                                        finishedSelector:@selector(viewController:finishedWithAuth:error:)];
     
-    [self.clientViewController presentViewController:viewController animated:YES completion:nil];
+    [[PFGoogleOauth sharedInstance].clientViewController presentViewController:viewController animated:YES completion:nil];
 }
 
 
@@ -116,28 +126,29 @@ static PFGoogleOauth* sharedInstance=nil;
         NSLog(@"OAuth Error: %@", error);
     } else {
         NSLog(@"OAuth Success!");
-        [PFClient loginWithOAuthCode:[auth code] callbackTarget:self method:@selector(pfLoginCompleted:)];
+        [PFClient loginWithOAuthCode:[auth code] callbackTarget:[PFGoogleOauth sharedInstance] method:@selector(pfLoginCompleted:)];
     }
 }
 
 
 -(void) pfGoogleOAuthCompleted
 {
-    if(self.pfGoogleOauthCallbackTarget && self.pfGoogleOauthCallbackSelector){
+    if([PFGoogleOauth sharedInstance].pfGoogleOauthCallbackTarget && [PFGoogleOauth sharedInstance].pfGoogleOauthCallbackSelector){
 #pragma clang diagnostic push
 #pragma clang diagnostic ignored "-Warc-performSelector-leaks"
-        [self.pfGoogleOauthCallbackTarget performSelector:self.pfGoogleOauthCallbackSelector];
+        [[PFGoogleOauth sharedInstance].pfGoogleOauthCallbackTarget performSelector:[PFGoogleOauth sharedInstance].pfGoogleOauthCallbackSelector];
 #pragma clang diagnostic pop
     }
+    DLog(@"");
 }
 
-
+    
 -(void) pfLoginCompleted:(NSNumber*) result
 {
-    if(self.clientViewController && self.loginCallbackSelector){
+    if([PFGoogleOauth sharedInstance].clientViewController && [PFGoogleOauth sharedInstance].loginCallbackSelector){
 #pragma clang diagnostic push
 #pragma clang diagnostic ignored "-Warc-performSelector-leaks"
-        [self.clientViewController performSelector:self.loginCallbackSelector withObject:result];
+        [[PFGoogleOauth sharedInstance].clientViewController performSelector:[PFGoogleOauth sharedInstance].loginCallbackSelector withObject:nil];
 #pragma clang diagnostic pop
     }
 }
