@@ -16,5 +16,6 @@
 @property(nonatomic) BOOL isShell;
 
 - (void) overwriteWith:(id<PFModelObject>) object;
+- (void) save;
 
 @end
