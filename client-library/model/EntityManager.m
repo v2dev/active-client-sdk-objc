@@ -126,6 +126,10 @@ static EntityManager* sharedInstance;
     return result;
 }
 
+- (void)saveObject:(id<PFModelObject>)modelObject{
+    
+}
+
 - (void) loadEntity:(id<PFModelObject>)entity{
     
     PFClient* ad = [PFClient sharedInstance];
