@@ -23,6 +23,9 @@
 
 /* Begin PBXBuildFile section */
 		5236884E161B60B4005993AE /* User.h in Headers */ = {isa = PBXBuildFile; fileRef = F2721ED715C9B20E0040FC3E /* User.h */; };
+		6AB0F67F16F2942600D7F7D5 /* PutRequest.h in Headers */ = {isa = PBXBuildFile; fileRef = 6AB0F67D16F2942600D7F7D5 /* PutRequest.h */; };
+		6AB0F68016F2942600D7F7D5 /* PutRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 6AB0F67E16F2942600D7F7D5 /* PutRequest.m */; };
+		6AB0F68116F2942600D7F7D5 /* PutRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 6AB0F67E16F2942600D7F7D5 /* PutRequest.m */; };
 		6ACA5BCC16E8FFFE00CB8FBD /* IUserAnchor.h in Headers */ = {isa = PBXBuildFile; fileRef = 6ACA5BCA16E8FFB700CB8FBD /* IUserAnchor.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		6ACA5BCD16E9000200CB8FBD /* IUserRole.h in Headers */ = {isa = PBXBuildFile; fileRef = 6ACA5BCB16E8FFE700CB8FBD /* IUserRole.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		6AF998E416F0F56700C962A4 /* PushUpdateResponse.h in Headers */ = {isa = PBXBuildFile; fileRef = 6AF998E216F0F56700C962A4 /* PushUpdateResponse.h */; };
@@ -202,6 +205,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		6AB0F67D16F2942600D7F7D5 /* PutRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PutRequest.h; path = model/PutRequest.h; sourceTree = "<group>"; };
+		6AB0F67E16F2942600D7F7D5 /* PutRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PutRequest.m; path = model/PutRequest.m; sourceTree = "<group>"; };
 		6ACA5BCA16E8FFB700CB8FBD /* IUserAnchor.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = IUserAnchor.h; sourceTree = "<group>"; };
 		6ACA5BCB16E8FFE700CB8FBD /* IUserRole.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = IUserRole.h; sourceTree = "<group>"; };
 		6AF998E216F0F56700C962A4 /* PushUpdateResponse.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PushUpdateResponse.h; path = model/PushUpdateResponse.h; sourceTree = "<group>"; };
@@ -569,6 +574,8 @@
 				6AF998E816F10E2D00C962A4 /* PushDeleteResonse.m */,
 				6AF998E216F0F56700C962A4 /* PushUpdateResponse.h */,
 				6AF998E316F0F56700C962A4 /* PushUpdateResponse.m */,
+				6AB0F67D16F2942600D7F7D5 /* PutRequest.h */,
+				6AB0F67E16F2942600D7F7D5 /* PutRequest.m */,
 				F2721ECA15C9B20E0040FC3E /* RegisteredApplication.h */,
 				F2721ECB15C9B20E0040FC3E /* RegisteredApplication.m */,
 				F2721ECC15C9B20E0040FC3E /* Serializable.h */,
@@ -800,6 +807,7 @@
 				F8BFB16116DEB53A000C9808 /* GTMReadMonitorInputStream.h in Headers */,
 				6AF998E416F0F56700C962A4 /* PushUpdateResponse.h in Headers */,
 				6AF998E916F10E2D00C962A4 /* PushDeleteResonse.h in Headers */,
+				6AB0F67F16F2942600D7F7D5 /* PutRequest.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -999,6 +1007,7 @@
 				F8BFB16216DEB53A000C9808 /* GTMReadMonitorInputStream.m in Sources */,
 				6AF998E516F0F56700C962A4 /* PushUpdateResponse.m in Sources */,
 				6AF998EA16F10E2D00C962A4 /* PushDeleteResonse.m in Sources */,
+				6AB0F68016F2942600D7F7D5 /* PutRequest.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1021,6 +1030,7 @@
 				F8BFB16316DEB53A000C9808 /* GTMReadMonitorInputStream.m in Sources */,
 				6AF998E616F0F56700C962A4 /* PushUpdateResponse.m in Sources */,
 				6AF998EB16F10E2D00C962A4 /* PushDeleteResonse.m in Sources */,
+				6AB0F68116F2942600D7F7D5 /* PutRequest.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
