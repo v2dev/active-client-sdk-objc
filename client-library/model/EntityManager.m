@@ -127,7 +127,11 @@ static EntityManager* sharedInstance;
 }
 
 - (void)saveObject:(id<PFModelObject>)modelObject{
-    
+    [PFClient sendPutRequestWithClass:[modelObject remoteClassName] object:modelObject completionTarget:nil method:nil];
+}
+
+- (void)saveObject:(id<PFModelObject>)modelObject withCompletionTarget:(id) target method:(SEL) method{
+    [PFClient sendPutRequestWithClass:[modelObject remoteClassName] object:modelObject completionTarget:target method:method];
 }
 
 - (void) loadEntity:(id<PFModelObject>)entity{
