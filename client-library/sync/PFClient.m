@@ -274,6 +274,7 @@ static PFClient* _sharedInstance;
     request.userId = [PFClient sharedInstance].userId;
     request.theObject = object;
     request.putTimestamp = [[NSDate date] timeIntervalSince1970];
+    request.transId = @"What_is_a_transId?";
     
     PFInvocation* callback = nil;
     if(target && selector)
