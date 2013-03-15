@@ -6,10 +6,10 @@
 //
 //
 
-#import "SyncResponse.h"
+#import "SyncRequest.h"
 #import "PFModelObject.h"
 
-@interface PutRequest : SyncResponse
+@interface PutRequest : SyncRequest
 
 @property id <PFModelObject> theObject;
 @property long putTimestamp;
