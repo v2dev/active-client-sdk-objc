@@ -12,7 +12,7 @@
 @interface PutRequest : SyncRequest
 
 @property id <PFModelObject> theObject;
-@property long putTimestamp;
+@property long long putTimestamp;
 @property NSString* transId;
 
 @end

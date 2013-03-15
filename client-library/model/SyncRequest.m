@@ -24,6 +24,7 @@
         responseChannel = @"";
         regAppKey = @"";
         svcOauthKey = @"";
+        _sendAck = NO;
     }
     
     return self;
@@ -41,6 +42,7 @@
         responseChannel = [dict objectForKey:@"responseChannel"];
         regAppKey = [dict objectForKey:@"regAppKey"];
         svcOauthKey = [dict objectForKey:@"svcOauthKey"];
+        _sendAck = [dict[@"sendAck"] boolValue];
     }
     
     return self;
@@ -60,6 +62,7 @@
         [dict setObject:responseChannel  forKey:@"responseChannel"];
         [dict setObject:regAppKey  forKey:@"regAppKey"];
         [dict setObject:svcOauthKey  forKey:@"svcOauthKey"];
+        dict[@"sendAck"] = @(_sendAck);
     }
     
     return dict;

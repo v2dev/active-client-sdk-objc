@@ -17,6 +17,7 @@
         _theObject = nil;
         _putTimestamp = 0;
         _transId = nil;
+        
     }
     
     return self;
@@ -41,7 +42,7 @@
     if(!isShell){
         
         dict[@"theObject"] = [_theObject toDictionary:NO];
-        dict[@"putTimeStamp"] = @(_putTimestamp);
+        dict[@"putTimestamp"] = @(_putTimestamp);
         dict[@"transId"] = _transId;
     }
     

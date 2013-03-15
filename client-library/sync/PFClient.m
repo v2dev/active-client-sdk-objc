@@ -273,8 +273,9 @@ static PFClient* _sharedInstance;
     request.token = [PFClient sharedInstance].token;
     request.userId = [PFClient sharedInstance].userId;
     request.theObject = object;
-    request.putTimestamp = [[NSDate date] timeIntervalSince1970];
-    request.transId = @"What_is_a_transId?";
+    request.putTimestamp = [[NSDate date] timeIntervalSince1970]*1000;
+    request.transId = [NSString stringWithFormat:@"%u%u%u%u", arc4random(), arc4random(), arc4random(), arc4random() ];
+    request.sendAck = YES;
     
     PFInvocation* callback = nil;
     if(target && selector)
