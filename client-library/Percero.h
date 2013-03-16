@@ -8,7 +8,7 @@
 
 #import <Foundation/Foundation.h>
 #import <Percero/PFClient.h>
-#import <Percero/PFConnection.h>
+#import <Percero/PFGoogleOauth.h>
 #import <Percero/EntityManager.h>
 #import <Percero/Serializable.h>
 #import <Percero/PFModelObject.h>
