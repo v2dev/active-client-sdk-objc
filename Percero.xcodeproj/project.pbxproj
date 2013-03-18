@@ -150,7 +150,7 @@
 		F2B0266515C9A495000375CE /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = F2B0266315C9A495000375CE /* InfoPlist.strings */; };
 		F2B0266815C9A495000375CE /* client_libraryTests.m in Sources */ = {isa = PBXBuildFile; fileRef = F2B0266715C9A495000375CE /* client_libraryTests.m */; };
 		F8811B3316F3F2F8004C2437 /* PFGoogleOauth.m in Sources */ = {isa = PBXBuildFile; fileRef = F8811B3116F3F2F8004C2437 /* PFGoogleOauth.m */; };
-		F8811B3416F3F2F8004C2437 /* PFGoogleOauth.h in Headers */ = {isa = PBXBuildFile; fileRef = F8811B3216F3F2F8004C2437 /* PFGoogleOauth.h */; };
+		F8811B3416F3F2F8004C2437 /* PFGoogleOauth.h in Headers */ = {isa = PBXBuildFile; fileRef = F8811B3216F3F2F8004C2437 /* PFGoogleOauth.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		F8BFB14216DEB53A000C9808 /* GTMGatherInputStream.h in Headers */ = {isa = PBXBuildFile; fileRef = F8BFB12B16DEB53A000C9808 /* GTMGatherInputStream.h */; };
 		F8BFB14316DEB53A000C9808 /* GTMGatherInputStream.m in Sources */ = {isa = PBXBuildFile; fileRef = F8BFB12C16DEB53A000C9808 /* GTMGatherInputStream.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		F8BFB14416DEB53A000C9808 /* GTMGatherInputStream.m in Sources */ = {isa = PBXBuildFile; fileRef = F8BFB12C16DEB53A000C9808 /* GTMGatherInputStream.m */; };
@@ -742,6 +742,7 @@
 				F2721EEF15C9B20E0040FC3E /* _Super_User.h in Headers */,
 				F2721EF115C9B20E0040FC3E /* _Super_UserAccount.h in Headers */,
 				F2721EF315C9B20E0040FC3E /* _Super_UserToken.h in Headers */,
+				F8811B3416F3F2F8004C2437 /* PFGoogleOauth.h in Headers */,
 				F2721EF915C9B20E0040FC3E /* AuthenticateOAuthAccessTokenResponse.h in Headers */,
 				F2721EFB15C9B20E0040FC3E /* AuthenticateOAuthCodeRequest.h in Headers */,
 				F2721EFD15C9B20E0040FC3E /* AuthenticateOAuthCodeResponse.h in Headers */,
@@ -808,7 +809,6 @@
 				6AF998E416F0F56700C962A4 /* PushUpdateResponse.h in Headers */,
 				6AF998E916F10E2D00C962A4 /* PushDeleteResonse.h in Headers */,
 				6AB0F67F16F2942600D7F7D5 /* PutRequest.h in Headers */,
-				F8811B3416F3F2F8004C2437 /* PFGoogleOauth.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

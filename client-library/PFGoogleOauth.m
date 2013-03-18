@@ -7,6 +7,7 @@
 //
 
 #import <Percero/Percero.h>
+#import "PFGoogleOauth.h"
 #import "GTMOAuth2ViewControllerTouch.h"
 
 static PFGoogleOauth* sharedInstance=nil;
