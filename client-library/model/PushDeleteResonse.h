@@ -10,4 +10,6 @@
 
 @interface PushDeleteResonse : SyncResponse
 
+@property (nonatomic, retain) NSMutableArray* result;
+
 @end

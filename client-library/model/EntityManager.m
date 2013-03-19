@@ -125,7 +125,16 @@ static EntityManager* sharedInstance;
     
     return result;
 }
-
+- (void) deleteObject:(id<PFModelObject>) modelObject{
+    NSString *objectClass = [[modelObject class] description];
+    NSMutableDictionary *dict = [self dictionaryForClass:objectClass];
+    [dict removeObjectForKey:modelObject];
+    
+    NSNotificationCenter *nc = [NSNotificationCenter defaultCenter];
+    NSString* notificationName = [NSString stringWithFormat:@"modelDidChange%@", objectClass];
+    [nc postNotificationName:notificationName object:nil];
+    
+}
 - (void)saveObject:(id<PFModelObject>)modelObject{
     [PFClient sendPutRequestWithClass:[modelObject remoteClassName] object:modelObject completionTarget:nil method:nil];
 }
@@ -146,7 +155,9 @@ static EntityManager* sharedInstance;
 
     [[PFSocketManager sharedInstance] sendEvent:@"findById" data:req callback:nil];
 }
-
+- (void) didreceiveDelete{
+    
+}
 /**
  * We have a helper function for setting up listeners for types of events that the EntityManager will emit
  * Specifically, the entity manager will emit an even for every object that it gets with the event name: didReceive{className}
@@ -155,7 +166,7 @@ static EntityManager* sharedInstance;
     // Register any events that we are interested in.
     NSNotificationCenter *nc = [NSNotificationCenter defaultCenter];
         
-    [nc addObserver:self 
+    [nc addObserver:self
            selector:selector 
                name:[NSString stringWithFormat:@"didReceive%@", className] 
              object:nil];
