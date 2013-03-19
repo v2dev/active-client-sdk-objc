@@ -72,7 +72,7 @@ static EntityManager* sharedInstance;
         //      I don't know if we need this or not.  Was using it to notify the controller logic that an object had entered the model cache.
         NSNotificationCenter *nc = [NSNotificationCenter defaultCenter];
         NSString* notificationName = [NSString stringWithFormat:@"modelDidChange%@", [[entity class] description]];
-        [nc postNotificationName:notificationName object:nil];
+        [nc postNotificationName:notificationName object:self];
     }
 
     old = [classDict objectForKey:[entity ID]];
@@ -132,7 +132,7 @@ static EntityManager* sharedInstance;
     
     NSNotificationCenter *nc = [NSNotificationCenter defaultCenter];
     NSString* notificationName = [NSString stringWithFormat:@"modelDidChange%@", objectClass];
-    [nc postNotificationName:notificationName object:nil];
+    [nc postNotificationName:notificationName object:self];
     
 }
 - (void)saveObject:(id<PFModelObject>)modelObject{
@@ -166,10 +166,10 @@ static EntityManager* sharedInstance;
     // Register any events that we are interested in.
     NSNotificationCenter *nc = [NSNotificationCenter defaultCenter];
         
-    [nc addObserver:self
+    [nc addObserver:target
            selector:selector 
-               name:[NSString stringWithFormat:@"didReceive%@", className] 
-             object:nil];
+               name:[NSString stringWithFormat:@"modelDidChange%@", className] 
+             object:[self sharedInstance]];
 
 }
 
