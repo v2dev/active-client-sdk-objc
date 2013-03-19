@@ -125,10 +125,11 @@ static EntityManager* sharedInstance;
     
     return result;
 }
+
 - (void) deleteObject:(id<PFModelObject>) modelObject{
     NSString *objectClass = [[modelObject class] description];
     NSMutableDictionary *dict = [self dictionaryForClass:objectClass];
-    [dict removeObjectForKey:modelObject];
+    [dict removeObjectForKey:modelObject.ID];
     
     NSNotificationCenter *nc = [NSNotificationCenter defaultCenter];
     NSString* notificationName = [NSString stringWithFormat:@"modelDidChange%@", objectClass];

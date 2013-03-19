@@ -1,19 +1,23 @@
 //
-//  PushDeleteResonse.m
+//  PushDeleteResponse.m
 //  Percero
 //
 //  Created by Jeff Wolski on 3/13/13.
 //
 //
 
-#import "PushDeleteResonse.h"
+#import "PushDeleteResponse.h"
 #import "EntityManager.h"
-@implementation PushDeleteResonse
+@implementation PushDeleteResponse
 
 - (id) initFromDictionary:(NSDictionary *)dict{
     self = [super initFromDictionary:dict];
     if(self){
         _result = [[EntityManager sharedInstance] deserializeObject:[dict objectForKey:@"objectList"]];
+        EntityManager *em = [EntityManager sharedInstance];
+        for (id<PFModelObject> object in _result) {
+            [em deleteObject:object];
+        }
     }
     
     return self;
