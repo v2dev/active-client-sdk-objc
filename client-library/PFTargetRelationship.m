@@ -10,4 +10,13 @@
 
 @implementation PFTargetRelationship
 
+
+- (id)initUnidirectionalWithInverseClassName:(NSString *)inverseClassName inversePropertyName:(NSString *)inversePropertyName{
+    if ([super init]) {
+        self.inverseClassName = inverseClassName;
+        self.inversePropertyName = inversePropertyName;
+        
+    }
+    return self;
+}
 @end

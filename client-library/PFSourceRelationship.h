@@ -10,4 +10,10 @@
 
 @interface PFSourceRelationship : PFRelationship
 
+- initUnidirectionalWithPropertyName:(NSString *) propertyName;
+- initBidirectionalWithPropertyName:(NSString *) propertyName
+                   inverseClassName:(NSString *) inverseClassName
+                inversePropertyName:(NSString *) inversePropertyName;
+
+
 @end
