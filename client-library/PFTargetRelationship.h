@@ -16,9 +16,12 @@
 @property (nonatomic, assign) BOOL isToMany;
 
 - initUnidirectionalWithInverseClassName:(NSString *) inverseClassName
-                     inversePropertyName:(NSString *) inversePropertyName;
+                     inversePropertyName:(NSString *) inversePropertyName
+                              isRequired:(BOOL) isRequired;
+
 - initBidirectionalWithPropertyName:(NSString *) propertyName
                    inverseClassName:(NSString *) inverseClassName
-                inversePropertyName:(NSString *) inversePropertyName;
+                inversePropertyName:(NSString *) inversePropertyName
+                         isRequired:(BOOL) isRequired;
 
 @end
