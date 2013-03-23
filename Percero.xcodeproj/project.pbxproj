@@ -23,11 +23,11 @@
 
 /* Begin PBXBuildFile section */
 		5236884E161B60B4005993AE /* User.h in Headers */ = {isa = PBXBuildFile; fileRef = F2721ED715C9B20E0040FC3E /* User.h */; };
-		6A1FBEA216FA304600E9E699 /* PFTargetRelationship.h in Headers */ = {isa = PBXBuildFile; fileRef = 6A1FBEA016FA304600E9E699 /* PFTargetRelationship.h */; };
+		6A1FBEA216FA304600E9E699 /* PFTargetRelationship.h in Headers */ = {isa = PBXBuildFile; fileRef = 6A1FBEA016FA304600E9E699 /* PFTargetRelationship.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		6A1FBEA316FA304600E9E699 /* PFTargetRelationship.m in Sources */ = {isa = PBXBuildFile; fileRef = 6A1FBEA116FA304600E9E699 /* PFTargetRelationship.m */; };
-		6A1FBEA716FA429A00E9E699 /* PFRelationship.h in Headers */ = {isa = PBXBuildFile; fileRef = 6A1FBEA516FA429A00E9E699 /* PFRelationship.h */; };
+		6A1FBEA716FA429A00E9E699 /* PFRelationship.h in Headers */ = {isa = PBXBuildFile; fileRef = 6A1FBEA516FA429A00E9E699 /* PFRelationship.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		6A1FBEA816FA429A00E9E699 /* PFRelationship.m in Sources */ = {isa = PBXBuildFile; fileRef = 6A1FBEA616FA429A00E9E699 /* PFRelationship.m */; };
-		6A1FBEAB16FA43A600E9E699 /* PFSourceRelationship.h in Headers */ = {isa = PBXBuildFile; fileRef = 6A1FBEA916FA43A600E9E699 /* PFSourceRelationship.h */; };
+		6A1FBEAB16FA43A600E9E699 /* PFSourceRelationship.h in Headers */ = {isa = PBXBuildFile; fileRef = 6A1FBEA916FA43A600E9E699 /* PFSourceRelationship.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		6A1FBEAC16FA43A600E9E699 /* PFSourceRelationship.m in Sources */ = {isa = PBXBuildFile; fileRef = 6A1FBEAA16FA43A600E9E699 /* PFSourceRelationship.m */; };
 		6AB0F67F16F2942600D7F7D5 /* PutRequest.h in Headers */ = {isa = PBXBuildFile; fileRef = 6AB0F67D16F2942600D7F7D5 /* PutRequest.h */; };
 		6AB0F68016F2942600D7F7D5 /* PutRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 6AB0F67E16F2942600D7F7D5 /* PutRequest.m */; };
@@ -770,6 +770,9 @@
 				F2721EFF15C9B20E0040FC3E /* AuthRequest.h in Headers */,
 				F2721F0115C9B20E0040FC3E /* AuthResponse.h in Headers */,
 				6ACA5BCD16E9000200CB8FBD /* IUserRole.h in Headers */,
+				6A1FBEA216FA304600E9E699 /* PFTargetRelationship.h in Headers */,
+				6A1FBEA716FA429A00E9E699 /* PFRelationship.h in Headers */,
+				6A1FBEAB16FA43A600E9E699 /* PFSourceRelationship.h in Headers */,
 				F2721F0315C9B20E0040FC3E /* ConnectResponse.h in Headers */,
 				6ACA5BCC16E8FFFE00CB8FBD /* IUserAnchor.h in Headers */,
 				F2721F0515C9B20E0040FC3E /* EntityManager.h in Headers */,
@@ -830,9 +833,6 @@
 				6AF998E416F0F56700C962A4 /* PushUpdateResponse.h in Headers */,
 				6AF998E916F10E2D00C962A4 /* PushDeleteResponse.h in Headers */,
 				6AB0F67F16F2942600D7F7D5 /* PutRequest.h in Headers */,
-				6A1FBEA216FA304600E9E699 /* PFTargetRelationship.h in Headers */,
-				6A1FBEA716FA429A00E9E699 /* PFRelationship.h in Headers */,
-				6A1FBEAB16FA43A600E9E699 /* PFSourceRelationship.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
