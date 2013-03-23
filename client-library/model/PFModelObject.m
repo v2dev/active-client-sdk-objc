@@ -9,21 +9,21 @@
 
 @implementation PFModelObject
 
-@synthesize ID, isShell;
+@synthesize ID, isShell, isLoading;
 
 - (void)overwriteWith:(id<PFModelObject>)object{
-    DLog(@"This should be implemented by the subclasses");
+    // do nothing
 }
 
 - (id)initFromDictionary:(NSDictionary *)dict{
-    DLog(@"This should be implemented by the subclasses");
-    return nil;
+	self = [super init];
+    return self;
 }
 
 
 - (NSMutableDictionary *)toDictionary:(BOOL)isShell{
-    DLog(@"This should be implemented by the subclasses");
-    return nil;
+    NSMutableDictionary *dict = [[NSMutableDictionary alloc] init];
+    return dict;
 }
 
 - (NSString *)remoteClassName{

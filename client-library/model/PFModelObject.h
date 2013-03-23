@@ -19,13 +19,21 @@
 - (void) overwriteWith:(id<PFModelObject>) object;
 
 @optional
-- (void) save;
 
+@property(nonatomic) BOOL isLoading;
++ (NSArray *) relationships;
+- (void) save;
 @end
 
 #pragma mark - PFModelObject class
 
-@interface PFModelObject : NSObject;
+@interface PFModelObject : NSObject{
+
+    // These are transient but needed for client side sync stuff
+	BOOL isShell;
+	BOOL isLoading;
+    NSString * ID;
+};
 
 
 #pragma mark PFModel protocol
@@ -33,6 +41,7 @@
 @property (nonatomic, retain) NSString* ID;
 
 @property(nonatomic) BOOL isShell;
+@property(nonatomic) BOOL isLoading;
 
 - (void) overwriteWith:(id<PFModelObject>) object;
 
