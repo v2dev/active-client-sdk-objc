@@ -10,5 +10,12 @@
 
 @implementation PFRelationship
 
+- (NSString *)description {
+    NSString *result;
+    
+    result = [NSString stringWithFormat:@"%@", self.class.description];
+    
+    return result;
+}
 
 @end

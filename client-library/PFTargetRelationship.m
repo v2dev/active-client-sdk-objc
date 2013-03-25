@@ -35,4 +35,13 @@
     return self;
 
 }
+
+- (NSString *)description{
+    
+    NSString *result = [super description];
+    
+    result = [NSString stringWithFormat:@"%@: self.%@ <- (%@ *) %@",result, self.propertyName, self.inverseClassName, self.inversePropertyName];
+    
+    return result;
+}
 @end
