@@ -33,6 +33,12 @@
 		6AB0F68016F2942600D7F7D5 /* PutRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 6AB0F67E16F2942600D7F7D5 /* PutRequest.m */; };
 		6AB0F68116F2942600D7F7D5 /* PutRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 6AB0F67E16F2942600D7F7D5 /* PutRequest.m */; };
 		6AB1982616FCC66100821DF6 /* PFModelObject.m in Sources */ = {isa = PBXBuildFile; fileRef = 6AB1982516FCC66100821DF6 /* PFModelObject.m */; };
+		6AB1982A1700E06E00821DF6 /* PutResponse.h in Headers */ = {isa = PBXBuildFile; fileRef = 6AB198281700E06A00821DF6 /* PutResponse.h */; };
+		6AB1982B1700E06E00821DF6 /* PutResponse.m in Sources */ = {isa = PBXBuildFile; fileRef = 6AB198291700E06C00821DF6 /* PutResponse.m */; };
+		6AB1982C1700E06E00821DF6 /* PutResponse.m in Sources */ = {isa = PBXBuildFile; fileRef = 6AB198291700E06C00821DF6 /* PutResponse.m */; };
+		6AB1982F1700E8C600821DF6 /* PushDeletesReceivedRequest.h in Headers */ = {isa = PBXBuildFile; fileRef = 6AB1982D1700E8C100821DF6 /* PushDeletesReceivedRequest.h */; };
+		6AB198301700E8C600821DF6 /* PushDeletesReceivedRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 6AB1982E1700E8C300821DF6 /* PushDeletesReceivedRequest.m */; };
+		6AB198311700E8C600821DF6 /* PushDeletesReceivedRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 6AB1982E1700E8C300821DF6 /* PushDeletesReceivedRequest.m */; };
 		6ACA5BCC16E8FFFE00CB8FBD /* IUserAnchor.h in Headers */ = {isa = PBXBuildFile; fileRef = 6ACA5BCA16E8FFB700CB8FBD /* IUserAnchor.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		6ACA5BCD16E9000200CB8FBD /* IUserRole.h in Headers */ = {isa = PBXBuildFile; fileRef = 6ACA5BCB16E8FFE700CB8FBD /* IUserRole.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		6AF998E416F0F56700C962A4 /* PushUpdateResponse.h in Headers */ = {isa = PBXBuildFile; fileRef = 6AF998E216F0F56700C962A4 /* PushUpdateResponse.h */; };
@@ -221,6 +227,10 @@
 		6AB0F67D16F2942600D7F7D5 /* PutRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PutRequest.h; path = model/PutRequest.h; sourceTree = "<group>"; };
 		6AB0F67E16F2942600D7F7D5 /* PutRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PutRequest.m; path = model/PutRequest.m; sourceTree = "<group>"; };
 		6AB1982516FCC66100821DF6 /* PFModelObject.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PFModelObject.m; path = model/PFModelObject.m; sourceTree = "<group>"; };
+		6AB198281700E06A00821DF6 /* PutResponse.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PutResponse.h; path = model/PutResponse.h; sourceTree = "<group>"; };
+		6AB198291700E06C00821DF6 /* PutResponse.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PutResponse.m; path = model/PutResponse.m; sourceTree = "<group>"; };
+		6AB1982D1700E8C100821DF6 /* PushDeletesReceivedRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PushDeletesReceivedRequest.h; path = model/PushDeletesReceivedRequest.h; sourceTree = "<group>"; };
+		6AB1982E1700E8C300821DF6 /* PushDeletesReceivedRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PushDeletesReceivedRequest.m; path = model/PushDeletesReceivedRequest.m; sourceTree = "<group>"; };
 		6ACA5BCA16E8FFB700CB8FBD /* IUserAnchor.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = IUserAnchor.h; sourceTree = "<group>"; };
 		6ACA5BCB16E8FFE700CB8FBD /* IUserRole.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = IUserRole.h; sourceTree = "<group>"; };
 		6AF998E216F0F56700C962A4 /* PushUpdateResponse.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PushUpdateResponse.h; path = model/PushUpdateResponse.h; sourceTree = "<group>"; };
@@ -541,6 +551,8 @@
 		F2721E8C15C9B1C20040FC3E /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				6AB198281700E06A00821DF6 /* PutResponse.h */,
+				6AB198291700E06C00821DF6 /* PutResponse.m */,
 				6ACA5BCA16E8FFB700CB8FBD /* IUserAnchor.h */,
 				6ACA5BCB16E8FFE700CB8FBD /* IUserRole.h */,
 				F2721E9A15C9B20E0040FC3E /* _Super_RegisteredApplication.h */,
@@ -575,6 +587,8 @@
 				F2721EBC15C9B20E0040FC3E /* FindByIdRequest.m */,
 				F2721EBD15C9B20E0040FC3E /* FindByIdResponse.h */,
 				F2721EBE15C9B20E0040FC3E /* FindByIdResponse.m */,
+				6AB1982D1700E8C100821DF6 /* PushDeletesReceivedRequest.h */,
+				6AB1982E1700E8C300821DF6 /* PushDeletesReceivedRequest.m */,
 				F2721EBF15C9B20E0040FC3E /* GetAllByNameRequest.h */,
 				F2721EC015C9B20E0040FC3E /* GetAllByNameRequest.m */,
 				F2721EC115C9B20E0040FC3E /* GetAllByNameResponse.h */,
@@ -833,6 +847,8 @@
 				6AF998E416F0F56700C962A4 /* PushUpdateResponse.h in Headers */,
 				6AF998E916F10E2D00C962A4 /* PushDeleteResponse.h in Headers */,
 				6AB0F67F16F2942600D7F7D5 /* PutRequest.h in Headers */,
+				6AB1982A1700E06E00821DF6 /* PutResponse.h in Headers */,
+				6AB1982F1700E8C600821DF6 /* PushDeletesReceivedRequest.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1037,6 +1053,8 @@
 				6A1FBEA816FA429A00E9E699 /* PFRelationship.m in Sources */,
 				6A1FBEAC16FA43A600E9E699 /* PFSourceRelationship.m in Sources */,
 				6AB1982616FCC66100821DF6 /* PFModelObject.m in Sources */,
+				6AB1982B1700E06E00821DF6 /* PutResponse.m in Sources */,
+				6AB198301700E8C600821DF6 /* PushDeletesReceivedRequest.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1059,6 +1077,8 @@
 				6AF998E616F0F56700C962A4 /* PushUpdateResponse.m in Sources */,
 				6AF998EB16F10E2D00C962A4 /* PushDeleteResponse.m in Sources */,
 				6AB0F68116F2942600D7F7D5 /* PutRequest.m in Sources */,
+				6AB1982C1700E06E00821DF6 /* PutResponse.m in Sources */,
+				6AB198311700E8C600821DF6 /* PushDeletesReceivedRequest.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
