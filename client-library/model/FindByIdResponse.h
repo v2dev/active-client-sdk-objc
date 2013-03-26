@@ -9,7 +9,7 @@
 #import "SyncResponse.h"
 #import "PFModelObject.h"
 
-@interface FindByIdResponse : SyncResponse{
+@interface FindByIdResponse : SyncResponse<Serializable>{
     id<PFModelObject> result;
 }
 
