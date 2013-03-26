@@ -4,7 +4,7 @@
 //
 //  Created by Jeff Wolski on 3/26/13.
 //
-//  The client will use this class to initiate the deletion of an object from the system.
+//  Use this class to initiate the deletion of an object from the system.
 
 #import "SyncRequest.h"
 #import "ClassIDPair.h"
