@@ -50,6 +50,9 @@
 		6AF998E916F10E2D00C962A4 /* PushDeleteResponse.h in Headers */ = {isa = PBXBuildFile; fileRef = 6AF998E716F10E2D00C962A4 /* PushDeleteResponse.h */; };
 		6AF998EA16F10E2D00C962A4 /* PushDeleteResponse.m in Sources */ = {isa = PBXBuildFile; fileRef = 6AF998E816F10E2D00C962A4 /* PushDeleteResponse.m */; };
 		6AF998EB16F10E2D00C962A4 /* PushDeleteResponse.m in Sources */ = {isa = PBXBuildFile; fileRef = 6AF998E816F10E2D00C962A4 /* PushDeleteResponse.m */; };
+		6AFAF6B81701E2AE0026151D /* RemoveRequest.h in Headers */ = {isa = PBXBuildFile; fileRef = 6AFAF6B61701E2AE0026151D /* RemoveRequest.h */; };
+		6AFAF6B91701E2AE0026151D /* RemoveRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 6AFAF6B71701E2AE0026151D /* RemoveRequest.m */; };
+		6AFAF6BA1701E2AE0026151D /* RemoveRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 6AFAF6B71701E2AE0026151D /* RemoveRequest.m */; };
 		EAF93FA516640BB600F581F4 /* NSObject+SBJson.h in Headers */ = {isa = PBXBuildFile; fileRef = EAF93F8C16640BB500F581F4 /* NSObject+SBJson.h */; };
 		EAF93FA616640BB600F581F4 /* NSObject+SBJson.m in Sources */ = {isa = PBXBuildFile; fileRef = EAF93F8D16640BB500F581F4 /* NSObject+SBJson.m */; };
 		EAF93FA716640BB600F581F4 /* SBJson.h in Headers */ = {isa = PBXBuildFile; fileRef = EAF93F8E16640BB500F581F4 /* SBJson.h */; };
@@ -242,6 +245,8 @@
 		6AF998E316F0F56700C962A4 /* PushUpdateResponse.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PushUpdateResponse.m; path = model/PushUpdateResponse.m; sourceTree = "<group>"; };
 		6AF998E716F10E2D00C962A4 /* PushDeleteResponse.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PushDeleteResponse.h; path = model/PushDeleteResponse.h; sourceTree = "<group>"; };
 		6AF998E816F10E2D00C962A4 /* PushDeleteResponse.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PushDeleteResponse.m; path = model/PushDeleteResponse.m; sourceTree = "<group>"; };
+		6AFAF6B61701E2AE0026151D /* RemoveRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = RemoveRequest.h; path = model/RemoveRequest.h; sourceTree = "<group>"; };
+		6AFAF6B71701E2AE0026151D /* RemoveRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = RemoveRequest.m; path = model/RemoveRequest.m; sourceTree = "<group>"; };
 		EAF93F8C16640BB500F581F4 /* NSObject+SBJson.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSObject+SBJson.h"; sourceTree = "<group>"; };
 		EAF93F8D16640BB500F581F4 /* NSObject+SBJson.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSObject+SBJson.m"; sourceTree = "<group>"; };
 		EAF93F8E16640BB500F581F4 /* SBJson.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SBJson.h; sourceTree = "<group>"; };
@@ -560,6 +565,8 @@
 				6A8B0868170123E700BB48EE /* ClassIDPair.m */,
 				6AB198281700E06A00821DF6 /* PutResponse.h */,
 				6AB198291700E06C00821DF6 /* PutResponse.m */,
+				6AFAF6B61701E2AE0026151D /* RemoveRequest.h */,
+				6AFAF6B71701E2AE0026151D /* RemoveRequest.m */,
 				6ACA5BCA16E8FFB700CB8FBD /* IUserAnchor.h */,
 				6ACA5BCB16E8FFE700CB8FBD /* IUserRole.h */,
 				F2721E9A15C9B20E0040FC3E /* _Super_RegisteredApplication.h */,
@@ -857,6 +864,7 @@
 				6AB1982A1700E06E00821DF6 /* PutResponse.h in Headers */,
 				6AB1982F1700E8C600821DF6 /* PushDeletesReceivedRequest.h in Headers */,
 				6A8B0869170123E800BB48EE /* ClassIDPair.h in Headers */,
+				6AFAF6B81701E2AE0026151D /* RemoveRequest.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1064,6 +1072,7 @@
 				6AB1982B1700E06E00821DF6 /* PutResponse.m in Sources */,
 				6AB198301700E8C600821DF6 /* PushDeletesReceivedRequest.m in Sources */,
 				6A8B086A170123E800BB48EE /* ClassIDPair.m in Sources */,
+				6AFAF6B91701E2AE0026151D /* RemoveRequest.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1089,6 +1098,7 @@
 				6AB1982C1700E06E00821DF6 /* PutResponse.m in Sources */,
 				6AB198311700E8C600821DF6 /* PushDeletesReceivedRequest.m in Sources */,
 				6A8B086B170123E800BB48EE /* ClassIDPair.m in Sources */,
+				6AFAF6BA1701E2AE0026151D /* RemoveRequest.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
