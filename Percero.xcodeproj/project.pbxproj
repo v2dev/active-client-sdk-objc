@@ -42,6 +42,8 @@
 		6AB1982F1700E8C600821DF6 /* PushDeletesReceivedRequest.h in Headers */ = {isa = PBXBuildFile; fileRef = 6AB1982D1700E8C100821DF6 /* PushDeletesReceivedRequest.h */; };
 		6AB198301700E8C600821DF6 /* PushDeletesReceivedRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 6AB1982E1700E8C300821DF6 /* PushDeletesReceivedRequest.m */; };
 		6AB198311700E8C600821DF6 /* PushDeletesReceivedRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 6AB1982E1700E8C300821DF6 /* PushDeletesReceivedRequest.m */; };
+		6AC09CD4170212C800D640A3 /* CreateRequest.h in Headers */ = {isa = PBXBuildFile; fileRef = 6AC09CD2170212C800D640A3 /* CreateRequest.h */; };
+		6AC09CD5170212C800D640A3 /* CreateRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 6AC09CD3170212C800D640A3 /* CreateRequest.m */; };
 		6ACA5BCC16E8FFFE00CB8FBD /* IUserAnchor.h in Headers */ = {isa = PBXBuildFile; fileRef = 6ACA5BCA16E8FFB700CB8FBD /* IUserAnchor.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		6ACA5BCD16E9000200CB8FBD /* IUserRole.h in Headers */ = {isa = PBXBuildFile; fileRef = 6ACA5BCB16E8FFE700CB8FBD /* IUserRole.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		6AD4553D1701FDA20038A988 /* RemoveResponse.h in Headers */ = {isa = PBXBuildFile; fileRef = 6AD4553B1701FDA20038A988 /* RemoveResponse.h */; };
@@ -242,6 +244,8 @@
 		6AB198291700E06C00821DF6 /* PutResponse.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PutResponse.m; path = model/PutResponse.m; sourceTree = "<group>"; };
 		6AB1982D1700E8C100821DF6 /* PushDeletesReceivedRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PushDeletesReceivedRequest.h; path = model/PushDeletesReceivedRequest.h; sourceTree = "<group>"; };
 		6AB1982E1700E8C300821DF6 /* PushDeletesReceivedRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PushDeletesReceivedRequest.m; path = model/PushDeletesReceivedRequest.m; sourceTree = "<group>"; };
+		6AC09CD2170212C800D640A3 /* CreateRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CreateRequest.h; sourceTree = "<group>"; };
+		6AC09CD3170212C800D640A3 /* CreateRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CreateRequest.m; sourceTree = "<group>"; };
 		6ACA5BCA16E8FFB700CB8FBD /* IUserAnchor.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = IUserAnchor.h; sourceTree = "<group>"; };
 		6ACA5BCB16E8FFE700CB8FBD /* IUserRole.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = IUserRole.h; sourceTree = "<group>"; };
 		6AD4553B1701FDA20038A988 /* RemoveResponse.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = RemoveResponse.h; path = model/RemoveResponse.h; sourceTree = "<group>"; };
@@ -574,6 +578,8 @@
 				6AFAF6B71701E2AE0026151D /* RemoveRequest.m */,
 				6AD4553B1701FDA20038A988 /* RemoveResponse.h */,
 				6AD4553C1701FDA20038A988 /* RemoveResponse.m */,
+				6AC09CD2170212C800D640A3 /* CreateRequest.h */,
+				6AC09CD3170212C800D640A3 /* CreateRequest.m */,
 				6ACA5BCA16E8FFB700CB8FBD /* IUserAnchor.h */,
 				6ACA5BCB16E8FFE700CB8FBD /* IUserRole.h */,
 				F2721E9A15C9B20E0040FC3E /* _Super_RegisteredApplication.h */,
@@ -873,6 +879,7 @@
 				6A8B0869170123E800BB48EE /* ClassIDPair.h in Headers */,
 				6AFAF6B81701E2AE0026151D /* RemoveRequest.h in Headers */,
 				6AD4553D1701FDA20038A988 /* RemoveResponse.h in Headers */,
+				6AC09CD4170212C800D640A3 /* CreateRequest.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1082,6 +1089,7 @@
 				6A8B086A170123E800BB48EE /* ClassIDPair.m in Sources */,
 				6AFAF6B91701E2AE0026151D /* RemoveRequest.m in Sources */,
 				6AD4553E1701FDA20038A988 /* RemoveResponse.m in Sources */,
+				6AC09CD5170212C800D640A3 /* CreateRequest.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
