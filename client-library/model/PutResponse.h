@@ -9,7 +9,7 @@
 #import "PFModelObject.h"
 #import "SyncResponse.h"
 
-@interface PutResponse : SyncResponse{
+@interface PutResponse : SyncResponse<Serializable>{
     
 }
 
