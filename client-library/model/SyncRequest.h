@@ -30,5 +30,6 @@
 @property(nonatomic, retain) NSString* messageId;
 @property(nonatomic, retain) NSString* regAppKey;
 @property(nonatomic, retain) NSString* svcOauthKey;
+@property(nonatomic, assign) BOOL sendAck;
 
 @end

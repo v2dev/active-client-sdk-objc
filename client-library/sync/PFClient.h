@@ -7,6 +7,8 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "PFModelObject.h"
+
 @class PFSocketManager;
 
 @interface PFClient : NSObject <NSCoding>{
@@ -37,6 +39,7 @@
 + (void) loginSavedSessionWithCallbackTarget:(NSObject*) target method:(SEL) selector;
 + (void) sendGetAllByNameRequest:(NSString*)className target:(NSObject*) target method:(SEL) selector;
 + (void) sendGetByIdRequest:(NSString*)className id:(NSString*)id target:(NSObject*) target method:(SEL) selector;
++ (void) sendPutRequestWithClass:(NSString*)className object:(id <PFModelObject>) object completionTarget:(NSObject*) target method:(SEL) selector;
 + (bool) isAuthenticated;
 + (void) autoLogin;
 + (void) logout;

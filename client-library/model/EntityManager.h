@@ -20,6 +20,9 @@
 - (void) loadEntity:(id<PFModelObject>)entity;
 - (NSMutableDictionary*) dictionaryForClass:(NSString*) c;
 - (id) deserializeObject:(id) ob;
+- (void) deleteObject:(id<PFModelObject>) modelObject;
+- (void) saveObject:(id <PFModelObject>) modelObject;
+- (void)saveObject:(id<PFModelObject>)modelObject withCompletionTarget:(id) target method:(SEL) method;
 + (void) addListenerForObjectType:(NSString*) className target:(NSObject*)target method:(SEL) selector;
 
 @end

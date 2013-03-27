@@ -7,7 +7,10 @@
 //
 
 #import <Percero/Percero.h>
+<<<<<<< HEAD
+=======
 #import "PFGoogleOauth.h"
+>>>>>>> dev
 #import "GTMOAuth2ViewControllerTouch.h"
 
 static PFGoogleOauth* sharedInstance=nil;
@@ -22,10 +25,23 @@ static PFGoogleOauth* sharedInstance=nil;
 @property (assign, nonatomic) BOOL isAuthenticatedWithGoogle;
 @end
 
+<<<<<<< HEAD
+@implementation PFGoogleOauth
+
+
++ (PFGoogleOauth*) sharedInstance{
+    if(sharedInstance==nil){
+        sharedInstance = [[super allocWithZone:NULL] init];
+    }
+    return sharedInstance;
+}
+
+=======
 @implementation PFGoogleOauth;
 
 
 #pragma mark - Public Class Methods
+>>>>>>> dev
 
 + (void) setUp{
     [PFGoogleOauth sharedInstance];
@@ -38,6 +54,12 @@ static PFGoogleOauth* sharedInstance=nil;
                name:@"modelDidChangeServiceApplicationOAuth"
              object:nil];
     [PFClient initialize];
+<<<<<<< HEAD
+
+}
+
+
+=======
 }
 
 
@@ -84,6 +106,7 @@ static PFGoogleOauth* sharedInstance=nil;
 
 #pragma mark
 
+>>>>>>> dev
 - (id) init{
     
     self = [super init];
@@ -105,8 +128,11 @@ static PFGoogleOauth* sharedInstance=nil;
 }
 
 
+<<<<<<< HEAD
+=======
 #pragma mark - Callbacks/Notifications
 
+>>>>>>> dev
 - (void) modelDidChangeServiceApplicationOAuth:(NSNotification*)n{
     EntityManager* em = [EntityManager sharedInstance];
     NSDictionary* saOAuths = [em dictionaryForClass:@"ServiceApplicationOAuth"];
@@ -114,12 +140,52 @@ static PFGoogleOauth* sharedInstance=nil;
         [PFGoogleOauth sharedInstance].saOAuth = [saOAuths valueForKey:oa];
         if([[PFGoogleOauth sharedInstance].saOAuth.serviceApplication.serviceProvider.name isEqualToString:@"google"]){
             [PFGoogleOauth sharedInstance].isAuthenticatedWithGoogle=YES;
+<<<<<<< HEAD
+            DLog(@"");
+=======
+>>>>>>> dev
             [[PFGoogleOauth sharedInstance] pfGoogleOAuthCompleted];
         }
     }
 }
 
 
+<<<<<<< HEAD
++ (void) listenForGoogleOauthWithSelector:(SEL)selector andTarget:(id)target{
+    
+    if(target && selector){
+        [PFGoogleOauth sharedInstance].pfGoogleOauthCallbackSelector=selector;
+        [PFGoogleOauth sharedInstance].pfGoogleOauthCallbackTarget=target;
+    }
+    if ([PFGoogleOauth sharedInstance].isAuthenticatedWithGoogle){
+        [[PFGoogleOauth sharedInstance] pfGoogleOAuthCompleted];
+    }
+    DLog(@"");
+}
+
+
++ (void) loginAndListenForCompletionWithSelector:(SEL)selector andTarget:(UIViewController *)clientViewController{
+    
+    [PFGoogleOauth sharedInstance].clientViewController=clientViewController;
+    [PFGoogleOauth sharedInstance].loginCallbackSelector=selector;
+    
+    EnvConfig* config = [EnvConfig sharedInstance];
+    
+    GTMOAuth2ViewControllerTouch *viewController =
+    [[GTMOAuth2ViewControllerTouch alloc] initWithScope:[config getEnvProperty:@"oauth.google.scope"]
+                                               clientID:[PFGoogleOauth sharedInstance].saOAuth.appKey
+                                           clientSecret:@""
+                                       keychainItemName:[config getEnvProperty:@"oauth.google.keychain_item_name"]
+                                               delegate:[PFGoogleOauth sharedInstance]
+                                       finishedSelector:@selector(viewController:finishedWithAuth:error:)];
+    
+    [[PFGoogleOauth sharedInstance].clientViewController presentViewController:viewController animated:YES completion:nil];
+}
+
+
+
+=======
+>>>>>>> dev
 // This is the callback function that will be called when login OAuth completes.
 // If success then we want to send the authCode to the server and start the login process there.
 // If fail then report the failure.
@@ -136,7 +202,10 @@ static PFGoogleOauth* sharedInstance=nil;
 }
 
 
+<<<<<<< HEAD
+=======
 
+>>>>>>> dev
 -(void) pfGoogleOAuthCompleted
 {
     if([PFGoogleOauth sharedInstance].pfGoogleOauthCallbackTarget && [PFGoogleOauth sharedInstance].pfGoogleOauthCallbackSelector){
@@ -145,6 +214,10 @@ static PFGoogleOauth* sharedInstance=nil;
         [[PFGoogleOauth sharedInstance].pfGoogleOauthCallbackTarget performSelector:[PFGoogleOauth sharedInstance].pfGoogleOauthCallbackSelector];
 #pragma clang diagnostic pop
     }
+<<<<<<< HEAD
+    DLog(@"");
+=======
+>>>>>>> dev
 }
 
     
@@ -157,5 +230,8 @@ static PFGoogleOauth* sharedInstance=nil;
 #pragma clang diagnostic pop
     }
 }
+<<<<<<< HEAD
+=======
 
+>>>>>>> dev
 @end
