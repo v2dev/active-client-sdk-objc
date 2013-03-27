@@ -50,4 +50,6 @@
 - (NSMutableDictionary*) toDictionary:(BOOL)isShell;
 - (NSString*) remoteClassName;
 
+
++ (NSArray *) relationships;
 @end

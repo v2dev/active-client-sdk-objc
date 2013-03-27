@@ -30,4 +30,8 @@
     DLog(@"This should be implemented by the subclasses");
     return nil;
 }
+
++ (NSArray *)relationships {
+    return @[];
+}
 @end
