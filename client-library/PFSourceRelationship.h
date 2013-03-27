@@ -10,10 +10,16 @@
 
 @interface PFSourceRelationship : PFRelationship
 
-- initUnidirectionalWithPropertyName:(NSString *) propertyName;
+- initUnidirectionalWithPropertyName:(NSString *) propertyName
+                    inverseClassName:(NSString *) inverseClassName
+                          isRequired:(BOOL)isRequired
+                        isCollection:(BOOL) isCollection;
 - initBidirectionalWithPropertyName:(NSString *) propertyName
                    inverseClassName:(NSString *) inverseClassName
-                inversePropertyName:(NSString *) inversePropertyName;
+                inversePropertyName:(NSString *) inversePropertyName
+                         isRequired:(BOOL)isRequired
+                       isCollection:(BOOL) isCollection;
+
 
 
 @end

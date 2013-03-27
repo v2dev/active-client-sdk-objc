@@ -12,6 +12,8 @@
 @property (nonatomic, copy) NSString *propertyName;
 @property (nonatomic, copy) NSString *inverseClassName;
 @property (nonatomic, copy) NSString *inversePropertyName;
+@property (nonatomic, assign) BOOL isCollection;
+@property (nonatomic, assign) BOOL isRequired;
 @property (nonatomic, assign) BOOL isUnidirectional;
 
 /*

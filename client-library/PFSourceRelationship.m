@@ -12,20 +12,32 @@
 
 - (id)initBidirectionalWithPropertyName:(NSString *)propertyName
                        inverseClassName:(NSString *)inverseClassName
-                    inversePropertyName:(NSString *)inversePropertyName{
+                    inversePropertyName:(NSString *)inversePropertyName
+                             isRequired:(BOOL)isRequired
+                           isCollection:(BOOL)isCollection{
     self = [super init];
     if (self) {
-        self.propertyName = propertyName;
-        self.inverseClassName = inverseClassName;
-        self.inversePropertyName = inversePropertyName;
+        super.isUnidirectional = NO;
+        super.propertyName = propertyName;
+        super.inverseClassName = inverseClassName;
+        super.inversePropertyName = inversePropertyName;
+        super.isRequired = isRequired;
+        super.isCollection = isCollection;
     }
     return self;
 }
 
-- (id)initUnidirectionalWithPropertyName:(NSString *)propertyName{
+- (id)initUnidirectionalWithPropertyName:(NSString *)propertyName
+                        inverseClassName:(NSString *)inverseClassName
+                              isRequired:(BOOL)isRequired
+                            isCollection:(BOOL)isCollection{
     self = [super init];
     if (self) {
-        self.propertyName = propertyName;
+        super.isUnidirectional = YES;
+        super.propertyName = propertyName;
+        super.inverseClassName = inverseClassName;
+        super.isRequired = isRequired;
+        super.isCollection = isCollection;
     }
     return self;
 }
@@ -35,7 +47,7 @@
     
     NSString *result = [super description];
     
-    result = [NSString stringWithFormat:@"%@: self.%@ -> (%@ *) %@",result, self.propertyName, self.inverseClassName, self.inversePropertyName];
+    result = [NSString stringWithFormat:@"%@: %@ %@--> (%@ *) %@",result, (self.propertyName)?self.propertyName:@"(?)", (self.isUnidirectional)?@"":@"<", self.inverseClassName, self.inversePropertyName];
     
     return result;
 }
