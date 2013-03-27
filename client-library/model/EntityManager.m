@@ -90,7 +90,7 @@ static EntityManager* sharedInstance;
         BOOL isShell = NO;
 
         NSString* className = [obj objectForKey:@"cn"];
-        // sometimes cn is not used... erg.
+        // className is used for shell objects, cn for non-shell objects
         if(!className){
             className = [obj objectForKey:@"className"];
             isShell = YES;
