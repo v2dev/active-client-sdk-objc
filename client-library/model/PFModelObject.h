@@ -22,7 +22,7 @@
 
 @property(nonatomic) BOOL isLoading;
 + (NSArray *) relationships;
-- (void) save;
+
 @end
 
 #pragma mark - PFModelObject class
@@ -44,6 +44,8 @@
 @property(nonatomic) BOOL isLoading;
 
 - (void) overwriteWith:(id<PFModelObject>) object;
+- (void) save;
+- (void) delete;
 
 #pragma mark Serializable protocol
 - (id) initFromDictionary:(NSDictionary*) dict;

@@ -31,6 +31,14 @@
     return nil;
 }
 
+- (void)save{
+    DLog(@"Save object.");
+}
+
+- (void)delete{
+    DLog(@"Delete object.");
+}
+
 + (NSArray *)relationships {
     return @[];
 }
