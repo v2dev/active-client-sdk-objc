@@ -22,6 +22,7 @@
 #import "GetAllByNameRequest.h"
 #import "FindByIdRequest.h"
 #import "PutRequest.h"
+#import "CreateRequest.h"
 
 // The singleton
 static PFClient* _sharedInstance;
@@ -282,6 +283,23 @@ static PFClient* _sharedInstance;
         callback = [[PFInvocation alloc] initWithTarget:target method:selector];
     
     [[PFSocketManager sharedInstance] sendEvent:@"putObject" data:request callback:callback];
+    
+}
+
++ (void)sendCreateRequestWithClass:(NSString *)className object:(id<PFModelObject>)object completionTarget:(NSObject *)target method:(SEL)selector {
+    
+    CreateRequest* request = [[CreateRequest alloc] init];
+    request.clientId = [PFClient sharedInstance].clientId;
+    request.token = [PFClient sharedInstance].token;
+    request.userId = [PFClient sharedInstance].userId;
+    request.theObject = object;
+    request.sendAck = YES;
+    
+    PFInvocation* callback = nil;
+    if(target && selector)
+        callback = [[PFInvocation alloc] initWithTarget:target method:selector];
+    
+    [[PFSocketManager sharedInstance] sendEvent:@"createObject" data:request callback:callback];
     
 }
 

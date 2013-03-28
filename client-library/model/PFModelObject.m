@@ -6,6 +6,7 @@
 //
 
 #import "PFModelObject.h"
+#import "EntityManager.h"
 
 @implementation PFModelObject
 
@@ -32,11 +33,17 @@
 }
 
 - (void)save{
-    DLog(@"Save object.");
+    
+    if (self.ID) {
+        [[EntityManager sharedInstance] updateObject:self];
+    } else {
+        self.ID = [[NSUUID UUID] UUIDString];
+        [[EntityManager sharedInstance] createObject:self];
+    }
 }
 
 - (void)delete{
-    DLog(@"Delete object.");
+	[[EntityManager sharedInstance] deleteObject:self];
 }
 
 + (NSArray *)relationships {

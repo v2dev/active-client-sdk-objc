@@ -136,12 +136,21 @@ static EntityManager* sharedInstance;
     [nc postNotificationName:notificationName object:self];
     
 }
-- (void)saveObject:(id<PFModelObject>)modelObject{
+- (void)updateObject:(id<PFModelObject>)modelObject{
     [PFClient sendPutRequestWithClass:[modelObject remoteClassName] object:modelObject completionTarget:nil method:nil];
 }
 
-- (void)saveObject:(id<PFModelObject>)modelObject withCompletionTarget:(id) target method:(SEL) method{
+- (void)updateObject:(id<PFModelObject>)modelObject withCompletionTarget:(id) target method:(SEL) method{
     [PFClient sendPutRequestWithClass:[modelObject remoteClassName] object:modelObject completionTarget:target method:method];
+}
+
+- (void)createObject:(id<PFModelObject>)modelObject{
+    [PFClient sendCreateRequestWithClass:[modelObject remoteClassName] object:modelObject completionTarget:nil method:nil];
+
+}
+
+- (void)createObject:(id<PFModelObject>)modelObject withCompletionTarget:(id) target method:(SEL) method{
+    [PFClient sendCreateRequestWithClass:[modelObject remoteClassName] object:modelObject completionTarget:target method:method];
 }
 
 - (void) loadEntity:(id<PFModelObject>)entity{
@@ -163,16 +172,16 @@ static EntityManager* sharedInstance;
  * We have a helper function for setting up listeners for types of events that the EntityManager will emit
  * Specifically, the entity manager will emit an even for every object that it gets with the event name: didReceive{className}
  */
-+ (void) addListenerForObjectType:(NSString*) className target:(NSObject*)target method:(SEL) selector{
-    // Register any events that we are interested in.
-    NSNotificationCenter *nc = [NSNotificationCenter defaultCenter];
-        
-    [nc addObserver:target
-           selector:selector 
-               name:[NSString stringWithFormat:@"modelDidChange%@", className] 
-             object:[self sharedInstance]];
-
-}
+//+ (void) addListenerForObjectType:(NSString*) className target:(NSObject*)target method:(SEL) selector{
+//    // Register any events that we are interested in.
+//    NSNotificationCenter *nc = [NSNotificationCenter defaultCenter];
+//        
+//    [nc addObserver:target
+//           selector:selector 
+//               name:[NSString stringWithFormat:@"modelDidChange%@", className] 
+//             object:[self sharedInstance]];
+//
+//}
 
 
 

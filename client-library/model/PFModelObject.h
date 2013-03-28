@@ -27,7 +27,7 @@
 
 #pragma mark - PFModelObject class
 
-@interface PFModelObject : NSObject{
+@interface PFModelObject : NSObject<PFModelObject>{
 
     // These are transient but needed for client side sync stuff
 	BOOL isShell;
