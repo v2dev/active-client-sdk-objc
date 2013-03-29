@@ -7,6 +7,7 @@
 
 #import "PFModelObject.h"
 #import "EntityManager.h"
+#import "ClassIDPair.h"
 
 @implementation PFModelObject
 
@@ -44,6 +45,14 @@
 
 - (void)delete{
 	[[EntityManager sharedInstance] deleteObject:self];
+}
+
+-(ClassIDPair *)classIDPair{
+    ClassIDPair *result = [[ClassIDPair alloc] init];
+    
+    result.className = self.remoteClassName;
+    result.ID = ID;      
+    return result;
 }
 
 + (NSArray *)relationships {

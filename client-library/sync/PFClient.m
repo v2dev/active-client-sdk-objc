@@ -23,6 +23,7 @@
 #import "FindByIdRequest.h"
 #import "PutRequest.h"
 #import "CreateRequest.h"
+#import "RemoveRequest.h"
 
 // The singleton
 static PFClient* _sharedInstance;
@@ -267,7 +268,7 @@ static PFClient* _sharedInstance;
     [[PFSocketManager sharedInstance] sendEvent:@"getAllByName" data:request callback:callback];
 }
 
-+ (void)sendPutRequestWithClass:(NSString *)className object:(id<PFModelObject>)object completionTarget:(NSObject *)target method:(SEL)selector {
++ (void)sendPutRequestWithClass:(NSString *)className object:(PFModelObject *)object completionTarget:(NSObject *)target method:(SEL)selector {
     
     PutRequest * request = [[PutRequest alloc] init];
     request.clientId = [PFClient sharedInstance].clientId;
@@ -286,12 +287,13 @@ static PFClient* _sharedInstance;
     
 }
 
-+ (void)sendCreateRequestWithClass:(NSString *)className object:(id<PFModelObject>)object completionTarget:(NSObject *)target method:(SEL)selector {
++ (void)sendCreateRequestWithClass:(NSString *)className object:(PFModelObject *)object completionTarget:(NSObject *)target method:(SEL)selector {
     
     CreateRequest* request = [[CreateRequest alloc] init];
     request.clientId = [PFClient sharedInstance].clientId;
     request.token = [PFClient sharedInstance].token;
     request.userId = [PFClient sharedInstance].userId;
+    
     request.theObject = object;
     request.sendAck = YES;
     
@@ -303,11 +305,30 @@ static PFClient* _sharedInstance;
     
 }
 
++ (void)sendRemoveRequestWithClass:(NSString *)className object:(PFModelObject *)object completionTarget:(NSObject *)target method:(SEL)selector {
+    
+    RemoveRequest* request = [[RemoveRequest alloc] init];
+    request.clientId = [PFClient sharedInstance].clientId;
+    request.token = [PFClient sharedInstance].token;
+    request.userId = [PFClient sharedInstance].userId;
+    
+    request.removePair = [object classIDPair];
+    request.sendAck = YES;
+    
+    PFInvocation* callback = nil;
+    if(target && selector)
+        callback = [[PFInvocation alloc] initWithTarget:target method:selector];
+    
+    [[PFSocketManager sharedInstance] sendEvent:@"removeObject" data:request callback:callback];
+    
+}
+
 + (void) sendGetByIdRequest:(NSString*)className id:(NSString*)id target:(NSObject*) target method:(SEL) selector{
     FindByIdRequest* request = [[FindByIdRequest alloc] init];
     [request setClientId:[PFClient sharedInstance].clientId];
     [request setToken:[PFClient sharedInstance].token];
     [request setUserId:[PFClient sharedInstance].userId];
+    
     [request setTheClassName:className];
     [request setTheClassId:id];
     

@@ -26,25 +26,31 @@
     return self;
 }
 
-- (NSMutableDictionary *)toDictionary:(BOOL)isShell{
+- (NSMutableDictionary *)toDictionary:(BOOL)shell{
     
-    NSMutableDictionary *dict = [super toDictionary:isShell];
+    NSMutableDictionary *dict = [super toDictionary:shell];
     
     // Always set the ID and classname
-	dict[@"ID"] = _ID;
-    dict[@"properties"] = _properties;
-	if(!isShell){
-		// If we're not sending a shell then...
-		dict[@"cn"] = [self remoteClassName];
-        
-        
-    } else {
-        
+	dict[@"ID"] = ID;
+    if (_properties) dict[@"properties"] = _properties;
+//	if(!isShell){
+//		// If we're not sending a shell then...
+//		dict[@"cn"] = [self remoteClassName];
+//        
+//        
+//    } else {
+    
         dict[@"className"] = [self remoteClassName];
 
         
-    }
+//    }
     
     return dict;
 }
+
+- (NSString *)remoteClassName{
+    return self.className;
+}
+
+
 @end

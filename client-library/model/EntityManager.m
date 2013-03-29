@@ -126,7 +126,7 @@ static EntityManager* sharedInstance;
     }
     
     return result;
-}
+} // deserializeObject:
 
 - (void) deleteObject:(PFModelObject *) modelObject{
     
@@ -185,6 +185,13 @@ static EntityManager* sharedInstance;
     }
     
     
+    
+    // send RemoveRequest to server
+    
+    [PFClient sendRemoveRequestWithClass:[modelObject remoteClassName] object:modelObject completionTarget:nil method:nil];
+    
+    
+    // post notification
     NSString *objectClass = [[modelObject class] description];
     NSMutableDictionary *dict = [self dictionaryForClass:objectClass];
     [dict removeObjectForKey:modelObject.ID];
@@ -192,7 +199,8 @@ static EntityManager* sharedInstance;
     NSString* notificationName = [NSString stringWithFormat:@"modelDidChange%@", objectClass];
     [nc postNotificationName:notificationName object:self];
     
-}
+} // deleteObject:
+
 - (void)updateObject:(id<PFModelObject>)modelObject{
     [PFClient sendPutRequestWithClass:[modelObject remoteClassName] object:modelObject completionTarget:nil method:nil];
 }

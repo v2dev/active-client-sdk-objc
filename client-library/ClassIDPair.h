@@ -7,10 +7,10 @@
 //
 
 #import "SyncRequest.h"
+#import "PFModelObject.h"
 
-@interface ClassIDPair : SyncRequest <Serializable>
+@interface ClassIDPair : PFModelObject <Serializable>
 
-@property (nonatomic, strong) NSString *ID;
 @property (nonatomic, strong) NSString *className;
 @property (nonatomic, strong) NSDictionary *properties;
 
