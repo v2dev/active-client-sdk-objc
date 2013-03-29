@@ -12,6 +12,8 @@
 #import "FindByIdRequest.h"
 #import "PFSocketManager.h"
 #import "PFClient.h"
+#import "PFTargetRelationship.h"
+#import "PFSourceRelationship.h"
 
 static EntityManager* sharedInstance;
 
@@ -126,11 +128,66 @@ static EntityManager* sharedInstance;
     return result;
 }
 
-- (void) deleteObject:(id<PFModelObject>) modelObject{
+- (void) deleteObject:(PFModelObject *) modelObject{
+    
+    // remove modelObject from all relationships
+    NSArray *relationships = [[modelObject class] relationships];
+    for (PFRelationship *relationship  in relationships) {
+        if ([relationship isKindOfClass:[PFSourceRelationship class]]) {
+            
+            // source unidirectional relationships require no action
+            if (!relationship.isUnidirectional) {
+                if (relationship.isCollection) {
+                    PFModelObject *targetObject = [modelObject valueForKey:relationship.propertyName];
+                    if (targetObject) {
+                        NSMutableArray *collection = [targetObject valueForKey:relationship.inversePropertyName];
+                        [collection removeObject:modelObject];
+                    }
+                    
+                    
+                } else {
+                    PFModelObject *targetObject = [modelObject valueForKey:relationship.propertyName];
+                    if (targetObject) {
+                        [targetObject setValue:nil forKey:relationship.inversePropertyName];
+                    }
+                }
+            }
+            
+            
+            
+        } else if ([relationship isKindOfClass:[PFTargetRelationship class]]){
+            if (relationship.isUnidirectional) {
+                {
+                    // this relationship cannot be a collection
+                    
+                    NSMutableDictionary * classDict =[[EntityManager sharedInstance] dictionaryForClass:relationship.inverseClassName];
+                    
+                    for (PFModelObject *obj in classDict) {
+                        if ([obj valueForKey:relationship.inversePropertyName] == modelObject){
+                            [obj setValue:nil forKey:relationship.inversePropertyName];
+                        }
+                    }
+                    
+                    //[modelObject setValue:nil forKey:relationship.inversePropertyName];
+                }
+            } else {
+                // target relationship is bi-directional
+                if (relationship.isCollection) {
+                    NSMutableArray *collection = [modelObject valueForKey:relationship.propertyName];
+                    [collection removeObject:modelObject];
+                    
+                } else {
+                    PFModelObject *sourceObject = [modelObject valueForKey:relationship.propertyName];
+                    [sourceObject setValue:nil forKey:relationship.inversePropertyName];
+                }
+            }
+        }
+    }
+    
+    
     NSString *objectClass = [[modelObject class] description];
     NSMutableDictionary *dict = [self dictionaryForClass:objectClass];
     [dict removeObjectForKey:modelObject.ID];
-    
     NSNotificationCenter *nc = [NSNotificationCenter defaultCenter];
     NSString* notificationName = [NSString stringWithFormat:@"modelDidChange%@", objectClass];
     [nc postNotificationName:notificationName object:self];
