@@ -237,16 +237,16 @@ static EntityManager* sharedInstance;
  * We have a helper function for setting up listeners for types of events that the EntityManager will emit
  * Specifically, the entity manager will emit an even for every object that it gets with the event name: didReceive{className}
  */
-//+ (void) addListenerForObjectType:(NSString*) className target:(NSObject*)target method:(SEL) selector{
-//    // Register any events that we are interested in.
-//    NSNotificationCenter *nc = [NSNotificationCenter defaultCenter];
-//        
-//    [nc addObserver:target
-//           selector:selector 
-//               name:[NSString stringWithFormat:@"modelDidChange%@", className] 
-//             object:[self sharedInstance]];
-//
-//}
++ (void) addListenerForObjectType:(NSString*) className target:(NSObject*)target method:(SEL) selector{
+    // Register any events that we are interested in.
+    NSNotificationCenter *nc = [NSNotificationCenter defaultCenter];
+        
+    [nc addObserver:target
+           selector:selector 
+               name:[NSString stringWithFormat:@"modelDidChange%@", className] 
+             object:[self sharedInstance]];
+
+}
 
 
 
