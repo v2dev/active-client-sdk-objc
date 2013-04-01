@@ -31,4 +31,9 @@
     return dict;
 }
 
+
+- (NSString*) remoteClassName{
+    return @"com.percero.agents.sync.vo.CreateRequest";
+}
+
 @end

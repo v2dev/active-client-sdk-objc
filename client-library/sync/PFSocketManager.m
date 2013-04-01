@@ -16,12 +16,30 @@
 #import "AuthResponse.h"
 #import "SyncResponse.h"
 #import "ConnectResponse.h"
+#import "CreateRequest.h"
+#import "CreateResponse.h"
+#import "PutRequest.h"
+#import "PutResponse.h"
+
+@interface PFSocketManager ()
+
+@property (nonatomic, readonly) NSMutableDictionary* syncRequests;
+
+@end
 
 static PFSocketManager* sharedInstance;
 
 @implementation PFSocketManager
-@synthesize socketIO, model, isConnected;
-
+@synthesize socketIO, /*model,*/ isConnected;
+- (NSMutableDictionary *)syncRequests{
+    static NSMutableDictionary* syncRequests;
+    
+    if (!syncRequests) {
+        syncRequests = [[NSMutableDictionary alloc] initWithCapacity:8];
+    }
+    
+    return syncRequests;
+}
 + (PFSocketManager*) sharedInstance{
     DLog(@"");
     if(!sharedInstance){
@@ -54,6 +72,60 @@ static PFSocketManager* sharedInstance;
     return self;
 }
 
+- (void) cacheSyncRequest:(SyncRequest *) syncRequest{
+    self.syncRequests[syncRequest.messageId] = syncRequest;
+}
+
+- (void) processSyncResponse:(SyncResponse *) syncResponse{
+    
+    if([syncResponse isKindOfClass:[ConnectResponse class]]){
+        NSNotificationCenter *nc = [NSNotificationCenter defaultCenter];
+        [nc postNotificationName:@"PFSocketReady" object:nil];
+    }
+    
+    // check to see if there is a matching request
+    SyncRequest *matchingRequest = self.syncRequests[syncResponse.correspondingMessageId];
+    
+    if (matchingRequest) {
+        // handle various response classes
+        
+        if ([syncResponse isKindOfClass:[CreateResponse class]]) {
+            CreateResponse *createResponse = (CreateResponse *) syncResponse;
+            CreateRequest *createRequest = (CreateRequest *)matchingRequest;
+            if (createResponse.result) {
+                // TODO: notify the user that the creation was successful
+            } else {
+                [createRequest.theObject delete];
+                // TODO: notify the user that the creation failed
+            }
+            
+        } else if ([syncResponse isKindOfClass:[PutResponse class]]) {
+            PutResponse *putResponse = (PutResponse *) syncResponse;
+            PutRequest *putRequest = (PutRequest *)matchingRequest;
+            if (putResponse.result) {
+                // TODO: notify the user that the Put was successful
+            } else {
+                // since the Put failed, we request an update from the server
+                [putRequest.theObject requestUpdate];
+                // TODO: notify the user that the Put failed
+            }
+        }
+        
+        // remove matchingRequest
+        
+        [self.syncRequests removeObjectForKey:syncResponse.correspondingMessageId];
+        
+    } else {
+        
+        if (/*this is a push response*/0) {
+            // do something useful
+        } else {
+            // since we didn't request this and the server didn't push it, just ignore this request
+        }
+    
+    }
+    
+}
 /**
  * This method takes care of assigning a message Id and sending the object across the wire
  */
@@ -64,10 +136,13 @@ static PFSocketManager* sharedInstance;
     }
     else if([data isKindOfClass:[SyncRequest class]]){
         ((SyncRequest*)data).messageId = requestId;
+        [self cacheSyncRequest:data];
     }
     
-    if(inv)
+    if(inv){
         [callbacks setObject:inv forKey:requestId];
+    }
+    
     
     [socketIO sendEvent:eventName withData:[data toDictionary:NO]];
 }
@@ -135,10 +210,7 @@ static PFSocketManager* sharedInstance;
         }
         else if([result isKindOfClass:[SyncResponse class]]){
             corrMessageId = ((SyncResponse*)result).correspondingMessageId;
-            if([result isKindOfClass:[ConnectResponse class]]){
-                NSNotificationCenter *nc = [NSNotificationCenter defaultCenter];
-                [nc postNotificationName:@"PFSocketReady" object:nil];
-            }
+            [self processSyncResponse:result];
         }
         
         if (corrMessageId){

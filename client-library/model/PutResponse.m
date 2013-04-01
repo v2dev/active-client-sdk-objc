@@ -14,7 +14,7 @@
 - (id) initFromDictionary:(NSDictionary *)dict{
     self = [super initFromDictionary:dict];
     if(self){
-        _result = [[[EntityManager sharedInstance] deserializeObject:[dict objectForKey:@"result"]] boolValue];
+        _result = [[dict objectForKey:@"result"] boolValue];
     }
     
     return self;

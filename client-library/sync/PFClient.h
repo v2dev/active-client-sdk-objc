@@ -39,7 +39,9 @@
 + (void) loginSavedSessionWithCallbackTarget:(NSObject*) target method:(SEL) selector;
 + (void) sendGetAllByNameRequest:(NSString*)className target:(NSObject*) target method:(SEL) selector;
 + (void) sendGetByIdRequest:(NSString*)className id:(NSString*)id target:(NSObject*) target method:(SEL) selector;
-+ (void) sendPutRequestWithClass:(NSString*)className object:(id <PFModelObject>) object completionTarget:(NSObject*) target method:(SEL) selector;
++ (void) sendPutRequestWithClass:(NSString*)className object:(PFModelObject *) object completionTarget:(NSObject*) target method:(SEL) selector;
++ (void) sendCreateRequestWithClass:(NSString*)className object:(PFModelObject *) object completionTarget:(NSObject*) target method:(SEL) selector;
++ (void) sendRemoveRequestWithClass:(NSString*)className object:(PFModelObject *) object completionTarget:(NSObject*) target method:(SEL) selector;
 + (bool) isAuthenticated;
 + (void) autoLogin;
 + (void) logout;

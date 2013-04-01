@@ -12,6 +12,8 @@
 #import "FindByIdRequest.h"
 #import "PFSocketManager.h"
 #import "PFClient.h"
+#import "PFTargetRelationship.h"
+#import "PFSourceRelationship.h"
 
 static EntityManager* sharedInstance;
 
@@ -124,24 +126,96 @@ static EntityManager* sharedInstance;
     }
     
     return result;
-}
+} // deserializeObject:
 
-- (void) deleteObject:(id<PFModelObject>) modelObject{
+- (void) deleteObject:(PFModelObject *) modelObject{
+    
+    // remove modelObject from all relationships
+    NSArray *relationships = [[modelObject class] relationships];
+    for (PFRelationship *relationship  in relationships) {
+        if ([relationship isKindOfClass:[PFSourceRelationship class]]) {
+            
+            // source unidirectional relationships require no action
+            if (!relationship.isUnidirectional) {
+                if (relationship.isCollection) {
+                    PFModelObject *targetObject = [modelObject valueForKey:relationship.propertyName];
+                    if (targetObject) {
+                        NSMutableArray *collection = [targetObject valueForKey:relationship.inversePropertyName];
+                        [collection removeObject:modelObject];
+                    }
+                    
+                    
+                } else {
+                    PFModelObject *targetObject = [modelObject valueForKey:relationship.propertyName];
+                    if (targetObject) {
+                        [targetObject setValue:nil forKey:relationship.inversePropertyName];
+                    }
+                }
+            }
+            
+            
+            
+        } else if ([relationship isKindOfClass:[PFTargetRelationship class]]){
+            if (relationship.isUnidirectional) {
+                {
+                    // this relationship cannot be a collection
+                    
+                    NSMutableDictionary * classDict =[[EntityManager sharedInstance] dictionaryForClass:relationship.inverseClassName];
+                    
+                    for (PFModelObject *obj in classDict) {
+                        if ([obj valueForKey:relationship.inversePropertyName] == modelObject){
+                            [obj setValue:nil forKey:relationship.inversePropertyName];
+                        }
+                    }
+                    
+                    //[modelObject setValue:nil forKey:relationship.inversePropertyName];
+                }
+            } else {
+                // target relationship is bi-directional
+                if (relationship.isCollection) {
+                    NSMutableArray *collection = [modelObject valueForKey:relationship.propertyName];
+                    [collection removeObject:modelObject];
+                    
+                } else {
+                    PFModelObject *sourceObject = [modelObject valueForKey:relationship.propertyName];
+                    [sourceObject setValue:nil forKey:relationship.inversePropertyName];
+                }
+            }
+        }
+    }
+    
+    
+    
+    // send RemoveRequest to server
+    
+    [PFClient sendRemoveRequestWithClass:[modelObject remoteClassName] object:modelObject completionTarget:nil method:nil];
+    
+    
+    // post notification
     NSString *objectClass = [[modelObject class] description];
     NSMutableDictionary *dict = [self dictionaryForClass:objectClass];
     [dict removeObjectForKey:modelObject.ID];
-    
     NSNotificationCenter *nc = [NSNotificationCenter defaultCenter];
     NSString* notificationName = [NSString stringWithFormat:@"modelDidChange%@", objectClass];
     [nc postNotificationName:notificationName object:self];
     
-}
-- (void)saveObject:(id<PFModelObject>)modelObject{
+} // deleteObject:
+
+- (void)updateObject:(id<PFModelObject>)modelObject{
     [PFClient sendPutRequestWithClass:[modelObject remoteClassName] object:modelObject completionTarget:nil method:nil];
 }
 
-- (void)saveObject:(id<PFModelObject>)modelObject withCompletionTarget:(id) target method:(SEL) method{
+- (void)updateObject:(id<PFModelObject>)modelObject withCompletionTarget:(id) target method:(SEL) method{
     [PFClient sendPutRequestWithClass:[modelObject remoteClassName] object:modelObject completionTarget:target method:method];
+}
+
+- (void)createObject:(id<PFModelObject>)modelObject{
+    [PFClient sendCreateRequestWithClass:[modelObject remoteClassName] object:modelObject completionTarget:nil method:nil];
+
+}
+
+- (void)createObject:(id<PFModelObject>)modelObject withCompletionTarget:(id) target method:(SEL) method{
+    [PFClient sendCreateRequestWithClass:[modelObject remoteClassName] object:modelObject completionTarget:target method:method];
 }
 
 - (void) loadEntity:(id<PFModelObject>)entity{

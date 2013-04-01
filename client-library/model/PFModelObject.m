@@ -6,6 +6,9 @@
 //
 
 #import "PFModelObject.h"
+#import "EntityManager.h"
+#import "ClassIDPair.h"
+#import "PFClient.h"
 
 @implementation PFModelObject
 
@@ -32,11 +35,30 @@
 }
 
 - (void)save{
-    DLog(@"Save object.");
+    
+    if (self.ID) {
+        [[EntityManager sharedInstance] updateObject:self];
+    } else {
+        self.ID = [[NSUUID UUID] UUIDString];
+        [[EntityManager sharedInstance] createObject:self];
+    }
+}
+
+- (void)requestUpdate{
+    
+        [PFClient sendGetByIdRequest:self.remoteClassName id:self.ID target:nil method:nil];
 }
 
 - (void)delete{
-    DLog(@"Delete object.");
+	[[EntityManager sharedInstance] deleteObject:self];
+}
+
+-(ClassIDPair *)classIDPair{
+    ClassIDPair *result = [[ClassIDPair alloc] init];
+    
+    result.className = self.remoteClassName;
+    result.ID = ID;      
+    return result;
 }
 
 + (NSArray *)relationships {

@@ -8,6 +8,7 @@
 
 #import <Foundation/Foundation.h>
 #import "Serializable.h"
+@class  ClassIDPair;
 
 #pragma mark - PFModelObject protocol
 @protocol PFModelObject <Serializable>
@@ -27,7 +28,7 @@
 
 #pragma mark - PFModelObject class
 
-@interface PFModelObject : NSObject{
+@interface PFModelObject : NSObject<PFModelObject>{
 
     // These are transient but needed for client side sync stuff
 	BOOL isShell;
@@ -46,7 +47,8 @@
 - (void) overwriteWith:(id<PFModelObject>) object;
 - (void) save;
 - (void) delete;
-
+- (void) requestUpdate;
+- (ClassIDPair *) classIDPair; // populates class and ID only
 #pragma mark Serializable protocol
 - (id) initFromDictionary:(NSDictionary*) dict;
 - (NSMutableDictionary*) toDictionary:(BOOL)isShell;

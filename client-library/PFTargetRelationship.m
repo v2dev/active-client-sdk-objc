@@ -43,7 +43,7 @@
     
     NSString *result = [super description];
     
-    result = [NSString stringWithFormat:@"%@: %@ <--%@ (%@ *) %@",result, (self.propertyName)?self.propertyName:@"(?)", (self.isUnidirectional)?@"":@">", self.inverseClassName, self.inversePropertyName];
+    result = [NSString stringWithFormat:@"%@:%@%@ <--%@ (%@ *) %@",result, self.isRequired?@"! ":@"  ", (self.propertyName)?self.propertyName:@"(?)", (self.isUnidirectional)?@"":@">", self.inverseClassName, self.inversePropertyName];
     
     return result;
 }

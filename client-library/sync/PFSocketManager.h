@@ -20,7 +20,7 @@
 }
 
 @property (nonatomic, readonly) SocketIO* socketIO;
-@property (nonatomic, readonly) NSMutableDictionary* model;
+//@property (nonatomic, readonly) NSMutableDictionary* model;
 @property (nonatomic) bool isConnected;
 
 + (PFSocketManager*) sharedInstance;
