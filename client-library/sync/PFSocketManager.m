@@ -21,7 +21,11 @@
 #import "PutRequest.h"
 #import "PutResponse.h"
 
-@interface PFSocketManager ()
+
+
+@interface PFSocketManager () {
+    NSTimer *messageTimer;
+}
 
 @property (nonatomic, readonly) NSMutableDictionary* syncRequests;
 
@@ -72,19 +76,89 @@ static PFSocketManager* sharedInstance;
     return self;
 }
 
+- (void) messageTimer{
+
+    static BOOL messageTimerIsLocked;
+    if (messageTimerIsLocked) {
+        return;
+    }
+    messageTimerIsLocked = YES;
+    
+    if (!messageTimer) {
+        messageTimer = [[NSTimer alloc] init];
+    }
+    
+    if ([messageTimer isValid]) {
+        if (!self.syncRequests.count) {
+            [messageTimer invalidate];
+        } else {
+            
+            dispatch_queue_t backgroundQueue = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_LOW, 0);
+            dispatch_async(backgroundQueue, ^{
+                // check to see if any messages need to be resent
+                static NSMutableArray *keysForTimedOutMessages;
+                if (!keysForTimedOutMessages) {
+                    keysForTimedOutMessages = [[NSMutableArray alloc] init];
+                }
+                [keysForTimedOutMessages removeAllObjects];
+                [self.syncRequests enumerateKeysAndObjectsUsingBlock:^(id key, SyncRequest *request, BOOL *stop ) {
+                    
+                    if ([request.timeSent timeIntervalSinceNow] >= request.timeToRetry) {
+                        // re-send request
+                        [self sendEvent:request.eventName data:request callback:nil];
+                    }
+                    if ([request.timeSent timeIntervalSinceNow] >= request.timeToLive) {
+                        [keysForTimedOutMessages addObject:key];
+                    }
+                }];
+                
+                // get rid of timed-out requests
+                for (id key in keysForTimedOutMessages) {
+                    [self.syncRequests removeObjectForKey:key];
+                }
+                dispatch_sync(dispatch_get_main_queue(), ^{
+                    
+                    // any UI or notifications should go here
+                    
+                });
+                
+                messageTimerIsLocked = NO;
+            });
+            
+            
+        }
+    } else {
+        if (!self.syncRequests.count) {
+            // since the timer is invalid and there are no syncRequests, we do nothing
+        } else {
+            messageTimer = [NSTimer scheduledTimerWithTimeInterval:6 target:self selector:@selector( messageTimer) userInfo:nil repeats:YES];
+        }
+        
+        messageTimerIsLocked = NO;
+    }
+    
+    
+} // messageTimer
+
 - (void) cacheSyncRequest:(SyncRequest *) syncRequest{
-    self.syncRequests[syncRequest.messageId] = syncRequest;
+    syncRequest.timeSent = [NSDate date];
+    id <NSCopying> key = [syncRequest.messageId copy];
+    self.syncRequests[key] = syncRequest;
+    [self messageTimer];
 }
 
+
+
 - (void) processSyncResponse:(SyncResponse *) syncResponse{
-    
+    id <NSCopying> key = [syncResponse.correspondingMessageId copy];
+
     if([syncResponse isKindOfClass:[ConnectResponse class]]){
         NSNotificationCenter *nc = [NSNotificationCenter defaultCenter];
         [nc postNotificationName:@"PFSocketReady" object:nil];
     }
     
     // check to see if there is a matching request
-    SyncRequest *matchingRequest = self.syncRequests[syncResponse.correspondingMessageId];
+    SyncRequest *matchingRequest = self.syncRequests[key];
     
     if (matchingRequest) {
         // handle various response classes
@@ -113,7 +187,7 @@ static PFSocketManager* sharedInstance;
         
         // remove matchingRequest
         
-        [self.syncRequests removeObjectForKey:syncResponse.correspondingMessageId];
+        [self.syncRequests removeObjectForKey:key];
         
     } else {
         
@@ -257,7 +331,6 @@ static PFSocketManager* sharedInstance;
     
     [nc addObserver:target selector:selector name:@"PFSocketReady" object:nil];
 }
-
 
 
 @end

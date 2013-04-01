@@ -73,5 +73,24 @@
     return @"com.percero.agents.sync.vo.SyncRequest";
 }
 
++ (MessageTime)timeToLive{
+    return MESSAGE_TIME_TO_LIVE_DEFAULT;
+}
 
++ (MessageTime)timeToRetry{
+    return MESSAGE_TIME_TO_RETRY_MEDIUM;
+}
+
+- (MessageTime)timeToLive{
+    return [self.class timeToLive];
+}
+
+- (MessageTime)timeToRetry{
+    return [self.class timeToRetry];
+}
+
+- (NSString *)eventName{
+    [NSException raise:@"Not implemented" format:@"%@ needs to be implemented in %@", @"eventName", [self.class description]];
+    return nil;
+}
 @end
