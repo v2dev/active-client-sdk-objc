@@ -54,4 +54,9 @@
     return @"com.percero.agents.sync.vo.PutRequest";
 }
 
+- (NSString *) eventName {
+    return @"putObject";
+}
+
+
 @end

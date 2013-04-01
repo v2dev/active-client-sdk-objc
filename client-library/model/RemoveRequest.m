@@ -36,4 +36,9 @@
 + (NSString*) remoteClassName{
 	return @"com.percero.agents.sync.vo.RemoveRequest";
 }
+
+- (NSString *) eventName {
+    return @"removeObject";
+}
+
 @end

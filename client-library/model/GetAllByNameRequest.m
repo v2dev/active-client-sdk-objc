@@ -45,5 +45,10 @@
     return @"com.percero.agents.sync.vo.GetAllByNameRequest";
 }
 
+- (NSString *) eventName {
+    return @"getAllByName";
+}
+
+
 
 @end

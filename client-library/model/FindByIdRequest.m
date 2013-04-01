@@ -49,4 +49,9 @@
     return @"com.percero.agents.sync.vo.FindByIdRequest";
 }
 
+- (NSString *) eventName {
+    return @"findById";
+}
+
+
 @end

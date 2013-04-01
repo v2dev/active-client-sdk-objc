@@ -36,4 +36,9 @@
     return @"com.percero.agents.sync.vo.CreateRequest";
 }
 
+
+- (NSString *) eventName {
+    return @"createObject";
+}
+
 @end
