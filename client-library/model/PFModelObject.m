@@ -8,6 +8,7 @@
 #import "PFModelObject.h"
 #import "EntityManager.h"
 #import "ClassIDPair.h"
+#import "PFClient.h"
 
 @implementation PFModelObject
 
@@ -41,6 +42,11 @@
         self.ID = [[NSUUID UUID] UUIDString];
         [[EntityManager sharedInstance] createObject:self];
     }
+}
+
+- (void)requestUpdate{
+    
+        [PFClient sendGetByIdRequest:self.remoteClassName id:self.ID target:nil method:nil];
 }
 
 - (void)delete{

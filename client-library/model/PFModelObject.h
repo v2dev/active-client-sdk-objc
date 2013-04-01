@@ -47,6 +47,7 @@
 - (void) overwriteWith:(id<PFModelObject>) object;
 - (void) save;
 - (void) delete;
+- (void) requestUpdate;
 - (ClassIDPair *) classIDPair; // populates class and ID only
 #pragma mark Serializable protocol
 - (id) initFromDictionary:(NSDictionary*) dict;
