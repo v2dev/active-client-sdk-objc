@@ -45,6 +45,6 @@
 + (bool) isAuthenticated;
 + (void) autoLogin;
 + (void) logout;
-+ (void) save;
+//+ (void) save;
 
 @end
