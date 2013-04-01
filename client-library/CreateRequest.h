@@ -11,6 +11,6 @@
 
 @interface CreateRequest : SyncRequest
 
-@property (nonatomic, weak) id <PFModelObject> theObject;
+@property (nonatomic, weak) PFModelObject *theObject;
 
 @end

@@ -82,18 +82,22 @@ static PFSocketManager* sharedInstance;
     }
     
     // check to see if there is a matching request
-    SyncResponse *matchingRequest = self.syncRequests[syncResponse.correspondingMessageId];
+    SyncRequest *matchingRequest = self.syncRequests[syncResponse.correspondingMessageId];
     
     if (matchingRequest) {
-        // do somthing useful
+        // handle various response classes
         
         if ([syncResponse isKindOfClass:[CreateResponse class]]) {
-            CreateResponse *cr = (CreateResponse *) syncResponse;
-            if (cr.result) {
+            CreateResponse *createResponse = (CreateResponse *) syncResponse;
+            CreateRequest *createRequest = (CreateRequest *)matchingRequest;
+            if (createResponse.result) {
                 // TODO: notify the user that the creation was successful
             } else {
+                [createRequest.theObject delete];
                 // TODO: notify the user that the creation failed
             }
+            
+        } else if (/*[syncResponse isKindOfClass:[SomeOtherClass class]]*/0) {
             
         }
         
