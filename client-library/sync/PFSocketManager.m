@@ -18,6 +18,8 @@
 #import "ConnectResponse.h"
 #import "CreateRequest.h"
 #import "CreateResponse.h"
+#import "PutRequest.h"
+#import "PutResponse.h"
 
 @interface PFSocketManager ()
 
@@ -97,8 +99,16 @@ static PFSocketManager* sharedInstance;
                 // TODO: notify the user that the creation failed
             }
             
-        } else if (/*[syncResponse isKindOfClass:[SomeOtherClass class]]*/0) {
-            
+        } else if ([syncResponse isKindOfClass:[PutResponse class]]) {
+            PutResponse *putResponse = (PutResponse *) syncResponse;
+            PutRequest *putRequest = (PutRequest *)matchingRequest;
+            if (putResponse.result) {
+                // TODO: notify the user that the Put was successful
+            } else {
+                // since the Put failed, we request an update from the server
+                [putRequest.theObject requestUpdate];
+                // TODO: notify the user that the Put failed
+            }
         }
         
         // remove matchingRequest
@@ -115,9 +125,6 @@ static PFSocketManager* sharedInstance;
     
     }
     
-    
-    
-
 }
 /**
  * This method takes care of assigning a message Id and sending the object across the wire
