@@ -53,7 +53,7 @@
 - (id) initFromDictionary:(NSDictionary*) dict;
 - (NSMutableDictionary*) toDictionary:(BOOL)isShell;
 - (NSString*) remoteClassName;
-
++ (NSDictionary *) all;
 
 + (NSArray *) relationships;
 @end

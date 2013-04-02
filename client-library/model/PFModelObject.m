@@ -9,6 +9,7 @@
 #import "EntityManager.h"
 #import "ClassIDPair.h"
 #import "PFClient.h"
+#import "Utility.h"
 
 @implementation PFModelObject
 
@@ -60,7 +61,11 @@
     result.ID = ID;      
     return result;
 }
-
++ (NSDictionary *)all{
+    NSString *className = [Utility translateRemoteClassName:[[self alloc] remoteClassName]];
+    NSMutableDictionary *dict = [[EntityManager sharedInstance] dictionaryForClass:className];
+    return [dict copy];
+}
 + (NSArray *)relationships {
     return @[];
 }

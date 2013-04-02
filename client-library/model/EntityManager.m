@@ -83,7 +83,12 @@ static EntityManager* sharedInstance;
 }
 
 - (NSMutableDictionary*) dictionaryForClass:(NSString*) c{
-    return [entityModel objectForKey:c];
+    NSMutableDictionary *dict = [entityModel objectForKey:c];
+    if (!dict) {
+        NSString *name = [[NSClassFromString(c) alloc] remoteClassName];
+        [PFClient sendGetAllByNameRequest:name target:nil method:nil];
+    }
+    return dict;
 }
 
 - (id) deserializeObject:(id) obj{
