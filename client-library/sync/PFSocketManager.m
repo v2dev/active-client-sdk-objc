@@ -191,7 +191,7 @@ static PFSocketManager* sharedInstance;
                 // TODO: notify the user that the Put was successful
             } else {
                 // since the Put failed, we request an update from the server
-//                [removeRequest.removePair requestUpdate];
+                [removeRequest.removePair requestUpdate];
                 // TODO: notify the user that the Put failed
             }
         }
