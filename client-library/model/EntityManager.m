@@ -143,8 +143,9 @@ static EntityManager* sharedInstance;
             // source unidirectional relationships require no action
             if (!relationship.isUnidirectional) {
                 if (relationship.isCollection) {
+                    
                     PFModelObject *targetObject = [modelObject valueForKey:relationship.propertyName];
-                    if (targetObject) {
+                    if (targetObject && !targetObject.isShell) {
                         NSMutableArray *collection = [targetObject valueForKey:relationship.inversePropertyName];
                         [collection removeObject:modelObject];
                     }
@@ -165,8 +166,8 @@ static EntityManager* sharedInstance;
                 {
                     // this relationship cannot be a collection
                     
-                    NSMutableDictionary * classDict =[[EntityManager sharedInstance] dictionaryForClass:relationship.inverseClassName];
-                    
+                    //NSMutableDictionary * classDict =[[EntityManager sharedInstance] dictionaryForClass:relationship.inverseClassName];
+                    NSMutableDictionary *classDict = [[EntityManager sharedInstance]->entityModel objectForKey:relationship.inverseClassName]; // To prevent triggering an unnecessary GetAllByNameRequest, we are bypassing the normal way of getting the class dictionary
                     for (PFModelObject *obj in classDict) {
                         if ([obj valueForKey:relationship.inversePropertyName] == modelObject){
                             [obj setValue:nil forKey:relationship.inversePropertyName];
@@ -178,8 +179,11 @@ static EntityManager* sharedInstance;
             } else {
                 // target relationship is bi-directional
                 if (relationship.isCollection) {
-                    NSMutableArray *collection = [modelObject valueForKey:relationship.propertyName];
-                    [collection removeObject:modelObject];
+                    if (!modelObject.isShell) {
+                        NSMutableArray *collection = [modelObject valueForKey:relationship.propertyName];
+                        [collection removeObject:modelObject];
+                    }
+                    
                     
                 } else {
                     PFModelObject *sourceObject = [modelObject valueForKey:relationship.propertyName];
