@@ -20,7 +20,8 @@
 #import "CreateResponse.h"
 #import "PutRequest.h"
 #import "PutResponse.h"
-
+#import "RemoveRequest.h"
+#import "RemoveResponse.h"
 
 
 @interface PFSocketManager () {
@@ -181,6 +182,16 @@ static PFSocketManager* sharedInstance;
             } else {
                 // since the Put failed, we request an update from the server
                 [putRequest.theObject requestUpdate];
+                // TODO: notify the user that the Put failed
+            }
+        } else if ([syncResponse isKindOfClass:[RemoveResponse class]]) {
+            RemoveResponse *removeResponse = (RemoveResponse *) syncResponse;
+            RemoveRequest *removeRequest = (RemoveRequest *)matchingRequest;
+            if (removeResponse.result) {
+                // TODO: notify the user that the Put was successful
+            } else {
+                // since the Put failed, we request an update from the server
+//                [removeRequest.removePair requestUpdate];
                 // TODO: notify the user that the Put failed
             }
         }
