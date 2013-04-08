@@ -25,6 +25,7 @@
 - (void)updateObject:(id<PFModelObject>)modelObject withCompletionTarget:(id) target method:(SEL) method;
 - (void) createObject:(id <PFModelObject>) modelObject;
 - (void)createObject:(id<PFModelObject>)modelObject withCompletionTarget:(id) target method:(SEL) method;
+- (void)restoreDeletedRelationships:(PFModelObject *) modelObject;
 
 + (void) addListenerForObjectType:(NSString*) className target:(NSObject*)target method:(SEL) selector;
 

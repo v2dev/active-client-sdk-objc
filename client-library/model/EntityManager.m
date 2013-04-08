@@ -200,15 +200,107 @@ static EntityManager* sharedInstance;
     [PFClient sendRemoveRequestWithClass:[modelObject remoteClassName] object:modelObject completionTarget:nil method:nil];
     
     
-    // post notification
+    // delete modelObject from class dictionary
     NSString *objectClass = [[modelObject class] description];
     NSMutableDictionary *dict = [self dictionaryForClass:objectClass];
     [dict removeObjectForKey:modelObject.ID];
+    
+    // post notification
     NSNotificationCenter *nc = [NSNotificationCenter defaultCenter];
     NSString* notificationName = [NSString stringWithFormat:@"modelDidChange%@", objectClass];
     [nc postNotificationName:notificationName object:self];
     
 } // deleteObject:
+
+
+- (void)restoreDeletedRelationships:(PFModelObject *)modelObject {
+    NSMutableSet * affectedClasses = [[NSMutableSet alloc] init];
+    // restore object for all relationships
+    NSArray *relationships = [[modelObject class] relationships];
+    for (PFRelationship *relationship  in relationships) {
+        if ([relationship isKindOfClass:[PFSourceRelationship class]]) {
+            
+            // source unidirectional relationships require no action
+            if (!relationship.isUnidirectional) {
+                if (relationship.isCollection) {
+                    
+                    PFModelObject *targetObject = [modelObject valueForKey:relationship.propertyName];
+                    if (targetObject && !targetObject.isShell) {
+                        NSMutableArray *collection = [targetObject valueForKey:relationship.inversePropertyName];
+                        NSUInteger thisObject = [collection indexOfObject:modelObject];
+                        if (thisObject == NSNotFound) {
+                            [collection addObject:modelObject];
+                        }
+                    }
+                    
+                    
+                } else {
+                    PFModelObject *targetObject = [modelObject valueForKey:relationship.propertyName];
+                    if (targetObject) {
+                        [targetObject setValue:modelObject forKey:relationship.inversePropertyName];
+                    }
+                }
+            }
+            
+            
+            
+        } else if ([relationship isKindOfClass:[PFTargetRelationship class]]){
+            if (relationship.isUnidirectional) {
+                {
+                    // this relationship cannot be a collection
+                    
+                    NSMutableDictionary *classDict = [[EntityManager sharedInstance]->entityModel objectForKey:relationship.inverseClassName]; // To prevent triggering an unnecessary GetAllByNameRequest, we are bypassing the normal way of getting the class dictionary
+                    
+                    // since we don't kow which objects may have been pointing to the model object,
+                    // we request an update to every non-shell object of thos class
+                    // TODO: we should modify the way a failing delete works so that we don't have to do this
+                    for (PFModelObject *obj in classDict) {
+                        if (!obj.isShell) {
+                            [obj requestUpdate];
+                        }
+                    }
+                    
+                    //[modelObject setValue:nil forKey:relationship.inversePropertyName];
+                }
+            } else {
+                // target relationship is bi-directional
+                if (relationship.isCollection) {
+                    if (!modelObject.isShell) {
+                        NSMutableArray *collection = [modelObject valueForKey:relationship.propertyName];
+                        NSUInteger thisObject = [collection indexOfObject:modelObject];
+                        if (thisObject == NSNotFound) {
+                            [collection addObject:modelObject];
+                            [affectedClasses addObject:relationship.inverseClassName];
+                        }
+
+                    }
+                    
+                    
+                } else {
+                    PFModelObject *sourceObject = [modelObject valueForKey:relationship.propertyName];
+                    [sourceObject setValue:modelObject forKey:relationship.inversePropertyName];
+                    [affectedClasses addObject:relationship.inverseClassName];
+
+                }
+            }
+        }
+    }
+    
+    
+    
+        
+    // post notifications
+    for (NSString *className in affectedClasses) {
+        NSNotificationCenter *nc = [NSNotificationCenter defaultCenter];
+        NSString* notificationName = [NSString stringWithFormat:@"modelDidChange%@", className];
+        [nc postNotificationName:notificationName object:self];
+    }
+    NSString *objectClass = [[modelObject class] description];
+    NSNotificationCenter *nc = [NSNotificationCenter defaultCenter];
+    NSString* notificationName = [NSString stringWithFormat:@"modelDidChange%@", objectClass];
+    [nc postNotificationName:notificationName object:self];
+
+} //restoreDeletedRelationships:
 
 - (void)updateObject:(id<PFModelObject>)modelObject{
     [PFClient sendPutRequestWithClass:[modelObject remoteClassName] object:modelObject completionTarget:nil method:nil];

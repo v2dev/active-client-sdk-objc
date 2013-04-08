@@ -22,7 +22,8 @@
 #import "PutResponse.h"
 #import "RemoveRequest.h"
 #import "RemoveResponse.h"
-
+#import "FindByIdRequest.h"
+#import "FindByIdResponse.h"
 
 @interface PFSocketManager () {
     NSTimer *messageTimer;
@@ -191,9 +192,20 @@ static PFSocketManager* sharedInstance;
                 // TODO: notify the user that the Put was successful
             } else {
                 // since the Put failed, we request an update from the server
+                [self.syncRequests setObject:removeRequest.removePair forKey:removeRequest.removePair.ID];
                 [removeRequest.removePair requestUpdate];
                 // TODO: notify the user that the Put failed
             }
+        } else if ([syncResponse isKindOfClass:[FindByIdResponse class]]) {
+            
+            FindByIdResponse* findByIdResponse = (FindByIdResponse *) syncResponse;
+            PFModelObject * foundObject = (PFModelObject *) findByIdResponse.result;
+            id savedObject = [self.syncRequests valueForKey:foundObject.ID];
+            if (savedObject) {
+                [foundObject restoreDeletedRelationships];
+                [self.syncRequests removeObjectForKey:foundObject.ID];
+            }
+        
         }
         
         // remove matchingRequest

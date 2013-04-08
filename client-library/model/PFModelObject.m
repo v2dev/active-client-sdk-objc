@@ -54,6 +54,15 @@
 	[[EntityManager sharedInstance] deleteObject:self];
 }
 
+- (void)restoreDeletedRelationships{
+    
+    // restore source relationship
+    [[EntityManager sharedInstance] restoreDeletedRelationships:self];
+
+    
+}
+
+
 -(ClassIDPair *)classIDPair{
     ClassIDPair *result = [[ClassIDPair alloc] init];
     

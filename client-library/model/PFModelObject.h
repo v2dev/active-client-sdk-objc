@@ -53,6 +53,8 @@
 - (id) initFromDictionary:(NSDictionary*) dict;
 - (NSMutableDictionary*) toDictionary:(BOOL)isShell;
 - (NSString*) remoteClassName;
+- (void)restoreDeletedRelationships;
+
 + (NSDictionary *) all;
 
 + (NSArray *) relationships;
