@@ -104,14 +104,16 @@ static PFSocketManager* sharedInstance;
                 }
                 [keysForTimedOutMessages removeAllObjects];
                 [self.syncRequests enumerateKeysAndObjectsUsingBlock:^(id key, SyncRequest *request, BOOL *stop ) {
+                    if ([request isKindOfClass:[SyncRequest class]]) {
+                        if ([request.timeSent timeIntervalSinceNow] >= request.timeToRetry) {
+                            // re-send request
+                            [self sendEvent:request.eventName data:request callback:nil];
+                        }
+                        if ([request.timeSent timeIntervalSinceNow] >= request.timeToLive) {
+                            [keysForTimedOutMessages addObject:key];
+                        }
+                    }
                     
-                    if ([request.timeSent timeIntervalSinceNow] >= request.timeToRetry) {
-                        // re-send request
-                        [self sendEvent:request.eventName data:request callback:nil];
-                    }
-                    if ([request.timeSent timeIntervalSinceNow] >= request.timeToLive) {
-                        [keysForTimedOutMessages addObject:key];
-                    }
                 }];
                 
                 // get rid of timed-out requests
