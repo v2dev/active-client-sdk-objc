@@ -53,12 +53,13 @@ static EnvConfig* sharedInstance;
 -(id) init{
     self  = [super init]; 
     if(self){
-        NSString* configuration = [[[NSBundle mainBundle] infoDictionary] objectForKey:@"Configuration"];
+//        NSString* configuration = [[[NSBundle mainBundle] infoDictionary] objectForKey:@"Configuration"];
         NSBundle* bundle = [NSBundle mainBundle];
         NSString* envsPListPath = [bundle pathForResource:@
                                    "env" ofType:@"plist"];
         NSDictionary* environments = [[NSDictionary alloc] initWithContentsOfFile:envsPListPath];
-        configs = [environments objectForKey:configuration];
+//        configs = [environments objectForKey:configuration];
+        configs = [environments objectForKey:@"Environment"];
     }
     
     return self;

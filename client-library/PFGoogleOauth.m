@@ -61,7 +61,7 @@ static PFGoogleOauth* sharedInstance=nil;
     EnvConfig* config = [EnvConfig sharedInstance];
     
     GTMOAuth2ViewControllerTouch *viewController =
-    [[GTMOAuth2ViewControllerTouch alloc] initWithScope:[config getEnvProperty:@"oauth.google.scope"]
+    [[GTMOAuth2ViewControllerTouch alloc] initWithScope:[config getEnvProperty:@"oauth.com.psiglobaldb.scope"]
                                                clientID:[PFGoogleOauth sharedInstance].saOAuth.appKey
                                            clientSecret:@""
                                        keychainItemName:[config getEnvProperty:@"oauth.google.keychain_item_name"]
