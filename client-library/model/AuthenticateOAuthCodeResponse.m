@@ -17,8 +17,8 @@
     self = [super initFromDictionary:dict];
     if(self){
         result = [[EntityManager sharedInstance] deserializeObject:[dict valueForKey:@"result"]];
-        accessToken = [dict valueForKey:@"accessToken"];
-        refreshToken = [dict valueForKey:@"refreshToken"];
+        accessToken = [dict valueForKey:@"accessToken"]; // store locally for autologin
+        refreshToken = [dict valueForKey:@"refreshToken"]; // store locally for autologin
     }
     
     return self;

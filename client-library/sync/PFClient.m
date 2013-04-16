@@ -126,39 +126,14 @@ static PFClient* _sharedInstance;
  * Callback method for when the regAppOAuths response is recieved
  */
 - (void) receivedGetRegAppOAuthsResponse{
-    if(regAppOAuths){
-        [regAppOAuths removeAllObjects];
-    }
-    else{
-        regAppOAuths = [[NSMutableArray alloc] init];
-    }
-    
-    NSDictionary* dict = [[EntityManager sharedInstance] dictionaryForClass:@"ServiceApplicationOAuth"] ;
-    for(NSString* key in dict)
-        [regAppOAuths addObject:[dict objectForKey:key]];
-    
-    // Try to autologin
-    [PFClient autoLogin];
+     
 }
 
 /**
  * Callback method for the SocketManager when it gets connected
  */
 - (void) socketConnected{
-    // Make a call to query for the RegAppOAuths that this application can use.
-    GetRegAppOAuthsRequest* request = [[GetRegAppOAuthsRequest alloc] init];
-    [request setOauthType:@"INSTALLED"];
-    [request setRegAppKey:appKey];
-    [request setRegAppSecret:appSecret];
-    request.userId = @"";
-    request.token = @"";
-    request.clientType = @"N";
-    request.clientId = @"";
-    request.deviceId = @"";
-    
-    PFInvocation* callback = [[PFInvocation alloc] initWithTarget:self method:@selector(receivedGetRegAppOAuthsResponse)];
-    
-    [syncManager sendEvent:@"getRegAppOAuths" data:request callback:callback];
+    [PFClient autoLogin];
 }
 
 /**
