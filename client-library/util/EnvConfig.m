@@ -30,6 +30,14 @@ static EnvConfig* sharedInstance;
  *                                  Using the '.' syntax can be used as just part of the property name or 
  *                                  can dig deeper into the properties file if it is organized with dictionaries.
  */
+- (NSDictionary *) getEnvDictionary:(NSString *)keyPath{
+    NSDictionary *result = [configs valueForKeyPath:keyPath];
+    if (![result isKindOfClass:[NSDictionary class]]) {
+        result = nil;
+    }
+    
+    return result;
+}
 - (NSString*) getEnvProperty:(NSString *)propName{
     id prop = [configs valueForKey:propName];
     // First check to see if the whole propname was used as the key... next try and break it up and dive deep
@@ -92,6 +100,47 @@ static EnvConfig* sharedInstance;
             NSString* recursiveResult = [self stringForKey:newKey inDict:value];
             result = [NSString stringWithFormat:@"%@%@", result, recursiveResult];
         }
+    }
+    
+    return result;
+}
+- (NSArray *) keyPathToLeafKey:(NSString *) leafKey withDictionary:(NSDictionary *) branchDict{
+    
+    NSMutableArray *result = nil; 
+    
+    id leafTest = [branchDict valueForKey:leafKey];
+    if (leafTest) {
+        // we found the leaf and can return nil
+        
+    } else {
+        result = [[NSMutableArray alloc] init];
+        [branchDict enumerateKeysAndObjectsUsingBlock:^(id key, id obj, BOOL *stop) {
+            
+            if ([obj isKindOfClass:[NSDictionary class]]) {
+                NSArray *keyPaths = [self keyPathToLeafKey:leafKey withDictionary:obj];
+                if (keyPaths) {
+                    for (NSString *keyPath in keyPaths) {
+                        NSString *newKeypath = [NSString stringWithFormat:@"%@.%@",keyPath,key];
+                        [result addObject:newKeypath];
+                    }
+                } else {
+                    [result addObject: key];
+                }
+                
+            }
+            
+        }];
+    }
+    DLog(@"result:%@",result);
+    return result;
+    
+}
+- (NSArray *)oauthProviderKeys{
+    static NSArray *result;
+    
+    if (!result) {
+        NSDictionary * oauthDict = [self getEnvDictionary:@"oauth"];
+        result = [self keyPathToLeafKey:@"paradigm" withDictionary:oauthDict];
     }
     
     return result;

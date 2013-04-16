@@ -33,6 +33,7 @@
 @property (nonatomic, readonly) NSMutableArray* regAppOAuths;
 @property (nonatomic, retain) NSMutableSet* authListeners;
 
++ (NSArray *) oauthProviderKeys;
 + (PFClient*) sharedInstance;
 + (void) addListenerForAuthEvents:(NSObject*)target method:(SEL)selector;
 + (bool) loginWithOAuthCode:(NSString*) oauthCode callbackTarget:(NSObject*) target method:(SEL) selector;

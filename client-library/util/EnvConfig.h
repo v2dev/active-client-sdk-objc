@@ -14,5 +14,7 @@
 
 + (EnvConfig*) sharedInstance;
 - (NSString*) getEnvProperty:(NSString*) propName;
+- (NSDictionary *) getEnvDictionary:(NSString *)keyPath;
+-(NSArray *) oauthProviderKeys;
 
 @end

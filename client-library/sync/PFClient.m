@@ -365,6 +365,9 @@ static PFClient* _sharedInstance;
     // !!!: not yet implemented
 }
 
-
++ (NSArray *)oauthProviderKeys{
+    NSArray * result = [[EnvConfig sharedInstance] oauthProviderKeys];
+    return result;
+}
 
 @end
