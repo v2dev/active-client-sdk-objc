@@ -105,7 +105,6 @@ static EnvConfig* sharedInstance;
     return result;
 }
 - (NSArray *) keyPathToLeafKey:(NSString *) leafKey withDictionary:(NSDictionary *) branchDict{
-    
     NSMutableArray *result = nil; 
     
     id leafTest = [branchDict valueForKey:leafKey];
@@ -120,7 +119,7 @@ static EnvConfig* sharedInstance;
                 NSArray *keyPaths = [self keyPathToLeafKey:leafKey withDictionary:obj];
                 if (keyPaths) {
                     for (NSString *keyPath in keyPaths) {
-                        NSString *newKeypath = [NSString stringWithFormat:@"%@.%@",keyPath,key];
+                        NSString *newKeypath = [NSString stringWithFormat:@"%@.%@",key,keyPath];
                         [result addObject:newKeypath];
                     }
                 } else {
@@ -131,19 +130,23 @@ static EnvConfig* sharedInstance;
             
         }];
     }
-    DLog(@"result:%@",result);
     return result;
     
 }
 - (NSArray *)oauthProviderKeys{
-    static NSArray *result;
-    
+    static NSMutableArray *result;
+    NSString *oauth = @"oauth";
     if (!result) {
-        NSDictionary * oauthDict = [self getEnvDictionary:@"oauth"];
-        result = [self keyPathToLeafKey:@"paradigm" withDictionary:oauthDict];
+        result = [[NSMutableArray alloc] init];
+        NSDictionary * oauthDict = [self getEnvDictionary:oauth];
+        NSArray *keyPaths = [self keyPathToLeafKey:@"paradigm" withDictionary:oauthDict];
+        for (NSString *keyPath in keyPaths) {
+            NSString *newKeypath = [NSString stringWithFormat:@"%@.%@",oauth,keyPath];
+            [result addObject:newKeypath];
+        }
     }
     
-    return result;
+    return [result copy];
 }
 
 - (NSString*) description{
