@@ -10,7 +10,6 @@
 
 @interface AuthenticateOAuthCodeRequest : AuthRequest{
 	
-    NSString* svcOauthKey;
     NSString* code;
 	NSString* redirectUri;
     NSString* requestToken;
@@ -18,9 +17,9 @@
 }
 
 @property(nonatomic, retain) NSString* code;
-@property(nonatomic, retain) NSString* svcOauthKey;
 @property(nonatomic, retain) NSString* redirectUri;
 @property(nonatomic, retain) NSString* requestToken;
 @property(nonatomic, retain) NSString* requestSecret;
 
 @end
+

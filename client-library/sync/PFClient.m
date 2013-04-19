@@ -159,15 +159,14 @@ static PFClient* _sharedInstance;
     if(target && selector)
         [PFClient addListenerForAuthEvents:target method:selector];
     
-    ServiceApplicationOAuth* saOAuth = [_sharedInstance.regAppOAuths objectAtIndex:0];
+//    ServiceApplicationOAuth* saOAuth = [_sharedInstance.regAppOAuths objectAtIndex:0]; // ???: this is probably outdated
     AuthenticateOAuthCodeRequest* req = [[AuthenticateOAuthCodeRequest alloc] init];
     req.userId = @"";
     req.token = @"";
     req.clientType = @"N";
     req.clientId = @"";
     req.code = oauthCode;
-    req.svcOauthKey = saOAuth.appKey; //saOAuth.serviceApplication.serviceProvider.;//@"psiglobal";
-    req.regAppKey = @"PSI_29V97G";
+    req.regAppKey = @"PM_2F30977"; // !!!: This should come from the env.plist
     req.deviceId = @"";
     
     PFInvocation* callback = [[PFInvocation alloc] initWithTarget:[PFClient sharedInstance] method:@selector(receivedAuthenticateOAuthCodeResponse:)];

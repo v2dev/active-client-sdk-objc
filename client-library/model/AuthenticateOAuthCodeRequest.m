@@ -9,7 +9,7 @@
 #import "AuthenticateOAuthCodeRequest.h"
 
 @implementation AuthenticateOAuthCodeRequest
-@synthesize code,redirectUri,requestSecret,requestToken,svcOauthKey;
+@synthesize code,redirectUri,requestSecret,requestToken;
 
 - (id) initFromDictionary:(NSDictionary *)dict{
     self = [super initFromDictionary:dict];
@@ -18,7 +18,6 @@
         redirectUri = [dict valueForKey:@"redirectUri"];
         requestSecret = [dict valueForKey:@"requestSecret"];
         requestToken = [dict valueForKey:@"requestToken"];
-        svcOauthKey = [dict valueForKey:@"svcOauthKey"];
     }
     
     return self;
@@ -32,7 +31,6 @@
         [dict setValue:redirectUri forKey:@"redirectUri"];
         [dict setValue:requestSecret forKey:@"requestSecret"];
         [dict setValue:requestToken forKey:@"requestToken"];
-        [dict setValue:svcOauthKey forKey:@"svcOauthKey"];
     }
     
     return dict;
