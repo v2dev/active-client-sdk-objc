@@ -8,6 +8,7 @@
 
 #import "PFAuthManager.h"
 #import "EnvConfig.h"
+#import "PFClient.h"
 
 @interface PFAuthManager () 
 
@@ -50,9 +51,12 @@ static PFAuthManager *_sharedInstance = nil;
 }
 
 - (void)authenticationSucceededWithCode:(NSString *)code{
-    [self.delegate authenticationSucceeded];
+    [PFClient loginWithOAuthCode:code callbackTarget:self method:@selector(didLogin:)];
 }
+- (void) didLogin:(id) package{
+    [self.delegate authenticationSucceeded];
 
+}
 #pragma mark -
 + (PFAuthManager *)sharedInstance {
     if (!_sharedInstance) {
