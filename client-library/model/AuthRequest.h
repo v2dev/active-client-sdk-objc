@@ -16,13 +16,19 @@
     NSString* clientId;
     NSString* deviceId;
     NSString* messageId;
+    NSString* regAppKey;
+    NSString* authProvider;
 }
 
-@property(nonatomic, retain) NSString* userId;
-@property(nonatomic, retain) NSString* token;
-@property(nonatomic, retain) NSString* clientType;
-@property(nonatomic, retain) NSString* clientId;
-@property(nonatomic, retain) NSString* deviceId;
-@property(nonatomic, retain) NSString* messageId;
+@property(nonatomic, strong) NSString* userId;
+@property(nonatomic, strong) NSString* token;
+@property(nonatomic, strong) NSString* clientType;
+@property(nonatomic, strong) NSString* clientId;
+@property(nonatomic, strong) NSString* deviceId;
+@property(nonatomic, strong) NSString* messageId;
+@property(nonatomic, strong) NSString* regAppKey;
+@property(nonatomic, strong) NSString* authProvider;
+
 
 @end
+

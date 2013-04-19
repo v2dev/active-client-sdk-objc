@@ -10,14 +10,12 @@
 #import "AuthRequest.h"
 
 @interface AuthenticateOAuthAccessTokenRequest : AuthRequest{
-	NSString* regAppKey;
     NSString* svcOauthKey;
     NSString* accessToken;
     NSString* refreshToken;
     NSString* redirectUri;
 }
 
-@property(nonatomic, retain) NSString* regAppKey;
 @property(nonatomic, retain) NSString* svcOauthKey;
 @property(nonatomic, retain) NSString* accessToken;
 @property(nonatomic, retain) NSString* refreshToken;

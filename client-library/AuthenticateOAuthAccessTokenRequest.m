@@ -9,14 +9,13 @@
 #import "AuthenticateOAuthAccessTokenRequest.h"
 
 @implementation AuthenticateOAuthAccessTokenRequest
-@synthesize accessToken, svcOauthKey, regAppKey, refreshToken, redirectUri;
+@synthesize accessToken, svcOauthKey, refreshToken, redirectUri;
 
 - (id) initFromDictionary:(NSDictionary *)dict{
     self = [super initFromDictionary:dict];
     if(self){
         refreshToken = [dict valueForKey:@"refreshToken"];
         redirectUri = [dict valueForKey:@"redirectUri"];
-        regAppKey = [dict valueForKey:@"regAppKey"];
         svcOauthKey = [dict valueForKey:@"svcOauthKey"];
         accessToken = [dict valueForKey:@"accessToken"];
     }
@@ -30,7 +29,6 @@
     if(!isShell){
         [dict setValue:refreshToken forKey:@"refreshToken"];
         [dict setValue:redirectUri forKey:@"redirectUri"];
-        [dict setValue:regAppKey forKey:@"regAppKey"];
         [dict setValue:accessToken forKey:@"accessToken"];
         [dict setValue:svcOauthKey forKey:@"svcOauthKey"];
     }

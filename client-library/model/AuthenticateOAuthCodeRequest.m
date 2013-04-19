@@ -9,14 +9,13 @@
 #import "AuthenticateOAuthCodeRequest.h"
 
 @implementation AuthenticateOAuthCodeRequest
-@synthesize code,redirectUri,regAppKey,requestSecret,requestToken,svcOauthKey;
+@synthesize code,redirectUri,requestSecret,requestToken,svcOauthKey;
 
 - (id) initFromDictionary:(NSDictionary *)dict{
     self = [super initFromDictionary:dict];
     if(self){
         code = [dict valueForKey:@"code"];
         redirectUri = [dict valueForKey:@"redirectUri"];
-        regAppKey = [dict valueForKey:@"regAppKey"];
         requestSecret = [dict valueForKey:@"requestSecret"];
         requestToken = [dict valueForKey:@"requestToken"];
         svcOauthKey = [dict valueForKey:@"svcOauthKey"];
@@ -31,7 +30,6 @@
     if(!isShell){
         [dict setValue:code forKey:@"code"];
         [dict setValue:redirectUri forKey:@"redirectUri"];
-        [dict setValue:regAppKey forKey:@"regAppKey"];
         [dict setValue:requestSecret forKey:@"requestSecret"];
         [dict setValue:requestToken forKey:@"requestToken"];
         [dict setValue:svcOauthKey forKey:@"svcOauthKey"];

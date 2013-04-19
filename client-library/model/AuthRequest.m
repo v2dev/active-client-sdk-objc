@@ -9,7 +9,7 @@
 #import "AuthRequest.h"
 
 @implementation AuthRequest
-@synthesize clientId, token, userId, messageId, clientType, deviceId;
+@synthesize clientId, token, userId, messageId, clientType, deviceId, regAppKey, authProvider;
 
 - (id) initFromDictionary:(NSDictionary *)dict{
     self = [super init];
@@ -21,6 +21,8 @@
         messageId = [dict valueForKey:@"messageId"];
         clientType = [dict valueForKey:@"clientType"];
         deviceId = [dict valueForKey:@"deviceId"];
+        regAppKey = [dict valueForKey:@"regAppKey"];
+        authProvider = [dict valueForKey:@"authProvider"];
     }
     
     return self;
@@ -35,6 +37,8 @@
     [dict setObject:messageId  forKey:@"messageId"];
     [dict setObject:clientType  forKey:@"clientType"];
     [dict setObject:deviceId  forKey:@"deviceId"];
+    [dict setObject:regAppKey  forKey:@"regAppKey"];
+    [dict setObject:authProvider  forKey:@"authProvider"];
     
     return dict;
 }

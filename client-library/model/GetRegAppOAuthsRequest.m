@@ -9,13 +9,12 @@
 #import "GetRegAppOAuthsRequest.h"
 
 @implementation GetRegAppOAuthsRequest
-@synthesize regAppKey, regAppSecret, oauthType;
+@synthesize regAppSecret, oauthType;
 
 - (id) initFromDictionary:(NSDictionary *)dict{
     self = [super initFromDictionary:dict];
     
     if(self){
-        regAppKey = [dict valueForKey:@"regAppKey"];
         regAppSecret = [dict valueForKey:@"regAppSecret"];
         oauthType = [dict valueForKey:@"oauthType"];
     }
@@ -27,7 +26,6 @@
     NSMutableDictionary* dict = [super toDictionary:isShell];
 
     [dict setObject:[self remoteClassName] forKey:@"cn"];
-    [dict setObject:regAppKey forKey:@"regAppKey"];
     [dict setObject:regAppSecret forKey:@"regAppSecret"];
     [dict setObject:oauthType forKey:@"oauthType"];
     
