@@ -35,6 +35,7 @@
 		6A3435E3171DF54700EEA040 /* PFGitHubOauthViewController.h in Headers */ = {isa = PBXBuildFile; fileRef = 6A3435E1171DF54700EEA040 /* PFGitHubOauthViewController.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		6A3435E4171DF54700EEA040 /* PFGitHubOauthViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6A3435E2171DF54700EEA040 /* PFGitHubOauthViewController.m */; };
 		6A3435E5171DF54700EEA040 /* PFGitHubOauthViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6A3435E2171DF54700EEA040 /* PFGitHubOauthViewController.m */; };
+		6A87F7D01721D6E200FDCDBE /* IUserIdentifier.h in Headers */ = {isa = PBXBuildFile; fileRef = 6A87F7CF1721D6E200FDCDBE /* IUserIdentifier.h */; };
 		6A8B0869170123E800BB48EE /* ClassIDPair.h in Headers */ = {isa = PBXBuildFile; fileRef = 6A8B0867170123E700BB48EE /* ClassIDPair.h */; };
 		6A8B086A170123E800BB48EE /* ClassIDPair.m in Sources */ = {isa = PBXBuildFile; fileRef = 6A8B0868170123E700BB48EE /* ClassIDPair.m */; };
 		6A8B086B170123E800BB48EE /* ClassIDPair.m in Sources */ = {isa = PBXBuildFile; fileRef = 6A8B0868170123E700BB48EE /* ClassIDPair.m */; };
@@ -247,6 +248,7 @@
 		6A3435DD171DD2DB00EEA040 /* PFAuthManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PFAuthManager.m; sourceTree = "<group>"; };
 		6A3435E1171DF54700EEA040 /* PFGitHubOauthViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PFGitHubOauthViewController.h; sourceTree = "<group>"; };
 		6A3435E2171DF54700EEA040 /* PFGitHubOauthViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PFGitHubOauthViewController.m; sourceTree = "<group>"; };
+		6A87F7CF1721D6E200FDCDBE /* IUserIdentifier.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IUserIdentifier.h; sourceTree = "<group>"; };
 		6A8B0867170123E700BB48EE /* ClassIDPair.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ClassIDPair.h; sourceTree = "<group>"; };
 		6A8B0868170123E700BB48EE /* ClassIDPair.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ClassIDPair.m; sourceTree = "<group>"; };
 		6AB0F67D16F2942600D7F7D5 /* PutRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PutRequest.h; path = model/PutRequest.h; sourceTree = "<group>"; };
@@ -597,6 +599,7 @@
 				6AC09CD61702152A00D640A3 /* CreateResponse.h */,
 				6AC09CD71702152A00D640A3 /* CreateResponse.m */,
 				6ACA5BCA16E8FFB700CB8FBD /* IUserAnchor.h */,
+				6A87F7CF1721D6E200FDCDBE /* IUserIdentifier.h */,
 				6ACA5BCB16E8FFE700CB8FBD /* IUserRole.h */,
 				F2721E9A15C9B20E0040FC3E /* _Super_RegisteredApplication.h */,
 				F2721E9B15C9B20E0040FC3E /* _Super_RegisteredApplication.m */,
@@ -903,6 +906,7 @@
 				6AD4553D1701FDA20038A988 /* RemoveResponse.h in Headers */,
 				6AC09CD4170212C800D640A3 /* CreateRequest.h in Headers */,
 				6AC09CD81702152A00D640A3 /* CreateResponse.h in Headers */,
+				6A87F7D01721D6E200FDCDBE /* IUserIdentifier.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
