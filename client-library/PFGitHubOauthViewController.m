@@ -35,7 +35,7 @@
     oauthURLString = @"https://github.com/login/oauth/authorize";
     oauthTokenURLString = @"https://github.com/login/oauth/access_token";
     oauthClientId = @"13262a8ae5e6f1a1d24f";
-    oauthRedirectURI = @"http://percero.io/index.html";
+    oauthRedirectURI = @"http://percero.io/oauth.html";
     oauthClientSecret = @"d03c8603efa329958bfb927e055aec12f6c9c56c";
     oauthScope = @"0";
     oauthState = [[NSUUID UUID] UUIDString];
