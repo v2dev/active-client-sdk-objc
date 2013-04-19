@@ -35,7 +35,7 @@
 		6A3435E3171DF54700EEA040 /* PFGitHubOauthViewController.h in Headers */ = {isa = PBXBuildFile; fileRef = 6A3435E1171DF54700EEA040 /* PFGitHubOauthViewController.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		6A3435E4171DF54700EEA040 /* PFGitHubOauthViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6A3435E2171DF54700EEA040 /* PFGitHubOauthViewController.m */; };
 		6A3435E5171DF54700EEA040 /* PFGitHubOauthViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6A3435E2171DF54700EEA040 /* PFGitHubOauthViewController.m */; };
-		6A87F7D01721D6E200FDCDBE /* IUserIdentifier.h in Headers */ = {isa = PBXBuildFile; fileRef = 6A87F7CF1721D6E200FDCDBE /* IUserIdentifier.h */; };
+		6A87F7D01721D6E200FDCDBE /* IUserIdentifier.h in Headers */ = {isa = PBXBuildFile; fileRef = 6A87F7CF1721D6E200FDCDBE /* IUserIdentifier.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		6A8B0869170123E800BB48EE /* ClassIDPair.h in Headers */ = {isa = PBXBuildFile; fileRef = 6A8B0867170123E700BB48EE /* ClassIDPair.h */; };
 		6A8B086A170123E800BB48EE /* ClassIDPair.m in Sources */ = {isa = PBXBuildFile; fileRef = 6A8B0868170123E700BB48EE /* ClassIDPair.m */; };
 		6A8B086B170123E800BB48EE /* ClassIDPair.m in Sources */ = {isa = PBXBuildFile; fileRef = 6A8B0868170123E700BB48EE /* ClassIDPair.m */; };
@@ -839,6 +839,7 @@
 				6A1FBEAB16FA43A600E9E699 /* PFSourceRelationship.h in Headers */,
 				F2721F0315C9B20E0040FC3E /* ConnectResponse.h in Headers */,
 				6A3435DE171DD2DB00EEA040 /* PFAuthManager.h in Headers */,
+				6A87F7D01721D6E200FDCDBE /* IUserIdentifier.h in Headers */,
 				6A3435E3171DF54700EEA040 /* PFGitHubOauthViewController.h in Headers */,
 				6ACA5BCC16E8FFFE00CB8FBD /* IUserAnchor.h in Headers */,
 				F2721F0515C9B20E0040FC3E /* EntityManager.h in Headers */,
@@ -906,7 +907,6 @@
 				6AD4553D1701FDA20038A988 /* RemoveResponse.h in Headers */,
 				6AC09CD4170212C800D640A3 /* CreateRequest.h in Headers */,
 				6AC09CD81702152A00D640A3 /* CreateResponse.h in Headers */,
-				6A87F7D01721D6E200FDCDBE /* IUserIdentifier.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
