@@ -25,7 +25,7 @@
 - (id) initFromDictionary:(NSDictionary *)dict{
     self = [super init];
     if(self){
-        ID = [dict valueForKey:@"id"];
+        ID = [dict valueForKey:@"ID"];
         dateCreated = [dict valueForKey:@"dateCreated"];
         isShell = dateCreated?NO:YES;
         dateModified = [dict valueForKey:@"dateModified"];
