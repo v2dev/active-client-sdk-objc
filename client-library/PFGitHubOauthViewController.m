@@ -37,7 +37,7 @@
     oauthClientId = @"13262a8ae5e6f1a1d24f";
     oauthRedirectURI = @"http://percero.io/oauth.html";
     oauthClientSecret = @"d03c8603efa329958bfb927e055aec12f6c9c56c";
-    oauthScope = @"0";
+    oauthScope = @"user,repo,public_repo";
     oauthState = [[NSUUID UUID] UUIDString];
 }
 
