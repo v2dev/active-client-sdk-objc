@@ -56,6 +56,7 @@
 - (void)restoreDeletedRelationships;
 
 + (NSDictionary *) all;
++ (NSString *)remoteClassName;
 
 + (NSArray *) relationships;
 @end
