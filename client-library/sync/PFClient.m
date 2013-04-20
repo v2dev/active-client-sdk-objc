@@ -168,7 +168,7 @@ static PFClient* _sharedInstance;
     req.code = oauthCode;
     req.regAppKey = @"PM_2F30977"; // !!!: This should come from the env.plist
     req.deviceId = @"";
-    
+    req.authProvider = @"GITHUB"; // !!!: This should come from the env.plist
     PFInvocation* callback = [[PFInvocation alloc] initWithTarget:[PFClient sharedInstance] method:@selector(receivedAuthenticateOAuthCodeResponse:)];
 
     [[PFSocketManager sharedInstance] sendEvent:@"authenticateOAuthCode" data:req callback:callback];
