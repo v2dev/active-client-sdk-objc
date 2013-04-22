@@ -24,13 +24,14 @@
 #import "PutRequest.h"
 #import "CreateRequest.h"
 #import "RemoveRequest.h"
+#import "ModelUtility.h"
+#import "IUserAnchor.h"
 
 // The singleton
 static PFClient* _sharedInstance;
 
 @implementation PFClient
 @synthesize syncManager, clientId, token, userId, regAppOAuths, authListeners, accessToken, refreshToken;
-
 
 /**
  * This method sets up everything to initialize the PFClient
@@ -50,10 +51,23 @@ static PFClient* _sharedInstance;
     
     // Get the SocketManager
     syncManager = [PFSocketManager sharedInstance];
-    
 
 }
 
++ (Class)iUserAnchorClass{
+    static Class result;
+    
+    if (!result) {
+        Class ModelUtilityClass = NSClassFromString(@"ModelUtility");
+        NSArray * modelClasses = [ModelUtilityClass modelClasses];
+        for (Class class in modelClasses) {
+            if ([class conformsToProtocol:@protocol(IUserAnchor)]) {
+                result = class;
+            }
+        }
+    }
+    return result;
+}
 - (id) init{
     self = [super init];
     

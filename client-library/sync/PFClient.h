@@ -8,6 +8,7 @@
 
 #import <Foundation/Foundation.h>
 #import "PFModelObject.h"
+#import "IUserAnchor.h"
 
 @class PFSocketManager;
 
@@ -32,7 +33,9 @@
 @property (nonatomic, retain) NSString* refreshToken;
 @property (nonatomic, readonly) NSMutableArray* regAppOAuths;
 @property (nonatomic, retain) NSMutableSet* authListeners;
+@property (nonatomic, strong) id<IUserAnchor> currentUser;
 
++ (Class) iUserAnchorClass;
 + (PFClient*) sharedInstance;
 + (void) addListenerForAuthEvents:(NSObject*)target method:(SEL)selector;
 + (bool) loginWithOAuthCode:(NSString*) oauthCode callbackTarget:(NSObject*) target method:(SEL) selector;
