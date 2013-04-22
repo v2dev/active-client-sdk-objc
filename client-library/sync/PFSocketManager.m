@@ -24,6 +24,9 @@
 #import "RemoveResponse.h"
 #import "FindByIdRequest.h"
 #import "FindByIdResponse.h"
+#import "FindByExampleRequest.h"
+#import "FindByExampleResponse.h"
+#import "PFClient.h"
 
 @interface PFSocketManager () {
     NSTimer *messageTimer;
@@ -207,7 +210,22 @@ static PFSocketManager* sharedInstance;
                 [foundObject restoreDeletedRelationships];
                 [self.syncRequests removeObjectForKey:foundObject.ID];
             }
-        
+            
+        }else if ([syncResponse isKindOfClass:[FindByExampleResponse class]]) {
+            FindByExampleResponse* findByExampleResponse = (FindByExampleResponse *) syncResponse;
+            FindByExampleRequest* findByExampleRequest = (FindByExampleRequest *) matchingRequest;
+
+            NSArray *result = findByExampleResponse.result;
+
+            if((result.count == 1) && [findByExampleRequest.theObject conformsToProtocol:@protocol(IUserAnchor)]){
+                PFModelObject<IUserAnchor> *requestUser = findByExampleRequest.theObject;
+                PFModelObject<IUserAnchor> *responseUser = result[0];
+                if ([requestUser.userId isEqualToString:responseUser.userId]) {
+                    [[PFClient sharedInstance] setCurrentUser:responseUser];
+                }
+            }
+            
+            
         }
         
         // remove matchingRequest

@@ -36,6 +36,12 @@
 		6A3435E4171DF54700EEA040 /* PFGitHubOauthViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6A3435E2171DF54700EEA040 /* PFGitHubOauthViewController.m */; };
 		6A3435E5171DF54700EEA040 /* PFGitHubOauthViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6A3435E2171DF54700EEA040 /* PFGitHubOauthViewController.m */; };
 		6A729BEF1725BA10001F4BB8 /* ModelUtility.h in Headers */ = {isa = PBXBuildFile; fileRef = 6A729BEE1725BA10001F4BB8 /* ModelUtility.h */; };
+		6A729BF21725CE74001F4BB8 /* FindByExampleRequest.h in Headers */ = {isa = PBXBuildFile; fileRef = 6A729BF01725CE74001F4BB8 /* FindByExampleRequest.h */; };
+		6A729BF31725CE74001F4BB8 /* FindByExampleRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 6A729BF11725CE74001F4BB8 /* FindByExampleRequest.m */; };
+		6A729BF41725CE74001F4BB8 /* FindByExampleRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 6A729BF11725CE74001F4BB8 /* FindByExampleRequest.m */; };
+		6A729BF71725E6FC001F4BB8 /* FindByExampleResponse.h in Headers */ = {isa = PBXBuildFile; fileRef = 6A729BF51725E6FB001F4BB8 /* FindByExampleResponse.h */; };
+		6A729BF81725E6FC001F4BB8 /* FindByExampleResponse.m in Sources */ = {isa = PBXBuildFile; fileRef = 6A729BF61725E6FB001F4BB8 /* FindByExampleResponse.m */; };
+		6A729BF91725E6FC001F4BB8 /* FindByExampleResponse.m in Sources */ = {isa = PBXBuildFile; fileRef = 6A729BF61725E6FB001F4BB8 /* FindByExampleResponse.m */; };
 		6A87F7D01721D6E200FDCDBE /* IUserIdentifier.h in Headers */ = {isa = PBXBuildFile; fileRef = 6A87F7CF1721D6E200FDCDBE /* IUserIdentifier.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		6A8B0869170123E800BB48EE /* ClassIDPair.h in Headers */ = {isa = PBXBuildFile; fileRef = 6A8B0867170123E700BB48EE /* ClassIDPair.h */; };
 		6A8B086A170123E800BB48EE /* ClassIDPair.m in Sources */ = {isa = PBXBuildFile; fileRef = 6A8B0868170123E700BB48EE /* ClassIDPair.m */; };
@@ -250,6 +256,10 @@
 		6A3435E1171DF54700EEA040 /* PFGitHubOauthViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PFGitHubOauthViewController.h; sourceTree = "<group>"; };
 		6A3435E2171DF54700EEA040 /* PFGitHubOauthViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PFGitHubOauthViewController.m; sourceTree = "<group>"; };
 		6A729BEE1725BA10001F4BB8 /* ModelUtility.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ModelUtility.h; path = "client-library/model/ModelUtility.h"; sourceTree = "<group>"; };
+		6A729BF01725CE74001F4BB8 /* FindByExampleRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = FindByExampleRequest.h; path = model/FindByExampleRequest.h; sourceTree = "<group>"; };
+		6A729BF11725CE74001F4BB8 /* FindByExampleRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = FindByExampleRequest.m; path = model/FindByExampleRequest.m; sourceTree = "<group>"; };
+		6A729BF51725E6FB001F4BB8 /* FindByExampleResponse.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FindByExampleResponse.h; sourceTree = "<group>"; };
+		6A729BF61725E6FB001F4BB8 /* FindByExampleResponse.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FindByExampleResponse.m; sourceTree = "<group>"; };
 		6A87F7CF1721D6E200FDCDBE /* IUserIdentifier.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IUserIdentifier.h; sourceTree = "<group>"; };
 		6A8B0867170123E700BB48EE /* ClassIDPair.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ClassIDPair.h; sourceTree = "<group>"; };
 		6A8B0868170123E700BB48EE /* ClassIDPair.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ClassIDPair.m; sourceTree = "<group>"; };
@@ -588,6 +598,8 @@
 		F2721E8C15C9B1C20040FC3E /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				6A729BF51725E6FB001F4BB8 /* FindByExampleResponse.h */,
+				6A729BF61725E6FB001F4BB8 /* FindByExampleResponse.m */,
 				6A8B0867170123E700BB48EE /* ClassIDPair.h */,
 				6A8B0868170123E700BB48EE /* ClassIDPair.m */,
 				6AB198281700E06A00821DF6 /* PutResponse.h */,
@@ -631,6 +643,8 @@
 				F2721EB315C9B20E0040FC3E /* AuthResponse.m */,
 				F2721EB415C9B20E0040FC3E /* ConnectResponse.h */,
 				F2721EB515C9B20E0040FC3E /* ConnectResponse.m */,
+				6A729BF01725CE74001F4BB8 /* FindByExampleRequest.h */,
+				6A729BF11725CE74001F4BB8 /* FindByExampleRequest.m */,
 				F2721EBB15C9B20E0040FC3E /* FindByIdRequest.h */,
 				F2721EBC15C9B20E0040FC3E /* FindByIdRequest.m */,
 				F2721EBD15C9B20E0040FC3E /* FindByIdResponse.h */,
@@ -911,6 +925,8 @@
 				6AC09CD4170212C800D640A3 /* CreateRequest.h in Headers */,
 				6AC09CD81702152A00D640A3 /* CreateResponse.h in Headers */,
 				6A729BEF1725BA10001F4BB8 /* ModelUtility.h in Headers */,
+				6A729BF21725CE74001F4BB8 /* FindByExampleRequest.h in Headers */,
+				6A729BF71725E6FC001F4BB8 /* FindByExampleResponse.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1124,6 +1140,8 @@
 				6AC09CD91702152A00D640A3 /* CreateResponse.m in Sources */,
 				6A3435DF171DD2DB00EEA040 /* PFAuthManager.m in Sources */,
 				6A3435E4171DF54700EEA040 /* PFGitHubOauthViewController.m in Sources */,
+				6A729BF31725CE74001F4BB8 /* FindByExampleRequest.m in Sources */,
+				6A729BF81725E6FC001F4BB8 /* FindByExampleResponse.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1153,6 +1171,8 @@
 				6AD4553F1701FDA20038A988 /* RemoveResponse.m in Sources */,
 				6A3435E0171DD2DB00EEA040 /* PFAuthManager.m in Sources */,
 				6A3435E5171DF54700EEA040 /* PFGitHubOauthViewController.m in Sources */,
+				6A729BF41725CE74001F4BB8 /* FindByExampleRequest.m in Sources */,
+				6A729BF91725E6FC001F4BB8 /* FindByExampleResponse.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

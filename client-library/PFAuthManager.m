@@ -55,8 +55,10 @@ static PFAuthManager *_sharedInstance = nil;
 }
 - (void) didLogin:(id) package{
     [self.delegate authenticationSucceeded];
-
+    
+    
 }
+
 #pragma mark -
 + (PFAuthManager *)sharedInstance {
     if (!_sharedInstance) {

@@ -9,5 +9,5 @@
 #import <Foundation/Foundation.h>
 
 @protocol IUserAnchor <NSObject>
-
+@property (nonatomic, strong) NSString *userId;
 @end

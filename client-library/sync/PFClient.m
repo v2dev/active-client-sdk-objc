@@ -21,6 +21,7 @@
 #import "PFSocketManager.h"
 #import "GetAllByNameRequest.h"
 #import "FindByIdRequest.h"
+#import "FindByExampleRequest.h"
 #import "PutRequest.h"
 #import "CreateRequest.h"
 #import "RemoveRequest.h"
@@ -117,6 +118,14 @@ static PFClient* _sharedInstance;
     }
 }
 
+- (void)getAuthenticatedUser{
+    Class iUserAnchorClass = [[self class] iUserAnchorClass];
+    PFModelObject<IUserAnchor,PFModelObject> *currentUser = [[iUserAnchorClass alloc] init];
+    [currentUser setUserId:self.userId];
+    [currentUser setID:[[NSUUID UUID] UUIDString]];
+    [[self class] sendFindByExampleRequest:currentUser target:self method:@selector(socketReady)];
+
+}
 
 /**
  * Callback method for when the login response is recieved
@@ -133,6 +142,7 @@ static PFClient* _sharedInstance;
         accessToken = response.accessToken;
         
         [PFClient save];
+    
     }
 }
 
@@ -156,7 +166,14 @@ static PFClient* _sharedInstance;
  * start generating activity on the wire.
  */
 - (void) socketReady{
-    [self announceAuthenticated:true];
+    
+    if (self.currentUser) {
+        [self announceAuthenticated:true];
+    } else {
+        [self getAuthenticatedUser];
+    }
+    
+
 }
 
 + (void) addListenerForAuthEvents:(NSObject*)target method:(SEL)selector{
@@ -255,6 +272,21 @@ static PFClient* _sharedInstance;
     
     [[PFSocketManager sharedInstance] sendEvent:@"getAllByName" data:request callback:callback];
 }
+
++ (void) sendFindByExampleRequest:(PFModelObject<IUserAnchor,PFModelObject> *) example target:(NSObject*) target method:(SEL) selector{
+    FindByExampleRequest* request = [[FindByExampleRequest alloc] init];
+    [request setClientId:[PFClient sharedInstance].clientId];
+    [request setToken:[PFClient sharedInstance].token];
+    [request setUserId:[PFClient sharedInstance].userId];
+    [request setTheObject:example];
+    
+    PFInvocation* callback = nil;
+    if(target && selector)
+        callback = [[PFInvocation alloc] initWithTarget:target method:selector];
+    
+    [[PFSocketManager sharedInstance] sendEvent:[request eventName] data:request callback:callback];
+}
+
 
 + (void)sendPutRequestWithClass:(NSString *)className object:(PFModelObject *)object completionTarget:(NSObject *)target method:(SEL)selector {
     
