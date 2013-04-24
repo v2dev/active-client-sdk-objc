@@ -330,7 +330,7 @@ static PFSocketManager* sharedInstance;
             [self processSyncResponse:result];
         }
         
-        if (corrMessageId){
+        if (corrMessageId && [corrMessageId isKindOfClass:[NSString class]]){
             // build ack
             NSDictionary *corrId = @{@"correspondingMessageId" : corrMessageId};
             NSDictionary *ack = @{@"ack": corrId};
