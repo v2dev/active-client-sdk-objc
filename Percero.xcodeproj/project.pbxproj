@@ -42,6 +42,9 @@
 		6A729BF71725E6FC001F4BB8 /* FindByExampleResponse.h in Headers */ = {isa = PBXBuildFile; fileRef = 6A729BF51725E6FB001F4BB8 /* FindByExampleResponse.h */; };
 		6A729BF81725E6FC001F4BB8 /* FindByExampleResponse.m in Sources */ = {isa = PBXBuildFile; fileRef = 6A729BF61725E6FB001F4BB8 /* FindByExampleResponse.m */; };
 		6A729BF91725E6FC001F4BB8 /* FindByExampleResponse.m in Sources */ = {isa = PBXBuildFile; fileRef = 6A729BF61725E6FB001F4BB8 /* FindByExampleResponse.m */; };
+		6A841FDD172AF2EE00A5B768 /* PFObjectBinder.h in Headers */ = {isa = PBXBuildFile; fileRef = 6A841FDB172AF2EE00A5B768 /* PFObjectBinder.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		6A841FDE172AF2EE00A5B768 /* PFObjectBinder.m in Sources */ = {isa = PBXBuildFile; fileRef = 6A841FDC172AF2EE00A5B768 /* PFObjectBinder.m */; };
+		6A841FDF172AF2EE00A5B768 /* PFObjectBinder.m in Sources */ = {isa = PBXBuildFile; fileRef = 6A841FDC172AF2EE00A5B768 /* PFObjectBinder.m */; };
 		6A87F7D01721D6E200FDCDBE /* IUserIdentifier.h in Headers */ = {isa = PBXBuildFile; fileRef = 6A87F7CF1721D6E200FDCDBE /* IUserIdentifier.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		6A8B0869170123E800BB48EE /* ClassIDPair.h in Headers */ = {isa = PBXBuildFile; fileRef = 6A8B0867170123E700BB48EE /* ClassIDPair.h */; };
 		6A8B086A170123E800BB48EE /* ClassIDPair.m in Sources */ = {isa = PBXBuildFile; fileRef = 6A8B0868170123E700BB48EE /* ClassIDPair.m */; };
@@ -255,11 +258,13 @@
 		6A3435DD171DD2DB00EEA040 /* PFAuthManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PFAuthManager.m; sourceTree = "<group>"; };
 		6A3435E1171DF54700EEA040 /* PFGitHubOauthViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PFGitHubOauthViewController.h; sourceTree = "<group>"; };
 		6A3435E2171DF54700EEA040 /* PFGitHubOauthViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PFGitHubOauthViewController.m; sourceTree = "<group>"; };
-		6A729BEE1725BA10001F4BB8 /* ModelUtility.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ModelUtility.h; path = "client-library/model/ModelUtility.h"; sourceTree = "<group>"; };
+		6A729BEE1725BA10001F4BB8 /* ModelUtility.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ModelUtility.h; path = model/ModelUtility.h; sourceTree = "<group>"; };
 		6A729BF01725CE74001F4BB8 /* FindByExampleRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = FindByExampleRequest.h; path = model/FindByExampleRequest.h; sourceTree = "<group>"; };
 		6A729BF11725CE74001F4BB8 /* FindByExampleRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = FindByExampleRequest.m; path = model/FindByExampleRequest.m; sourceTree = "<group>"; };
 		6A729BF51725E6FB001F4BB8 /* FindByExampleResponse.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FindByExampleResponse.h; sourceTree = "<group>"; };
 		6A729BF61725E6FB001F4BB8 /* FindByExampleResponse.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FindByExampleResponse.m; sourceTree = "<group>"; };
+		6A841FDB172AF2EE00A5B768 /* PFObjectBinder.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PFObjectBinder.h; sourceTree = "<group>"; };
+		6A841FDC172AF2EE00A5B768 /* PFObjectBinder.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PFObjectBinder.m; sourceTree = "<group>"; };
 		6A87F7CF1721D6E200FDCDBE /* IUserIdentifier.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IUserIdentifier.h; sourceTree = "<group>"; };
 		6A8B0867170123E700BB48EE /* ClassIDPair.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ClassIDPair.h; sourceTree = "<group>"; };
 		6A8B0868170123E700BB48EE /* ClassIDPair.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ClassIDPair.m; sourceTree = "<group>"; };
@@ -699,6 +704,8 @@
 		F2721E8D15C9B1D00040FC3E /* Controller */ = {
 			isa = PBXGroup;
 			children = (
+				6A841FDB172AF2EE00A5B768 /* PFObjectBinder.h */,
+				6A841FDC172AF2EE00A5B768 /* PFObjectBinder.m */,
 				F2721EB615C9B20E0040FC3E /* EntityManager.h */,
 				F2721EB715C9B20E0040FC3E /* EntityManager.m */,
 				F2721F2E15C9B3F70040FC3E /* PFClient.h */,
@@ -718,6 +725,7 @@
 		F2721E8E15C9B1E00040FC3E /* Utility */ = {
 			isa = PBXGroup;
 			children = (
+				6A729BEE1725BA10001F4BB8 /* ModelUtility.h */,
 				F2721F3315C9B3F70040FC3E /* EnvConfig.h */,
 				F2721F3415C9B3F70040FC3E /* EnvConfig.m */,
 				F2721F3515C9B3F70040FC3E /* PFInvocation.h */,
@@ -731,7 +739,6 @@
 		F2B0263C15C9A495000375CE = {
 			isa = PBXGroup;
 			children = (
-				6A729BEE1725BA10001F4BB8 /* ModelUtility.h */,
 				F2300CA415EE8CC80037A4A4 /* Submodules */,
 				F2B0264C15C9A495000375CE /* Percero */,
 				F2B0266015C9A495000375CE /* client-libraryTests */,
@@ -858,6 +865,7 @@
 				6A3435DE171DD2DB00EEA040 /* PFAuthManager.h in Headers */,
 				6A87F7D01721D6E200FDCDBE /* IUserIdentifier.h in Headers */,
 				6A3435E3171DF54700EEA040 /* PFGitHubOauthViewController.h in Headers */,
+				6A841FDD172AF2EE00A5B768 /* PFObjectBinder.h in Headers */,
 				6ACA5BCC16E8FFFE00CB8FBD /* IUserAnchor.h in Headers */,
 				F2721F0515C9B20E0040FC3E /* EntityManager.h in Headers */,
 				F2721F0915C9B20E0040FC3E /* FindByIdRequest.h in Headers */,
@@ -1142,6 +1150,7 @@
 				6A3435E4171DF54700EEA040 /* PFGitHubOauthViewController.m in Sources */,
 				6A729BF31725CE74001F4BB8 /* FindByExampleRequest.m in Sources */,
 				6A729BF81725E6FC001F4BB8 /* FindByExampleResponse.m in Sources */,
+				6A841FDE172AF2EE00A5B768 /* PFObjectBinder.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1173,6 +1182,7 @@
 				6A3435E5171DF54700EEA040 /* PFGitHubOauthViewController.m in Sources */,
 				6A729BF41725CE74001F4BB8 /* FindByExampleRequest.m in Sources */,
 				6A729BF91725E6FC001F4BB8 /* FindByExampleResponse.m in Sources */,
+				6A841FDF172AF2EE00A5B768 /* PFObjectBinder.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
