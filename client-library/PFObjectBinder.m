@@ -12,8 +12,11 @@
 
 - (void) updateTargetObject{
     
-    id targetValue = [self.sourceObject valueForKeyPath:self.sourceKeyPath];
-    [self.targetObject setValue:targetValue forKeyPath:self.targetKeyPath];
+    if (_sourceObject && _sourceKeyPath && _targetObject && _targetKeyPath) {
+        id targetValue = [self.sourceObject valueForKeyPath:self.sourceKeyPath];
+        [self.targetObject setValue:targetValue forKeyPath:self.targetKeyPath];
+
+    }
     
 }
 
