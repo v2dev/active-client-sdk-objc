@@ -73,10 +73,10 @@
     result.ID = ID;      
     return result;
 }
-+ (NSDictionary *)all{
++ (NSMutableArray *)all{
     NSString *className = [Utility translateRemoteClassName:[[self alloc] remoteClassName]];
     NSMutableDictionary *dict = [[EntityManager sharedInstance] dictionaryForClass:className];
-    return [dict copy];
+    return [[dict allValues] mutableCopy];
 }
 + (NSArray *)relationships {
     return @[];
