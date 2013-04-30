@@ -1,14 +1,21 @@
 //
-//  PFTableSectionData.m
+//  PFTableViewDataSource.m
 //  Percero
 //
 //  Created by Jeff Wolski on 4/30/13.
 //
 //
 
-#import "PFTableSectionData.h"
+#import "PFTableViewDataSource.h"
 
-@implementation PFTableSectionData
+@interface PFTableViewDataSource ()
+
+@property (nonatomic, strong) NSMutableArray *rowBindings;
+
+@end
+
+
+@implementation PFTableViewDataSource
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
     NSArray *sectionsArray = [_anchorObject valueForKeyPath:_keyPathForSectionsArray];
@@ -52,7 +59,7 @@
        keyPathForCellsArray:(NSString *)keyPathForCellsArray
  keyPathForSectionLabelText:(NSString *)keyPathForSectionLabelText
     keyPathForCellLabelText:(NSString *)keyPathForCellLabelText
-               sectionStyle:(PFTableSectionDataSectionStyle)sectionStyle{
+               sectionMode:(PFTableViewDataSourceMode)sectionMode{
     if (self = [self init]) {
         _anchorObject = anchorObject;
         _keyPathForSectionsArray = keyPathForSectionsArray;
@@ -65,9 +72,9 @@
     return self;
 }
 
-+ (PFTableSectionData *)TableSectionDataWithAnchorObject:(id)anchorObject keyPathForSectionsArray:(NSString *)keyPathForSectionsArray keyPathForCellsArray:(NSString *)keyPathForCellsArray keyPathForSectionLabelText:(NSString *)keyPathForSectionLabelText keyPathForCellLabelText:(NSString *)keyPathForCellLabelText sectionStyle:(PFTableSectionDataSectionStyle)sectionStyle{
++ (PFTableViewDataSource *)TableSectionDataWithAnchorObject:(id)anchorObject keyPathForSectionsArray:(NSString *)keyPathForSectionsArray keyPathForCellsArray:(NSString *)keyPathForCellsArray keyPathForSectionLabelText:(NSString *)keyPathForSectionLabelText keyPathForCellLabelText:(NSString *)keyPathForCellLabelText sectionMode:(PFTableViewDataSourceMode)sectionMode{
     
-    PFTableSectionData *result = [[PFTableSectionData alloc] initWithAnchorObject:anchorObject keyPathForSectionsArray:keyPathForSectionsArray keyPathForCellsArray:keyPathForCellsArray keyPathForSectionLabelText:keyPathForSectionLabelText keyPathForCellLabelText:keyPathForCellLabelText sectionStyle:sectionStyle];
+    PFTableViewDataSource *result = [[PFTableViewDataSource alloc] initWithAnchorObject:anchorObject keyPathForSectionsArray:keyPathForSectionsArray keyPathForCellsArray:keyPathForCellsArray keyPathForSectionLabelText:keyPathForSectionLabelText keyPathForCellLabelText:keyPathForCellLabelText sectionMode:sectionMode];
     return result;
 }
 

@@ -1,5 +1,5 @@
 //
-//  PFTableSectionData.h
+//  PFTableViewDataSource.h
 //  Percero
 //
 //  Created by Jeff Wolski on 4/30/13.
@@ -10,24 +10,24 @@
 #import <UIKit/UIKit.h>
 
 typedef enum {
-    PFTableSectionDataSectionStyleSectionHeader,
-    PFTableSectionDataSectionStyleCell,
-} PFTableSectionDataSectionStyle;
+    PFTableViewDataSourceModeHeader,
+    PFTableViewDataSourceModeCell,
+} PFTableViewDataSourceMode;
 
 
-@interface PFTableSectionData : NSObject <UITableViewDataSource>
+@interface PFTableViewDataSource : NSObject <UITableViewDataSource>
 @property (weak, nonatomic) id anchorObject;
 @property (strong, nonatomic) NSString *keyPathForSectionsArray;
 @property (strong, nonatomic) NSString *keyPathForCellsArray;
 
 @property (strong, nonatomic) NSString *keyPathForSectionLabelText;
 @property (strong, nonatomic) NSString *keyPathForCellLabelText;
-@property (assign, nonatomic) PFTableSectionDataSectionStyle sectionStyle;
+@property (assign, nonatomic) PFTableViewDataSourceMode sectionMode;
 
-+ (PFTableSectionData *)TableSectionDataWithAnchorObject:(id) anchorObject
++ (PFTableViewDataSource *)TableSectionDataWithAnchorObject:(id) anchorObject
                                  keyPathForSectionsArray:(NSString *) keyPathForSectionsArray
                                     keyPathForCellsArray:(NSString *) keyPathForCellsArray
                               keyPathForSectionLabelText:(NSString *) keyPathForSectionLabelText
                               keyPathForCellLabelText:(NSString *) keyPathForCellLabelText
-                                            sectionStyle:(PFTableSectionDataSectionStyle) sectionStyle;
+                                            sectionMode:(PFTableViewDataSourceMode) sectionMode;
 @end
