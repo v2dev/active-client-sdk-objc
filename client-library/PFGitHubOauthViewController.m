@@ -18,11 +18,15 @@
     NSString *oauthState;
 }
 @property (nonatomic, strong) UIWebView *webView;
+@property (nonatomic, strong) UIView *transitionView;
+
 @end
 
 @implementation PFGitHubOauthViewController
 
-
+- (void) gotACode{
+    self.transitionView;  // alloc, init, bring to the top, do fun stuff
+}
 
 
 - (void)viewDidLoad
@@ -131,6 +135,7 @@
                 shouldStart = NO;
                 
                 [self requestAccessTokenWithCode:code];
+                [self gotACode];
                 [webView loadHTMLString:[NSString stringWithFormat: @"Got a code:%@",code] baseURL:nil];
                 [self.delegate authenticationSucceededWithCode:code];
             }
