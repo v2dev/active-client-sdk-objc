@@ -7,14 +7,16 @@
 //
 
 #import "PFObjectBinder.h"
+#import "PFModelObject.h"
 
 @implementation PFObjectBinder
 
 - (void) updateTargetObject{
     
     if (_sourceObject && _sourceKeyPath && _targetObject && _targetKeyPath) {
-        id targetValue = [self.sourceObject valueForKeyPath:self.sourceKeyPath];
-        [self.targetObject setValue:targetValue forKeyPath:self.targetKeyPath];
+        
+        id sourceValue = [self.sourceObject valueForKeyPath:self.sourceKeyPath];
+        [self.targetObject setValue:sourceValue forKeyPath:self.targetKeyPath];
 
     }
     
@@ -79,11 +81,24 @@
 - (void) registerKvo{
     
     if (_sourceObject && _sourceKeyPath) {
-        [_sourceObject addObserver:self forKeyPath:_sourceKeyPath options:0 context:nil];
+        if ([_sourceObject respondsToSelector:@selector(isSubclassOfClass:)]) {
+            if ([_sourceObject isSubclassOfClass:[PFModelObject class]]) {
+                // source object is a PFModelObject subclass
+                NSString *notificationName = [NSString stringWithFormat:@"modelDidChange%@",[[_sourceObject class] description]];
+                NSNotificationCenter *nc = [NSNotificationCenter defaultCenter];
+                [nc addObserver:self selector:@selector(updateTargetObject) name:notificationName object:nil];
+                
+            } else {
+                // 
+            }
+        } else {
+            // source object is an instance
+            [_sourceObject addObserver:self forKeyPath:_sourceKeyPath options:0 context:nil];
+        }
     }
     
     [self updateTargetObject];
-
+    
 }
 
 - (void)unregisterKvo{
