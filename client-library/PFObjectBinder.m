@@ -12,7 +12,7 @@
 @implementation PFObjectBinder
 
 - (void) updateTargetObject{
-    
+    NSLog(@"updateTarget sourceClass:%@  targetClass:%@",[_sourceObject class], [_targetObject class]);
     if (_sourceObject && _sourceKeyPath && _targetObject && _targetKeyPath) {
         
         id sourceValue = [self.sourceObject valueForKeyPath:self.sourceKeyPath];
@@ -59,7 +59,18 @@
     
 }
 
-
+- (void)resetWithTargetObject:(id)targetObject targetKeyPath:(NSString *)targetKeyPath sourceObject:(id)sourceObject sourceKeyPath:(NSString *)sourceKeyPath{
+    
+    [self unregisterKvo];
+    
+    _targetObject = targetObject;
+    _targetKeyPath = targetKeyPath;
+    _sourceObject = sourceObject;
+    _sourceKeyPath = sourceKeyPath;
+    
+    
+    [self registerKvo];
+}
 
 
 - (PFObjectBinder *)initWithTargetObject:(id)targetObject targetKeyPath:(NSString *)targetKeyPath sourceObject:(id)sourceObject sourceKeyPath:(NSString *)sourceKeyPath{

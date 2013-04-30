@@ -45,6 +45,9 @@
 		6A78CFCA1730441E0037256F /* PFTableViewDataSource.h in Headers */ = {isa = PBXBuildFile; fileRef = 6A78CFC81730441E0037256F /* PFTableViewDataSource.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		6A78CFCB1730441E0037256F /* PFTableViewDataSource.m in Sources */ = {isa = PBXBuildFile; fileRef = 6A78CFC91730441E0037256F /* PFTableViewDataSource.m */; };
 		6A78CFCC1730441E0037256F /* PFTableViewDataSource.m in Sources */ = {isa = PBXBuildFile; fileRef = 6A78CFC91730441E0037256F /* PFTableViewDataSource.m */; };
+		6A78CFCF173062200037256F /* PFBindingTableViewCell.h in Headers */ = {isa = PBXBuildFile; fileRef = 6A78CFCD173062200037256F /* PFBindingTableViewCell.h */; };
+		6A78CFD0173062200037256F /* PFBindingTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 6A78CFCE173062200037256F /* PFBindingTableViewCell.m */; };
+		6A78CFD1173062200037256F /* PFBindingTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 6A78CFCE173062200037256F /* PFBindingTableViewCell.m */; };
 		6A841FDD172AF2EE00A5B768 /* PFObjectBinder.h in Headers */ = {isa = PBXBuildFile; fileRef = 6A841FDB172AF2EE00A5B768 /* PFObjectBinder.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		6A841FDE172AF2EE00A5B768 /* PFObjectBinder.m in Sources */ = {isa = PBXBuildFile; fileRef = 6A841FDC172AF2EE00A5B768 /* PFObjectBinder.m */; };
 		6A841FDF172AF2EE00A5B768 /* PFObjectBinder.m in Sources */ = {isa = PBXBuildFile; fileRef = 6A841FDC172AF2EE00A5B768 /* PFObjectBinder.m */; };
@@ -268,6 +271,8 @@
 		6A729BF61725E6FB001F4BB8 /* FindByExampleResponse.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FindByExampleResponse.m; sourceTree = "<group>"; };
 		6A78CFC81730441E0037256F /* PFTableViewDataSource.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PFTableViewDataSource.h; sourceTree = "<group>"; };
 		6A78CFC91730441E0037256F /* PFTableViewDataSource.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PFTableViewDataSource.m; sourceTree = "<group>"; };
+		6A78CFCD173062200037256F /* PFBindingTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PFBindingTableViewCell.h; sourceTree = "<group>"; };
+		6A78CFCE173062200037256F /* PFBindingTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PFBindingTableViewCell.m; sourceTree = "<group>"; };
 		6A841FDB172AF2EE00A5B768 /* PFObjectBinder.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PFObjectBinder.h; sourceTree = "<group>"; };
 		6A841FDC172AF2EE00A5B768 /* PFObjectBinder.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PFObjectBinder.m; sourceTree = "<group>"; };
 		6A87F7CF1721D6E200FDCDBE /* IUserIdentifier.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IUserIdentifier.h; sourceTree = "<group>"; };
@@ -709,6 +714,8 @@
 		F2721E8D15C9B1D00040FC3E /* Controller */ = {
 			isa = PBXGroup;
 			children = (
+				6A78CFCD173062200037256F /* PFBindingTableViewCell.h */,
+				6A78CFCE173062200037256F /* PFBindingTableViewCell.m */,
 				6A841FDB172AF2EE00A5B768 /* PFObjectBinder.h */,
 				6A841FDC172AF2EE00A5B768 /* PFObjectBinder.m */,
 				F2721EB615C9B20E0040FC3E /* EntityManager.h */,
@@ -943,6 +950,7 @@
 				6A729BEF1725BA10001F4BB8 /* ModelUtility.h in Headers */,
 				6A729BF21725CE74001F4BB8 /* FindByExampleRequest.h in Headers */,
 				6A729BF71725E6FC001F4BB8 /* FindByExampleResponse.h in Headers */,
+				6A78CFCF173062200037256F /* PFBindingTableViewCell.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1160,6 +1168,7 @@
 				6A729BF81725E6FC001F4BB8 /* FindByExampleResponse.m in Sources */,
 				6A841FDE172AF2EE00A5B768 /* PFObjectBinder.m in Sources */,
 				6A78CFCB1730441E0037256F /* PFTableViewDataSource.m in Sources */,
+				6A78CFD0173062200037256F /* PFBindingTableViewCell.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1193,6 +1202,7 @@
 				6A729BF91725E6FC001F4BB8 /* FindByExampleResponse.m in Sources */,
 				6A841FDF172AF2EE00A5B768 /* PFObjectBinder.m in Sources */,
 				6A78CFCC1730441E0037256F /* PFTableViewDataSource.m in Sources */,
+				6A78CFD1173062200037256F /* PFBindingTableViewCell.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

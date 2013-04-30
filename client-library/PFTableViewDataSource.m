@@ -7,6 +7,7 @@
 //
 
 #import "PFTableViewDataSource.h"
+#import "PFBindingTableViewCell.h"
 
 @interface PFTableViewDataSource ()
 
@@ -23,13 +24,20 @@
     NSArray *cellsArray = [sectionObject valueForKeyPath:_keyPathForCellsArray];
     id cellObject = cellsArray[indexPath.row];
     
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:_keyPathForCellsArray];
+    PFBindingTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:_keyPathForCellsArray];
     if (!cell) {
-        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:_keyPathForCellsArray];
+        cell = [[PFBindingTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:_keyPathForCellsArray];
+        
+    }
+    if (!cell.objectBinder) {
+        cell.objectBinder = [[PFObjectBinder alloc] init];
     }
     
-    cell.textLabel.text = [cellObject valueForKeyPath:_keyPathForCellLabelText];
-    
+    [cell.objectBinder resetWithTargetObject:cell targetKeyPath:@"textLabel.text" sourceObject:cellObject sourceKeyPath:_keyPathForSectionLabelText];
+    if (!cell.textLabel.text) {
+        cell.textLabel.text = @".";
+    }
+
     return cell;
 }
 
@@ -77,5 +85,8 @@
     PFTableViewDataSource *result = [[PFTableViewDataSource alloc] initWithAnchorObject:anchorObject keyPathForSectionsArray:keyPathForSectionsArray keyPathForCellsArray:keyPathForCellsArray keyPathForSectionLabelText:keyPathForSectionLabelText keyPathForCellLabelText:keyPathForCellLabelText sectionMode:sectionMode];
     return result;
 }
-
+- (void)setAnchorObject:(id)anchorObject{
+    _anchorObject = anchorObject;
+    
+}
 @end

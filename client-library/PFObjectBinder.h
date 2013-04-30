@@ -16,5 +16,5 @@
 @property (strong, nonatomic) NSString *sourceKeyPath;
 
 - (PFObjectBinder *)initWithTargetObject:(id) targetObject targetKeyPath:(NSString *) targetKeyPath sourceObject:(id) sourceObject sourceKeyPath:(NSString *) sourceKeyPath;
-
+- (void) resetWithTargetObject:(id) targetObject targetKeyPath:(NSString *) targetKeyPath sourceObject:(id) sourceObject sourceKeyPath:(NSString *) sourceKeyPath;
 @end
