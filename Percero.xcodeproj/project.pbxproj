@@ -42,6 +42,9 @@
 		6A729BF71725E6FC001F4BB8 /* FindByExampleResponse.h in Headers */ = {isa = PBXBuildFile; fileRef = 6A729BF51725E6FB001F4BB8 /* FindByExampleResponse.h */; };
 		6A729BF81725E6FC001F4BB8 /* FindByExampleResponse.m in Sources */ = {isa = PBXBuildFile; fileRef = 6A729BF61725E6FB001F4BB8 /* FindByExampleResponse.m */; };
 		6A729BF91725E6FC001F4BB8 /* FindByExampleResponse.m in Sources */ = {isa = PBXBuildFile; fileRef = 6A729BF61725E6FB001F4BB8 /* FindByExampleResponse.m */; };
+		6A78CFCA1730441E0037256F /* PFTableSectionData.h in Headers */ = {isa = PBXBuildFile; fileRef = 6A78CFC81730441E0037256F /* PFTableSectionData.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		6A78CFCB1730441E0037256F /* PFTableSectionData.m in Sources */ = {isa = PBXBuildFile; fileRef = 6A78CFC91730441E0037256F /* PFTableSectionData.m */; };
+		6A78CFCC1730441E0037256F /* PFTableSectionData.m in Sources */ = {isa = PBXBuildFile; fileRef = 6A78CFC91730441E0037256F /* PFTableSectionData.m */; };
 		6A841FDD172AF2EE00A5B768 /* PFObjectBinder.h in Headers */ = {isa = PBXBuildFile; fileRef = 6A841FDB172AF2EE00A5B768 /* PFObjectBinder.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		6A841FDE172AF2EE00A5B768 /* PFObjectBinder.m in Sources */ = {isa = PBXBuildFile; fileRef = 6A841FDC172AF2EE00A5B768 /* PFObjectBinder.m */; };
 		6A841FDF172AF2EE00A5B768 /* PFObjectBinder.m in Sources */ = {isa = PBXBuildFile; fileRef = 6A841FDC172AF2EE00A5B768 /* PFObjectBinder.m */; };
@@ -263,6 +266,8 @@
 		6A729BF11725CE74001F4BB8 /* FindByExampleRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = FindByExampleRequest.m; path = model/FindByExampleRequest.m; sourceTree = "<group>"; };
 		6A729BF51725E6FB001F4BB8 /* FindByExampleResponse.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FindByExampleResponse.h; sourceTree = "<group>"; };
 		6A729BF61725E6FB001F4BB8 /* FindByExampleResponse.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FindByExampleResponse.m; sourceTree = "<group>"; };
+		6A78CFC81730441E0037256F /* PFTableSectionData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PFTableSectionData.h; sourceTree = "<group>"; };
+		6A78CFC91730441E0037256F /* PFTableSectionData.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PFTableSectionData.m; sourceTree = "<group>"; };
 		6A841FDB172AF2EE00A5B768 /* PFObjectBinder.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PFObjectBinder.h; sourceTree = "<group>"; };
 		6A841FDC172AF2EE00A5B768 /* PFObjectBinder.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PFObjectBinder.m; sourceTree = "<group>"; };
 		6A87F7CF1721D6E200FDCDBE /* IUserIdentifier.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IUserIdentifier.h; sourceTree = "<group>"; };
@@ -718,6 +723,8 @@
 				6A3435DD171DD2DB00EEA040 /* PFAuthManager.m */,
 				6A3435E1171DF54700EEA040 /* PFGitHubOauthViewController.h */,
 				6A3435E2171DF54700EEA040 /* PFGitHubOauthViewController.m */,
+				6A78CFC81730441E0037256F /* PFTableSectionData.h */,
+				6A78CFC91730441E0037256F /* PFTableSectionData.m */,
 			);
 			name = Controller;
 			sourceTree = "<group>";
@@ -850,6 +857,7 @@
 				F2721EED15C9B20E0040FC3E /* _Super_ServiceApplicationOAuth.h in Headers */,
 				F2721EEF15C9B20E0040FC3E /* _Super_User.h in Headers */,
 				F2721EF115C9B20E0040FC3E /* _Super_UserAccount.h in Headers */,
+				6A78CFCA1730441E0037256F /* PFTableSectionData.h in Headers */,
 				F2721EF315C9B20E0040FC3E /* _Super_UserToken.h in Headers */,
 				F8811B3416F3F2F8004C2437 /* PFGoogleOauth.h in Headers */,
 				F2721EF915C9B20E0040FC3E /* AuthenticateOAuthAccessTokenResponse.h in Headers */,
@@ -1151,6 +1159,7 @@
 				6A729BF31725CE74001F4BB8 /* FindByExampleRequest.m in Sources */,
 				6A729BF81725E6FC001F4BB8 /* FindByExampleResponse.m in Sources */,
 				6A841FDE172AF2EE00A5B768 /* PFObjectBinder.m in Sources */,
+				6A78CFCB1730441E0037256F /* PFTableSectionData.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1183,6 +1192,7 @@
 				6A729BF41725CE74001F4BB8 /* FindByExampleRequest.m in Sources */,
 				6A729BF91725E6FC001F4BB8 /* FindByExampleResponse.m in Sources */,
 				6A841FDF172AF2EE00A5B768 /* PFObjectBinder.m in Sources */,
+				6A78CFCC1730441E0037256F /* PFTableSectionData.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
