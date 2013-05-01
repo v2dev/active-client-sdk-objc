@@ -29,15 +29,17 @@
         cell = [[PFBindingTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:_keyPathForCellsArray];
         
     }
-    if (!cell.objectBinder) {
-        cell.objectBinder = [[PFObjectBinder alloc] init];
-    }
-    
-    [cell.objectBinder resetWithTargetObject:cell targetKeyPath:@"textLabel.text" sourceObject:cellObject sourceKeyPath:_keyPathForSectionLabelText];
-    if (!cell.textLabel.text) {
-        cell.textLabel.text = @".";
-    }
+//    if (!cell.objectBinder) {
+//        cell.objectBinder = [[PFObjectBinder alloc] init];
+//    }
+//    
+//    [cell.objectBinder resetWithTargetObject:cell targetKeyPath:@"textLabel.text" sourceObject:cellObject sourceKeyPath:_keyPathForSectionLabelText];
+//    if (!cell.textLabel.text) {
+//        cell.textLabel.text = @".";
+//    }
+    cell.keyPathForAnchorObjectLabelString = _keyPathForCellLabelText;
 
+    cell.anchorObject = cellObject;
     return cell;
 }
 

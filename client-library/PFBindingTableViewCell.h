@@ -6,8 +6,10 @@
 //
 //
 
-#import <UIKit/UITableView.h>
+#import <UIKit/UIKit.h>
 #import "PFObjectBinder.h"
 @interface PFBindingTableViewCell : UITableViewCell
-@property (nonatomic, strong) PFObjectBinder *objectBinder;
+@property (nonatomic, weak) id anchorObject;
+@property (nonatomic, strong) NSString *keyPathForAnchorObjectLabelString;
+@property (nonatomic, strong) PFObjectBinder *anchorObjectBinder;
 @end
