@@ -17,7 +17,13 @@
 
 
 @implementation PFTableViewDataSource
-
+- (void)setPfBindingTableViewCellSubclass:(Class)pfBindingTableViewCellSubclass{
+    if ([pfBindingTableViewCellSubclass isSubclassOfClass:[PFBindingTableViewCell class]]) {
+        _pfBindingTableViewCellSubclass = pfBindingTableViewCellSubclass;
+    } else {
+        [NSException exceptionWithName:@"PFTableViewDataSource" reason:@"pfBindingTableViewCellSubclass myst be a subclass of PFBindingTableViewCell" userInfo:@{@"pfBindingTableViewCellSubclass":pfBindingTableViewCellSubclass}];
+    }
+}
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
     NSArray *sectionsArray = [_anchorObject valueForKeyPath:_keyPathForSectionsArray];
     id sectionObject = sectionsArray[indexPath.section];
@@ -26,7 +32,7 @@
     
     PFBindingTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:_keyPathForCellsArray];
     if (!cell) {
-        cell = [[PFBindingTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:_keyPathForCellsArray];
+        cell = [[_pfBindingTableViewCellSubclass alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:_keyPathForCellsArray];
         
     }
 //    if (!cell.objectBinder) {
@@ -64,6 +70,14 @@
     return numberOfSections;
 }
 #pragma mark
+
+- (id)init{
+    if (self = [super init]);{
+        _pfBindingTableViewCellSubclass = [PFBindingTableViewCell class];
+    }
+    return self;
+}
+
 - (id) initWithAnchorObject:(id)anchorObject
     keyPathForSectionsArray:(NSString *)keyPathForSectionsArray
        keyPathForCellsArray:(NSString *)keyPathForCellsArray

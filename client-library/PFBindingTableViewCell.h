@@ -12,4 +12,6 @@
 @property (nonatomic, weak) id anchorObject;
 @property (nonatomic, strong) NSString *keyPathForAnchorObjectLabelString;
 @property (nonatomic, strong) PFObjectBinder *anchorObjectBinder;
+- (void) resetData;
+
 @end

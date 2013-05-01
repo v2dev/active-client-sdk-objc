@@ -19,11 +19,11 @@ typedef enum {
 @property (weak, nonatomic) id anchorObject;
 @property (strong, nonatomic) NSString *keyPathForSectionsArray;
 @property (strong, nonatomic) NSString *keyPathForCellsArray;
-
 @property (strong, nonatomic) NSString *keyPathForSectionLabelText;
 @property (strong, nonatomic) NSString *keyPathForCellLabelText;
 @property (assign, nonatomic) PFTableViewDataSourceMode sectionMode;
 
+@property (strong, nonatomic) Class pfBindingTableViewCellSubclass;
 
 + (PFTableViewDataSource *)TableSectionDataWithAnchorObject:(id) anchorObject
                                  keyPathForSectionsArray:(NSString *) keyPathForSectionsArray
