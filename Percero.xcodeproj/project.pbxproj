@@ -45,7 +45,7 @@
 		6A78CFCA1730441E0037256F /* PFTableViewDataSource.h in Headers */ = {isa = PBXBuildFile; fileRef = 6A78CFC81730441E0037256F /* PFTableViewDataSource.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		6A78CFCB1730441E0037256F /* PFTableViewDataSource.m in Sources */ = {isa = PBXBuildFile; fileRef = 6A78CFC91730441E0037256F /* PFTableViewDataSource.m */; };
 		6A78CFCC1730441E0037256F /* PFTableViewDataSource.m in Sources */ = {isa = PBXBuildFile; fileRef = 6A78CFC91730441E0037256F /* PFTableViewDataSource.m */; };
-		6A78CFCF173062200037256F /* PFBindingTableViewCell.h in Headers */ = {isa = PBXBuildFile; fileRef = 6A78CFCD173062200037256F /* PFBindingTableViewCell.h */; };
+		6A78CFCF173062200037256F /* PFBindingTableViewCell.h in Headers */ = {isa = PBXBuildFile; fileRef = 6A78CFCD173062200037256F /* PFBindingTableViewCell.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		6A78CFD0173062200037256F /* PFBindingTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 6A78CFCE173062200037256F /* PFBindingTableViewCell.m */; };
 		6A78CFD1173062200037256F /* PFBindingTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 6A78CFCE173062200037256F /* PFBindingTableViewCell.m */; };
 		6A841FDD172AF2EE00A5B768 /* PFObjectBinder.h in Headers */ = {isa = PBXBuildFile; fileRef = 6A841FDB172AF2EE00A5B768 /* PFObjectBinder.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -882,6 +882,7 @@
 				6A3435E3171DF54700EEA040 /* PFGitHubOauthViewController.h in Headers */,
 				6A841FDD172AF2EE00A5B768 /* PFObjectBinder.h in Headers */,
 				6ACA5BCC16E8FFFE00CB8FBD /* IUserAnchor.h in Headers */,
+				6A78CFCF173062200037256F /* PFBindingTableViewCell.h in Headers */,
 				F2721F0515C9B20E0040FC3E /* EntityManager.h in Headers */,
 				F2721F0915C9B20E0040FC3E /* FindByIdRequest.h in Headers */,
 				F2721F0B15C9B20E0040FC3E /* FindByIdResponse.h in Headers */,
@@ -950,7 +951,6 @@
 				6A729BEF1725BA10001F4BB8 /* ModelUtility.h in Headers */,
 				6A729BF21725CE74001F4BB8 /* FindByExampleRequest.h in Headers */,
 				6A729BF71725E6FC001F4BB8 /* FindByExampleResponse.h in Headers */,
-				6A78CFCF173062200037256F /* PFBindingTableViewCell.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
