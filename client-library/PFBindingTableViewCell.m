@@ -9,45 +9,72 @@
 #import "PFBindingTableViewCell.h"
 
 @implementation PFBindingTableViewCell
-- (void)setAnchorObject:(id)anchorObject{
 
+- (void)setDataObject:(id)dataObject{
+    _anchorObjectBinder = nil;
+    _dataObject = dataObject;
+    NSString *labelKeyPath = @"textLabel.text";
+    NSString *sourceKeypath = [NSString stringWithFormat:@"dataObject.%@", _keyPathForDataObjectLabelString];
 
-    [self willChangeValueForKey:@"anchorObject"];
-    _anchorObject = anchorObject;
-    [self didChangeValueForKey:@"anchorObject"];
-    
-    if ([self isMemberOfClass:[PFBindingTableViewCell class]]) {
-        
-        self.anchorObjectBinder.sourceObject = _anchorObject;
-    }
-
-    [self resetData];
+    _anchorObjectBinder = [[PFObjectBinder alloc] initWithTargetObject:self targetKeyPath:labelKeyPath sourceObject:self sourceKeyPath:sourceKeypath];
 }
 
 - (PFObjectBinder *)anchorObjectBinder{
     if (!_anchorObjectBinder) {
-        if ([self isMemberOfClass:[PFBindingTableViewCell class]]) {
-            NSString *labelKeyPath = @"textLabel.text";
-            _anchorObjectBinder = [[PFObjectBinder alloc] initWithTargetObject:self targetKeyPath:labelKeyPath sourceObject:self.anchorObject sourceKeyPath:_keyPathForAnchorObjectLabelString];
-        } else {
             _anchorObjectBinder = [[PFObjectBinder alloc] init];
-        }
+        
     }
     return _anchorObjectBinder;
 }
-
-- (void) resetData {
+- (NSMutableSet *)binders{
     
-    
-    
-    if ([self isMemberOfClass:[PFBindingTableViewCell class]]) {
-       
-        if (!self.textLabel.text) {
-            self.textLabel.text = @".";
-        }
+    if (!_binders) {
+        _binders = [[NSMutableSet alloc] init];
     }
-    
-
-
+    return _binders;
 }
+
+- (id)initWithkeyPathForAnchorObjectLabelString:(NSString *)keyPathForAnchorObjectLabelString{
+
+    if ([self isMemberOfClass:[PFBindingTableViewCell class]]) {
+        _keyPathForDataObjectLabelString = keyPathForAnchorObjectLabelString;
+        if (self = [super initWithStyle:UITableViewCellStyleDefault reuseIdentifier:[[self class]description]]) {
+            NSString *labelKeyPath = @"textLabel.text";
+            
+            NSString *sourceKeypath = [NSString stringWithFormat:@"dataObject.%@", _keyPathForDataObjectLabelString];
+            
+            _anchorObjectBinder = [[PFObjectBinder alloc] initWithTargetObject:self targetKeyPath:labelKeyPath sourceObject:self sourceKeyPath:sourceKeypath];
+        }
+        
+        
+    }
+    return self;
+}
+
+- (void)willMoveToSuperview:(UIView *)newSuperview{
+    if (!newSuperview) {
+        
+        for (PFObjectBinder *binder in self.binders) {
+            [binder unregisterKvo];
+        }
+        
+    } else {
+        NSString *labelKeyPath = @"textLabel.text";
+        NSString *sourceKeypath = [NSString stringWithFormat:@"dataObject.%@", _keyPathForDataObjectLabelString];
+        
+        [_anchorObjectBinder resetWithTargetObject:self targetKeyPath:labelKeyPath sourceObject:self sourceKeyPath:sourceKeypath];
+
+    }
+}
+
+- (void)dealloc{
+    DLog(@"self.anchorObjectBinder:%@",self.anchorObjectBinder);
+    [_binders removeAllObjects];
+    DLog(@"PFTableViewCell will unregisterKVO");
+    [self.anchorObjectBinder unregisterKvo];
+    DLog(@"PFTableViewCell did unregisterKVO");
+
+    
+}
+
 @end

@@ -9,9 +9,10 @@
 #import <UIKit/UIKit.h>
 #import "PFObjectBinder.h"
 @interface PFBindingTableViewCell : UITableViewCell
-@property (nonatomic, weak) id anchorObject;
-@property (nonatomic, strong) NSString *keyPathForAnchorObjectLabelString;
+@property (nonatomic, weak) id dataObject;
+@property (nonatomic, strong) NSString *keyPathForDataObjectLabelString;
+@property (nonatomic, strong) NSMutableSet *binders;
 @property (nonatomic, strong) PFObjectBinder *anchorObjectBinder;
-- (void) resetData;
+- (id) initWithkeyPathForAnchorObjectLabelString:(NSString *) keyPathForAnchorObjectLabelString;
 
 @end

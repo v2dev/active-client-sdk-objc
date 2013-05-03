@@ -30,9 +30,9 @@
     NSArray *cellsArray = [sectionObject valueForKeyPath:_keyPathForCellsArray];
     id cellObject = cellsArray[indexPath.row];
     
-    PFBindingTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:_keyPathForCellsArray];
+    PFBindingTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:[[_pfBindingTableViewCellSubclass class]description]];
     if (!cell) {
-        cell = [[_pfBindingTableViewCellSubclass alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:_keyPathForCellsArray];
+        cell = [[_pfBindingTableViewCellSubclass alloc] initWithkeyPathForAnchorObjectLabelString:self.keyPathForCellLabelText];
         
     }
 //    if (!cell.objectBinder) {
@@ -43,9 +43,9 @@
 //    if (!cell.textLabel.text) {
 //        cell.textLabel.text = @".";
 //    }
-    cell.keyPathForAnchorObjectLabelString = _keyPathForCellLabelText;
+//    cell.keyPathForDataObjectLabelString = _keyPathForCellLabelText;
 
-    cell.anchorObject = cellObject;
+    cell.dataObject = cellObject;
     return cell;
 }
 
