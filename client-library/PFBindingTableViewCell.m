@@ -34,6 +34,13 @@
     return _binders;
 }
 
+- (id)initWithDataObject:(id)dataObject{
+    if (self = [self init]) {
+        _dataObject = dataObject;
+    }
+    return  self;
+}
+
 - (id)initWithkeyPathForAnchorObjectLabelString:(NSString *)keyPathForAnchorObjectLabelString{
 
     if ([self isMemberOfClass:[PFBindingTableViewCell class]]) {

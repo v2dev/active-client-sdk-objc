@@ -32,20 +32,19 @@
     
     PFBindingTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:[[_pfBindingTableViewCellSubclass class]description]];
     if (!cell) {
-        cell = [[_pfBindingTableViewCellSubclass alloc] initWithkeyPathForAnchorObjectLabelString:self.keyPathForCellLabelText];
-        
-    }
-//    if (!cell.objectBinder) {
-//        cell.objectBinder = [[PFObjectBinder alloc] init];
-//    }
-//    
-//    [cell.objectBinder resetWithTargetObject:cell targetKeyPath:@"textLabel.text" sourceObject:cellObject sourceKeyPath:_keyPathForSectionLabelText];
-//    if (!cell.textLabel.text) {
-//        cell.textLabel.text = @".";
-//    }
-//    cell.keyPathForDataObjectLabelString = _keyPathForCellLabelText;
+        if (self.pfBindingTableViewCellSubclass == [PFBindingTableViewCell class]) {
+            cell = [[_pfBindingTableViewCellSubclass alloc] initWithkeyPathForAnchorObjectLabelString:self.keyPathForCellLabelText];
+            if (!cell.textLabel.text) cell.textLabel.text = @".";
 
-    cell.dataObject = cellObject;
+        } else {
+            cell = [[_pfBindingTableViewCellSubclass alloc] initWithDataObject:cellObject];
+            if (!cell.textLabel.text) cell.textLabel.text = @".";
+        }
+        
+    } else {
+        cell.dataObject = cellObject;
+    }
+
     return cell;
 }
 

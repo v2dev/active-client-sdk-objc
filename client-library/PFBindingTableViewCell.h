@@ -14,5 +14,5 @@
 @property (nonatomic, strong) NSMutableSet *binders;
 @property (nonatomic, strong) PFObjectBinder *anchorObjectBinder;
 - (id) initWithkeyPathForAnchorObjectLabelString:(NSString *) keyPathForAnchorObjectLabelString;
-
+- (id) initWithDataObject:(id) dataObject;
 @end
