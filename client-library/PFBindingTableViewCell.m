@@ -35,8 +35,15 @@
 }
 
 - (id)initWithDataObject:(id)dataObject{
-    if (self = [self init]) {
-        _dataObject = dataObject;
+    if ([self isMemberOfClass:[PFBindingTableViewCell class]]) {
+        
+        if (self = [self init]) {
+            _dataObject = dataObject;
+        }
+    } else {
+        if (self = [super init]) {
+            _dataObject = dataObject;
+        }
     }
     return  self;
 }
