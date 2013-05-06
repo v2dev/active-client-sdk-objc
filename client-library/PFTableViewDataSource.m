@@ -25,25 +25,35 @@
     }
 }
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
-    NSArray *sectionsArray = [_anchorObject valueForKeyPath:_keyPathForSectionsArray];
-    id sectionObject = sectionsArray[indexPath.section];
-    NSArray *cellsArray = [sectionObject valueForKeyPath:_keyPathForCellsArray];
-    id cellObject = cellsArray[indexPath.row];
+    NSArray *cellsArray;
     
+    
+    if (_keyPathForCellsArray) {
+        NSArray *sectionsArray = [_anchorObject valueForKeyPath:_keyPathForSectionsArray];
+        id sectionObject = sectionsArray[indexPath.section];
+        cellsArray = [sectionObject valueForKeyPath:_keyPathForCellsArray];
+
+    } else {
+        cellsArray = [_anchorObject valueForKeyPath:_keyPathForCellsArray];
+    }
+    
+    id cellObject = cellsArray[indexPath.row];
+
     PFBindingTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:[[_pfBindingTableViewCellSubclass class]description]];
     if (!cell) {
         if (self.pfBindingTableViewCellSubclass == [PFBindingTableViewCell class]) {
             cell = [[_pfBindingTableViewCellSubclass alloc] initWithkeyPathForAnchorObjectLabelString:self.keyPathForCellLabelText];
-            if (!cell.textLabel.text) cell.textLabel.text = @".";
 
         } else {
             cell = [[_pfBindingTableViewCellSubclass alloc] initWithDataObject:cellObject];
-            if (!cell.textLabel.text) cell.textLabel.text = @".";
         }
         
-    } else {
-        cell.dataObject = cellObject;
+        if (!cell.textLabel.text) cell.textLabel.text = @".";
+
     }
+    
+    cell.dataObject = cellObject;
+    
 
     return cell;
 }
@@ -93,6 +103,7 @@ pfBindingTableViewCellSubclass: (Class) pfBindingTableViewCellSubclass
         _keyPathForCellsArray = keyPathForCellsArray;
         _keyPathForSectionLabelText = keyPathForSectionLabelText;
         _keyPathForCellLabelText = keyPathForCellLabelText;
+        
         
     }
     
