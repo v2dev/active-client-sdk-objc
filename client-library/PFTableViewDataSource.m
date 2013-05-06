@@ -73,19 +73,23 @@
 
 - (id)init{
     if (self = [super init]);{
-        _pfBindingTableViewCellSubclass = [PFBindingTableViewCell class];
+
     }
     return self;
 }
 
 - (id) initWithAnchorObject:(id)anchorObject
+pfBindingTableViewCellSubclass: (Class) pfBindingTableViewCellSubclass
     keyPathForSectionsArray:(NSString *)keyPathForSectionsArray
        keyPathForCellsArray:(NSString *)keyPathForCellsArray
  keyPathForSectionLabelText:(NSString *)keyPathForSectionLabelText
     keyPathForCellLabelText:(NSString *)keyPathForCellLabelText
-               sectionMode:(PFTableViewDataSourceMode)sectionMode{
+                sectionMode:(PFTableViewDataSourceMode)sectionMode{
     if (self = [self init]) {
         _anchorObject = anchorObject;
+        _pfBindingTableViewCellSubclass = pfBindingTableViewCellSubclass;
+        if (!_pfBindingTableViewCellSubclass){ _pfBindingTableViewCellSubclass = [PFBindingTableViewCell class];
+        }
         _keyPathForSectionsArray = keyPathForSectionsArray;
         _keyPathForCellsArray = keyPathForCellsArray;
         _keyPathForSectionLabelText = keyPathForSectionLabelText;
@@ -96,9 +100,9 @@
     return self;
 }
 
-+ (PFTableViewDataSource *)TableSectionDataWithAnchorObject:(id)anchorObject keyPathForSectionsArray:(NSString *)keyPathForSectionsArray keyPathForCellsArray:(NSString *)keyPathForCellsArray keyPathForSectionLabelText:(NSString *)keyPathForSectionLabelText keyPathForCellLabelText:(NSString *)keyPathForCellLabelText sectionMode:(PFTableViewDataSourceMode)sectionMode{
++ (PFTableViewDataSource *)TableSectionDataWithAnchorObject:(id)anchorObject pfBindingTableViewCellSubclass:(Class)pfBindingTableViewCellSubclass keyPathForSectionsArray:(NSString *)keyPathForSectionsArray keyPathForCellsArray:(NSString *)keyPathForCellsArray keyPathForSectionLabelText:(NSString *)keyPathForSectionLabelText keyPathForCellLabelText:(NSString *)keyPathForCellLabelText sectionMode:(PFTableViewDataSourceMode)sectionMode {
     
-    PFTableViewDataSource *result = [[PFTableViewDataSource alloc] initWithAnchorObject:anchorObject keyPathForSectionsArray:keyPathForSectionsArray keyPathForCellsArray:keyPathForCellsArray keyPathForSectionLabelText:keyPathForSectionLabelText keyPathForCellLabelText:keyPathForCellLabelText sectionMode:sectionMode];
+    PFTableViewDataSource *result = [[PFTableViewDataSource alloc] initWithAnchorObject:anchorObject pfBindingTableViewCellSubclass:pfBindingTableViewCellSubclass keyPathForSectionsArray:keyPathForSectionsArray keyPathForCellsArray:keyPathForCellsArray keyPathForSectionLabelText:keyPathForSectionLabelText keyPathForCellLabelText:keyPathForCellLabelText sectionMode:sectionMode];
     return result;
 }
 - (void)setAnchorObject:(id)anchorObject{

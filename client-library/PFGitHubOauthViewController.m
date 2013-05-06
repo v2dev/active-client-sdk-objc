@@ -25,7 +25,7 @@
 @implementation PFGitHubOauthViewController
 
 - (void) gotACode{
-    self.transitionView;  // alloc, init, bring to the top, do fun stuff
+//    self.transitionView;  // alloc, init, bring to the top, do fun stuff
 }
 
 

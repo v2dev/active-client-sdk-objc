@@ -26,9 +26,10 @@ typedef enum {
 @property (strong, nonatomic) Class pfBindingTableViewCellSubclass;
 
 + (PFTableViewDataSource *)TableSectionDataWithAnchorObject:(id) anchorObject
-                                 keyPathForSectionsArray:(NSString *) keyPathForSectionsArray
-                                    keyPathForCellsArray:(NSString *) keyPathForCellsArray
-                              keyPathForSectionLabelText:(NSString *) keyPathForSectionLabelText
-                              keyPathForCellLabelText:(NSString *) keyPathForCellLabelText
-                                            sectionMode:(PFTableViewDataSourceMode) sectionMode;
+                             pfBindingTableViewCellSubclass: (Class) pfBindingTableViewCellSubclass
+                                    keyPathForSectionsArray:(NSString *) keyPathForSectionsArray
+                                       keyPathForCellsArray:(NSString *) keyPathForCellsArray
+                                 keyPathForSectionLabelText:(NSString *) keyPathForSectionLabelText
+                                    keyPathForCellLabelText:(NSString *) keyPathForCellLabelText
+                                                sectionMode:(PFTableViewDataSourceMode) sectionMode;
 @end
