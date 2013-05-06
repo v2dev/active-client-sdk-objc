@@ -10,14 +10,14 @@
 
 @implementation PFBindingTableViewCell
 
-- (void)setDataObject:(id)dataObject{
-    _anchorObjectBinder = nil;
-    _dataObject = dataObject;
-    NSString *labelKeyPath = @"textLabel.text";
-    NSString *sourceKeypath = [NSString stringWithFormat:@"dataObject.%@", _keyPathForDataObjectLabelString];
-
-    _anchorObjectBinder = [[PFObjectBinder alloc] initWithTargetObject:self targetKeyPath:labelKeyPath sourceObject:self sourceKeyPath:sourceKeypath];
-}
+//- (void)setDataObject:(id)dataObject{
+////    _anchorObjectBinder = nil;
+//    _dataObject = dataObject;
+//    NSString *labelKeyPath = @"textLabel.text";
+//    NSString *sourceKeypath = [NSString stringWithFormat:@"dataObject.%@", _keyPathForDataObjectLabelString];
+//
+////    _anchorObjectBinder = [[PFObjectBinder alloc] initWithTargetObject:self targetKeyPath:labelKeyPath sourceObject:self sourceKeyPath:sourceKeypath];
+//}
 
 - (PFObjectBinder *)anchorObjectBinder{
     if (!_anchorObjectBinder) {
