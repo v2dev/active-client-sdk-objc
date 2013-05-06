@@ -17,6 +17,20 @@
 
 
 @implementation PFTableViewDataSource
+
+- (NSArray *) tableView:(UITableView *)tableView rowsArrayForSection:(NSInteger)section{
+    NSArray *cellsArray;
+    if (_keyPathForCellsArray) {
+        NSArray *sectionsArray = [_anchorObject valueForKeyPath:_keyPathForSectionsArray];
+        id sectionObject = sectionsArray[section];
+        cellsArray = [sectionObject valueForKeyPath:_keyPathForCellsArray];
+        
+    } else {
+        cellsArray = [_anchorObject valueForKeyPath:_keyPathForCellsArray];
+    }
+    return cellsArray;
+}
+
 - (void)setPfBindingTableViewCellSubclass:(Class)pfBindingTableViewCellSubclass{
     if ([pfBindingTableViewCellSubclass isSubclassOfClass:[PFBindingTableViewCell class]]) {
         _pfBindingTableViewCellSubclass = pfBindingTableViewCellSubclass;
@@ -27,16 +41,8 @@
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
     NSArray *cellsArray;
     
-    
-    if (_keyPathForCellsArray) {
-        NSArray *sectionsArray = [_anchorObject valueForKeyPath:_keyPathForSectionsArray];
-        id sectionObject = sectionsArray[indexPath.section];
-        cellsArray = [sectionObject valueForKeyPath:_keyPathForCellsArray];
-
-    } else {
-        cellsArray = [_anchorObject valueForKeyPath:_keyPathForCellsArray];
-    }
-    
+    cellsArray = [self tableView:tableView rowsArrayForSection:indexPath.section];
+        
     id cellObject = cellsArray[indexPath.row];
 
     PFBindingTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:[[_pfBindingTableViewCellSubclass class]description]];
@@ -70,9 +76,11 @@
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
-    NSArray *sectionsArray = [_anchorObject valueForKeyPath:_keyPathForSectionsArray];
-    id sectionObject = sectionsArray[section];
-    NSArray *cellsArray = [sectionObject valueForKeyPath:_keyPathForCellsArray];
+ 
+    NSArray *cellsArray;
+    
+    cellsArray = [self tableView:tableView rowsArrayForSection:section];
+
     NSInteger numberOfCells = cellsArray.count;
     return numberOfCells;
 }
