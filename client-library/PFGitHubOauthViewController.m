@@ -25,7 +25,14 @@
 @implementation PFGitHubOauthViewController
 
 - (void) gotACode{
-//    self.transitionView;  // alloc, init, bring to the top, do fun stuff
+    // The PFOauthCompletedView nib shouold be in the client app, if not then use the default "Got a Code" meessage
+    
+    NSString *path = [[NSBundle mainBundle] pathForResource:@"PFOauthCompletedView" ofType:@"nib"];
+    
+    if (path){
+        self.transitionView = [[[NSBundle mainBundle] loadNibNamed:@"PFOauthCompletedView" owner:nil options:nil] lastObject];
+        [self.view addSubview:self.transitionView];
+    }
 }
 
 
