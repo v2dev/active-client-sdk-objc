@@ -59,6 +59,10 @@
 }
 
 - (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section{
+    if (!_keyPathForSectionsArray) {
+        return nil;
+    }
+    
     NSArray *sectionsArray = [_anchorObject valueForKeyPath:_keyPathForSectionsArray];
     id sectionObject = sectionsArray[section];
     NSString *sectionTitle = [sectionObject valueForKeyPath:_keyPathForSectionLabelText];
@@ -74,8 +78,12 @@
 }
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView{
-    NSArray *sectionsArray = [_anchorObject valueForKeyPath:_keyPathForSectionsArray];
-    NSInteger numberOfSections = sectionsArray.count;
+    NSInteger numberOfSections = 1;
+    if (_keyPathForSectionsArray) {
+        NSArray *sectionsArray = [_anchorObject valueForKeyPath:_keyPathForSectionsArray];
+        numberOfSections = sectionsArray.count;
+
+    }
     return numberOfSections;
 }
 #pragma mark
