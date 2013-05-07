@@ -37,6 +37,7 @@
 }
 
 - (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context{
+    DLog(@"");
     if (registered) {
         if ([keyPath isEqualToString:@"targetObject"]) {
             if (!self.targetObject) {

@@ -84,9 +84,9 @@
 - (void)dealloc{
     DLog(@"self.anchorObjectBinder:%@",self.anchorObjectBinder);
     [_binders removeAllObjects];
-    DLog(@"PFTableViewCell will unregisterKVO");
+    DLog(@"%@ will unregisterKVO", self.class);
     [self.anchorObjectBinder unregisterKvo];
-    DLog(@"PFTableViewCell did unregisterKVO");
+    DLog(@"%@ did unregisterKVO", self.class);
 
     
 }
