@@ -138,6 +138,7 @@
                 }
             } else {
                 // source object is an instance
+                DLog(@"register sourceObject class:%@  targetObjectClass:%@", [self.sourceObject class], [self.targetObject class]);
                 [self addObserver:self forKeyPath:self.sourceKeyPath options:0 context:nil];
                 registered = YES;
 

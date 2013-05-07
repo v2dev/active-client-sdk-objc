@@ -24,6 +24,7 @@ typedef enum {
 @property (assign, nonatomic) PFTableViewDataSourceMode sectionMode;
 
 @property (strong, nonatomic) Class pfBindingTableViewCellSubclass;
+- (id) tableView:(UITableView *)tableView dataObjectForRowAtIndexPath:(NSIndexPath *)indexPath;
 
 + (PFTableViewDataSource *)TableSectionDataWithAnchorObject:(id) anchorObject
                              pfBindingTableViewCellSubclass: (Class) pfBindingTableViewCellSubclass

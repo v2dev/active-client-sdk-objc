@@ -17,10 +17,17 @@
 
 
 @implementation PFTableViewDataSource
+- (id) tableView:(UITableView *)tableView dataObjectForRowAtIndexPath:(NSIndexPath *)indexPath{
+    NSArray *rowsArray = [self tableView:tableView dataObjectsArrayForSection:indexPath.section];
+    
+    id cellObject = rowsArray[indexPath.row];
+    
+    return cellObject;
+}
 
-- (NSArray *) tableView:(UITableView *)tableView rowsArrayForSection:(NSInteger)section{
+- (NSArray *) tableView:(UITableView *)tableView dataObjectsArrayForSection:(NSInteger)section{
     NSArray *cellsArray;
-    if (_keyPathForCellsArray) {
+    if (_keyPathForSectionsArray) {
         NSArray *sectionsArray = [_anchorObject valueForKeyPath:_keyPathForSectionsArray];
         id sectionObject = sectionsArray[section];
         cellsArray = [sectionObject valueForKeyPath:_keyPathForCellsArray];
@@ -39,11 +46,8 @@
     }
 }
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
-    NSArray *cellsArray;
-    
-    cellsArray = [self tableView:tableView rowsArrayForSection:indexPath.section];
         
-    id cellObject = cellsArray[indexPath.row];
+    id cellObject = [self tableView:tableView dataObjectForRowAtIndexPath:indexPath];
 
     PFBindingTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:[[_pfBindingTableViewCellSubclass class]description]];
     if (!cell) {
@@ -54,7 +58,7 @@
             cell = [[_pfBindingTableViewCellSubclass alloc] initWithDataObject:cellObject];
         }
         
-        if (!cell.textLabel.text) cell.textLabel.text = @".";
+        //if (!cell.textLabel.text) cell.textLabel.text = @".";
         
     } else {
         DLog(@"cell was already queued");
@@ -83,7 +87,7 @@
  
     NSArray *cellsArray;
     
-    cellsArray = [self tableView:tableView rowsArrayForSection:section];
+    cellsArray = [self tableView:tableView dataObjectsArrayForSection:section];
 
     NSInteger numberOfCells = cellsArray.count;
     return numberOfCells;
