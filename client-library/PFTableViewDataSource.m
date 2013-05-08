@@ -19,14 +19,21 @@
 @implementation PFTableViewDataSource
 - (id) tableView:(UITableView *)tableView dataObjectForRowAtIndexPath:(NSIndexPath *)indexPath{
     NSArray *rowsArray = [self tableView:tableView dataObjectsArrayForSection:indexPath.section];
-    
-    id cellObject = rowsArray[indexPath.row];
-    
+    NSInteger offset = (PFTableViewDataSourceModeCell == self.sectionMode)?1:0;
+
+    id cellObject;
+    if ((PFTableViewDataSourceModeCell == self.sectionMode) && (indexPath.row == 0)) {
+        NSArray *sectionsArray = [_anchorObject valueForKeyPath:_keyPathForSectionsArray];
+        cellObject = sectionsArray[indexPath.section];
+    } else {
+        cellObject = rowsArray[indexPath.row - offset];
+    }
     return cellObject;
 }
 
 - (NSArray *) tableView:(UITableView *)tableView dataObjectsArrayForSection:(NSInteger)section{
     NSArray *cellsArray;
+    
     if (_keyPathForSectionsArray) {
         NSArray *sectionsArray = [_anchorObject valueForKeyPath:_keyPathForSectionsArray];
         id sectionObject = sectionsArray[section];
@@ -73,7 +80,7 @@
 }
 
 - (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section{
-    if (!_keyPathForSectionsArray) {
+    if (!self.keyPathForSectionsArray || (self.sectionMode == PFTableViewDataSourceModeCell)) {
         return nil;
     }
     
@@ -84,12 +91,13 @@
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
- 
+    NSInteger offset = (PFTableViewDataSourceModeCell == self.sectionMode)?1:0;
     NSArray *cellsArray;
     
     cellsArray = [self tableView:tableView dataObjectsArrayForSection:section];
 
-    NSInteger numberOfCells = cellsArray.count;
+    NSInteger numberOfCells = cellsArray.count + offset;
+    
     return numberOfCells;
 }
 
@@ -127,7 +135,7 @@ pfBindingTableViewCellSubclass: (Class) pfBindingTableViewCellSubclass
         _keyPathForCellsArray = keyPathForCellsArray;
         _keyPathForSectionLabelText = keyPathForSectionLabelText;
         _keyPathForCellLabelText = keyPathForCellLabelText;
-        
+        _sectionMode = sectionMode;
         
     }
     
