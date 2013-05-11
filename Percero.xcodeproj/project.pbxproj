@@ -74,6 +74,10 @@
 		6AD4553D1701FDA20038A988 /* RemoveResponse.h in Headers */ = {isa = PBXBuildFile; fileRef = 6AD4553B1701FDA20038A988 /* RemoveResponse.h */; };
 		6AD4553E1701FDA20038A988 /* RemoveResponse.m in Sources */ = {isa = PBXBuildFile; fileRef = 6AD4553C1701FDA20038A988 /* RemoveResponse.m */; };
 		6AD4553F1701FDA20038A988 /* RemoveResponse.m in Sources */ = {isa = PBXBuildFile; fileRef = 6AD4553C1701FDA20038A988 /* RemoveResponse.m */; };
+		6AEBF701173DE23D004DE359 /* NSMutableArray+PFUpdate.h in Headers */ = {isa = PBXBuildFile; fileRef = 6AEBF6FF173DE23D004DE359 /* NSMutableArray+PFUpdate.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		6AEBF702173DE23D004DE359 /* NSMutableArray+PFUpdate.m in Sources */ = {isa = PBXBuildFile; fileRef = 6AEBF700173DE23D004DE359 /* NSMutableArray+PFUpdate.m */; };
+		6AEBF703173DE23D004DE359 /* NSMutableArray+PFUpdate.m in Sources */ = {isa = PBXBuildFile; fileRef = 6AEBF700173DE23D004DE359 /* NSMutableArray+PFUpdate.m */; };
+		6AEBF706173DE25A004DE359 /* update_arraysTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 6AEBF705173DE25A004DE359 /* update_arraysTests.m */; };
 		6AF998E416F0F56700C962A4 /* PushUpdateResponse.h in Headers */ = {isa = PBXBuildFile; fileRef = 6AF998E216F0F56700C962A4 /* PushUpdateResponse.h */; };
 		6AF998E516F0F56700C962A4 /* PushUpdateResponse.m in Sources */ = {isa = PBXBuildFile; fileRef = 6AF998E316F0F56700C962A4 /* PushUpdateResponse.m */; };
 		6AF998E616F0F56700C962A4 /* PushUpdateResponse.m in Sources */ = {isa = PBXBuildFile; fileRef = 6AF998E316F0F56700C962A4 /* PushUpdateResponse.m */; };
@@ -293,6 +297,10 @@
 		6ACA5BCB16E8FFE700CB8FBD /* IUserRole.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = IUserRole.h; sourceTree = "<group>"; };
 		6AD4553B1701FDA20038A988 /* RemoveResponse.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = RemoveResponse.h; path = model/RemoveResponse.h; sourceTree = "<group>"; };
 		6AD4553C1701FDA20038A988 /* RemoveResponse.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = RemoveResponse.m; path = model/RemoveResponse.m; sourceTree = "<group>"; };
+		6AEBF6FF173DE23D004DE359 /* NSMutableArray+PFUpdate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSMutableArray+PFUpdate.h"; sourceTree = "<group>"; };
+		6AEBF700173DE23D004DE359 /* NSMutableArray+PFUpdate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSMutableArray+PFUpdate.m"; sourceTree = "<group>"; };
+		6AEBF704173DE25A004DE359 /* update_arraysTests.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = update_arraysTests.h; sourceTree = "<group>"; };
+		6AEBF705173DE25A004DE359 /* update_arraysTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = update_arraysTests.m; sourceTree = "<group>"; };
 		6AF998E216F0F56700C962A4 /* PushUpdateResponse.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PushUpdateResponse.h; path = model/PushUpdateResponse.h; sourceTree = "<group>"; };
 		6AF998E316F0F56700C962A4 /* PushUpdateResponse.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PushUpdateResponse.m; path = model/PushUpdateResponse.m; sourceTree = "<group>"; };
 		6AF998E716F10E2D00C962A4 /* PushDeleteResponse.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PushDeleteResponse.h; path = model/PushDeleteResponse.h; sourceTree = "<group>"; };
@@ -739,6 +747,8 @@
 		F2721E8E15C9B1E00040FC3E /* Utility */ = {
 			isa = PBXGroup;
 			children = (
+				6AEBF6FF173DE23D004DE359 /* NSMutableArray+PFUpdate.h */,
+				6AEBF700173DE23D004DE359 /* NSMutableArray+PFUpdate.m */,
 				6A729BEE1725BA10001F4BB8 /* ModelUtility.h */,
 				F2721F3315C9B3F70040FC3E /* EnvConfig.h */,
 				F2721F3415C9B3F70040FC3E /* EnvConfig.m */,
@@ -804,6 +814,8 @@
 		F2B0266015C9A495000375CE /* client-libraryTests */ = {
 			isa = PBXGroup;
 			children = (
+				6AEBF704173DE25A004DE359 /* update_arraysTests.h */,
+				6AEBF705173DE25A004DE359 /* update_arraysTests.m */,
 				F2B0266615C9A495000375CE /* client_libraryTests.h */,
 				F2B0266715C9A495000375CE /* client_libraryTests.m */,
 				F2B0266115C9A495000375CE /* Supporting Files */,
@@ -882,6 +894,7 @@
 				6A3435E3171DF54700EEA040 /* PFGitHubOauthViewController.h in Headers */,
 				6A841FDD172AF2EE00A5B768 /* PFObjectBinder.h in Headers */,
 				6ACA5BCC16E8FFFE00CB8FBD /* IUserAnchor.h in Headers */,
+				6AEBF701173DE23D004DE359 /* NSMutableArray+PFUpdate.h in Headers */,
 				6A78CFCF173062200037256F /* PFBindingTableViewCell.h in Headers */,
 				F2721F0515C9B20E0040FC3E /* EntityManager.h in Headers */,
 				F2721F0915C9B20E0040FC3E /* FindByIdRequest.h in Headers */,
@@ -1169,6 +1182,7 @@
 				6A841FDE172AF2EE00A5B768 /* PFObjectBinder.m in Sources */,
 				6A78CFCB1730441E0037256F /* PFTableViewDataSource.m in Sources */,
 				6A78CFD0173062200037256F /* PFBindingTableViewCell.m in Sources */,
+				6AEBF702173DE23D004DE359 /* NSMutableArray+PFUpdate.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1203,6 +1217,8 @@
 				6A841FDF172AF2EE00A5B768 /* PFObjectBinder.m in Sources */,
 				6A78CFCC1730441E0037256F /* PFTableViewDataSource.m in Sources */,
 				6A78CFD1173062200037256F /* PFBindingTableViewCell.m in Sources */,
+				6AEBF703173DE23D004DE359 /* NSMutableArray+PFUpdate.m in Sources */,
+				6AEBF706173DE25A004DE359 /* update_arraysTests.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
