@@ -55,6 +55,9 @@
 		6A8B0869170123E800BB48EE /* ClassIDPair.h in Headers */ = {isa = PBXBuildFile; fileRef = 6A8B0867170123E700BB48EE /* ClassIDPair.h */; };
 		6A8B086A170123E800BB48EE /* ClassIDPair.m in Sources */ = {isa = PBXBuildFile; fileRef = 6A8B0868170123E700BB48EE /* ClassIDPair.m */; };
 		6A8B086B170123E800BB48EE /* ClassIDPair.m in Sources */ = {isa = PBXBuildFile; fileRef = 6A8B0868170123E700BB48EE /* ClassIDPair.m */; };
+		6A9F3C371741CD3500164A3D /* PFTableViewBinder.h in Headers */ = {isa = PBXBuildFile; fileRef = 6A9F3C351741CD3500164A3D /* PFTableViewBinder.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		6A9F3C381741CD3500164A3D /* PFTableViewBinder.m in Sources */ = {isa = PBXBuildFile; fileRef = 6A9F3C361741CD3500164A3D /* PFTableViewBinder.m */; };
+		6A9F3C391741CD3500164A3D /* PFTableViewBinder.m in Sources */ = {isa = PBXBuildFile; fileRef = 6A9F3C361741CD3500164A3D /* PFTableViewBinder.m */; };
 		6AB0F67F16F2942600D7F7D5 /* PutRequest.h in Headers */ = {isa = PBXBuildFile; fileRef = 6AB0F67D16F2942600D7F7D5 /* PutRequest.h */; };
 		6AB0F68016F2942600D7F7D5 /* PutRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 6AB0F67E16F2942600D7F7D5 /* PutRequest.m */; };
 		6AB0F68116F2942600D7F7D5 /* PutRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 6AB0F67E16F2942600D7F7D5 /* PutRequest.m */; };
@@ -282,6 +285,8 @@
 		6A87F7CF1721D6E200FDCDBE /* IUserIdentifier.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IUserIdentifier.h; sourceTree = "<group>"; };
 		6A8B0867170123E700BB48EE /* ClassIDPair.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ClassIDPair.h; sourceTree = "<group>"; };
 		6A8B0868170123E700BB48EE /* ClassIDPair.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ClassIDPair.m; sourceTree = "<group>"; };
+		6A9F3C351741CD3500164A3D /* PFTableViewBinder.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PFTableViewBinder.h; sourceTree = "<group>"; };
+		6A9F3C361741CD3500164A3D /* PFTableViewBinder.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PFTableViewBinder.m; sourceTree = "<group>"; };
 		6AB0F67D16F2942600D7F7D5 /* PutRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PutRequest.h; path = model/PutRequest.h; sourceTree = "<group>"; };
 		6AB0F67E16F2942600D7F7D5 /* PutRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PutRequest.m; path = model/PutRequest.m; sourceTree = "<group>"; };
 		6AB1982516FCC66100821DF6 /* PFModelObject.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PFModelObject.m; path = model/PFModelObject.m; sourceTree = "<group>"; };
@@ -740,6 +745,8 @@
 				6A3435E2171DF54700EEA040 /* PFGitHubOauthViewController.m */,
 				6A78CFC81730441E0037256F /* PFTableViewDataSource.h */,
 				6A78CFC91730441E0037256F /* PFTableViewDataSource.m */,
+				6A9F3C351741CD3500164A3D /* PFTableViewBinder.h */,
+				6A9F3C361741CD3500164A3D /* PFTableViewBinder.m */,
 			);
 			name = Controller;
 			sourceTree = "<group>";
@@ -876,7 +883,6 @@
 				F2721EED15C9B20E0040FC3E /* _Super_ServiceApplicationOAuth.h in Headers */,
 				F2721EEF15C9B20E0040FC3E /* _Super_User.h in Headers */,
 				F2721EF115C9B20E0040FC3E /* _Super_UserAccount.h in Headers */,
-				6A78CFCA1730441E0037256F /* PFTableViewDataSource.h in Headers */,
 				F2721EF315C9B20E0040FC3E /* _Super_UserToken.h in Headers */,
 				F8811B3416F3F2F8004C2437 /* PFGoogleOauth.h in Headers */,
 				F2721EF915C9B20E0040FC3E /* AuthenticateOAuthAccessTokenResponse.h in Headers */,
@@ -894,7 +900,9 @@
 				6A3435E3171DF54700EEA040 /* PFGitHubOauthViewController.h in Headers */,
 				6A841FDD172AF2EE00A5B768 /* PFObjectBinder.h in Headers */,
 				6ACA5BCC16E8FFFE00CB8FBD /* IUserAnchor.h in Headers */,
+				6A9F3C371741CD3500164A3D /* PFTableViewBinder.h in Headers */,
 				6AEBF701173DE23D004DE359 /* NSMutableArray+PFUpdate.h in Headers */,
+				6A78CFCA1730441E0037256F /* PFTableViewDataSource.h in Headers */,
 				6A78CFCF173062200037256F /* PFBindingTableViewCell.h in Headers */,
 				F2721F0515C9B20E0040FC3E /* EntityManager.h in Headers */,
 				F2721F0915C9B20E0040FC3E /* FindByIdRequest.h in Headers */,
@@ -1183,6 +1191,7 @@
 				6A78CFCB1730441E0037256F /* PFTableViewDataSource.m in Sources */,
 				6A78CFD0173062200037256F /* PFBindingTableViewCell.m in Sources */,
 				6AEBF702173DE23D004DE359 /* NSMutableArray+PFUpdate.m in Sources */,
+				6A9F3C381741CD3500164A3D /* PFTableViewBinder.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1219,6 +1228,7 @@
 				6A78CFD1173062200037256F /* PFBindingTableViewCell.m in Sources */,
 				6AEBF703173DE23D004DE359 /* NSMutableArray+PFUpdate.m in Sources */,
 				6AEBF706173DE25A004DE359 /* update_arraysTests.m in Sources */,
+				6A9F3C391741CD3500164A3D /* PFTableViewBinder.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
