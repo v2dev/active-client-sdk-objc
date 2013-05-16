@@ -20,6 +20,7 @@
 
 - (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context{
     DLog(@"%@",change);
+    
     NSArray *newObjects = [change valueForKey:NSKeyValueChangeNewKey];
     if (newObjects) {
         NSMutableArray * paths = [NSMutableArray array];
@@ -76,7 +77,7 @@ pfBindingTableViewCellSubclass: (Class) pfBindingTableViewCellSubclass
         NSString *keyPath = [NSString stringWithFormat:@"anchorObject.%@",self.keyPathForCellsArray];
 
         [self removeObserver:self forKeyPath:keyPath];
-        DLog(@"register:%@.%@",self,keyPath);
+        DLog(@"unregister:%@.%@",self,keyPath);
         isRegistered = NO;
     }
 }

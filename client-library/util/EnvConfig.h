@@ -8,9 +8,18 @@
 
 #import <Foundation/Foundation.h>
 
+typedef enum {
+    PFOAuthProviderTypeInvalid = 0,
+    PFOauthProviderTypeGitHub,
+    PFOauthProviderTypeGoogle
+} PFOauthProviderType;
+
 @interface EnvConfig : NSObject{
     NSDictionary* configs;
+
 }
++ (NSString *) oauthProviderKeyForPFOauthProviderType:(PFOauthProviderType)pfOauthProviderType;
++ (NSDictionary *) oauthProviderDictForKey:(NSString *) key;
 
 + (EnvConfig*) sharedInstance;
 - (NSString*) getEnvProperty:(NSString*) propName;

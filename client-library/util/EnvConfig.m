@@ -9,6 +9,7 @@
 #import "EnvConfig.h"
 
 static EnvConfig* sharedInstance;
+
 @implementation EnvConfig
 
 + (EnvConfig*) sharedInstance{
@@ -104,51 +105,79 @@ static EnvConfig* sharedInstance;
     
     return result;
 }
-- (NSArray *) keyPathToLeafKey:(NSString *) leafKey withDictionary:(NSDictionary *) branchDict{
-    NSMutableArray *result = nil; 
-    
-    id leafTest = [branchDict valueForKey:leafKey];
-    if (leafTest) {
-        // we found the leaf and can return nil
-        
-    } else {
-        result = [[NSMutableArray alloc] init];
-        [branchDict enumerateKeysAndObjectsUsingBlock:^(id key, id obj, BOOL *stop) {
+//- (NSArray *) keyPathToLeafKey:(NSString *) leafKey withDictionary:(NSDictionary *) branchDict{
+//    NSMutableArray *result = nil; 
+//    
+//    id leafTest = [branchDict valueForKey:leafKey];
+//    if (leafTest) {
+//        // we found the leaf and can return nil
+//        
+//    } else {
+//        result = [[NSMutableArray alloc] init];
+//        [branchDict enumerateKeysAndObjectsUsingBlock:^(id key, id obj, BOOL *stop) {
+//            
+//            if ([obj isKindOfClass:[NSDictionary class]]) {
+//                NSArray *keyPaths = [self keyPathToLeafKey:leafKey withDictionary:obj];
+//                if (keyPaths) {
+//                    for (NSString *keyPath in keyPaths) {
+//                        NSString *newKeypath = [NSString stringWithFormat:@"%@.%@",key,keyPath];
+//                        [result addObject:newKeypath];
+//                    }
+//                } else {
+//                    [result addObject: key];
+//                }
+//                
+//            }
+//            
+//        }];
+//    }
+//    return result;
+//    
+//}
++ (NSString *) oauthProviderKeyForPFOauthProviderType:(PFOauthProviderType)pfOauthProviderType{
+    __block NSString *result = nil;
+    NSString *oauthType = nil;
+    switch (pfOauthProviderType) {
+        case PFOauthProviderTypeGitHub:
+            oauthType = @"github";
+            break;
             
-            if ([obj isKindOfClass:[NSDictionary class]]) {
-                NSArray *keyPaths = [self keyPathToLeafKey:leafKey withDictionary:obj];
-                if (keyPaths) {
-                    for (NSString *keyPath in keyPaths) {
-                        NSString *newKeypath = [NSString stringWithFormat:@"%@.%@",key,keyPath];
-                        [result addObject:newKeypath];
-                    }
-                } else {
-                    [result addObject: key];
-                }
-                
-            }
+        case PFOauthProviderTypeGoogle:
+            oauthType = @"google";
+            break;
             
-        }];
+        default:
+            break;
     }
-    return result;
     
+    NSDictionary *oauthProviders = [[self sharedInstance] getEnvDictionary:@"oauth"];
+    [oauthProviders enumerateKeysAndObjectsUsingBlock:^(NSString *key, id dict, BOOL *stop) {
+        NSString *paradigm = [dict objectForKey:@"paradigm"];
+        if ([paradigm isEqualToString:oauthType]) {
+            result = key;
+            *stop = YES;
+        }
+    }];
+     
+   
+    return result;
 }
 - (NSArray *)oauthProviderKeys{
-    static NSMutableArray *result;
+    static NSArray *result;
     NSString *oauth = @"oauth";
     if (!result) {
         result = [[NSMutableArray alloc] init];
         NSDictionary * oauthDict = [self getEnvDictionary:oauth];
-        NSArray *keyPaths = [self keyPathToLeafKey:@"paradigm" withDictionary:oauthDict];
-        for (NSString *keyPath in keyPaths) {
-            NSString *newKeypath = [NSString stringWithFormat:@"%@.%@",oauth,keyPath];
-            [result addObject:newKeypath];
-        }
+        result = [oauthDict allKeys];
     }
     
     return [result copy];
 }
-
++ (NSDictionary *)oauthProviderDictForKey:(NSString *)key{
+    NSDictionary *oauthDictionary = [[self sharedInstance] getEnvDictionary:@"oauth"];
+    NSDictionary *result = [oauthDictionary objectForKey:key];
+    return result;
+}
 - (NSString*) description{
     return [self stringForKey:@"" inDict:configs];
 }

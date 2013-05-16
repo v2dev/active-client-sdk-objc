@@ -37,8 +37,8 @@ static PFAuthManager *_sharedInstance = nil;
 
 - (void) authorizeWithGitHubKeypath:(NSString *)keyPath
                    completionTarget:(UIViewController *)clientViewController{
-    self.oauthAuthenticationViewController = [[PFGitHubOauthViewController alloc] init];
-    PFGitHubOauthViewController *controller = (PFGitHubOauthViewController *)self.oauthAuthenticationViewController;
+    self.oauthAuthenticationViewController = [[PFOauthViewController alloc] init];
+    PFOauthViewController *controller = (PFOauthViewController *)self.oauthAuthenticationViewController;
     controller.oauthKey = keyPath;
     controller.delegate = self;
     [clientViewController presentModalViewController:controller animated:YES];

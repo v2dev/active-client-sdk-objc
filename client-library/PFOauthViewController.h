@@ -15,7 +15,9 @@
 
 @end
 
-@interface PFGitHubOauthViewController : UIViewController <UIWebViewDelegate>
+@interface PFOauthViewController : UIViewController <UIWebViewDelegate>
+
 @property (nonatomic, strong) NSString *oauthKey;
 @property (nonatomic, weak) id<PFGitHubOauthDelegate> delegate;
+
 @end
