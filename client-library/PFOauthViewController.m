@@ -42,11 +42,13 @@
 - (void) resetOauthEnvironment{
     
     NSDictionary *oauthDict = [EnvConfig oauthProviderDictForKey:self.oauthKey];
-    
+
+    oauthProviderType = [@"google" isEqualToString:oauthDict[@"paradigm"]]?PFOauthProviderTypeGoogle:PFOauthProviderTypeGitHub;
+
     oauthURLString = oauthDict[@"initialEndpointURL"];
     oauthTokenURLString = oauthDict[@"validationEndpointURL"];
     oauthClientId = oauthDict[@"client_id"];
-    oauthRedirectURI = oauthDict[@"redirectURI"];
+    oauthRedirectURI = oauthDict[@"redirectUri"];
     oauthClientSecret = oauthDict[@"client_secret"];
     oauthScope = oauthDict[@"scope"];
     oauthState = [[NSUUID UUID] UUIDString];
@@ -91,13 +93,15 @@
                 urlString = [NSString stringWithFormat:@"%@&state=%@",urlString,oauthState];
             }
             
-            
+            if (oauthProviderType == PFOauthProviderTypeGoogle) {
+                urlString = [NSString stringWithFormat:@"%@&response_type=%@",urlString,@"token"];
+            }
         } else{
             urlString = nil;
         }
     }
     
-    NSURL * oauthURL = [NSURL URLWithString:urlString];
+    NSURL * oauthURL = [NSURL URLWithString:[urlString stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding]];
     
     NSURLRequest * result = [NSURLRequest requestWithURL:oauthURL];
     
@@ -141,16 +145,32 @@
             parameters[peices[0]] = peices[1];
     }
     
-//    NSLog(@"url:%@", parameters);
+    NSLog(@"url:%@", parameters);
     
-    NSString *requestState = [parameters valueForKey:@"state"];
+    NSString *stateKey = nil;
+    if (oauthProviderType == PFOauthProviderTypeGoogle) {
+        stateKey = [NSString stringWithFormat:@"%@#%@",oauthRedirectURI,@"state"];
+    } else if (oauthProviderType == PFOauthProviderTypeGitHub){
+        stateKey = @"state";
+    }
+
+    NSString *requestState = [parameters valueForKey:stateKey];
     NSString *errorString = [parameters valueForKey:@"error"];
     
     if (requestState) {
         if ([requestState isEqualToString:oauthState]){
-            NSString *code = [parameters valueForKey:@"code"];
+            
+            NSString *codeKey = nil;
+            if (oauthProviderType == PFOauthProviderTypeGoogle) {
+                codeKey = @"access_token";
+            } else if (oauthProviderType == PFOauthProviderTypeGitHub) {
+                codeKey = @"code";
+            }
+            
+            NSString *code = [parameters valueForKey:codeKey];
             if (code) {
                 shouldStart = NO;
+                
                 
                 [self requestAccessTokenWithCode:code];
                 [self gotACode];
