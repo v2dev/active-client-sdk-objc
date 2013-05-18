@@ -185,7 +185,7 @@ static PFClient* _sharedInstance;
 /**
  * Service method to make it easier for the client application to issue a login request
  */ 
-+ (bool) loginWithOAuthCode:(NSString*) oauthCode callbackTarget:(NSObject*)target method:(SEL)selector{
++ (bool) loginWithOAuthCode:(NSString *)oauthCode oauthKey:(NSString *)oauthKey callbackTarget:(NSObject *)target method:(SEL)selector{
     
     if(target && selector)
         [PFClient addListenerForAuthEvents:target method:selector];
@@ -194,12 +194,13 @@ static PFClient* _sharedInstance;
     AuthenticateOAuthCodeRequest* req = [[AuthenticateOAuthCodeRequest alloc] init];
     req.userId = @"";
     req.token = @"";
-    req.clientType = @"N";
-    req.clientId = @"";
+    req.clientType = @"";
+    req.clientId = [[EnvConfig oauthProviderDictForKey:oauthKey] objectForKey:@"client_id"];
+    req.redirectUri = [[EnvConfig oauthProviderDictForKey:oauthKey] objectForKey:@"redirectUri"];
     req.code = oauthCode;
-    req.regAppKey = @"PM_2F30977"; // !!!: This should come from the env.plist
-    req.deviceId = @"";
-    req.authProvider = @"GITHUB"; // !!!: This should come from the env.plist
+    req.deviceId = [[NSUUID UUID] UUIDString];
+    req.regAppKey = @"";
+    req.authProvider = [[[EnvConfig oauthProviderDictForKey:oauthKey] objectForKey:@"paradigm"] uppercaseString]; // !!!: This should come from the env.plist
     PFInvocation* callback = [[PFInvocation alloc] initWithTarget:[PFClient sharedInstance] method:@selector(receivedAuthenticateOAuthCodeResponse:)];
 
     [[PFSocketManager sharedInstance] sendEvent:@"authenticateOAuthCode" data:req callback:callback];
@@ -224,8 +225,8 @@ static PFClient* _sharedInstance;
         req.clientId = [PFClient sharedInstance].clientId;
         req.accessToken = [PFClient sharedInstance].accessToken;
         req.refreshToken = [PFClient sharedInstance].refreshToken; //saOAuth.serviceApplication.serviceProvider.;//@"psiglobal";
-        req.svcOauthKey = saOAuth.appKey; //saOAuth.serviceApplication.serviceProvider.;//@"psiglobal";
-        req.regAppKey = @"PSI_29V97G";
+        req.svcOauthKey = saOAuth.appKey; //saOAuth.serviceApplication.serviceProvider.;
+        req.regAppKey = @"";
         req.deviceId = @"";
     
         PFInvocation* callback = [[PFInvocation alloc] initWithTarget:[PFClient sharedInstance] method:@selector(autoLoginCallback:)];

@@ -12,7 +12,7 @@
 
 @interface PFAuthManager () 
 
-@property (nonatomic, strong)  UIViewController *oauthAuthenticationViewController;
+@property (nonatomic, strong)  PFOauthViewController *oauthAuthenticationViewController;
 + (PFAuthManager *)sharedInstance;
 
 @end
@@ -51,11 +51,12 @@ static PFAuthManager *_sharedInstance = nil;
 }
 
 - (void)authenticationSucceededWithCode:(NSString *)code{
-    [PFClient loginWithOAuthCode:code callbackTarget:self method:@selector(didLogin:)];
+
+    [PFClient loginWithOAuthCode:code oauthKey:self.oauthAuthenticationViewController.oauthKey callbackTarget:self method:@selector(didLogin:)];
 }
 - (void) didLogin:(id) package{
     [self.delegate authenticationSucceeded];
-    
+    [(UIViewController *)(self.delegate) dismissModalViewControllerAnimated:YES ];
     
 }
 

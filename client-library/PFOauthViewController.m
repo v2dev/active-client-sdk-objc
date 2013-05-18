@@ -94,7 +94,7 @@
             }
             
             if (oauthProviderType == PFOauthProviderTypeGoogle) {
-                urlString = [NSString stringWithFormat:@"%@&response_type=%@",urlString,@"token"];
+                urlString = [NSString stringWithFormat:@"%@&response_type=%@",urlString,@"code"];
             }
         } else{
             urlString = nil;
@@ -148,11 +148,11 @@
     NSLog(@"url:%@", parameters);
     
     NSString *stateKey = nil;
-    if (oauthProviderType == PFOauthProviderTypeGoogle) {
-        stateKey = [NSString stringWithFormat:@"%@#%@",oauthRedirectURI,@"state"];
-    } else if (oauthProviderType == PFOauthProviderTypeGitHub){
+//    if (oauthProviderType == PFOauthProviderTypeGoogle) {
+//        stateKey = [NSString stringWithFormat:@"%@#%@",oauthRedirectURI,@"state"];
+//    } else if (oauthProviderType == PFOauthProviderTypeGitHub){
         stateKey = @"state";
-    }
+//    }
 
     NSString *requestState = [parameters valueForKey:stateKey];
     NSString *errorString = [parameters valueForKey:@"error"];
@@ -161,11 +161,11 @@
         if ([requestState isEqualToString:oauthState]){
             
             NSString *codeKey = nil;
-            if (oauthProviderType == PFOauthProviderTypeGoogle) {
-                codeKey = @"access_token";
-            } else if (oauthProviderType == PFOauthProviderTypeGitHub) {
+//            if (oauthProviderType == PFOauthProviderTypeGoogle) {
+//                codeKey = @"access_token";
+//            } else if (oauthProviderType == PFOauthProviderTypeGitHub) {
                 codeKey = @"code";
-            }
+//            }
             
             NSString *code = [parameters valueForKey:codeKey];
             if (code) {
