@@ -17,6 +17,7 @@
 @property (strong, nonatomic) NSString *keyPathForSectionLabelText;
 @property (strong, nonatomic) NSString *keyPathForCellLabelText;
 @property (assign, nonatomic) PFTableViewDataSourceMode sectionMode;
+@property (nonatomic, strong) PFTableViewDataSource *dataSource;
 
 @property (strong, nonatomic) Class pfBindingTableViewCellSubclass;
 - (void) registerKVO;

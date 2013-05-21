@@ -13,7 +13,6 @@
     BOOL isRegistered;
 }
 //@property (nonatomic, strong) NSMutableArray *rowBindings;
-@property (nonatomic, strong) PFTableViewDataSource *dataSource;
 @end
 
 @implementation PFTableViewBinder
