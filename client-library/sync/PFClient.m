@@ -256,7 +256,11 @@ static PFClient* _sharedInstance;
         NSLog(@"autoLoginCallback got invalid type of object");
     }
 }
-
++ (NSString *)appName{
+    NSString* result = [[EnvConfig sharedInstance] getEnvProperty:@"socket.appName"];
+    
+    return result;
+}
 /**
  * Public static method to send a get all by name request
  */
@@ -405,6 +409,7 @@ static PFClient* _sharedInstance;
     _sharedInstance.refreshToken = nil;
     _sharedInstance.userId = nil;
     [PFClient save];
+    
 }
 
 + (void)loginSavedSessionWithCallbackTarget:(NSObject *)target method:(SEL)selector{

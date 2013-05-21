@@ -36,6 +36,7 @@
 @property (nonatomic, strong) id<IUserAnchor> currentUser;
 
 + (Class) iUserAnchorClass;
++ (NSString *) appName;
 + (PFClient*) sharedInstance;
 + (void) addListenerForAuthEvents:(NSObject*)target method:(SEL)selector;
 + (bool) loginWithOAuthCode:(NSString*) oauthCode oauthKey:(NSString *) oauthKey callbackTarget:(NSObject*) target method:(SEL) selector;
