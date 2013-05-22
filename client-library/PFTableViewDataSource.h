@@ -22,6 +22,7 @@ typedef enum {
 @property (strong, nonatomic) NSString *keyPathForSectionLabelText;
 @property (strong, nonatomic) NSString *keyPathForCellLabelText;
 @property (assign, nonatomic) PFTableViewDataSourceMode sectionMode;
+@property (assign, nonatomic) BOOL canDeleteRows;
 
 @property (strong, nonatomic) Class pfBindingTableViewCellSubclass;
 - (id) tableView:(UITableView *)tableView dataObjectForRowAtIndexPath:(NSIndexPath *)indexPath;

@@ -8,7 +8,7 @@
 
 #import "PFTableViewDataSource.h"
 #import "PFBindingTableViewCell.h"
-
+#import "PFModelObject.h"
 @interface PFTableViewDataSource ()
 
 @property (nonatomic, strong) NSMutableArray *rowBindings;
@@ -17,6 +17,19 @@
 
 
 @implementation PFTableViewDataSource
+
+- (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath{
+    return self.canDeleteRows;
+}
+
+- (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath{
+    if (editingStyle == UITableViewCellEditingStyleDelete) {
+
+        PFModelObject *cellObject = [self tableView:tableView dataObjectForRowAtIndexPath:indexPath];
+        [cellObject delete];
+    }
+}
+
 - (id) tableView:(UITableView *)tableView dataObjectForRowAtIndexPath:(NSIndexPath *)indexPath{
     NSArray *rowsArray = [self tableView:tableView dataObjectsArrayForSection:indexPath.section];
     NSInteger offset = (PFTableViewDataSourceModeCell == self.sectionMode)?1:0;
