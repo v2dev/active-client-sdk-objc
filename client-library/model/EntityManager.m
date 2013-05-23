@@ -146,7 +146,7 @@ static EntityManager* sharedInstance;
                     
                     PFModelObject *targetObject = [modelObject valueForKey:relationship.propertyName];
                     if (targetObject && !targetObject.isShell) {
-                        NSMutableArray *collection = [targetObject valueForKey:relationship.inversePropertyName];
+                        NSMutableArray *collection = [targetObject mutableArrayValueForKey:relationship.inversePropertyName];
                         [collection removeObject:modelObject];
                     }
                     
@@ -180,7 +180,7 @@ static EntityManager* sharedInstance;
                 // target relationship is bi-directional
                 if (relationship.isCollection) {
                     if (!modelObject.isShell) {
-                        NSMutableArray *collection = [modelObject valueForKey:relationship.propertyName];
+                        NSMutableArray *collection = [modelObject mutableArrayValueForKey:relationship.propertyName];
                         [collection removeObject:modelObject];
                     }
                     
