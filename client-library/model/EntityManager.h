@@ -26,7 +26,7 @@
 - (void) createObject:(id <PFModelObject>) modelObject;
 - (void)createObject:(id<PFModelObject>)modelObject withCompletionTarget:(id) target method:(SEL) method;
 - (void)restoreDeletedRelationships:(PFModelObject *) modelObject;
-
+- (void) setInverseRelationshipsForNewObject:(PFModelObject<PFModelObject> *) modelObject;
 + (void) addListenerForObjectType:(NSString*) className target:(NSObject*)target method:(SEL) selector;
 
 @end

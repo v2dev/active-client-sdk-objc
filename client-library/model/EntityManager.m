@@ -302,6 +302,68 @@ static EntityManager* sharedInstance;
 
 } //restoreDeletedRelationships:
 
+- (void)setInverseRelationshipsForNewObject:(PFModelObject<PFModelObject> *)modelObject{
+    
+    // add modelobject to all inverse relationships
+    NSArray *relationships = [[modelObject class] relationships];
+    for (PFRelationship *relationship  in relationships) {
+        if ([relationship isKindOfClass:[PFSourceRelationship class]]) {
+            
+            // source unidirectional relationships require no action
+            if (!relationship.isUnidirectional) {
+                if (relationship.isCollection) {
+                    
+                    PFModelObject *targetObject = [modelObject valueForKey:relationship.propertyName];
+                    if (targetObject && !targetObject.isShell) {
+                        NSMutableArray *collection = [targetObject mutableArrayValueForKey:relationship.inversePropertyName];
+                        [collection addObject:modelObject];
+                    }
+                    
+                    
+                } else {
+                    PFModelObject *targetObject = [modelObject valueForKey:relationship.propertyName];
+                    if (targetObject) {
+                        [targetObject setValue:modelObject forKey:relationship.inversePropertyName];
+                    }
+                }
+            }
+            
+            
+            
+        } else if ([relationship isKindOfClass:[PFTargetRelationship class]]){
+            if (relationship.isUnidirectional) {
+                
+//                // this relationship cannot be a collection
+//                
+//                //NSMutableDictionary * classDict =[[EntityManager sharedInstance] dictionaryForClass:relationship.inverseClassName];
+//                NSMutableDictionary *classDict = [[EntityManager sharedInstance]->entityModel objectForKey:relationship.inverseClassName]; // To prevent triggering an unnecessary GetAllByNameRequest, we are bypassing the normal way of getting the class dictionary
+//                for (PFModelObject *obj in classDict) {
+//                    if ([obj valueForKey:relationship.inversePropertyName] == modelObject){
+//                        [obj setValue:nil forKey:relationship.inversePropertyName];
+//                    }
+//                }
+//                
+//                //[modelObject setValue:nil forKey:relationship.inversePropertyName];
+                
+            } else {
+                // target relationship is bi-directional
+                if (relationship.isCollection) {
+                    if (!modelObject.isShell) {
+                        NSMutableArray *collection = [modelObject mutableArrayValueForKey:relationship.propertyName];
+                        [collection addObject:modelObject];
+                    }
+                    
+                    
+                } else {
+                    PFModelObject *sourceObject = [modelObject valueForKey:relationship.propertyName];
+                    [sourceObject setValue:modelObject forKey:relationship.inversePropertyName];
+                }
+            }
+        }
+    }
+
+} // setInverseRelationshipsForNewObject:
+
 - (void)updateObject:(id<PFModelObject>)modelObject{
     [PFClient sendPutRequestWithClass:[modelObject remoteClassName] object:modelObject completionTarget:nil method:nil];
 }
@@ -311,6 +373,8 @@ static EntityManager* sharedInstance;
 }
 
 - (void)createObject:(id<PFModelObject>)modelObject{
+    
+    [self setInverseRelationshipsForNewObject:modelObject];
     [PFClient sendCreateRequestWithClass:[modelObject remoteClassName] object:modelObject completionTarget:nil method:nil];
 
 }
