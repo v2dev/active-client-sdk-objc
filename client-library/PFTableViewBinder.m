@@ -32,6 +32,8 @@
         [self.tableView insertRowsAtIndexPaths:paths
                               withRowAnimation:UITableViewRowAnimationAutomatic];
         
+    } else {
+        [self.tableView reloadData];
     }
 }
 
