@@ -133,8 +133,7 @@ static EntityManager* sharedInstance;
     return result;
 } // deserializeObject:
 
-- (void) deleteObject:(PFModelObject *) modelObject{
-    
+- (void)removeFromInverseRelationsipsModelObject:(PFModelObject *)modelObject {
     // remove modelObject from all relationships
     NSArray *relationships = [[modelObject class] relationships];
     for (PFRelationship *relationship  in relationships) {
@@ -192,6 +191,11 @@ static EntityManager* sharedInstance;
             }
         }
     }
+}
+
+- (void) deleteObject:(PFModelObject *) modelObject{
+    
+    [self removeFromInverseRelationsipsModelObject:modelObject];
     
     
     
@@ -302,7 +306,7 @@ static EntityManager* sharedInstance;
 
 } //restoreDeletedRelationships:
 
-- (void)setInverseRelationshipsForNewObject:(PFModelObject<PFModelObject> *)modelObject{
+- (void)addToInverseRelationshipsModelObject:(PFModelObject<PFModelObject> *)modelObject{
     
     // add modelobject to all inverse relationships
     NSArray *relationships = [[modelObject class] relationships];
@@ -316,7 +320,8 @@ static EntityManager* sharedInstance;
                     PFModelObject *targetObject = [modelObject valueForKey:relationship.propertyName];
                     if (targetObject && !targetObject.isShell) {
                         NSMutableArray *collection = [targetObject mutableArrayValueForKey:relationship.inversePropertyName];
-                        [collection addObject:modelObject];
+                        NSUInteger index = [collection indexOfObject:modelObject];
+                        if(index == NSNotFound)[collection addObject:modelObject];
                     }
                     
                     
@@ -350,7 +355,8 @@ static EntityManager* sharedInstance;
                 if (relationship.isCollection) {
                     if (!modelObject.isShell) {
                         NSMutableArray *collection = [modelObject mutableArrayValueForKey:relationship.propertyName];
-                        [collection addObject:modelObject];
+                        NSUInteger index = [collection indexOfObject:modelObject];
+                        if(index == NSNotFound)[collection addObject:modelObject];
                     }
                     
                     
@@ -374,8 +380,9 @@ static EntityManager* sharedInstance;
 
 - (void)createObject:(id<PFModelObject>)modelObject{
     
-    [self setInverseRelationshipsForNewObject:modelObject];
-    [PFClient sendCreateRequestWithClass:[modelObject remoteClassName] object:modelObject completionTarget:nil method:nil];
+    PFModelObject *newObject = [self getEntity:modelObject];
+    [self addToInverseRelationshipsModelObject:newObject];
+    [PFClient sendCreateRequestWithClass:[newObject remoteClassName] object:newObject completionTarget:nil method:nil];
 
 }
 

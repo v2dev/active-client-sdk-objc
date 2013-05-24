@@ -18,6 +18,8 @@
 #import "ConnectResponse.h"
 #import "CreateRequest.h"
 #import "CreateResponse.h"
+#import "PushUpdateResponse.h"
+#import "PushDeleteResponse.h"
 #import "PutRequest.h"
 #import "PutResponse.h"
 #import "RemoveRequest.h"
@@ -234,8 +236,12 @@ static PFSocketManager* sharedInstance;
         
     } else {
         
-        if (/*this is a push response*/0) {
-            // do something useful
+        if ([syncResponse isKindOfClass:[PushUpdateResponse class]]) {
+            PushUpdateResponse *pushUpdateResponse =(PushUpdateResponse *) syncResponse;
+            for (PFModelObject *obj in pushUpdateResponse.result) {
+                [[EntityManager sharedInstance] addToInverseRelationshipsModelObject:[[EntityManager sharedInstance] getEntity:obj] ];
+
+            }
         } else {
             // since we didn't request this and the server didn't push it, just ignore this request
         }
