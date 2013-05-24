@@ -17,24 +17,55 @@
 
 @implementation PFTableViewBinder
 
+- (void)insertRowsForChange:(NSDictionary *)change {
+    NSMutableArray * paths = [NSMutableArray array];
+    NSIndexSet *indexes = [change valueForKey:NSKeyValueChangeIndexesKey];
+    [indexes enumerateIndexesUsingBlock:^(NSUInteger index, BOOL *stop) {
+        NSUInteger sectionAndRow[2] = {0, index};
+        [paths addObject:[NSIndexPath indexPathWithIndexes:sectionAndRow
+                                                    length:2]];
+    }];
+    [self.tableView insertRowsAtIndexPaths:paths
+                          withRowAnimation:UITableViewRowAnimationAutomatic];
+}
+
+- (void)removeRowsForChange:(NSDictionary *)change {
+    NSMutableArray * paths = [NSMutableArray array];
+    NSIndexSet *indexes = [change valueForKey:NSKeyValueChangeIndexesKey];
+    [indexes enumerateIndexesUsingBlock:^(NSUInteger index, BOOL *stop) {
+        NSUInteger sectionAndRow[2] = {0, index};
+        [paths addObject:[NSIndexPath indexPathWithIndexes:sectionAndRow
+                                                    length:2]];
+    }];
+    [self.tableView deleteRowsAtIndexPaths:paths
+                          withRowAnimation:UITableViewRowAnimationAutomatic];
+}
+
 - (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context{
     DLog(@"%@",change);
-    
-    NSArray *newObjects = [change valueForKey:NSKeyValueChangeNewKey];
-    if (newObjects) {
-        NSMutableArray * paths = [NSMutableArray array];
-        NSIndexSet *indexes = [change valueForKey:NSKeyValueChangeIndexesKey];
-        [indexes enumerateIndexesUsingBlock:^(NSUInteger index, BOOL *stop) {
-            NSUInteger sectionAndRow[2] = {0, index};
-            [paths addObject:[NSIndexPath indexPathWithIndexes:sectionAndRow
-                                       length:2]];
-        }];
-        [self.tableView insertRowsAtIndexPaths:paths
-                              withRowAnimation:UITableViewRowAnimationAutomatic];
-        
-    } else {
-        [self.tableView reloadData];
+    NSInteger kind = [change[NSKeyValueChangeKindKey] intValue];
+
+    switch (kind) {
+        case NSKeyValueChangeInsertion:
+            [self insertRowsForChange:change];
+            break;
+          
+        case NSKeyValueChangeRemoval:
+            [self removeRowsForChange:change];
+            break;
+            
+        default:
+            DLog(@"Unknown Table KVO");
+            [self.tableView reloadData];
+            break;
     }
+    
+//    NSArray *newObjects = [change valueForKey:NSKeyValueChangeNewKey];
+//    if (kind == NSKeyValueChangeInsertion) {
+//        [self insertRowsForChange:change];        
+//    } else {
+//        [self.tableView reloadData];
+//    }
 }
 
 - (id) initWithAnchorObject:(id)anchorObject
