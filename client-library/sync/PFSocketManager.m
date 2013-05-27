@@ -239,7 +239,8 @@ static PFSocketManager* sharedInstance;
         if ([syncResponse isKindOfClass:[PushUpdateResponse class]]) {
             PushUpdateResponse *pushUpdateResponse =(PushUpdateResponse *) syncResponse;
             for (PFModelObject *obj in pushUpdateResponse.result) {
-                [[EntityManager sharedInstance] addToInverseRelationshipsModelObject:[[EntityManager sharedInstance] getEntity:obj] ];
+                PFModelObject *dontLeaveMeLikeThisObject = [[EntityManager sharedInstance] getEntity:obj] ;
+                [[EntityManager sharedInstance] addToInverseRelationshipsModelObject:dontLeaveMeLikeThisObject];
 
             }
         } else {

@@ -353,12 +353,14 @@ static EntityManager* sharedInstance;
             } else {
                 // target relationship is bi-directional
                 if (relationship.isCollection) {
-                    if (!modelObject.isShell) {
-                        NSMutableArray *collection = [modelObject mutableArrayValueForKey:relationship.propertyName];
-                        NSUInteger index = [collection indexOfObject:modelObject];
-                        if(index == NSNotFound)[collection addObject:modelObject];
-                    }
-                    
+//                    if (!modelObject.isShell) {
+//                        NSMutableArray *collection = [modelObject mutableArrayValueForKey:relationship.propertyName];
+//                        NSUInteger index = [collection indexOfObject:modelObject];
+//                        if(index == NSNotFound){
+//                            [collection addObject:modelObject];
+//                        }
+//                    }
+                
                     
                 } else {
                     PFModelObject *sourceObject = [modelObject valueForKey:relationship.propertyName];
