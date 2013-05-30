@@ -68,6 +68,14 @@ static PFSocketManager* sharedInstance;
         EnvConfig* config = [EnvConfig sharedInstance];
         [socketIO connectToHost:[config getEnvProperty:@"socket.host"] onPort:[[config getEnvProperty:@"socket.port"] intValue]];
         isConnecting = true;
+        double delayInSeconds = 5.0;
+        dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, (int64_t)(delayInSeconds * NSEC_PER_SEC));
+        dispatch_after(popTime, dispatch_get_main_queue(), ^(void){
+            if (!isConnected) {
+                isConnecting = NO;
+                [self connect];
+            }
+        });
     }
 }
 
@@ -289,17 +297,29 @@ static PFSocketManager* sharedInstance;
      * Custom "connect" message required by PF Gateway
      */
     NSMutableDictionary* connectMessage = [[NSMutableDictionary alloc] init];
-    [connectMessage setValue:@"connect" forKey:@"connect"];
+    
+    if (self.lastSessionId) {
+        [connectMessage setValue:@{@"ensureMessageDelivery":@(YES), @"lastSessionId":self.lastSessionId, @"reconnectId": self.reconnectID} forKey:@"reconnect"];
+    } else {
+        [connectMessage setValue:@{@"ensureMessageDelivery":@(YES)} forKey:@"connect"];
+    }
+
     [socketIO sendEvent:@"message" withData:connectMessage];
+    
     
     NSNotificationCenter *nc = [NSNotificationCenter defaultCenter];
     [nc postNotificationName:@"PFSocketConnected" object:nil];
     
+    self.lastSessionId = [socketIO valueForKey:@"_sid"];
+
     isConnecting = false;
 }
 - (void) socketIODidDisconnect:(SocketIO *)socket{
     NSLog(@"Disonnected from socket :(");
+    
+//    self.lastSessionId = [socketIO valueForKey:@"_sid"];
     isConnected = false;
+    [self connect];
 }
 - (void) socketIO:(SocketIO *)socket didReceiveMessage:(SocketIOPacket *)packet{
     NSLog(@"Got Message: %@", packet.data);
@@ -319,7 +339,7 @@ static PFSocketManager* sharedInstance;
     id<Serializable> result = [self deserializeObject:message];
     
     if([[packet name] isEqualToString:@"gatewayConnectAck"]){
-        
+        self.reconnectID = message;
     }
     
     if(result){

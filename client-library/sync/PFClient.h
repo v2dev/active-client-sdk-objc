@@ -24,7 +24,7 @@
     NSString* refreshToken;
     NSMutableSet* authListeners;
 }
-
+@property (nonatomic, strong) NSString *lastOauthKey;
 @property (nonatomic, readonly) PFSocketManager* syncManager;
 @property (nonatomic, retain) NSString* clientId;
 @property (nonatomic, retain) NSString* userId;

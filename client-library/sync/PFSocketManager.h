@@ -18,11 +18,11 @@
     bool isConnecting;
     NSMutableDictionary* callbacks;
 }
-
+@property (nonatomic , strong) NSString *reconnectID;
 @property (nonatomic, readonly) SocketIO* socketIO;
 //@property (nonatomic, readonly) NSMutableDictionary* model;
 @property (nonatomic) bool isConnected;
-
+@property (nonatomic, strong) NSString* lastSessionId;
 + (PFSocketManager*) sharedInstance;
 
 - (void) sendEvent:(NSString*)eventName data:(id<Serializable>)data callback:(PFInvocation*) inv;

@@ -31,6 +31,7 @@
         [dict setValue:redirectUri forKey:@"redirectUri"];
         [dict setValue:accessToken forKey:@"accessToken"];
         [dict setValue:svcOauthKey forKey:@"svcOauthKey"];
+        
     }
     
     return dict;

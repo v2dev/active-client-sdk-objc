@@ -117,6 +117,18 @@ static PFClient* _sharedInstance;
         [inv invokeWithArgument:success];
     }
 }
+- (NSString *)userId{
+    if (!userId) {
+        userId = @"";
+    }
+    return userId;
+}
+- (NSString *)token{
+    if (!token) {
+        token = @"";
+    }
+    return token;
+}
 
 - (void)getAuthenticatedUser{
     Class iUserAnchorClass = [[self class] iUserAnchorClass];
@@ -182,25 +194,35 @@ static PFClient* _sharedInstance;
 }
 
 
-/**
- * Service method to make it easier for the client application to issue a login request
- */ 
-+ (bool) loginWithOAuthCode:(NSString *)oauthCode oauthKey:(NSString *)oauthKey callbackTarget:(NSObject *)target method:(SEL)selector{
++ (AuthenticateOAuthCodeRequest *)newAuthenticateOAuthRequestWithOauthCode:(NSString *) oauthCode {
+    //    ServiceApplicationOAuth* saOAuth = [_sharedInstance.regAppOAuths objectAtIndex:0]; // ???: this is probably outdated
+    NSString *oauthKey = [self sharedInstance].lastOauthKey;
     
-    if(target && selector)
-        [PFClient addListenerForAuthEvents:target method:selector];
-    
-//    ServiceApplicationOAuth* saOAuth = [_sharedInstance.regAppOAuths objectAtIndex:0]; // ???: this is probably outdated
     AuthenticateOAuthCodeRequest* req = [[AuthenticateOAuthCodeRequest alloc] init];
-    req.userId = @"";
-    req.token = @"";
+    req.userId = [self sharedInstance].userId;
+    req.token = [self sharedInstance].token;
     req.clientType = @"";
     req.clientId = [[EnvConfig oauthProviderDictForKey:oauthKey] objectForKey:@"client_id"];
     req.redirectUri = [[EnvConfig oauthProviderDictForKey:oauthKey] objectForKey:@"redirectUri"];
     req.code = oauthCode;
     req.deviceId = [[NSUUID UUID] UUIDString];
     req.regAppKey = @"";
-    req.authProvider = [[[EnvConfig oauthProviderDictForKey:oauthKey] objectForKey:@"paradigm"] uppercaseString]; // !!!: This should come from the env.plist
+    req.authProvider = [[[EnvConfig oauthProviderDictForKey:oauthKey] objectForKey:@"paradigm"] uppercaseString];
+    return req;
+
+}
+
+/**
+ * Service method to make it easier for the client application to issue a login request
+ */ 
++ (bool) loginWithOAuthCode:(NSString *)oauthCode oauthKey:(NSString *)oauthKey callbackTarget:(NSObject *)target method:(SEL)selector{
+    [self sharedInstance].lastOauthKey = oauthKey;
+    if(target && selector)
+        [PFClient addListenerForAuthEvents:target method:selector];
+    
+    AuthenticateOAuthCodeRequest *req;
+    req = [self newAuthenticateOAuthRequestWithOauthCode:oauthCode];
+    
     PFInvocation* callback = [[PFInvocation alloc] initWithTarget:[PFClient sharedInstance] method:@selector(receivedAuthenticateOAuthCodeResponse:)];
 
     [[PFSocketManager sharedInstance] sendEvent:@"authenticateOAuthCode" data:req callback:callback];
@@ -215,24 +237,15 @@ static PFClient* _sharedInstance;
 + (void) autoLogin{
         
     // If we have old info to try to and renew our authenticated state then try
-    if(_sharedInstance.token && _sharedInstance.clientId && _sharedInstance.accessToken && _sharedInstance.refreshToken){
-        ServiceApplicationOAuth* saOAuth = [_sharedInstance.regAppOAuths objectAtIndex:0];
-
-        AuthenticateOAuthAccessTokenRequest* req = [[AuthenticateOAuthAccessTokenRequest alloc] init];
-        req.userId = [PFClient sharedInstance].userId;
-        req.token = [PFClient sharedInstance].token;
-        req.clientType = @"N";
-        req.clientId = [PFClient sharedInstance].clientId;
-        req.accessToken = [PFClient sharedInstance].accessToken;
-        req.refreshToken = [PFClient sharedInstance].refreshToken; //saOAuth.serviceApplication.serviceProvider.;//@"psiglobal";
-        req.svcOauthKey = saOAuth.appKey; //saOAuth.serviceApplication.serviceProvider.;
-        req.regAppKey = @"";
-        req.deviceId = @"";
-    
-        PFInvocation* callback = [[PFInvocation alloc] initWithTarget:[PFClient sharedInstance] method:@selector(autoLoginCallback:)];
-    
-        [[PFSocketManager sharedInstance] sendEvent:@"authenticateOAuthAccessToken" data:req callback:callback];
-    }
+//    if(_sharedInstance.token && _sharedInstance.clientId && _sharedInstance.accessToken && _sharedInstance.refreshToken){
+//        //ServiceApplicationOAuth* saOAuth = [_sharedInstance.regAppOAuths objectAtIndex:0];
+//
+//        AuthenticateOAuthAccessTokenRequest* req = [self newAuthenticateOAuthRequestWithOauthCode:nil];
+//        
+//        PFInvocation* callback = [[PFInvocation alloc] initWithTarget:[PFClient sharedInstance] method:@selector(autoLoginCallback:)];
+//    
+//        [[PFSocketManager sharedInstance] sendEvent:@"authenticateOAuthAccessToken" data:req callback:callback];
+//    }
     
 }
 
