@@ -55,8 +55,9 @@ static PFAuthManager *_sharedInstance = nil;
     [PFClient loginWithOAuthCode:code oauthKey:self.oauthAuthenticationViewController.oauthKey callbackTarget:self method:@selector(didLogin:)];
 }
 - (void) didLogin:(id) package{
-    [self.delegate authenticationSucceeded];
-    [(UIViewController *)(self.delegate) dismissModalViewControllerAnimated:YES ];
+    [(UIViewController *)(self.delegate) dismissViewControllerAnimated:YES completion:^{
+        [self.delegate authenticationSucceeded];
+    }];
     
 }
 
