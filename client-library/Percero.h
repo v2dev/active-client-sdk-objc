@@ -11,6 +11,7 @@
 #import <Percero/PFBindingTableViewCell.h>
 //#import <Percero/PFGoogleOauth.h>
 #import <Percero/EntityManager.h>
+#import <Percero/PFArraysBinder.h>
 #import <Percero/Serializable.h>
 #import <Percero/PFModelObject.h>
 #import <Percero/ServiceApplicationOAuth.h>

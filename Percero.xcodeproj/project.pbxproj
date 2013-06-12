@@ -51,6 +51,9 @@
 		6A841FDD172AF2EE00A5B768 /* PFObjectBinder.h in Headers */ = {isa = PBXBuildFile; fileRef = 6A841FDB172AF2EE00A5B768 /* PFObjectBinder.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		6A841FDE172AF2EE00A5B768 /* PFObjectBinder.m in Sources */ = {isa = PBXBuildFile; fileRef = 6A841FDC172AF2EE00A5B768 /* PFObjectBinder.m */; };
 		6A841FDF172AF2EE00A5B768 /* PFObjectBinder.m in Sources */ = {isa = PBXBuildFile; fileRef = 6A841FDC172AF2EE00A5B768 /* PFObjectBinder.m */; };
+		6A8460801767D6240095E5E5 /* PFArraysBinder.h in Headers */ = {isa = PBXBuildFile; fileRef = 6A84607E1767D6240095E5E5 /* PFArraysBinder.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		6A8460811767D6240095E5E5 /* PFArraysBinder.m in Sources */ = {isa = PBXBuildFile; fileRef = 6A84607F1767D6240095E5E5 /* PFArraysBinder.m */; };
+		6A8460821767D6240095E5E5 /* PFArraysBinder.m in Sources */ = {isa = PBXBuildFile; fileRef = 6A84607F1767D6240095E5E5 /* PFArraysBinder.m */; };
 		6A87EE28174544B000C69431 /* PFGoogleOauthViewController.h in Headers */ = {isa = PBXBuildFile; fileRef = 6A87EE26174544B000C69431 /* PFGoogleOauthViewController.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		6A87EE29174544B000C69431 /* PFGoogleOauthViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6A87EE27174544B000C69431 /* PFGoogleOauthViewController.m */; };
 		6A87EE2A174544B000C69431 /* PFGoogleOauthViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6A87EE27174544B000C69431 /* PFGoogleOauthViewController.m */; };
@@ -283,6 +286,8 @@
 		6A78CFCE173062200037256F /* PFBindingTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PFBindingTableViewCell.m; sourceTree = "<group>"; };
 		6A841FDB172AF2EE00A5B768 /* PFObjectBinder.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PFObjectBinder.h; sourceTree = "<group>"; };
 		6A841FDC172AF2EE00A5B768 /* PFObjectBinder.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PFObjectBinder.m; sourceTree = "<group>"; };
+		6A84607E1767D6240095E5E5 /* PFArraysBinder.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PFArraysBinder.h; sourceTree = "<group>"; };
+		6A84607F1767D6240095E5E5 /* PFArraysBinder.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PFArraysBinder.m; sourceTree = "<group>"; };
 		6A87EE26174544B000C69431 /* PFGoogleOauthViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PFGoogleOauthViewController.h; sourceTree = "<group>"; };
 		6A87EE27174544B000C69431 /* PFGoogleOauthViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PFGoogleOauthViewController.m; sourceTree = "<group>"; };
 		6A87F7CF1721D6E200FDCDBE /* IUserIdentifier.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IUserIdentifier.h; sourceTree = "<group>"; };
@@ -771,9 +776,9 @@
 		F2B0263C15C9A495000375CE = {
 			isa = PBXGroup;
 			children = (
+				F2B0264C15C9A495000375CE /* Percero */,
 				F2B0266015C9A495000375CE /* client-libraryTests */,
 				F2B0264915C9A495000375CE /* Frameworks */,
-				F2B0264C15C9A495000375CE /* Percero */,
 				F2B0264815C9A495000375CE /* Products */,
 				F2300CA415EE8CC80037A4A4 /* Submodules */,
 			);
@@ -806,6 +811,8 @@
 				F2721E8C15C9B1C20040FC3E /* Model */,
 				F2B0264D15C9A495000375CE /* Supporting Files */,
 				F23C67F715CAE66A00E1E0F0 /* Percero.h */,
+				6A84607E1767D6240095E5E5 /* PFArraysBinder.h */,
+				6A84607F1767D6240095E5E5 /* PFArraysBinder.m */,
 			);
 			name = Percero;
 			path = "client-library";
@@ -877,6 +884,7 @@
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				6A8460801767D6240095E5E5 /* PFArraysBinder.h in Headers */,
 				F2721EDF15C9B20E0040FC3E /* _Super_ServiceProvider.h in Headers */,
 				F2721EE115C9B20E0040FC3E /* AuthenticateOAuthAccessTokenRequest.h in Headers */,
 				F2721EE915C9B20E0040FC3E /* _Super_RegisteredApplication.h in Headers */,
@@ -1169,6 +1177,7 @@
 				F8BFB15B16DEB53A000C9808 /* GTMOAuth2SignIn.m in Sources */,
 				F8BFB15E16DEB53A000C9808 /* GTMOAuth2ViewControllerTouch.m in Sources */,
 				F8BFB16216DEB53A000C9808 /* GTMReadMonitorInputStream.m in Sources */,
+				6A8460811767D6240095E5E5 /* PFArraysBinder.m in Sources */,
 				6AF998E516F0F56700C962A4 /* PushUpdateResponse.m in Sources */,
 				6AF998EA16F10E2D00C962A4 /* PushDeleteResponse.m in Sources */,
 				6AB0F68016F2942600D7F7D5 /* PutRequest.m in Sources */,
@@ -1207,6 +1216,7 @@
 				F8BFB14D16DEB53A000C9808 /* GTMHTTPFetcherService.m in Sources */,
 				F8BFB15016DEB53A000C9808 /* GTMHTTPFetchHistory.m in Sources */,
 				F8BFB15316DEB53A000C9808 /* GTMHTTPUploadFetcher.m in Sources */,
+				6A8460821767D6240095E5E5 /* PFArraysBinder.m in Sources */,
 				F8BFB15616DEB53A000C9808 /* GTMMIMEDocument.m in Sources */,
 				F8BFB15916DEB53A000C9808 /* GTMOAuth2Authentication.m in Sources */,
 				F8BFB15C16DEB53A000C9808 /* GTMOAuth2SignIn.m in Sources */,

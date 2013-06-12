@@ -34,8 +34,7 @@
     NSIndexSet *indexes = [change valueForKey:NSKeyValueChangeIndexesKey];
     [indexes enumerateIndexesUsingBlock:^(NSUInteger index, BOOL *stop) {
         NSUInteger sectionAndRow[2] = {0, index};
-        [paths addObject:[NSIndexPath indexPathWithIndexes:sectionAndRow
-                                                    length:2]];
+        [paths addObject:[NSIndexPath indexPathWithIndexes:sectionAndRow length:2]];
     }];
     [self.tableView deleteRowsAtIndexPaths:paths
                           withRowAnimation:UITableViewRowAnimationAutomatic];
