@@ -19,6 +19,21 @@
 @end
 
 @implementation PFArraysBinder
+
+- (NSString *) keyPathLocal{
+    return [self.keypaths firstObject];
+}
+- (NSArray *) keyPathsNext{
+    
+    NSArray *result = nil;
+    if (self.keypaths.count > 1) {
+        NSMutableArray * newKeyPathsArray = [self.keypaths mutableCopy];
+        [newKeyPathsArray removeObjectAtIndex:0];
+        result = [newKeyPathsArray copy];
+    }
+   
+    return result;
+}
 - (NSMutableDictionary *)children{
     if (!_children) {
         _children = [[NSMutableDictionary alloc] init];
@@ -29,69 +44,54 @@
 - (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context{
     DLog(@"\n\nchange:%@", change);
     if (self.delegate) {
-        NSString *extendedKeypath = [NSString stringWithFormat:@"%@.%@",self.keypath1, keyPath];
+        NSString *extendedKeypath = [NSString stringWithFormat:@"%@.%@",[self keyPathLocal], keyPath];
 
         [self.delegate observeValueForKeyPath:extendedKeypath ofObject:object change:change context:context];
     }
 }
 
 
-- (void) bindToArray1{
+- (void) bindToArray{
     
-    NSString *keyPath = self.keypath1;
-    if (!keyPath) {
-        keyPath = self.keypath2;
-    }
+    NSString *keyPath = [self keyPathLocal];
+    
     if (keyPath) {
         [self.dataObject addObserver:self forKeyPath:keyPath options:0 context:nil];
     }
     
     
 }
-- (void) buildArrayBinder2 {
-    if (self.keypath1 && self.keypath2) {
-        NSArray *dataArray = [self.dataObject valueForKeyPath:self.keypath1];
+- (void) buildChildrenArray{
+    NSArray *keypathsNext = [self keyPathsNext];
+    if (keypathsNext && keypathsNext.count) {
+        NSArray *dataArray = [self.dataObject valueForKeyPath:[self keyPathLocal]];
         for (PFModelObject *object in dataArray) {
-            NSString *newKey = [object arraysBinderChildrenKey];
-            PFArraysBinder *newArrayBinder = [[PFArraysBinder alloc] initWithDataObject:object keyPath:self.keypath2];
+            NSString *newChildKey = [object arraysBinderChildrenKey];
+            PFArraysBinder *newArrayBinder = [[PFArraysBinder alloc] initWithDataObject:object keyPaths:keypathsNext];
             newArrayBinder.delegate = self;
-            [self.children setObject:newArrayBinder forKey:newKey];
+            [self.children setObject:newArrayBinder forKey:newChildKey];
         }
     }
     
 }
 
-- (id)initWithDataObject:(PFModelObject *)dataObject keyPath:(NSString *)keypath
-{
+- (id)initWithDataObject:(PFModelObject *)dataObject keyPaths:(NSArray *)keypaths{
     if ([self init]){
         _dataObject = dataObject;
-        _keypath1 = keypath;
+        _keypaths = keypaths;
         
-        [self bindToArray1];
-        
+        [self bindToArray];
+        [self buildChildrenArray];
         
     }
     return self;
 }
 
-- (id)initWithDataObject:(PFModelObject *)dataObject keyPath1:(NSString *)keypath1 keyPath2:(NSString *)keypath2
-{
-    if ([self init]){
-        _dataObject = dataObject;
-        _keypath1 = keypath1;
-        _keypath2 = keypath2;
-        
-        [self bindToArray1];
-        [self buildArrayBinder2];
-        
-    }
-    return self;
-}
 
 @end
 
 
-@implementation PFModelObject (PFArrayBinder)
+@implementation PFModelObject (PFArraysBinder)
 
 - (NSString *)arraysBinderChildrenKey{
     return  [NSString stringWithFormat:@"%@-%@",self.class,self.ID];
