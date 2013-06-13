@@ -37,18 +37,28 @@
 
 
 - (void) bindToArray1{
-
-    [self.dataObject addObserver:self forKeyPath:self.keypath1 options:0 context:nil];
+    
+    NSString *keyPath = self.keypath1;
+    if (!keyPath) {
+        keyPath = self.keypath2;
+    }
+    if (keyPath) {
+        [self.dataObject addObserver:self forKeyPath:keyPath options:0 context:nil];
+    }
+    
     
 }
 - (void) buildArrayBinder2 {
-    NSArray *dataArray = [self.dataObject valueForKeyPath:self.keypath1];
-    for (PFModelObject *object in dataArray) {
-        NSString *newKey = [object arraysBinderChildrenKey];
-        PFArraysBinder *newArrayBinder = [[PFArraysBinder alloc] initWithDataObject:object keyPath:self.keypath2];
-        newArrayBinder.delegate = self;
-        [self.children setObject:newArrayBinder forKey:newKey];
+    if (self.keypath1 && self.keypath2) {
+        NSArray *dataArray = [self.dataObject valueForKeyPath:self.keypath1];
+        for (PFModelObject *object in dataArray) {
+            NSString *newKey = [object arraysBinderChildrenKey];
+            PFArraysBinder *newArrayBinder = [[PFArraysBinder alloc] initWithDataObject:object keyPath:self.keypath2];
+            newArrayBinder.delegate = self;
+            [self.children setObject:newArrayBinder forKey:newKey];
+        }
     }
+    
 }
 
 - (id)initWithDataObject:(PFModelObject *)dataObject keyPath:(NSString *)keypath

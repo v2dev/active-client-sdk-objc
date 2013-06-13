@@ -9,9 +9,11 @@
 #import <Foundation/Foundation.h>
 #import <UIKit/UIKit.h>
 
+/*! Indicates how section data will be displayed */
 typedef enum {
-    PFTableViewDataSourceModeHeader,
-    PFTableViewDataSourceModeCell,
+    
+    PFTableViewDataSourceModeHeader, /*!< Displays section data as a header */
+    PFTableViewDataSourceModeCell, /*!< Displays section data as a cell */
 } PFTableViewDataSourceMode;
 
 
@@ -23,8 +25,8 @@ typedef enum {
 @property (strong, nonatomic) NSString *keyPathForCellLabelText;
 @property (assign, nonatomic) PFTableViewDataSourceMode sectionMode;
 @property (assign, nonatomic) BOOL canDeleteRows;
-
 @property (strong, nonatomic) Class pfBindingTableViewCellSubclass;
+
 - (id) tableView:(UITableView *)tableView dataObjectForRowAtIndexPath:(NSIndexPath *)indexPath;
 
 + (PFTableViewDataSource *)TableSectionDataWithAnchorObject:(id) anchorObject

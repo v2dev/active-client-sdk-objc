@@ -9,9 +9,11 @@
 #import "PFTableViewDataSource.h"
 #import "PFBindingTableViewCell.h"
 #import "PFModelObject.h"
+#import "PFArraysBinder.h"
+
 @interface PFTableViewDataSource ()
 
-@property (nonatomic, strong) NSMutableArray *rowBindings;
+
 
 @end
 
@@ -160,6 +162,7 @@ pfBindingTableViewCellSubclass: (Class) pfBindingTableViewCellSubclass
     PFTableViewDataSource *result = [[PFTableViewDataSource alloc] initWithAnchorObject:anchorObject pfBindingTableViewCellSubclass:pfBindingTableViewCellSubclass keyPathForSectionsArray:keyPathForSectionsArray keyPathForCellsArray:keyPathForCellsArray keyPathForSectionLabelText:keyPathForSectionLabelText keyPathForCellLabelText:keyPathForCellLabelText sectionMode:sectionMode];
     return result;
 }
+
 - (void)setAnchorObject:(id)anchorObject{
     _anchorObject = anchorObject;
     

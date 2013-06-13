@@ -8,11 +8,13 @@
 
 #import "PFTableViewBinder.h"
 #import "PFBindingTableViewCell.h"
+#import "PFArraysBinder.h"
 
 @interface PFTableViewBinder (){
     BOOL isRegistered;
 }
 //@property (nonatomic, strong) NSMutableArray *rowBindings;
+@property (nonatomic, strong) PFArraysBinder *arraysBinder;
 @end
 
 @implementation PFTableViewBinder
@@ -95,22 +97,24 @@ pfBindingTableViewCellSubclass: (Class) pfBindingTableViewCellSubclass
     return self;
 }
 - (void)registerKVO{
-    if (!isRegistered) {
-        NSString *keyPath = [NSString stringWithFormat:@"anchorObject.%@",self.keyPathForCellsArray];
-        [self addObserver:self forKeyPath:keyPath options:(NSKeyValueObservingOptionNew) context:NULL];
-        DLog(@"register:%@.%@",self,keyPath);
-        
-        isRegistered = YES;
-    }
+    self.arraysBinder = [[PFArraysBinder alloc] initWithDataObject:self.anchorObject keyPath1:self.keyPathForSectionsArray keyPath2:self.keyPathForCellsArray];
+    self.arraysBinder.delegate = self;
+//    if (!isRegistered) {
+//        NSString *keyPath = [NSString stringWithFormat:@"anchorObject.%@",self.keyPathForCellsArray];
+//        [self addObserver:self forKeyPath:keyPath options:(NSKeyValueObservingOptionNew) context:NULL];
+//        DLog(@"register:%@.%@",self,keyPath);
+//        
+//        isRegistered = YES;
+//    }
 }
 - (void)unregisterKVO{
-    if (isRegistered) {
-        NSString *keyPath = [NSString stringWithFormat:@"anchorObject.%@",self.keyPathForCellsArray];
-
-        [self removeObserver:self forKeyPath:keyPath];
-        DLog(@"unregister:%@.%@",self,keyPath);
-        isRegistered = NO;
-    }
+//    if (isRegistered) {
+//        NSString *keyPath = [NSString stringWithFormat:@"anchorObject.%@",self.keyPathForCellsArray];
+//
+//        [self removeObserver:self forKeyPath:keyPath];
+//        DLog(@"unregister:%@.%@",self,keyPath);
+//        isRegistered = NO;
+//    }
 }
 + (PFTableViewBinder *)TableSectionDataWithAnchorObject:(id)anchorObject
                          tableView:(UITableView *) tableView

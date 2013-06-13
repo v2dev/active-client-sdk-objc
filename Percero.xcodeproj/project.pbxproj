@@ -280,7 +280,7 @@
 		6A729BF11725CE74001F4BB8 /* FindByExampleRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = FindByExampleRequest.m; path = model/FindByExampleRequest.m; sourceTree = "<group>"; };
 		6A729BF51725E6FB001F4BB8 /* FindByExampleResponse.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FindByExampleResponse.h; sourceTree = "<group>"; };
 		6A729BF61725E6FB001F4BB8 /* FindByExampleResponse.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FindByExampleResponse.m; sourceTree = "<group>"; };
-		6A78CFC81730441E0037256F /* PFTableViewDataSource.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PFTableViewDataSource.h; sourceTree = "<group>"; };
+		6A78CFC81730441E0037256F /* PFTableViewDataSource.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PFTableViewDataSource.h; sourceTree = "<group>"; tabWidth = 4; };
 		6A78CFC91730441E0037256F /* PFTableViewDataSource.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PFTableViewDataSource.m; sourceTree = "<group>"; };
 		6A78CFCD173062200037256F /* PFBindingTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PFBindingTableViewCell.h; sourceTree = "<group>"; };
 		6A78CFCE173062200037256F /* PFBindingTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PFBindingTableViewCell.m; sourceTree = "<group>"; };
