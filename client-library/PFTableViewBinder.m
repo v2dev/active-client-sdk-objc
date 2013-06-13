@@ -96,8 +96,18 @@ pfBindingTableViewCellSubclass: (Class) pfBindingTableViewCellSubclass
     
     return self;
 }
+- (NSArray *) keyPathsArray {
+    NSMutableArray * result = [[NSMutableArray alloc] initWithCapacity:2];
+    if (self.keyPathForSectionsArray) {
+        [result addObject:self.keyPathForSectionsArray];
+    }
+    if (self.keyPathForCellsArray) {
+        [result addObject:self.keyPathForCellsArray];
+    }
+    return result;
+}
 - (void)registerKVO{
-    self.arraysBinder = [[PFArraysBinder alloc] initWithDataObject:self.anchorObject keyPath1:self.keyPathForSectionsArray keyPath2:self.keyPathForCellsArray];
+    self.arraysBinder = [[PFArraysBinder alloc] initWithDataObject:self.anchorObject keyPaths:[self keyPathsArray]];
     self.arraysBinder.delegate = self;
 //    if (!isRegistered) {
 //        NSString *keyPath = [NSString stringWithFormat:@"anchorObject.%@",self.keyPathForCellsArray];
