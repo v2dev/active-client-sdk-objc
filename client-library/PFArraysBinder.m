@@ -21,7 +21,11 @@
 @implementation PFArraysBinder
 
 - (NSString *) keyPathLocal{
-    return [self.keypaths firstObject];
+    NSString *result;
+    if (self.keypaths && self.keypaths.count) {
+        result = self.keypaths[0];
+    }
+    return result;
 }
 - (NSArray *) keyPathsNext{
     
