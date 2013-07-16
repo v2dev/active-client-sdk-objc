@@ -10,6 +10,7 @@
 #import "ClassIDPair.h"
 #import "PFClient.h"
 #import "Utility.h"
+#import "PFDataManager.h"
 
 @implementation PFModelObject
 
@@ -50,7 +51,7 @@
 
 - (void)requestUpdate{
     
-        [PFClient sendGetByIdRequest:self.remoteClassName id:self.ID target:nil method:nil];
+        [PFDataManager sendGetByIdRequest:self.remoteClassName id:self.ID target:nil method:nil];
 }
 
 - (void)delete{

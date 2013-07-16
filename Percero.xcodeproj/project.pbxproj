@@ -96,6 +96,8 @@
 		6AFAF6B81701E2AE0026151D /* RemoveRequest.h in Headers */ = {isa = PBXBuildFile; fileRef = 6AFAF6B61701E2AE0026151D /* RemoveRequest.h */; };
 		6AFAF6B91701E2AE0026151D /* RemoveRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 6AFAF6B71701E2AE0026151D /* RemoveRequest.m */; };
 		6AFAF6BA1701E2AE0026151D /* RemoveRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 6AFAF6B71701E2AE0026151D /* RemoveRequest.m */; };
+		6AFBF825176BC65400DDA9C9 /* PFDataManager.h in Headers */ = {isa = PBXBuildFile; fileRef = 6AFBF823176BC65400DDA9C9 /* PFDataManager.h */; };
+		6AFBF826176BC65400DDA9C9 /* PFDataManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 6AFBF824176BC65400DDA9C9 /* PFDataManager.m */; };
 		EAF93FA516640BB600F581F4 /* NSObject+SBJson.h in Headers */ = {isa = PBXBuildFile; fileRef = EAF93F8C16640BB500F581F4 /* NSObject+SBJson.h */; };
 		EAF93FA616640BB600F581F4 /* NSObject+SBJson.m in Sources */ = {isa = PBXBuildFile; fileRef = EAF93F8D16640BB500F581F4 /* NSObject+SBJson.m */; };
 		EAF93FA716640BB600F581F4 /* SBJson.h in Headers */ = {isa = PBXBuildFile; fileRef = EAF93F8E16640BB500F581F4 /* SBJson.h */; };
@@ -320,6 +322,8 @@
 		6AF998E816F10E2D00C962A4 /* PushDeleteResponse.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PushDeleteResponse.m; path = model/PushDeleteResponse.m; sourceTree = "<group>"; };
 		6AFAF6B61701E2AE0026151D /* RemoveRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = RemoveRequest.h; path = model/RemoveRequest.h; sourceTree = "<group>"; };
 		6AFAF6B71701E2AE0026151D /* RemoveRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = RemoveRequest.m; path = model/RemoveRequest.m; sourceTree = "<group>"; };
+		6AFBF823176BC65400DDA9C9 /* PFDataManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PFDataManager.h; sourceTree = "<group>"; };
+		6AFBF824176BC65400DDA9C9 /* PFDataManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PFDataManager.m; sourceTree = "<group>"; };
 		EAF93F8C16640BB500F581F4 /* NSObject+SBJson.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSObject+SBJson.h"; sourceTree = "<group>"; };
 		EAF93F8D16640BB500F581F4 /* NSObject+SBJson.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSObject+SBJson.m"; sourceTree = "<group>"; };
 		EAF93F8E16640BB500F581F4 /* SBJson.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SBJson.h; sourceTree = "<group>"; };
@@ -813,6 +817,8 @@
 				F23C67F715CAE66A00E1E0F0 /* Percero.h */,
 				6A84607E1767D6240095E5E5 /* PFArraysBinder.h */,
 				6A84607F1767D6240095E5E5 /* PFArraysBinder.m */,
+				6AFBF823176BC65400DDA9C9 /* PFDataManager.h */,
+				6AFBF824176BC65400DDA9C9 /* PFDataManager.m */,
 			);
 			name = Percero;
 			path = "client-library";
@@ -981,6 +987,7 @@
 				6A729BEF1725BA10001F4BB8 /* ModelUtility.h in Headers */,
 				6A729BF21725CE74001F4BB8 /* FindByExampleRequest.h in Headers */,
 				6A729BF71725E6FC001F4BB8 /* FindByExampleResponse.h in Headers */,
+				6AFBF825176BC65400DDA9C9 /* PFDataManager.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1202,6 +1209,7 @@
 				6AEBF702173DE23D004DE359 /* NSMutableArray+PFUpdate.m in Sources */,
 				6A9F3C381741CD3500164A3D /* PFTableViewBinder.m in Sources */,
 				6A87EE29174544B000C69431 /* PFGoogleOauthViewController.m in Sources */,
+				6AFBF826176BC65400DDA9C9 /* PFDataManager.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
