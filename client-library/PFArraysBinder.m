@@ -60,7 +60,7 @@
     NSString *keyPath = [self keyPathLocal];
     
     if (keyPath) {
-        [self.dataObject addObserver:self forKeyPath:keyPath options:0 context:nil];
+        [self.dataObject addObserver:self forKeyPath:keyPath options:NSKeyValueObservingOptionNew context:nil];
     }
     
     
