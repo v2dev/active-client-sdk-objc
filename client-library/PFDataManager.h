@@ -9,6 +9,6 @@
 #import <Foundation/Foundation.h>
 
 @interface PFDataManager : NSObject
-+ (void) sendGetByIdRequest:(NSString*)className id:(NSString*)id target:(NSObject*) target method:(SEL) selector;
++ (void) sendFindByIdRequest:(NSString*)className id:(NSString*)id target:(NSObject*) target method:(SEL) selector;
 
 @end

@@ -51,7 +51,7 @@
 
 - (void)requestUpdate{
     
-        [PFDataManager sendGetByIdRequest:self.remoteClassName id:self.ID target:nil method:nil];
+        [PFDataManager sendFindByIdRequest:self.remoteClassName id:self.ID target:nil method:nil];
 }
 
 - (void)delete{
