@@ -14,6 +14,7 @@
 #import "PFClient.h"
 #import "PFTargetRelationship.h"
 #import "PFSourceRelationship.h"
+#import "PFDataManager.h"
 
 static EntityManager* sharedInstance;
 
@@ -394,15 +395,17 @@ static EntityManager* sharedInstance;
 
 - (void) loadEntity:(id<PFModelObject>)entity{
     
-    PFClient* ad = [PFClient sharedInstance];
+//    PFClient* ad = [PFClient sharedInstance];
+    [PFDataManager sendFindByIdRequestWithRemoteClassName:[entity remoteClassName] objectId:entity.ID callBackTarget:nil callbackMethod:nil];
     
-    FindByIdRequest* req = [[FindByIdRequest alloc] init];
-    req.theClassId = entity.ID;
-    req.theClassName = [entity remoteClassName];
-    req.clientId = ad.clientId;
-    req.userId = ad.userId;
-
-    [[PFSocketManager sharedInstance] sendEvent:@"findById" data:req callback:nil];
+    
+//    FindByIdRequest* req = [[FindByIdRequest alloc] init];
+//    req.theClassId = entity.ID;
+//    req.theClassName = [entity remoteClassName];
+//    req.clientId = ad.clientId;
+//    req.userId = ad.userId;
+//    
+//    [[PFSocketManager sharedInstance] sendEvent:@"findById" data:req callback:nil];
 }
 - (void) didreceiveDelete{
     

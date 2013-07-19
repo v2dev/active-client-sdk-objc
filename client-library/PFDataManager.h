@@ -9,6 +9,6 @@
 #import <Foundation/Foundation.h>
 
 @interface PFDataManager : NSObject
-+ (void) sendFindByIdRequest:(NSString*)className id:(NSString*)id target:(NSObject*) target method:(SEL) selector;
++ (void) sendFindByIdRequestWithRemoteClassName:(NSString*)className objectId:(NSString*)id callBackTarget:(NSObject*) target callbackMethod:(SEL) selector;
 
 @end

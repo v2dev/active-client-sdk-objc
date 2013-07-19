@@ -270,7 +270,7 @@ static PFSocketManager* sharedInstance;
         ((SyncRequest*)data).messageId = requestId;
         [self cacheSyncRequest:data];
     }
-    
+
     if(inv){
         [callbacks setObject:inv forKey:requestId];
     }

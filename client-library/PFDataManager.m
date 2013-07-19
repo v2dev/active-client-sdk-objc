@@ -15,7 +15,7 @@
 @implementation PFDataManager
 
 
-+ (void) sendFindByIdRequest:(NSString*)className id:(NSString*)id target:(NSObject*) target method:(SEL) selector{
++ (void) sendFindByIdRequestWithRemoteClassName:(NSString*)className objectId:(NSString*)id callBackTarget:(NSObject*) target callbackMethod:(SEL) selector{
     FindByIdRequest* request = [[FindByIdRequest alloc] init];
     [request setClientId:[PFClient sharedInstance].clientId];
     [request setToken:[PFClient sharedInstance].token];
