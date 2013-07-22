@@ -10,5 +10,5 @@
 
 @interface PFDataManager : NSObject
 + (void) sendFindByIdRequestWithRemoteClassName:(NSString*)className objectId:(NSString*)id callBackTarget:(NSObject*) target callbackMethod:(SEL) selector;
-
++ (void) setup;
 @end

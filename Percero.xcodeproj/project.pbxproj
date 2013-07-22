@@ -83,6 +83,8 @@
 		6AD4553D1701FDA20038A988 /* RemoveResponse.h in Headers */ = {isa = PBXBuildFile; fileRef = 6AD4553B1701FDA20038A988 /* RemoveResponse.h */; };
 		6AD4553E1701FDA20038A988 /* RemoveResponse.m in Sources */ = {isa = PBXBuildFile; fileRef = 6AD4553C1701FDA20038A988 /* RemoveResponse.m */; };
 		6AD4553F1701FDA20038A988 /* RemoveResponse.m in Sources */ = {isa = PBXBuildFile; fileRef = 6AD4553C1701FDA20038A988 /* RemoveResponse.m */; };
+		6AE3690117999252006A784E /* DataModel.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 6AE368FF17999252006A784E /* DataModel.xcdatamodeld */; };
+		6AE3690217999252006A784E /* DataModel.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 6AE368FF17999252006A784E /* DataModel.xcdatamodeld */; };
 		6AEBF701173DE23D004DE359 /* NSMutableArray+PFUpdate.h in Headers */ = {isa = PBXBuildFile; fileRef = 6AEBF6FF173DE23D004DE359 /* NSMutableArray+PFUpdate.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		6AEBF702173DE23D004DE359 /* NSMutableArray+PFUpdate.m in Sources */ = {isa = PBXBuildFile; fileRef = 6AEBF700173DE23D004DE359 /* NSMutableArray+PFUpdate.m */; };
 		6AEBF703173DE23D004DE359 /* NSMutableArray+PFUpdate.m in Sources */ = {isa = PBXBuildFile; fileRef = 6AEBF700173DE23D004DE359 /* NSMutableArray+PFUpdate.m */; };
@@ -312,6 +314,7 @@
 		6ACA5BCB16E8FFE700CB8FBD /* IUserRole.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = IUserRole.h; sourceTree = "<group>"; };
 		6AD4553B1701FDA20038A988 /* RemoveResponse.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = RemoveResponse.h; path = model/RemoveResponse.h; sourceTree = "<group>"; };
 		6AD4553C1701FDA20038A988 /* RemoveResponse.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = RemoveResponse.m; path = model/RemoveResponse.m; sourceTree = "<group>"; };
+		6AE3690017999252006A784E /* DataModel.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = DataModel.xcdatamodel; sourceTree = "<group>"; };
 		6AEBF6FF173DE23D004DE359 /* NSMutableArray+PFUpdate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSMutableArray+PFUpdate.h"; sourceTree = "<group>"; };
 		6AEBF700173DE23D004DE359 /* NSMutableArray+PFUpdate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSMutableArray+PFUpdate.m"; sourceTree = "<group>"; };
 		6AEBF704173DE25A004DE359 /* update_arraysTests.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = update_arraysTests.h; sourceTree = "<group>"; };
@@ -819,6 +822,7 @@
 				6A84607F1767D6240095E5E5 /* PFArraysBinder.m */,
 				6AFBF823176BC65400DDA9C9 /* PFDataManager.h */,
 				6AFBF824176BC65400DDA9C9 /* PFDataManager.m */,
+				6AE368FF17999252006A784E /* DataModel.xcdatamodeld */,
 			);
 			name = Percero;
 			path = "client-library";
@@ -1210,6 +1214,7 @@
 				6A9F3C381741CD3500164A3D /* PFTableViewBinder.m in Sources */,
 				6A87EE29174544B000C69431 /* PFGoogleOauthViewController.m in Sources */,
 				6AFBF826176BC65400DDA9C9 /* PFDataManager.m in Sources */,
+				6AE3690117999252006A784E /* DataModel.xcdatamodeld in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1249,6 +1254,7 @@
 				6AEBF706173DE25A004DE359 /* update_arraysTests.m in Sources */,
 				6A9F3C391741CD3500164A3D /* PFTableViewBinder.m in Sources */,
 				6A87EE2A174544B000C69431 /* PFGoogleOauthViewController.m in Sources */,
+				6AE3690217999252006A784E /* DataModel.xcdatamodeld in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1445,6 +1451,19 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCVersionGroup section */
+		6AE368FF17999252006A784E /* DataModel.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				6AE3690017999252006A784E /* DataModel.xcdatamodel */,
+			);
+			currentVersion = 6AE3690017999252006A784E /* DataModel.xcdatamodel */;
+			path = DataModel.xcdatamodeld;
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+/* End XCVersionGroup section */
 	};
 	rootObject = F2B0263E15C9A495000375CE /* Project object */;
 }
