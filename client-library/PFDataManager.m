@@ -12,6 +12,8 @@
 #import "PFInvocation.h"
 #import "PFSocketManager.h"
 #import <UIKit/UIKit.h>
+#import "JsonObject.h"
+
 @interface PFDataManager ()
 
 @property (nonatomic, strong) UIManagedDocument *document;
@@ -42,6 +44,16 @@ static PFDataManager *_sharedInstance;
 }
 - (void) documentIsReady{
     NSLog(@"%s", __PRETTY_FUNCTION__);
+    NSManagedObjectContext *moc = self.document.managedObjectContext;
+    JsonObject *newObject = nil;
+//    NSEntityDescription *entityDescription = [NSEntityDescription entityForName:@"JsonObject" inManagedObjectContext:moc];
+//   newObject = [[JsonObject alloc] initWithEntity:entityDescription insertIntoManagedObjectContext:moc];
+    NSDictionary *entities = self.document.managedObjectModel.entitiesByName;
+    DLog(@"entities:%@",entities);
+    newObject = [NSEntityDescription
+     insertNewObjectForEntityForName:@"JsonObject"
+     inManagedObjectContext:moc];
+    NSLog(@"newObject:%@", newObject);
     //
 }
 - (id) init {

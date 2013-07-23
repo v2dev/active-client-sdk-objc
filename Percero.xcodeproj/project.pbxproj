@@ -64,6 +64,9 @@
 		6A9F3C371741CD3500164A3D /* PFTableViewBinder.h in Headers */ = {isa = PBXBuildFile; fileRef = 6A9F3C351741CD3500164A3D /* PFTableViewBinder.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		6A9F3C381741CD3500164A3D /* PFTableViewBinder.m in Sources */ = {isa = PBXBuildFile; fileRef = 6A9F3C361741CD3500164A3D /* PFTableViewBinder.m */; };
 		6A9F3C391741CD3500164A3D /* PFTableViewBinder.m in Sources */ = {isa = PBXBuildFile; fileRef = 6A9F3C361741CD3500164A3D /* PFTableViewBinder.m */; };
+		6AA814E9179DE68D00370E11 /* JsonObject.h in Headers */ = {isa = PBXBuildFile; fileRef = 6AA814E7179DE68D00370E11 /* JsonObject.h */; };
+		6AA814EC179DE9DF00370E11 /* JsonObject.m in Sources */ = {isa = PBXBuildFile; fileRef = 6AA814E8179DE68D00370E11 /* JsonObject.m */; };
+		6AA814ED179DE9E000370E11 /* JsonObject.m in Sources */ = {isa = PBXBuildFile; fileRef = 6AA814E8179DE68D00370E11 /* JsonObject.m */; };
 		6AB0F67F16F2942600D7F7D5 /* PutRequest.h in Headers */ = {isa = PBXBuildFile; fileRef = 6AB0F67D16F2942600D7F7D5 /* PutRequest.h */; };
 		6AB0F68016F2942600D7F7D5 /* PutRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 6AB0F67E16F2942600D7F7D5 /* PutRequest.m */; };
 		6AB0F68116F2942600D7F7D5 /* PutRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 6AB0F67E16F2942600D7F7D5 /* PutRequest.m */; };
@@ -83,8 +86,6 @@
 		6AD4553D1701FDA20038A988 /* RemoveResponse.h in Headers */ = {isa = PBXBuildFile; fileRef = 6AD4553B1701FDA20038A988 /* RemoveResponse.h */; };
 		6AD4553E1701FDA20038A988 /* RemoveResponse.m in Sources */ = {isa = PBXBuildFile; fileRef = 6AD4553C1701FDA20038A988 /* RemoveResponse.m */; };
 		6AD4553F1701FDA20038A988 /* RemoveResponse.m in Sources */ = {isa = PBXBuildFile; fileRef = 6AD4553C1701FDA20038A988 /* RemoveResponse.m */; };
-		6AE3690117999252006A784E /* DataModel.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 6AE368FF17999252006A784E /* DataModel.xcdatamodeld */; };
-		6AE3690217999252006A784E /* DataModel.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 6AE368FF17999252006A784E /* DataModel.xcdatamodeld */; };
 		6AEBF701173DE23D004DE359 /* NSMutableArray+PFUpdate.h in Headers */ = {isa = PBXBuildFile; fileRef = 6AEBF6FF173DE23D004DE359 /* NSMutableArray+PFUpdate.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		6AEBF702173DE23D004DE359 /* NSMutableArray+PFUpdate.m in Sources */ = {isa = PBXBuildFile; fileRef = 6AEBF700173DE23D004DE359 /* NSMutableArray+PFUpdate.m */; };
 		6AEBF703173DE23D004DE359 /* NSMutableArray+PFUpdate.m in Sources */ = {isa = PBXBuildFile; fileRef = 6AEBF700173DE23D004DE359 /* NSMutableArray+PFUpdate.m */; };
@@ -299,6 +300,8 @@
 		6A8B0868170123E700BB48EE /* ClassIDPair.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ClassIDPair.m; sourceTree = "<group>"; };
 		6A9F3C351741CD3500164A3D /* PFTableViewBinder.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PFTableViewBinder.h; sourceTree = "<group>"; };
 		6A9F3C361741CD3500164A3D /* PFTableViewBinder.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PFTableViewBinder.m; sourceTree = "<group>"; };
+		6AA814E7179DE68D00370E11 /* JsonObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JsonObject.h; sourceTree = "<group>"; };
+		6AA814E8179DE68D00370E11 /* JsonObject.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JsonObject.m; sourceTree = "<group>"; };
 		6AB0F67D16F2942600D7F7D5 /* PutRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PutRequest.h; path = model/PutRequest.h; sourceTree = "<group>"; };
 		6AB0F67E16F2942600D7F7D5 /* PutRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PutRequest.m; path = model/PutRequest.m; sourceTree = "<group>"; };
 		6AB1982516FCC66100821DF6 /* PFModelObject.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PFModelObject.m; path = model/PFModelObject.m; sourceTree = "<group>"; };
@@ -314,7 +317,6 @@
 		6ACA5BCB16E8FFE700CB8FBD /* IUserRole.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = IUserRole.h; sourceTree = "<group>"; };
 		6AD4553B1701FDA20038A988 /* RemoveResponse.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = RemoveResponse.h; path = model/RemoveResponse.h; sourceTree = "<group>"; };
 		6AD4553C1701FDA20038A988 /* RemoveResponse.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = RemoveResponse.m; path = model/RemoveResponse.m; sourceTree = "<group>"; };
-		6AE3690017999252006A784E /* DataModel.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = DataModel.xcdatamodel; sourceTree = "<group>"; };
 		6AEBF6FF173DE23D004DE359 /* NSMutableArray+PFUpdate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSMutableArray+PFUpdate.h"; sourceTree = "<group>"; };
 		6AEBF700173DE23D004DE359 /* NSMutableArray+PFUpdate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSMutableArray+PFUpdate.m"; sourceTree = "<group>"; };
 		6AEBF704173DE25A004DE359 /* update_arraysTests.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = update_arraysTests.h; sourceTree = "<group>"; };
@@ -822,7 +824,8 @@
 				6A84607F1767D6240095E5E5 /* PFArraysBinder.m */,
 				6AFBF823176BC65400DDA9C9 /* PFDataManager.h */,
 				6AFBF824176BC65400DDA9C9 /* PFDataManager.m */,
-				6AE368FF17999252006A784E /* DataModel.xcdatamodeld */,
+				6AA814E7179DE68D00370E11 /* JsonObject.h */,
+				6AA814E8179DE68D00370E11 /* JsonObject.m */,
 			);
 			name = Percero;
 			path = "client-library";
@@ -940,6 +943,7 @@
 				F2721F2315C9B20E0040FC3E /* SyncResponse.h in Headers */,
 				F2721F2715C9B20E0040FC3E /* UserAccount.h in Headers */,
 				F2721F2915C9B20E0040FC3E /* UserToken.h in Headers */,
+				6AA814E9179DE68D00370E11 /* JsonObject.h in Headers */,
 				F2721F3915C9B3F70040FC3E /* PFClient.h in Headers */,
 				F2721F3B15C9B3F70040FC3E /* PFSocketManager.h in Headers */,
 				F2721F3D15C9B3F70040FC3E /* EnvConfig.h in Headers */,
@@ -1172,6 +1176,7 @@
 				EAF93FB516640BB600F581F4 /* SBJsonStreamWriterAccumulator.m in Sources */,
 				EAF93FB716640BB600F581F4 /* SBJsonStreamWriterState.m in Sources */,
 				EAF93FB916640BB600F581F4 /* SBJsonTokeniser.m in Sources */,
+				6AA814ED179DE9E000370E11 /* JsonObject.m in Sources */,
 				EAF93FBB16640BB600F581F4 /* SBJsonUTF8Stream.m in Sources */,
 				EAF93FBD16640BB600F581F4 /* SBJsonWriter.m in Sources */,
 				EAF93FC816640C3000F581F4 /* base64.c in Sources */,
@@ -1214,7 +1219,6 @@
 				6A9F3C381741CD3500164A3D /* PFTableViewBinder.m in Sources */,
 				6A87EE29174544B000C69431 /* PFGoogleOauthViewController.m in Sources */,
 				6AFBF826176BC65400DDA9C9 /* PFDataManager.m in Sources */,
-				6AE3690117999252006A784E /* DataModel.xcdatamodeld in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1234,6 +1238,7 @@
 				F8BFB15916DEB53A000C9808 /* GTMOAuth2Authentication.m in Sources */,
 				F8BFB15C16DEB53A000C9808 /* GTMOAuth2SignIn.m in Sources */,
 				F8BFB15F16DEB53A000C9808 /* GTMOAuth2ViewControllerTouch.m in Sources */,
+				6AA814EC179DE9DF00370E11 /* JsonObject.m in Sources */,
 				F8BFB16316DEB53A000C9808 /* GTMReadMonitorInputStream.m in Sources */,
 				6AF998E616F0F56700C962A4 /* PushUpdateResponse.m in Sources */,
 				6AF998EB16F10E2D00C962A4 /* PushDeleteResponse.m in Sources */,
@@ -1254,7 +1259,6 @@
 				6AEBF706173DE25A004DE359 /* update_arraysTests.m in Sources */,
 				6A9F3C391741CD3500164A3D /* PFTableViewBinder.m in Sources */,
 				6A87EE2A174544B000C69431 /* PFGoogleOauthViewController.m in Sources */,
-				6AE3690217999252006A784E /* DataModel.xcdatamodeld in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1451,19 +1455,6 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
-
-/* Begin XCVersionGroup section */
-		6AE368FF17999252006A784E /* DataModel.xcdatamodeld */ = {
-			isa = XCVersionGroup;
-			children = (
-				6AE3690017999252006A784E /* DataModel.xcdatamodel */,
-			);
-			currentVersion = 6AE3690017999252006A784E /* DataModel.xcdatamodel */;
-			path = DataModel.xcdatamodeld;
-			sourceTree = "<group>";
-			versionGroupType = wrapper.xcdatamodel;
-		};
-/* End XCVersionGroup section */
 	};
 	rootObject = F2B0263E15C9A495000375CE /* Project object */;
 }
