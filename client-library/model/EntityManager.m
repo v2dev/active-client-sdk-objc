@@ -70,6 +70,7 @@ static EntityManager* sharedInstance;
     }
     // If the entity is not cached yet, then cache it
     else if(!old){
+        [PFDataManager processIncomingObject:entity];
         [classDict setValue:entity forKey:[entity ID]];
         
         //      I don't know if we need this or not.  Was using it to notify the controller logic that an object had entered the model cache.

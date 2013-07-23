@@ -9,6 +9,9 @@
 #import <Foundation/Foundation.h>
 
 @interface PFDataManager : NSObject
+
++ (void)processIncomingObject:(id) object;
+
 + (void) sendFindByIdRequestWithRemoteClassName:(NSString*)className objectId:(NSString*)id callBackTarget:(NSObject*) target callbackMethod:(SEL) selector;
 + (void) setup;
 @end

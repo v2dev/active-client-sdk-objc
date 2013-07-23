@@ -44,16 +44,7 @@ static PFDataManager *_sharedInstance;
 }
 - (void) documentIsReady{
     NSLog(@"%s", __PRETTY_FUNCTION__);
-    NSManagedObjectContext *moc = self.document.managedObjectContext;
-    JsonObject *newObject = nil;
-//    NSEntityDescription *entityDescription = [NSEntityDescription entityForName:@"JsonObject" inManagedObjectContext:moc];
-//   newObject = [[JsonObject alloc] initWithEntity:entityDescription insertIntoManagedObjectContext:moc];
-    NSDictionary *entities = self.document.managedObjectModel.entitiesByName;
-    DLog(@"entities:%@",entities);
-    newObject = [NSEntityDescription
-     insertNewObjectForEntityForName:@"JsonObject"
-     inManagedObjectContext:moc];
-    NSLog(@"newObject:%@", newObject);
+
     //
 }
 - (id) init {
@@ -78,6 +69,26 @@ static PFDataManager *_sharedInstance;
     }
     
     return self;
+}
+
++ (void)processIncomingObject:(PFModelObject *) object
+{
+    PFDataManager *dataManager = [self sharedInstance];
+    NSManagedObjectContext *moc = dataManager.document.managedObjectContext;
+    JsonObject *newObject = nil;
+    
+    NSDictionary *entities = dataManager.document.managedObjectModel.entitiesByName;
+    DLog(@"entities:%@",entities);
+    newObject = [NSEntityDescription
+                 insertNewObjectForEntityForName:@"JsonObject"
+                 inManagedObjectContext:moc];
+    newObject.objectId = object.ID;
+    newObject.nameOfClass = object.remoteClassName;
+    NSError *error = nil;
+    NSData *jsonData = [NSJSONSerialization dataWithJSONObject:[object toDictionary:object.isShell] options:NSJSONWritingPrettyPrinted error:&error];
+    
+    newObject.jsonData = jsonData;
+    NSLog(@"newObject:%@", newObject);
 }
 
 #pragma mark singleton
