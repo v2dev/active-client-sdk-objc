@@ -13,8 +13,8 @@
 #import "PFSocketManager.h"
 #import <UIKit/UIKit.h>
 #import "JsonObject.h"
-
-
+#import "Utility.h"
+#import "EntityManager.h"
 
 @interface PFPersistence ()
 
@@ -32,20 +32,35 @@ NSString *entityName = @"JsonObject";
 + (void)setup {
     [self sharedInstance];
 }
-+ (void) sendFindByIdRequestWithRemoteClassName:(NSString*)className objectId:(NSString*)id callBackTarget:(NSObject*) target callbackMethod:(SEL) selector{
-    FindByIdRequest* request = [[FindByIdRequest alloc] init];
-    [request setClientId:[PFClient sharedInstance].clientId];
-    [request setToken:[PFClient sharedInstance].token];
-    [request setUserId:[PFClient sharedInstance].userId];
++ (void) sendFindByIdRequestWithRemoteClassName:(NSString*)remoteClassName objectId:(NSString*)objectId callBackTarget:(NSObject*) target callbackMethod:(SEL) selector{
+    if (0&&[PFClient isConnected]) {
+        FindByIdRequest* request = [[FindByIdRequest alloc] init];
+        [request setClientId:[PFClient sharedInstance].clientId];
+        [request setToken:[PFClient sharedInstance].token];
+        [request setUserId:[PFClient sharedInstance].userId];
+        
+        [request setTheClassName:remoteClassName];
+        [request setTheClassId:objectId];
+        
+        PFInvocation* callback = nil;
+        if(target && selector)
+            callback = [[PFInvocation alloc] initWithTarget:target method:selector];
+        
+        [[PFSocketManager sharedInstance] sendEvent:@"findById" data:request callback:callback];
+    } else {
+        JsonObject *object = [self.class findObjectWithRemoteClassName:remoteClassName objectID:objectId];
+        if (object) {
+            NSMutableDictionary *objectDictionary = [PFModelObject dictionaryFromJsonData:object.jsonData];
+            NSString *className = [Utility translateRemoteClassName:remoteClassName];
+            Class objectClass = NSClassFromString(className);
+            NSAssert([objectClass isSubclassOfClass:[PFModelObject class]], @"Should be a subclass of PFModelObject.");
+            NSAssert([remoteClassName isEqualToString:[(PFModelObject *)objectClass remoteClassName]], @"Class name is not valid.");
+            PFModelObject *properObject = [(PFModelObject *)[objectClass alloc] initFromDictionary:objectDictionary];
+            [[EntityManager sharedInstance] getEntity:properObject]; // this will load the properObject into the memory cache
+            
+        }
+    }
     
-    [request setTheClassName:className];
-    [request setTheClassId:id];
-    
-    PFInvocation* callback = nil;
-    if(target && selector)
-        callback = [[PFInvocation alloc] initWithTarget:target method:selector];
-    
-    [[PFSocketManager sharedInstance] sendEvent:@"findById" data:request callback:callback];
 }
 - (void) documentIsReady{
     NSLog(@"%s", __PRETTY_FUNCTION__);
@@ -75,13 +90,11 @@ NSString *entityName = @"JsonObject";
     
     return self;
 }
-+ (NSArray *) findObjectsWithRemoteClassName:(NSString *) remoteClassName objectID:(NSString *) objectID{
-    NSArray *result = nil;
++ (JsonObject *) findObjectWithRemoteClassName:(NSString *) remoteClassName objectID:(NSString *) objectID{
+    JsonObject *result = nil;
     
     PFPersistence *dataManager = [self sharedInstance];
     NSManagedObjectContext *moc = dataManager.document.managedObjectContext;
-//    NSDictionary *entities = dataManager.document.managedObjectModel.entitiesByName;
-//    DLog(@"entities:%@",entities);
     
     NSFetchRequest *request = [NSFetchRequest fetchRequestWithEntityName:entityName]; request.fetchBatchSize = 20;
     
@@ -91,8 +104,11 @@ NSString *entityName = @"JsonObject";
     request.predicate = predicateCompound;
     
     NSError *errorFetchRequest;
-    result = [moc executeFetchRequest:request error:&errorFetchRequest];
-
+    NSArray *fetchResults = [moc executeFetchRequest:request error:&errorFetchRequest];
+    if (fetchResults && fetchResults.count) {
+        NSAssert(fetchResults.count == 1, @"Fetch should have returned 1 object instead of %d", fetchResults.count);
+        result = fetchResults[0];
+    }
     return result;
 }
 
@@ -103,11 +119,10 @@ NSString *entityName = @"JsonObject";
         return;
     }
     
-    NSArray *storedObject = [self findObjectsWithRemoteClassName:object.remoteClassName objectID:object.ID];
-    if (storedObject && storedObject.count) {
+    JsonObject *existingObject = [self findObjectWithRemoteClassName:object.remoteClassName objectID:object.ID];
+    if (existingObject) {
         // if the object already exists, update the jsonData
-        NSAssert(storedObject.count == 1, @"Fetch should have returned 1 object instead of %d", storedObject.count);
-        JsonObject *existingObject = storedObject[0];
+        
         NSData *objectJasonData = object.jsonData;
         if (![objectJasonData isEqualToData:existingObject.jsonData]) {
             existingObject.jsonData = objectJasonData;

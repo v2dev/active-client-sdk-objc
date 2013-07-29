@@ -25,4 +25,14 @@
     return jsonData;
 }
 
++ (NSMutableDictionary *)dictionaryFromJsonData:(NSData *) jsonData{
+    NSMutableDictionary *result = nil;
+    
+    NSError *errorJSON = nil;
+    result = [NSJSONSerialization JSONObjectWithData:jsonData options:(NSJSONReadingMutableContainers | NSJSONWritingPrettyPrinted) error:&errorJSON];
+    NSAssert([result isKindOfClass:[NSMutableDictionary class]], @"Result should have been an instance of NSMutableDicitonary");
+    
+    return result;
+}
+
 @end

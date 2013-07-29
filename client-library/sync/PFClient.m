@@ -361,7 +361,9 @@ static PFClient* _sharedInstance;
     
 }
 
-
++ (BOOL)isConnected{
+    return [[PFSocketManager sharedInstance] isConnected];
+}
 
 + (bool) isAuthenticated{
     return (bool)[PFClient sharedInstance].token;

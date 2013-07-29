@@ -20,5 +20,5 @@
 
 @interface PFModelObject (JsonObject)
 - (NSData *)jsonData;
-
++ (NSMutableDictionary *)dictionaryFromJsonData:(NSData *) jsonData;
 @end

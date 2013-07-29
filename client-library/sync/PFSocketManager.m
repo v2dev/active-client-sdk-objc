@@ -215,6 +215,8 @@ static PFSocketManager* sharedInstance;
             
             FindByIdResponse* findByIdResponse = (FindByIdResponse *) syncResponse;
             PFModelObject * foundObject = (PFModelObject *) findByIdResponse.result;
+            
+            
             id savedObject = [self.syncRequests valueForKey:foundObject.ID];
             if (savedObject) {
                 [foundObject restoreDeletedRelationships];
