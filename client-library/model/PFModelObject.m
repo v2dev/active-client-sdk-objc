@@ -10,7 +10,7 @@
 #import "ClassIDPair.h"
 #import "PFClient.h"
 #import "Utility.h"
-#import "PFDataManager.h"
+#import "PFPersistence.h"
 
 @implementation PFModelObject
 
@@ -51,7 +51,7 @@
 
 - (void)requestUpdate{
     
-        [PFDataManager sendFindByIdRequestWithRemoteClassName:self.remoteClassName objectId:self.ID callBackTarget:nil callbackMethod:nil];
+        [PFPersistence sendFindByIdRequestWithRemoteClassName:self.remoteClassName objectId:self.ID callBackTarget:nil callbackMethod:nil];
 }
 
 - (void)delete{

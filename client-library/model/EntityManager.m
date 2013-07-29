@@ -14,7 +14,7 @@
 #import "PFClient.h"
 #import "PFTargetRelationship.h"
 #import "PFSourceRelationship.h"
-#import "PFDataManager.h"
+#import "PFPersistence.h"
 
 static EntityManager* sharedInstance;
 
@@ -70,7 +70,7 @@ static EntityManager* sharedInstance;
     }
     // If the entity is not cached yet, then cache it
     else if(!old){
-        [PFDataManager processIncomingObject:entity];
+        [PFPersistence addObject:entity];
         [classDict setValue:entity forKey:[entity ID]];
         
         //      I don't know if we need this or not.  Was using it to notify the controller logic that an object had entered the model cache.
@@ -397,7 +397,7 @@ static EntityManager* sharedInstance;
 - (void) loadEntity:(id<PFModelObject>)entity{
     
 //    PFClient* ad = [PFClient sharedInstance];
-    [PFDataManager sendFindByIdRequestWithRemoteClassName:[entity remoteClassName] objectId:entity.ID callBackTarget:nil callbackMethod:nil];
+    [PFPersistence sendFindByIdRequestWithRemoteClassName:[entity remoteClassName] objectId:entity.ID callBackTarget:nil callbackMethod:nil];
     
     
 //    FindByIdRequest* req = [[FindByIdRequest alloc] init];

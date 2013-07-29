@@ -26,7 +26,7 @@
 #import "RemoveRequest.h"
 #import "ModelUtility.h"
 #import "IUserAnchor.h"
-#import "PFDataManager.h"
+#import "PFPersistence.h"
 
 // The singleton
 static PFClient* _sharedInstance;
@@ -38,7 +38,7 @@ static PFClient* _sharedInstance;
  * This method sets up everything to initialize the PFClient
  */
 - (void) setup{
-    [PFDataManager setup];
+    [PFPersistence setup];
     authListeners = [[NSMutableSet alloc] init];
 
     // The PFSocketManager will issue this message when it gets connected
