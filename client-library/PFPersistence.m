@@ -33,7 +33,7 @@ NSString *entityName = @"JsonObject";
     [self sharedInstance];
 }
 + (void) sendFindByIdRequestWithRemoteClassName:(NSString*)remoteClassName objectId:(NSString*)objectId callBackTarget:(NSObject*) target callbackMethod:(SEL) selector{
-    if (0&&[PFClient isConnected]) {
+    if ([PFClient isConnected]) {
         FindByIdRequest* request = [[FindByIdRequest alloc] init];
         [request setClientId:[PFClient sharedInstance].clientId];
         [request setToken:[PFClient sharedInstance].token];
@@ -124,8 +124,10 @@ NSString *entityName = @"JsonObject";
         // if the object already exists, update the jsonData
         
         NSData *objectJasonData = object.jsonData;
-        if (![objectJasonData isEqualToData:existingObject.jsonData]) {
+        if (![objectJasonData isEqualToData:existingObject.jsonData])
+        {
             existingObject.jsonData = objectJasonData;
+            existingObject.jsonString = [[NSString alloc] initWithData:objectJasonData encoding:NSUTF8StringEncoding];
         }
         
     } else {
@@ -143,6 +145,7 @@ NSString *entityName = @"JsonObject";
         NSData *jsonData;
         jsonData = object.jsonData;
         newObject.jsonData = jsonData;
+        newObject.jsonString = [[NSString alloc]initWithData:jsonData encoding:NSUTF8StringEncoding];
         NSLog(@"newObject:%@", newObject);
         
     }

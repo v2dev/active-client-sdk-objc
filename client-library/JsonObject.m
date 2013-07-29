@@ -11,6 +11,7 @@
 @implementation JsonObject
 
 @dynamic jsonData;
+@dynamic jsonString;
 @dynamic nameOfClass;
 @dynamic objectId;
 
@@ -21,7 +22,7 @@
 - (NSData *)jsonData;
 {
     NSError *errorJSON = nil;
-    NSData *jsonData = [NSJSONSerialization dataWithJSONObject:[self toDictionary:self.isShell] options:NSJSONWritingPrettyPrinted error:&errorJSON];
+    NSData *jsonData = [NSJSONSerialization dataWithJSONObject:[self toDictionary:self.isShell] options:0/*NSJSONWritingPrettyPrinted*/ error:&errorJSON];
     return jsonData;
 }
 

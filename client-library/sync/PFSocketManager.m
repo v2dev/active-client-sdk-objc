@@ -29,6 +29,7 @@
 #import "FindByExampleRequest.h"
 #import "FindByExampleResponse.h"
 #import "PFClient.h"
+#import "PFPersistence.h"
 
 @interface PFSocketManager () {
     NSTimer *messageTimer;
@@ -222,6 +223,8 @@ static PFSocketManager* sharedInstance;
                 [foundObject restoreDeletedRelationships];
                 [self.syncRequests removeObjectForKey:foundObject.ID];
             }
+            
+            [PFPersistence addObject:foundObject];
             
         }else if ([syncResponse isKindOfClass:[FindByExampleResponse class]]) {
             FindByExampleResponse* findByExampleResponse = (FindByExampleResponse *) syncResponse;

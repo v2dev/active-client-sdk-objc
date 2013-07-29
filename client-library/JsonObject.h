@@ -13,6 +13,7 @@
 @interface JsonObject : NSManagedObject
 
 @property (nonatomic, retain) NSData * jsonData;
+@property (nonatomic, retain) NSString * jsonString;
 @property (nonatomic, retain) NSString * nameOfClass;
 @property (nonatomic, retain) NSString * objectId;
 
