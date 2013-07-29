@@ -8,12 +8,17 @@
 
 #import <Foundation/Foundation.h>
 #import <CoreData/CoreData.h>
-
+#import "PFModelObject.h"
 
 @interface JsonObject : NSManagedObject
 
 @property (nonatomic, retain) NSData * jsonData;
 @property (nonatomic, retain) NSString * nameOfClass;
 @property (nonatomic, retain) NSString * objectId;
+
+@end
+
+@interface PFModelObject (JsonObject)
+- (NSData *)jsonData;
 
 @end
