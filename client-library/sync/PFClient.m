@@ -20,13 +20,13 @@
 #import "EntityManager.h"
 #import "PFSocketManager.h"
 #import "GetAllByNameRequest.h"
-#import "FindByIdRequest.h"
 #import "FindByExampleRequest.h"
 #import "PutRequest.h"
 #import "CreateRequest.h"
 #import "RemoveRequest.h"
 #import "ModelUtility.h"
 #import "IUserAnchor.h"
+#import "PFPersistence.h"
 
 // The singleton
 static PFClient* _sharedInstance;
@@ -38,7 +38,7 @@ static PFClient* _sharedInstance;
  * This method sets up everything to initialize the PFClient
  */
 - (void) setup{
-        
+    [PFPersistence setup];
     authListeners = [[NSMutableSet alloc] init];
 
     // The PFSocketManager will issue this message when it gets connected
@@ -361,23 +361,9 @@ static PFClient* _sharedInstance;
     
 }
 
-+ (void) sendGetByIdRequest:(NSString*)className id:(NSString*)id target:(NSObject*) target method:(SEL) selector{
-    FindByIdRequest* request = [[FindByIdRequest alloc] init];
-    [request setClientId:[PFClient sharedInstance].clientId];
-    [request setToken:[PFClient sharedInstance].token];
-    [request setUserId:[PFClient sharedInstance].userId];
-    
-    [request setTheClassName:className];
-    [request setTheClassId:id];
-    
-    PFInvocation* callback = nil;
-    if(target && selector)
-        callback = [[PFInvocation alloc] initWithTarget:target method:selector];
-    
-    [[PFSocketManager sharedInstance] sendEvent:@"findById" data:request callback:callback];
-
++ (BOOL)isConnected{
+    return [[PFSocketManager sharedInstance] isConnected];
 }
-
 
 + (bool) isAuthenticated{
     return (bool)[PFClient sharedInstance].token;

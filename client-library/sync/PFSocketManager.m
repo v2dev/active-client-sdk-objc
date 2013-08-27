@@ -29,6 +29,7 @@
 #import "FindByExampleRequest.h"
 #import "FindByExampleResponse.h"
 #import "PFClient.h"
+#import "PFPersistence.h"
 
 @interface PFSocketManager () {
     NSTimer *messageTimer;
@@ -215,11 +216,15 @@ static PFSocketManager* sharedInstance;
             
             FindByIdResponse* findByIdResponse = (FindByIdResponse *) syncResponse;
             PFModelObject * foundObject = (PFModelObject *) findByIdResponse.result;
+            
+            
             id savedObject = [self.syncRequests valueForKey:foundObject.ID];
             if (savedObject) {
                 [foundObject restoreDeletedRelationships];
                 [self.syncRequests removeObjectForKey:foundObject.ID];
             }
+            
+            [PFPersistence addObject:foundObject];
             
         }else if ([syncResponse isKindOfClass:[FindByExampleResponse class]]) {
             FindByExampleResponse* findByExampleResponse = (FindByExampleResponse *) syncResponse;
@@ -270,7 +275,7 @@ static PFSocketManager* sharedInstance;
         ((SyncRequest*)data).messageId = requestId;
         [self cacheSyncRequest:data];
     }
-    
+
     if(inv){
         [callbacks setObject:inv forKey:requestId];
     }
