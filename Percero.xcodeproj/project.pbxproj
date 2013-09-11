@@ -29,6 +29,8 @@
 		6A1FBEA816FA429A00E9E699 /* PFRelationship.m in Sources */ = {isa = PBXBuildFile; fileRef = 6A1FBEA616FA429A00E9E699 /* PFRelationship.m */; };
 		6A1FBEAB16FA43A600E9E699 /* PFSourceRelationship.h in Headers */ = {isa = PBXBuildFile; fileRef = 6A1FBEA916FA43A600E9E699 /* PFSourceRelationship.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		6A1FBEAC16FA43A600E9E699 /* PFSourceRelationship.m in Sources */ = {isa = PBXBuildFile; fileRef = 6A1FBEAA16FA43A600E9E699 /* PFSourceRelationship.m */; };
+		6A2960CF17E0CF58001AECE3 /* Reachability.h in Headers */ = {isa = PBXBuildFile; fileRef = 6A2960CD17E0CF58001AECE3 /* Reachability.h */; };
+		6A2960D017E0CF58001AECE3 /* Reachability.m in Sources */ = {isa = PBXBuildFile; fileRef = 6A2960CE17E0CF58001AECE3 /* Reachability.m */; };
 		6A3435DE171DD2DB00EEA040 /* PFAuthManager.h in Headers */ = {isa = PBXBuildFile; fileRef = 6A3435DC171DD2DB00EEA040 /* PFAuthManager.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		6A3435DF171DD2DB00EEA040 /* PFAuthManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 6A3435DD171DD2DB00EEA040 /* PFAuthManager.m */; };
 		6A3435E0171DD2DB00EEA040 /* PFAuthManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 6A3435DD171DD2DB00EEA040 /* PFAuthManager.m */; };
@@ -276,6 +278,8 @@
 		6A1FBEA616FA429A00E9E699 /* PFRelationship.m */ = {isa = PBXFileReference; fileEncoding = 4; indentWidth = 4; lastKnownFileType = sourcecode.c.objc; path = PFRelationship.m; sourceTree = "<group>"; tabWidth = 4; usesTabs = 0; wrapsLines = 1; };
 		6A1FBEA916FA43A600E9E699 /* PFSourceRelationship.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PFSourceRelationship.h; sourceTree = "<group>"; };
 		6A1FBEAA16FA43A600E9E699 /* PFSourceRelationship.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PFSourceRelationship.m; sourceTree = "<group>"; };
+		6A2960CD17E0CF58001AECE3 /* Reachability.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Reachability.h; sourceTree = "<group>"; };
+		6A2960CE17E0CF58001AECE3 /* Reachability.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Reachability.m; sourceTree = "<group>"; };
 		6A3435DC171DD2DB00EEA040 /* PFAuthManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PFAuthManager.h; sourceTree = "<group>"; };
 		6A3435DD171DD2DB00EEA040 /* PFAuthManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PFAuthManager.m; sourceTree = "<group>"; };
 		6A3435E1171DF54700EEA040 /* PFOauthViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PFOauthViewController.h; sourceTree = "<group>"; };
@@ -769,6 +773,8 @@
 		F2721E8E15C9B1E00040FC3E /* Utility */ = {
 			isa = PBXGroup;
 			children = (
+				6A2960CD17E0CF58001AECE3 /* Reachability.h */,
+				6A2960CE17E0CF58001AECE3 /* Reachability.m */,
 				6AEBF6FF173DE23D004DE359 /* NSMutableArray+PFUpdate.h */,
 				6AEBF700173DE23D004DE359 /* NSMutableArray+PFUpdate.m */,
 				6A729BEE1725BA10001F4BB8 /* ModelUtility.h */,
@@ -996,6 +1002,7 @@
 				6A729BF21725CE74001F4BB8 /* FindByExampleRequest.h in Headers */,
 				6A729BF71725E6FC001F4BB8 /* FindByExampleResponse.h in Headers */,
 				6AFBF825176BC65400DDA9C9 /* PFPersistence.h in Headers */,
+				6A2960CF17E0CF58001AECE3 /* Reachability.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1219,6 +1226,7 @@
 				6A9F3C381741CD3500164A3D /* PFTableViewBinder.m in Sources */,
 				6A87EE29174544B000C69431 /* PFGoogleOauthViewController.m in Sources */,
 				6AFBF826176BC65400DDA9C9 /* PFPersistence.m in Sources */,
+				6A2960D017E0CF58001AECE3 /* Reachability.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
