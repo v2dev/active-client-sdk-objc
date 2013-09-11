@@ -31,6 +31,8 @@
 		6A1FBEAC16FA43A600E9E699 /* PFSourceRelationship.m in Sources */ = {isa = PBXBuildFile; fileRef = 6A1FBEAA16FA43A600E9E699 /* PFSourceRelationship.m */; };
 		6A2960CF17E0CF58001AECE3 /* Reachability.h in Headers */ = {isa = PBXBuildFile; fileRef = 6A2960CD17E0CF58001AECE3 /* Reachability.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		6A2960D017E0CF58001AECE3 /* Reachability.m in Sources */ = {isa = PBXBuildFile; fileRef = 6A2960CE17E0CF58001AECE3 /* Reachability.m */; };
+		6A2960D317E0E935001AECE3 /* NSArray+CLLocationPoints.h in Headers */ = {isa = PBXBuildFile; fileRef = 6A2960D117E0E935001AECE3 /* NSArray+CLLocationPoints.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		6A2960D417E0E935001AECE3 /* NSArray+CLLocationPoints.m in Sources */ = {isa = PBXBuildFile; fileRef = 6A2960D217E0E935001AECE3 /* NSArray+CLLocationPoints.m */; };
 		6A3435DE171DD2DB00EEA040 /* PFAuthManager.h in Headers */ = {isa = PBXBuildFile; fileRef = 6A3435DC171DD2DB00EEA040 /* PFAuthManager.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		6A3435DF171DD2DB00EEA040 /* PFAuthManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 6A3435DD171DD2DB00EEA040 /* PFAuthManager.m */; };
 		6A3435E0171DD2DB00EEA040 /* PFAuthManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 6A3435DD171DD2DB00EEA040 /* PFAuthManager.m */; };
@@ -280,6 +282,8 @@
 		6A1FBEAA16FA43A600E9E699 /* PFSourceRelationship.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PFSourceRelationship.m; sourceTree = "<group>"; };
 		6A2960CD17E0CF58001AECE3 /* Reachability.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Reachability.h; sourceTree = "<group>"; };
 		6A2960CE17E0CF58001AECE3 /* Reachability.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Reachability.m; sourceTree = "<group>"; };
+		6A2960D117E0E935001AECE3 /* NSArray+CLLocationPoints.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSArray+CLLocationPoints.h"; sourceTree = "<group>"; };
+		6A2960D217E0E935001AECE3 /* NSArray+CLLocationPoints.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSArray+CLLocationPoints.m"; sourceTree = "<group>"; };
 		6A3435DC171DD2DB00EEA040 /* PFAuthManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PFAuthManager.h; sourceTree = "<group>"; };
 		6A3435DD171DD2DB00EEA040 /* PFAuthManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PFAuthManager.m; sourceTree = "<group>"; };
 		6A3435E1171DF54700EEA040 /* PFOauthViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PFOauthViewController.h; sourceTree = "<group>"; };
@@ -784,6 +788,8 @@
 				F2721F3615C9B3F70040FC3E /* PFInvocation.m */,
 				F2721F3715C9B3F70040FC3E /* Utility.h */,
 				F2721F3815C9B3F70040FC3E /* Utility.m */,
+				6A2960D117E0E935001AECE3 /* NSArray+CLLocationPoints.h */,
+				6A2960D217E0E935001AECE3 /* NSArray+CLLocationPoints.m */,
 			);
 			name = Utility;
 			sourceTree = "<group>";
@@ -903,6 +909,7 @@
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				6A2960D317E0E935001AECE3 /* NSArray+CLLocationPoints.h in Headers */,
 				6A2960CF17E0CF58001AECE3 /* Reachability.h in Headers */,
 				6A8460801767D6240095E5E5 /* PFArraysBinder.h in Headers */,
 				F2721EDF15C9B20E0040FC3E /* _Super_ServiceProvider.h in Headers */,
@@ -1227,6 +1234,7 @@
 				6A87EE29174544B000C69431 /* PFGoogleOauthViewController.m in Sources */,
 				6AFBF826176BC65400DDA9C9 /* PFPersistence.m in Sources */,
 				6A2960D017E0CF58001AECE3 /* Reachability.m in Sources */,
+				6A2960D417E0E935001AECE3 /* NSArray+CLLocationPoints.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
