@@ -9,6 +9,7 @@
 #import <Foundation/Foundation.h>
 #import "PFModelObject.h"
 #import "IUserAnchor.h"
+#import "Reachability.h"
 
 @class PFSocketManager;
 
@@ -24,6 +25,8 @@
     NSString* refreshToken;
     NSMutableSet* authListeners;
 }
+@property (nonatomic, copy) NetworkReachable reachableBlock;
+@property (nonatomic, copy) NetworkUnreachable unReachableBlock;
 @property (nonatomic, strong) NSString *lastOauthKey;
 @property (nonatomic, readonly) PFSocketManager* syncManager;
 @property (nonatomic, retain) NSString* clientId;

@@ -29,7 +29,7 @@
 		6A1FBEA816FA429A00E9E699 /* PFRelationship.m in Sources */ = {isa = PBXBuildFile; fileRef = 6A1FBEA616FA429A00E9E699 /* PFRelationship.m */; };
 		6A1FBEAB16FA43A600E9E699 /* PFSourceRelationship.h in Headers */ = {isa = PBXBuildFile; fileRef = 6A1FBEA916FA43A600E9E699 /* PFSourceRelationship.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		6A1FBEAC16FA43A600E9E699 /* PFSourceRelationship.m in Sources */ = {isa = PBXBuildFile; fileRef = 6A1FBEAA16FA43A600E9E699 /* PFSourceRelationship.m */; };
-		6A2960CF17E0CF58001AECE3 /* Reachability.h in Headers */ = {isa = PBXBuildFile; fileRef = 6A2960CD17E0CF58001AECE3 /* Reachability.h */; };
+		6A2960CF17E0CF58001AECE3 /* Reachability.h in Headers */ = {isa = PBXBuildFile; fileRef = 6A2960CD17E0CF58001AECE3 /* Reachability.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		6A2960D017E0CF58001AECE3 /* Reachability.m in Sources */ = {isa = PBXBuildFile; fileRef = 6A2960CE17E0CF58001AECE3 /* Reachability.m */; };
 		6A3435DE171DD2DB00EEA040 /* PFAuthManager.h in Headers */ = {isa = PBXBuildFile; fileRef = 6A3435DC171DD2DB00EEA040 /* PFAuthManager.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		6A3435DF171DD2DB00EEA040 /* PFAuthManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 6A3435DD171DD2DB00EEA040 /* PFAuthManager.m */; };
@@ -903,6 +903,7 @@
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				6A2960CF17E0CF58001AECE3 /* Reachability.h in Headers */,
 				6A8460801767D6240095E5E5 /* PFArraysBinder.h in Headers */,
 				F2721EDF15C9B20E0040FC3E /* _Super_ServiceProvider.h in Headers */,
 				F2721EE115C9B20E0040FC3E /* AuthenticateOAuthAccessTokenRequest.h in Headers */,
@@ -1002,7 +1003,6 @@
 				6A729BF21725CE74001F4BB8 /* FindByExampleRequest.h in Headers */,
 				6A729BF71725E6FC001F4BB8 /* FindByExampleResponse.h in Headers */,
 				6AFBF825176BC65400DDA9C9 /* PFPersistence.h in Headers */,
-				6A2960CF17E0CF58001AECE3 /* Reachability.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -27,10 +27,13 @@
 #import "ModelUtility.h"
 #import "IUserAnchor.h"
 #import "PFPersistence.h"
-#import "Reachability.h"
 
 // The singleton
 static PFClient* _sharedInstance;
+
+@interface PFClient ()
+@property (nonatomic, weak) Reachability *reach;
+@end
 
 @implementation PFClient
 @synthesize syncManager, clientId, token, userId, regAppOAuths, authListeners, accessToken, refreshToken;
@@ -420,20 +423,29 @@ static PFClient* _sharedInstance;
 
 - (void)startReachability{
     // Allocate a reachability object
-    Reachability* reach = [Reachability reachabilityWithHostname:@"www.google.com"];
+    
+    self.reach = [Reachability reachabilityWithHostname:@"www.google.com"];
     
     // Set the blocks
-    reach.reachableBlock = ^(Reachability*reach)
+    self.reachableBlock = ^(Reachability*reach)
     {
         NSLog(@"REACHABLE!");
     };
-    
-    reach.unreachableBlock = ^(Reachability*reach)
+
+    self.unReachableBlock = ^(Reachability*reach)
     {
         NSLog(@"UNREACHABLE!");
     };
     
     // Start the notifier, which will cause the reachability object to retain itself!
-    [reach startNotifier];
+    [self.reach startNotifier];
+}
+
+- (void)setReachableBlock:(NetworkReachable)reachableBlock{
+    self.reach.reachableBlock = reachableBlock;
+}
+
+- (void)setUnReachableBlock:(NetworkUnreachable)unReachableBlock{
+    self.reach.unreachableBlock = unReachableBlock;
 }
 @end
