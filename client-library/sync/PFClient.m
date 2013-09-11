@@ -27,6 +27,7 @@
 #import "ModelUtility.h"
 #import "IUserAnchor.h"
 #import "PFPersistence.h"
+#import "Reachability.h"
 
 // The singleton
 static PFClient* _sharedInstance;
@@ -40,7 +41,7 @@ static PFClient* _sharedInstance;
 - (void) setup{
     [PFPersistence setup];
     authListeners = [[NSMutableSet alloc] init];
-
+    [self startReachability];
     // The PFSocketManager will issue this message when it gets connected
     [PFSocketManager addListenerForConnectEvent:self method:@selector(socketConnected)];
     [PFSocketManager addListenerForReadyEvent:self method:@selector(socketReady)];
@@ -415,6 +416,24 @@ static PFClient* _sharedInstance;
     // !!!: not yet implemented
 }
 
+#pragma mark - reachability
 
-
+- (void)startReachability{
+    // Allocate a reachability object
+    Reachability* reach = [Reachability reachabilityWithHostname:@"www.google.com"];
+    
+    // Set the blocks
+    reach.reachableBlock = ^(Reachability*reach)
+    {
+        NSLog(@"REACHABLE!");
+    };
+    
+    reach.unreachableBlock = ^(Reachability*reach)
+    {
+        NSLog(@"UNREACHABLE!");
+    };
+    
+    // Start the notifier, which will cause the reachability object to retain itself!
+    [reach startNotifier];
+}
 @end
