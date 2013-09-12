@@ -9,7 +9,7 @@
 #import "NSArray+CLLocationPoints.h"
 
 CLLocationCoordinate2D distanceMultipilersFromReferenceLocation(CLLocation *location);
-void coordinatesInMetersFromCLLocationPoints(NSArray *points, CLLocationCoordinate2D * coordinates);
+//NSData *coordinatesInMetersFromCLLocationPoints(NSArray *points, CLLocationCoordinate2D * coordinates);
 
 CLLocationCoordinate2D distanceMultipilersFromReferenceLocation(CLLocation *location)
 {
@@ -31,14 +31,20 @@ CLLocationCoordinate2D distanceMultipilersFromReferenceLocation(CLLocation *loca
     return distanceMultipliers;
 }
 
-void coordinatesInMetersFromCLLocationPoints(NSArray *points, CLLocationCoordinate2D * coordinates)
+
+
+@implementation NSArray (CLLocationPoints)
+
+-(NSData *) coordinatesInMetersFromCLLocationPoints
 {
-    NSUInteger pointsCount = points.count;
-    CLLocationCoordinate2D distanceMultipliers = distanceMultipilersFromReferenceLocation(points[0]);
+    
+    NSUInteger pointsCount = self.count;
+    CLLocationCoordinate2D coordinates[pointsCount];
+    CLLocationCoordinate2D distanceMultipliers = distanceMultipilersFromReferenceLocation(self[0]);
     
     // populated the coordinates array with point coordinates
     for (NSUInteger pointIndex = 0 ; pointIndex < pointsCount ; pointIndex++) {
-        CLLocation *point = points[pointIndex];
+        CLLocation *point = self[pointIndex];
         CLLocationCoordinate2D coordinate = [point coordinate];
         coordinates[pointIndex] = coordinate;
     };
@@ -46,23 +52,24 @@ void coordinatesInMetersFromCLLocationPoints(NSArray *points, CLLocationCoordina
     // translate and scale to meters all coordinates
     CLLocationCoordinate2D referenceCoordinate = coordinates[0];
     for (NSUInteger coordinateIndex = 0 ; coordinateIndex < pointsCount ; coordinateIndex++) {
-        CLLocationCoordinate2D coordinate = coordinates[coordinateIndex];
-        coordinate.latitude -= referenceCoordinate.latitude;
-        coordinate.longitude -= referenceCoordinate.longitude;
+//        CLLocationCoordinate2D coordinate = coordinates[coordinateIndex];
+        coordinates[coordinateIndex].latitude -= referenceCoordinate.latitude;
+        coordinates[coordinateIndex].longitude -= referenceCoordinate.longitude;
         
-        coordinate.latitude *= distanceMultipliers.latitude;
-        coordinate.longitude *= distanceMultipliers.longitude;
+        coordinates[coordinateIndex].latitude *= distanceMultipliers.latitude;
+        coordinates[coordinateIndex].longitude *= distanceMultipliers.longitude;
     };
     
+    NSData* coordinatesData = [NSData dataWithBytes:(const void *)coordinates length:sizeof(CLLocationCoordinate2D)*pointsCount];
+    
+    return coordinatesData;
 }
-
-
-@implementation NSArray (CLLocationPoints)
 
 - (double) areaInMeters{
     NSUInteger selfCount = self.count;
-    CLLocationCoordinate2D coordinates[selfCount];
-    coordinatesInMetersFromCLLocationPoints(self, coordinates);
+    
+    NSData *coordinatesData = [self coordinatesInMetersFromCLLocationPoints];
+    CLLocationCoordinate2D * coordinates = (CLLocationCoordinate2D *) [coordinatesData bytes];
     
     double sumA = 0.0;
     double sumB = 0.0;
@@ -80,7 +87,7 @@ void coordinatesInMetersFromCLLocationPoints(NSArray *points, CLLocationCoordina
 
 - (double) areaInAcres{
 
-    return [self areaInMeters] * 4046.8252519;
+    return [self areaInMeters] / 4046.8252519;
 
 }
 @end
