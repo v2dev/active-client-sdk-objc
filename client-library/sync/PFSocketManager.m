@@ -43,6 +43,15 @@ static PFSocketManager* sharedInstance;
 
 @implementation PFSocketManager
 @synthesize socketIO, /*model,*/ isConnected;
+
+- (void) notifyModelDidChange{
+    
+//    NSLog(@"notifyModelDidChange");
+    NSNotificationCenter *nc = [NSNotificationCenter defaultCenter];
+    NSString* notificationName = [NSString stringWithFormat:@"modelDidChange"];
+    [nc postNotificationName:notificationName object:self];
+    
+}
 - (NSMutableDictionary *)syncRequests{
     static NSMutableDictionary* syncRequests;
     
@@ -168,6 +177,7 @@ static PFSocketManager* sharedInstance;
 
 
 - (void) processSyncResponse:(SyncResponse *) syncResponse{
+
     id <NSCopying> key = [syncResponse.correspondingMessageId copy];
 
     if([syncResponse isKindOfClass:[ConnectResponse class]]){
@@ -226,6 +236,8 @@ static PFSocketManager* sharedInstance;
             
             [PFPersistence addObject:foundObject];
             
+            [self notifyModelDidChange];
+
         }else if ([syncResponse isKindOfClass:[FindByExampleResponse class]]) {
             FindByExampleResponse* findByExampleResponse = (FindByExampleResponse *) syncResponse;
             FindByExampleRequest* findByExampleRequest = (FindByExampleRequest *) matchingRequest;
@@ -240,6 +252,8 @@ static PFSocketManager* sharedInstance;
                 }
             }
             
+            [self notifyModelDidChange];
+
             
         }
         
@@ -256,12 +270,15 @@ static PFSocketManager* sharedInstance;
                 [[EntityManager sharedInstance] addToInverseRelationshipsModelObject:dontLeaveMeLikeThisObject];
 
             }
+            [self notifyModelDidChange];
+
         } else {
             // since we didn't request this and the server didn't push it, just ignore this request
         }
     
     }
-    
+
+
 }
 /**
  * This method takes care of assigning a message Id and sending the object across the wire
