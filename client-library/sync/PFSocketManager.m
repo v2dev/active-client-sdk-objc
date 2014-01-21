@@ -28,6 +28,7 @@
 #import "FindByIdResponse.h"
 #import "FindByExampleRequest.h"
 #import "FindByExampleResponse.h"
+#import "PushCWUpdateResponse.h"
 #import "PFClient.h"
 #import "PFPersistence.h"
 
@@ -174,7 +175,12 @@ static PFSocketManager* sharedInstance;
     [self messageTimer];
 }
 
-
+- (void) processPushCWResponse:(PushCWUpdateResponse *) pushCWResponse {
+    
+    PFModelObject *theEntity = [[EntityManager sharedInstance] entityForClass:pushCWResponse.theClassName andId:pushCWResponse.theClassId];
+    [theEntity setValue:pushCWResponse.result forKey:pushCWResponse.fieldName];
+    
+}
 
 - (void) processSyncResponse:(SyncResponse *) syncResponse{
 
@@ -184,14 +190,15 @@ static PFSocketManager* sharedInstance;
         NSNotificationCenter *nc = [NSNotificationCenter defaultCenter];
         [nc postNotificationName:@"PFSocketReady" object:nil];
     }
-    
     // check to see if there is a matching request
     SyncRequest *matchingRequest = self.syncRequests[key];
     
     if (matchingRequest) {
         // handle various response classes
-        
-        if ([syncResponse isKindOfClass:[CreateResponse class]]) {
+        if ([syncResponse isKindOfClass:[PushCWUpdateResponse class]]) {
+            [self processPushCWResponse:(PushCWUpdateResponse *)syncResponse];
+            
+        } else if ([syncResponse isKindOfClass:[CreateResponse class]]) {
             CreateResponse *createResponse = (CreateResponse *) syncResponse;
             CreateRequest *createRequest = (CreateRequest *)matchingRequest;
             if (createResponse.result) {
@@ -272,7 +279,11 @@ static PFSocketManager* sharedInstance;
             }
             [self notifyModelDidChange];
 
-        } else {
+        } else if ([syncResponse isKindOfClass:[PushCWUpdateResponse class]]) {
+            
+                [self processPushCWResponse:(PushCWUpdateResponse *)syncResponse];
+                
+            } else {
             // since we didn't request this and the server didn't push it, just ignore this request
         }
     

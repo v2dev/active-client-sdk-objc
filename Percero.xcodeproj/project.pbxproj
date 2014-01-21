@@ -71,6 +71,11 @@
 		6AA814E9179DE68D00370E11 /* JsonObject.h in Headers */ = {isa = PBXBuildFile; fileRef = 6AA814E7179DE68D00370E11 /* JsonObject.h */; };
 		6AA814EC179DE9DF00370E11 /* JsonObject.m in Sources */ = {isa = PBXBuildFile; fileRef = 6AA814E8179DE68D00370E11 /* JsonObject.m */; };
 		6AA814ED179DE9E000370E11 /* JsonObject.m in Sources */ = {isa = PBXBuildFile; fileRef = 6AA814E8179DE68D00370E11 /* JsonObject.m */; };
+		6AB03A78188DC7FD00D74333 /* PushCWUpdateRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 6AB03A77188DC7FD00D74333 /* PushCWUpdateRequest.m */; };
+		6AB03A79188DC7FD00D74333 /* PushCWUpdateRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 6AB03A77188DC7FD00D74333 /* PushCWUpdateRequest.m */; };
+		6AB03A7B188DC9CA00D74333 /* PushCWUpdateRequest.h in Headers */ = {isa = PBXBuildFile; fileRef = 6AB03A7A188DC9CA00D74333 /* PushCWUpdateRequest.h */; };
+		6AB03A7E188DCCC100D74333 /* PushCWUpdateResponse.m in Sources */ = {isa = PBXBuildFile; fileRef = 6AB03A7D188DCCC100D74333 /* PushCWUpdateResponse.m */; };
+		6AB03A7F188DCCC100D74333 /* PushCWUpdateResponse.m in Sources */ = {isa = PBXBuildFile; fileRef = 6AB03A7D188DCCC100D74333 /* PushCWUpdateResponse.m */; };
 		6AB0F67F16F2942600D7F7D5 /* PutRequest.h in Headers */ = {isa = PBXBuildFile; fileRef = 6AB0F67D16F2942600D7F7D5 /* PutRequest.h */; };
 		6AB0F68016F2942600D7F7D5 /* PutRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 6AB0F67E16F2942600D7F7D5 /* PutRequest.m */; };
 		6AB0F68116F2942600D7F7D5 /* PutRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 6AB0F67E16F2942600D7F7D5 /* PutRequest.m */; };
@@ -310,6 +315,10 @@
 		6A9F3C361741CD3500164A3D /* PFTableViewBinder.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PFTableViewBinder.m; sourceTree = "<group>"; };
 		6AA814E7179DE68D00370E11 /* JsonObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JsonObject.h; sourceTree = "<group>"; };
 		6AA814E8179DE68D00370E11 /* JsonObject.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JsonObject.m; sourceTree = "<group>"; };
+		6AB03A77188DC7FD00D74333 /* PushCWUpdateRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PushCWUpdateRequest.m; path = model/PushCWUpdateRequest.m; sourceTree = "<group>"; };
+		6AB03A7A188DC9CA00D74333 /* PushCWUpdateRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PushCWUpdateRequest.h; path = model/PushCWUpdateRequest.h; sourceTree = "<group>"; };
+		6AB03A7C188DCBE600D74333 /* PushCWUpdateResponse.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = PushCWUpdateResponse.h; path = model/PushCWUpdateResponse.h; sourceTree = "<group>"; };
+		6AB03A7D188DCCC100D74333 /* PushCWUpdateResponse.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PushCWUpdateResponse.m; path = model/PushCWUpdateResponse.m; sourceTree = "<group>"; };
 		6AB0F67D16F2942600D7F7D5 /* PutRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PutRequest.h; path = model/PutRequest.h; sourceTree = "<group>"; };
 		6AB0F67E16F2942600D7F7D5 /* PutRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PutRequest.m; path = model/PutRequest.m; sourceTree = "<group>"; };
 		6AB1982516FCC66100821DF6 /* PFModelObject.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PFModelObject.m; path = model/PFModelObject.m; sourceTree = "<group>"; };
@@ -700,6 +709,10 @@
 				F2721EBC15C9B20E0040FC3E /* FindByIdRequest.m */,
 				F2721EBD15C9B20E0040FC3E /* FindByIdResponse.h */,
 				F2721EBE15C9B20E0040FC3E /* FindByIdResponse.m */,
+				6AB03A7A188DC9CA00D74333 /* PushCWUpdateRequest.h */,
+				6AB03A77188DC7FD00D74333 /* PushCWUpdateRequest.m */,
+				6AB03A7C188DCBE600D74333 /* PushCWUpdateResponse.h */,
+				6AB03A7D188DCCC100D74333 /* PushCWUpdateResponse.m */,
 				6AB1982D1700E8C100821DF6 /* PushDeletesReceivedRequest.h */,
 				6AB1982E1700E8C300821DF6 /* PushDeletesReceivedRequest.m */,
 				F2721EBF15C9B20E0040FC3E /* GetAllByNameRequest.h */,
@@ -980,6 +993,7 @@
 				EAF93FB816640BB600F581F4 /* SBJsonTokeniser.h in Headers */,
 				EAF93FBA16640BB600F581F4 /* SBJsonUTF8Stream.h in Headers */,
 				EAF93FBC16640BB600F581F4 /* SBJsonWriter.h in Headers */,
+				6AB03A7B188DC9CA00D74333 /* PushCWUpdateRequest.h in Headers */,
 				EAF93FC016640BE800F581F4 /* SBJson-Prefix.pch in Headers */,
 				EAF93FC916640C3000F581F4 /* base64.h in Headers */,
 				EAF93FCA16640C3000F581F4 /* NSData+SRB64Additions.h in Headers */,
@@ -1196,9 +1210,11 @@
 				EAF93FC816640C3000F581F4 /* base64.c in Sources */,
 				EAF93FCB16640C3000F581F4 /* NSData+SRB64Additions.m in Sources */,
 				EAF93FCE16640C3000F581F4 /* SRWebSocket.m in Sources */,
+				6AB03A7E188DCCC100D74333 /* PushCWUpdateResponse.m in Sources */,
 				F8BFB14316DEB53A000C9808 /* GTMGatherInputStream.m in Sources */,
 				F8BFB14616DEB53A000C9808 /* GTMHTTPFetcher.m in Sources */,
 				F8BFB14916DEB53A000C9808 /* GTMHTTPFetcherLogging.m in Sources */,
+				6AB03A78188DC7FD00D74333 /* PushCWUpdateRequest.m in Sources */,
 				F8BFB14C16DEB53A000C9808 /* GTMHTTPFetcherService.m in Sources */,
 				F8BFB14F16DEB53A000C9808 /* GTMHTTPFetchHistory.m in Sources */,
 				F8BFB15216DEB53A000C9808 /* GTMHTTPUploadFetcher.m in Sources */,
@@ -1257,6 +1273,7 @@
 				6AA814EC179DE9DF00370E11 /* JsonObject.m in Sources */,
 				F8BFB16316DEB53A000C9808 /* GTMReadMonitorInputStream.m in Sources */,
 				6AF998E616F0F56700C962A4 /* PushUpdateResponse.m in Sources */,
+				6AB03A7F188DCCC100D74333 /* PushCWUpdateResponse.m in Sources */,
 				6AF998EB16F10E2D00C962A4 /* PushDeleteResponse.m in Sources */,
 				6AB0F68116F2942600D7F7D5 /* PutRequest.m in Sources */,
 				6AB1982C1700E06E00821DF6 /* PutResponse.m in Sources */,
@@ -1274,6 +1291,7 @@
 				6AEBF703173DE23D004DE359 /* NSMutableArray+PFUpdate.m in Sources */,
 				6AEBF706173DE25A004DE359 /* update_arraysTests.m in Sources */,
 				6A9F3C391741CD3500164A3D /* PFTableViewBinder.m in Sources */,
+				6AB03A79188DC7FD00D74333 /* PushCWUpdateRequest.m in Sources */,
 				6A87EE2A174544B000C69431 /* PFGoogleOauthViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
