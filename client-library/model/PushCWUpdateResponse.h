@@ -5,14 +5,13 @@
 //
 
 #import "SyncResponse.h"
-#import "PFModelObject.h"
+#import "ClassIDPair.h"
 
 @interface PushCWUpdateResponse : SyncResponse<Serializable>
 
-@property(nonatomic, retain) NSString* theClassName;
-@property(nonatomic, retain) NSString* theClassId;
+@property(nonatomic, retain) ClassIDPair* classIDPair;
 @property(nonatomic, retain) NSString* fieldName;
 
-@property(nonatomic, retain) id result;
+@property(nonatomic, retain) id value;
 
 @end

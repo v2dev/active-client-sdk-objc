@@ -24,6 +24,7 @@
 #import "PutRequest.h"
 #import "CreateRequest.h"
 #import "RemoveRequest.h"
+#import "PushCWUpdateRequest.h"
 #import "ModelUtility.h"
 #import "IUserAnchor.h"
 #import "PFPersistence.h"
@@ -281,6 +282,7 @@ static PFClient* _sharedInstance;
 /**
  * Public static method to send a get all by name request
  */
+
 + (void) sendGetAllByNameRequest:(NSString*)className target:(NSObject*) target method:(SEL) selector{
     GetAllByNameRequest* request = [[GetAllByNameRequest alloc] init];
     [request setClientId:[PFClient sharedInstance].clientId];
@@ -363,6 +365,23 @@ static PFClient* _sharedInstance;
     
     [[PFSocketManager sharedInstance] sendEvent:@"removeObject" data:request callback:callback];
     
+}
++ (void) sendPushCWRequestWithEntity:(PFModelObject *) entity fieldName:(NSString *) fieldName parameters:(NSArray *)parameters target:(NSObject*) target method:(SEL) selector{
+    
+    PushCWUpdateRequest *request = [[PushCWUpdateRequest alloc] init];
+    request.classIDPair.className = entity.remoteClassName;
+    request.classIDPair.ID = entity.ID;
+    request.fieldName = fieldName;
+    
+    [request setClientId:[PFClient sharedInstance].clientId];
+    [request setToken:[PFClient sharedInstance].token];
+    [request setUserId:[PFClient sharedInstance].userId];
+    
+    PFInvocation* callback = nil;
+    if(target && selector)
+        callback = [[PFInvocation alloc] initWithTarget:target method:selector];
+
+    [[PFSocketManager sharedInstance] sendEvent:@"getChangeWatcher" data:request callback:callback];
 }
 
 + (BOOL)isConnected{

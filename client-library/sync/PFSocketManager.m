@@ -29,6 +29,7 @@
 #import "FindByExampleRequest.h"
 #import "FindByExampleResponse.h"
 #import "PushCWUpdateResponse.h"
+#import "PushCWUpdateRequest.h"
 #import "PFClient.h"
 #import "PFPersistence.h"
 
@@ -177,8 +178,31 @@ static PFSocketManager* sharedInstance;
 
 - (void) processPushCWResponse:(PushCWUpdateResponse *) pushCWResponse {
     
-    PFModelObject *theEntity = [[EntityManager sharedInstance] entityForClass:pushCWResponse.theClassName andId:pushCWResponse.theClassId];
-    [theEntity setValue:pushCWResponse.result forKey:pushCWResponse.fieldName];
+    
+    ClassIDPair *theTargetClassIdPair = [pushCWResponse valueForKey:@"classIDPair"];
+    NSString * targetClassName = [Utility translateRemoteClassName:theTargetClassIdPair.className];
+    NSString * targetId = theTargetClassIdPair.ID;
+    PFModelObject *targetObject = [[EntityManager sharedInstance] entityForClass:targetClassName andId:targetId];
+    id value = pushCWResponse.value;
+    if (value) {
+        if ([value isKindOfClass:[NSArray class]]) {
+            NSMutableArray * newArray = [[NSMutableArray alloc] initWithCapacity:[(NSArray *)value count]];
+            for (id object in value) {
+                if ([object isKindOfClass:[NSDictionary class]]) {
+                    
+                    PFModelObject *newObject = nil;
+                    newObject = [[EntityManager sharedInstance] deserializeObject:object];
+                    [newArray addObject:newObject];
+                }
+            }
+            // this array should always be replaced instead of modified
+            // and should be targeting a readOnly property
+            value = [newArray copy];
+        }
+    }
+    
+    
+    [targetObject setValue:value forKey:pushCWResponse.fieldName];
     
 }
 

@@ -5,11 +5,11 @@
 //
 
 #import "SyncRequest.h"
+#import "ClassIDPair.h"
 
 @interface PushCWUpdateRequest : SyncRequest
 
-@property(nonatomic, retain) NSString* theClassName;
-@property(nonatomic, retain) NSString* theClassId;
+@property(nonatomic, retain) ClassIDPair *classIDPair;
 @property(nonatomic, retain) NSString* fieldName;
 
 @end

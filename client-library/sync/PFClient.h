@@ -12,6 +12,7 @@
 #import "Reachability.h"
 
 @class PFSocketManager;
+@class PushCWUpdateRequest;
 
 @interface PFClient : NSObject <NSCoding>{
     PFSocketManager* syncManager;
@@ -49,6 +50,8 @@
 + (void) sendPutRequestWithClass:(NSString*)className object:(PFModelObject *) object completionTarget:(NSObject*) target method:(SEL) selector;
 + (void) sendCreateRequestWithClass:(NSString*)className object:(PFModelObject *) object completionTarget:(NSObject*) target method:(SEL) selector;
 + (void) sendRemoveRequestWithClass:(NSString*)className object:(PFModelObject *) object completionTarget:(NSObject*) target method:(SEL) selector;
++ (void) sendPushCWRequestWithEntity:(PFModelObject *) entity fieldName:(NSString *) fieldName parameters:(NSArray *)parameters target:(NSObject*) target method:(SEL) selector;
+
 + (BOOL) isConnected;
 + (bool) isAuthenticated;
 + (void) autoLogin;

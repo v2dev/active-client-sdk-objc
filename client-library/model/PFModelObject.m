@@ -66,6 +66,11 @@
     
 }
 
+- (void) getChangeWatcherWithFieldName:(NSString *) filedName parameters:(NSArray *) parameters{
+
+    [PFClient sendPushCWRequestWithEntity:self fieldName:filedName parameters:parameters target:nil method:nil];
+    
+}
 
 -(ClassIDPair *)classIDPair{
     ClassIDPair *result = [[ClassIDPair alloc] init];

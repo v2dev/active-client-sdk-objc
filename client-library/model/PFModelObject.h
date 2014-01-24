@@ -54,6 +54,7 @@
 - (NSMutableDictionary*) toDictionary:(BOOL)isShell;
 - (NSString*) remoteClassName;
 - (void)restoreDeletedRelationships;
+- (void) getChangeWatcherWithFieldName:(NSString *) filedName parameters:(NSArray *) parameters;
 
 + (NSMutableArray *) all;
 + (NSString *)remoteClassName;

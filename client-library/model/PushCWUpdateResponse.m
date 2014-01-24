@@ -12,11 +12,9 @@
 - (id) initFromDictionary:(NSDictionary *)dict{
     self = [super initFromDictionary:dict];
     if(self){
-        _theClassId = [dict objectForKey:@"theClassId"];
-        _theClassName = [dict objectForKey:@"theClassName"];
+        _classIDPair = [[ClassIDPair alloc] initFromDictionary:[dict objectForKey:@"classIdPair"]];
         _fieldName = [dict objectForKey:@"fieldName"];
-
-        _result =[dict objectForKey:@"result"];
+        _value = [dict objectForKey:@"value"];
     }
     
     return self;
@@ -27,11 +25,9 @@
     [dict setObject:[self remoteClassName] forKey:@"cn"];
     
     if(!isShell){
-        [dict setObject:_theClassId  forKey:@"theClassId"];
-        [dict setObject:_theClassName  forKey:@"theClassName"];
-        [dict setObject:_fieldName forKey:@"fieldName"];
-        [dict setObject:_result forKey:@"result"];
-
+        [dict setObject:[_classIDPair toDictionary:isShell]  forKey:@"classIDPair"];
+        [dict setObject:_value forKey:@"value"];
+        //[dict setObject:@"" forKey:@"params"];
     }
     return dict;
 }
