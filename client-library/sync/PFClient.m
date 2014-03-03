@@ -372,6 +372,7 @@ static PFClient* _sharedInstance;
     request.classIDPair.className = entity.remoteClassName;
     request.classIDPair.ID = entity.ID;
     request.fieldName = fieldName;
+    request.params = parameters;
     
     [request setClientId:[PFClient sharedInstance].clientId];
     [request setToken:[PFClient sharedInstance].token];

@@ -11,7 +11,7 @@
 
 @property(nonatomic, retain) ClassIDPair* classIDPair;
 @property(nonatomic, retain) NSString* fieldName;
-
+@property(nonatomic, retain) NSArray* params;
 @property(nonatomic, retain) id value;
 
 @end

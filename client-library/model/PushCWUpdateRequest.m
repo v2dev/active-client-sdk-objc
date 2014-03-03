@@ -14,6 +14,7 @@
         DLog(@"");
         _classIDPair = [[ClassIDPair alloc] init];
         _fieldName = nil;
+        _params = nil;
     }
     
     return self;
@@ -25,6 +26,7 @@
         _classIDPair = [[ClassIDPair alloc]initFromDictionary:[dict objectForKey:@"classIdPair"]];
 
         _fieldName = [dict objectForKey:@"fieldName"];
+        _params = [dict objectForKey:@"params"];
     }
     
     return self;
@@ -38,6 +40,7 @@
         [dict setObject:[_classIDPair toDictionary:isShell]  forKey:@"classIdPair"];
 
         [dict setObject:_fieldName forKey:@"fieldName"];
+        [dict setObject:_params forKey:@"params"];
     }
     
     return dict;
