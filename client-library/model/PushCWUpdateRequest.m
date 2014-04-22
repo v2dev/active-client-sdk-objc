@@ -40,7 +40,7 @@
         [dict setObject:[_classIDPair toDictionary:isShell]  forKey:@"classIdPair"];
 
         [dict setObject:_fieldName forKey:@"fieldName"];
-        [dict setObject:_params forKey:@"params"];
+        if (_params)[dict setObject:_params forKey:@"params"];
     }
     
     return dict;

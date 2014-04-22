@@ -28,7 +28,7 @@
     if(!isShell){
         [dict setObject:[_classIDPair toDictionary:isShell]  forKey:@"classIDPair"];
         [dict setObject:_value forKey:@"value"];
-        [dict setObject:_params forKey:@"params"];
+        if (_params)[dict setObject:_params forKey:@"params"];
     }
     return dict;
 }
