@@ -394,8 +394,12 @@ static PFClient* _sharedInstance;
 }
 
 + (void) save{
-    [NSKeyedArchiver archiveRootObject:[PFClient sharedInstance] toFile:@"pfclient"];
+    NSArray *paths = NSSearchPathForDirectoriesInDomains(NSLibraryDirectory, NSUserDomainMask, YES);
+    NSString* path = [paths[0] stringByAppendingPathComponent:@"pfclient"];
+    bool successful = [NSKeyedArchiver archiveRootObject:[PFClient sharedInstance] toFile:path];
+    NSLog(@"[PFClient save] was successful = %i",successful);
 }
+
 
 - (id) initWithCoder:(NSCoder *)aDecoder{
     self = [self init];
