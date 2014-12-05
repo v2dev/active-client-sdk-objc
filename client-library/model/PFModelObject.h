@@ -54,7 +54,8 @@
 - (NSMutableDictionary*) toDictionary:(BOOL)isShell;
 - (NSString*) remoteClassName;
 - (void)restoreDeletedRelationships;
-- (void) getChangeWatcherWithFieldName:(NSString *) filedName parameters:(NSArray *) parameters;
+- (void) getChangeWatcherWithFieldName:(NSString *) fieldName parameters:(NSArray *) parameters;
+- (void) getChangeWatcherWithFieldName:(NSString *) fieldName parameters:(NSArray *) parameters callBackTarget:(NSObject*) target callbackMethod:(SEL) method;
 
 + (NSMutableArray *) all;
 + (NSString *)remoteClassName;

@@ -201,6 +201,7 @@ static PFSocketManager* sharedInstance;
         }
     }
     
+    NSLog(@"\njgc - %@ Response\n",pushCWResponse.correspondingMessageId);
     
     [targetObject setValue:value forKey:pushCWResponse.fieldName];
     
@@ -325,6 +326,16 @@ static PFSocketManager* sharedInstance;
     }
     else if([data isKindOfClass:[SyncRequest class]]){
         ((SyncRequest*)data).messageId = requestId;
+        
+        if([data isKindOfClass:[PushCWUpdateRequest class]]){
+         NSLog(@"\njgc - %@ Request\n",requestId);
+            // if data.param != nil then
+            //
+            
+        
+        }
+        
+        
         [self cacheSyncRequest:data];
     }
 

@@ -66,11 +66,26 @@
     
 }
 
-- (void) getChangeWatcherWithFieldName:(NSString *) filedName parameters:(NSArray *) parameters{
+- (void) getChangeWatcherWithFieldName:(NSString *) fieldName parameters:(NSArray *) parameters{
 
-    [PFClient sendPushCWRequestWithEntity:self fieldName:filedName parameters:parameters target:nil method:nil];
+    [PFClient sendPushCWRequestWithEntity:self
+                                fieldName:fieldName
+                               parameters:parameters
+                                   target:nil
+                                   method:nil];
     
 }
+
+- (void) getChangeWatcherWithFieldName:(NSString *) fieldName parameters:(NSArray *) parameters callBackTarget:(NSObject*) target callbackMethod:(SEL) method{
+    
+    [PFClient sendPushCWRequestWithEntity:self
+                                fieldName:fieldName
+                               parameters:parameters
+                                   target:target
+                                   method:method];
+    
+}
+
 
 -(ClassIDPair *)classIDPair{
     ClassIDPair *result = [[ClassIDPair alloc] init];

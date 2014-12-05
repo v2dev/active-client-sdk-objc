@@ -366,7 +366,11 @@ static PFClient* _sharedInstance;
     [[PFSocketManager sharedInstance] sendEvent:@"removeObject" data:request callback:callback];
     
 }
-+ (void) sendPushCWRequestWithEntity:(PFModelObject *) entity fieldName:(NSString *) fieldName parameters:(NSArray *)parameters target:(NSObject*) target method:(SEL) selector{
++ (void) sendPushCWRequestWithEntity:(PFModelObject *) entity
+                           fieldName:(NSString *) fieldName
+                          parameters:(NSArray *)parameters
+                              target:(NSObject*) target
+                              method:(SEL) selector{
     
     PushCWUpdateRequest *request = [[PushCWUpdateRequest alloc] init];
     request.classIDPair.className = entity.remoteClassName;
