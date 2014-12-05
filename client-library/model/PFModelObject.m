@@ -86,6 +86,20 @@
     
 }
 
++(void)requestServerSideDerivedCollectionWithRootObject:(id)rootObject
+      changeWatcherFieldName:(NSString *)changeWatcherFieldName
+                       param:(NSArray*)param
+              callbackTarget:(id)callbackTarget
+            callbackSelector:(SEL)callbackSelector{
+    
+    
+    [rootObject getChangeWatcherWithFieldName:changeWatcherFieldName
+                                   parameters:param
+                               callBackTarget:callbackTarget
+                               callbackMethod:callbackSelector];
+}
+
+
 
 -(ClassIDPair *)classIDPair{
     ClassIDPair *result = [[ClassIDPair alloc] init];

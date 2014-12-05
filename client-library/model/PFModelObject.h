@@ -55,8 +55,12 @@
 - (NSString*) remoteClassName;
 - (void)restoreDeletedRelationships;
 - (void) getChangeWatcherWithFieldName:(NSString *) fieldName parameters:(NSArray *) parameters;
-- (void) getChangeWatcherWithFieldName:(NSString *) fieldName parameters:(NSArray *) parameters callBackTarget:(NSObject*) target callbackMethod:(SEL) method;
-
+//- (void) getChangeWatcherWithFieldName:(NSString *) fieldName parameters:(NSArray *) parameters callBackTarget:(NSObject*) target callbackMethod:(SEL) method;
++(void)requestServerSideDerivedCollectionWithRootObject:(id)rootObject
+                                 changeWatcherFieldName:(NSString *)changeWatcherFieldName
+                                                  param:(NSArray*)param
+                                         callbackTarget:(id)callbackTarget
+                                       callbackSelector:(SEL)callbackSelector;
 + (NSMutableArray *) all;
 + (NSString *)remoteClassName;
 

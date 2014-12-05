@@ -225,6 +225,7 @@
 		F2B0265F15C9A495000375CE /* libPercero.a in Frameworks */ = {isa = PBXBuildFile; fileRef = F2B0264715C9A495000375CE /* libPercero.a */; };
 		F2B0266515C9A495000375CE /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = F2B0266315C9A495000375CE /* InfoPlist.strings */; };
 		F2B0266815C9A495000375CE /* client_libraryTests.m in Sources */ = {isa = PBXBuildFile; fileRef = F2B0266715C9A495000375CE /* client_libraryTests.m */; };
+		F80542AC1A323EA800D38DE7 /* SSDC_Response.h in Headers */ = {isa = PBXBuildFile; fileRef = F80542AA1A323EA800D38DE7 /* SSDC_Response.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		F8BFB14216DEB53A000C9808 /* GTMGatherInputStream.h in Headers */ = {isa = PBXBuildFile; fileRef = F8BFB12B16DEB53A000C9808 /* GTMGatherInputStream.h */; };
 		F8BFB14316DEB53A000C9808 /* GTMGatherInputStream.m in Sources */ = {isa = PBXBuildFile; fileRef = F8BFB12C16DEB53A000C9808 /* GTMGatherInputStream.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		F8BFB14416DEB53A000C9808 /* GTMGatherInputStream.m in Sources */ = {isa = PBXBuildFile; fileRef = F8BFB12C16DEB53A000C9808 /* GTMGatherInputStream.m */; };
@@ -474,6 +475,7 @@
 		F2B0266415C9A495000375CE /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		F2B0266615C9A495000375CE /* client_libraryTests.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = client_libraryTests.h; sourceTree = "<group>"; };
 		F2B0266715C9A495000375CE /* client_libraryTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = client_libraryTests.m; sourceTree = "<group>"; };
+		F80542AA1A323EA800D38DE7 /* SSDC_Response.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SSDC_Response.h; sourceTree = "<group>"; };
 		F8BFB12B16DEB53A000C9808 /* GTMGatherInputStream.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GTMGatherInputStream.h; sourceTree = "<group>"; };
 		F8BFB12C16DEB53A000C9808 /* GTMGatherInputStream.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GTMGatherInputStream.m; sourceTree = "<group>"; };
 		F8BFB12D16DEB53A000C9808 /* GTMHTTPFetcher.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GTMHTTPFetcher.h; sourceTree = "<group>"; };
@@ -658,23 +660,6 @@
 		F2721E8C15C9B1C20040FC3E /* Model */ = {
 			isa = PBXGroup;
 			children = (
-				6A729BF51725E6FB001F4BB8 /* FindByExampleResponse.h */,
-				6A729BF61725E6FB001F4BB8 /* FindByExampleResponse.m */,
-				6A8B0867170123E700BB48EE /* ClassIDPair.h */,
-				6A8B0868170123E700BB48EE /* ClassIDPair.m */,
-				6AB198281700E06A00821DF6 /* PutResponse.h */,
-				6AB198291700E06C00821DF6 /* PutResponse.m */,
-				6AFAF6B61701E2AE0026151D /* RemoveRequest.h */,
-				6AFAF6B71701E2AE0026151D /* RemoveRequest.m */,
-				6AD4553B1701FDA20038A988 /* RemoveResponse.h */,
-				6AD4553C1701FDA20038A988 /* RemoveResponse.m */,
-				6AC09CD2170212C800D640A3 /* CreateRequest.h */,
-				6AC09CD3170212C800D640A3 /* CreateRequest.m */,
-				6AC09CD61702152A00D640A3 /* CreateResponse.h */,
-				6AC09CD71702152A00D640A3 /* CreateResponse.m */,
-				6ACA5BCA16E8FFB700CB8FBD /* IUserAnchor.h */,
-				6A87F7CF1721D6E200FDCDBE /* IUserIdentifier.h */,
-				6ACA5BCB16E8FFE700CB8FBD /* IUserRole.h */,
 				F2721E9A15C9B20E0040FC3E /* _Super_RegisteredApplication.h */,
 				F2721E9B15C9B20E0040FC3E /* _Super_RegisteredApplication.m */,
 				F2721E9C15C9B20E0040FC3E /* _Super_ServiceApplication.h */,
@@ -701,20 +686,22 @@
 				F2721EB115C9B20E0040FC3E /* AuthRequest.m */,
 				F2721EB215C9B20E0040FC3E /* AuthResponse.h */,
 				F2721EB315C9B20E0040FC3E /* AuthResponse.m */,
+				6A8B0867170123E700BB48EE /* ClassIDPair.h */,
+				6A8B0868170123E700BB48EE /* ClassIDPair.m */,
 				F2721EB415C9B20E0040FC3E /* ConnectResponse.h */,
 				F2721EB515C9B20E0040FC3E /* ConnectResponse.m */,
+				6AC09CD2170212C800D640A3 /* CreateRequest.h */,
+				6AC09CD3170212C800D640A3 /* CreateRequest.m */,
+				6AC09CD61702152A00D640A3 /* CreateResponse.h */,
+				6AC09CD71702152A00D640A3 /* CreateResponse.m */,
 				6A729BF01725CE74001F4BB8 /* FindByExampleRequest.h */,
 				6A729BF11725CE74001F4BB8 /* FindByExampleRequest.m */,
+				6A729BF51725E6FB001F4BB8 /* FindByExampleResponse.h */,
+				6A729BF61725E6FB001F4BB8 /* FindByExampleResponse.m */,
 				F2721EBB15C9B20E0040FC3E /* FindByIdRequest.h */,
 				F2721EBC15C9B20E0040FC3E /* FindByIdRequest.m */,
 				F2721EBD15C9B20E0040FC3E /* FindByIdResponse.h */,
 				F2721EBE15C9B20E0040FC3E /* FindByIdResponse.m */,
-				6AB03A7A188DC9CA00D74333 /* PushCWUpdateRequest.h */,
-				6AB03A77188DC7FD00D74333 /* PushCWUpdateRequest.m */,
-				6AB03A7C188DCBE600D74333 /* PushCWUpdateResponse.h */,
-				6AB03A7D188DCCC100D74333 /* PushCWUpdateResponse.m */,
-				6AB1982D1700E8C100821DF6 /* PushDeletesReceivedRequest.h */,
-				6AB1982E1700E8C300821DF6 /* PushDeletesReceivedRequest.m */,
 				F2721EBF15C9B20E0040FC3E /* GetAllByNameRequest.h */,
 				F2721EC015C9B20E0040FC3E /* GetAllByNameRequest.m */,
 				F2721EC115C9B20E0040FC3E /* GetAllByNameResponse.h */,
@@ -723,16 +710,38 @@
 				F2721EC415C9B20E0040FC3E /* GetRegAppOAuthsRequest.m */,
 				F2721EC515C9B20E0040FC3E /* GetRegAppOAuthsResponse.h */,
 				F2721EC615C9B20E0040FC3E /* GetRegAppOAuthsResponse.m */,
+				6ACA5BCA16E8FFB700CB8FBD /* IUserAnchor.h */,
+				6A87F7CF1721D6E200FDCDBE /* IUserIdentifier.h */,
+				6ACA5BCB16E8FFE700CB8FBD /* IUserRole.h */,
 				F2721EC915C9B20E0040FC3E /* PFModelObject.h */,
 				6AB1982516FCC66100821DF6 /* PFModelObject.m */,
+				6A1FBEA516FA429A00E9E699 /* PFRelationship.h */,
+				6A1FBEA616FA429A00E9E699 /* PFRelationship.m */,
+				6A1FBEA916FA43A600E9E699 /* PFSourceRelationship.h */,
+				6A1FBEAA16FA43A600E9E699 /* PFSourceRelationship.m */,
+				6A1FBEA016FA304600E9E699 /* PFTargetRelationship.h */,
+				6A1FBEA116FA304600E9E699 /* PFTargetRelationship.m */,
+				6AB03A7A188DC9CA00D74333 /* PushCWUpdateRequest.h */,
+				6AB03A77188DC7FD00D74333 /* PushCWUpdateRequest.m */,
+				6AB03A7C188DCBE600D74333 /* PushCWUpdateResponse.h */,
+				6AB03A7D188DCCC100D74333 /* PushCWUpdateResponse.m */,
+				F80542AA1A323EA800D38DE7 /* SSDC_Response.h */,
 				6AF998E716F10E2D00C962A4 /* PushDeleteResponse.h */,
 				6AF998E816F10E2D00C962A4 /* PushDeleteResponse.m */,
+				6AB1982D1700E8C100821DF6 /* PushDeletesReceivedRequest.h */,
+				6AB1982E1700E8C300821DF6 /* PushDeletesReceivedRequest.m */,
 				6AF998E216F0F56700C962A4 /* PushUpdateResponse.h */,
 				6AF998E316F0F56700C962A4 /* PushUpdateResponse.m */,
 				6AB0F67D16F2942600D7F7D5 /* PutRequest.h */,
 				6AB0F67E16F2942600D7F7D5 /* PutRequest.m */,
+				6AB198281700E06A00821DF6 /* PutResponse.h */,
+				6AB198291700E06C00821DF6 /* PutResponse.m */,
 				F2721ECA15C9B20E0040FC3E /* RegisteredApplication.h */,
 				F2721ECB15C9B20E0040FC3E /* RegisteredApplication.m */,
+				6AFAF6B61701E2AE0026151D /* RemoveRequest.h */,
+				6AFAF6B71701E2AE0026151D /* RemoveRequest.m */,
+				6AD4553B1701FDA20038A988 /* RemoveResponse.h */,
+				6AD4553C1701FDA20038A988 /* RemoveResponse.m */,
 				F2721ECC15C9B20E0040FC3E /* Serializable.h */,
 				F2721ECD15C9B20E0040FC3E /* ServiceApplication.h */,
 				F2721ECE15C9B20E0040FC3E /* ServiceApplication.m */,
@@ -750,12 +759,6 @@
 				F2721EDA15C9B20E0040FC3E /* UserAccount.m */,
 				F2721EDB15C9B20E0040FC3E /* UserToken.h */,
 				F2721EDC15C9B20E0040FC3E /* UserToken.m */,
-				6A1FBEA516FA429A00E9E699 /* PFRelationship.h */,
-				6A1FBEA616FA429A00E9E699 /* PFRelationship.m */,
-				6A1FBEA016FA304600E9E699 /* PFTargetRelationship.h */,
-				6A1FBEA116FA304600E9E699 /* PFTargetRelationship.m */,
-				6A1FBEA916FA43A600E9E699 /* PFSourceRelationship.h */,
-				6A1FBEAA16FA43A600E9E699 /* PFSourceRelationship.m */,
 			);
 			name = Model;
 			sourceTree = "<group>";
@@ -1010,6 +1013,7 @@
 				F8BFB15A16DEB53A000C9808 /* GTMOAuth2SignIn.h in Headers */,
 				F8BFB15D16DEB53A000C9808 /* GTMOAuth2ViewControllerTouch.h in Headers */,
 				F8BFB16116DEB53A000C9808 /* GTMReadMonitorInputStream.h in Headers */,
+				F80542AC1A323EA800D38DE7 /* SSDC_Response.h in Headers */,
 				6AF998E416F0F56700C962A4 /* PushUpdateResponse.h in Headers */,
 				6AF998E916F10E2D00C962A4 /* PushDeleteResponse.h in Headers */,
 				6AB0F67F16F2942600D7F7D5 /* PutRequest.h in Headers */,
