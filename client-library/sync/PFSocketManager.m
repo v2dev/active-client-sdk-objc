@@ -44,6 +44,9 @@
 static PFSocketManager* sharedInstance;
 
 @implementation PFSocketManager
+
+NSString *paramString(NSArray *params);
+
 @synthesize socketIO, /*model,*/ isConnected;
 
 - (void) notifyModelDidChange{
@@ -177,6 +180,9 @@ static PFSocketManager* sharedInstance;
 }
 
 - (void) processPushCWResponse:(PushCWUpdateResponse *) pushCWResponse {
+    static int count=0;
+    count++;
+    
     
     
     ClassIDPair *theTargetClassIdPair = [pushCWResponse valueForKey:@"classIDPair"];
@@ -206,26 +212,76 @@ static PFSocketManager* sharedInstance;
     NSString* corrMessageId = pushCWResponse.correspondingMessageId;
     PFInvocation* callback = [callbacks objectForKey:corrMessageId];
     
-    //If the callback target and selector are nil, then this is a legacy SSDC so let's do what we would have done had we not filtered out these actions in the last few lines of [self socketIO:didReceiveEvent]
-    if (callback.target==nil || callback.selector==nil) {
-        PFModelObject *targetObject = [[EntityManager sharedInstance] entityForClass:targetClassName andId:targetId];
+    if (callback==nil && ![self objectForKey2014:pushCWResponse]) {
+        /*
+         If the callback is nil and callbacks dictionary does not contain an objectForKey2014
+         then this is a legacy SSDC
+         */
         
-        //In the last few lines of [self socketIO:didReceiveEvent:] we branched around the following methods because this is a PushCWUpdateResponse but
-        //since this turns out to be a legacy SSDC, it would have previously invoked both these methods, so let's do it here.
-        [callback invokeWithArgument:pushCWResponse];
+        
+        //Legacy
+        PFModelObject *targetObject = [[EntityManager sharedInstance] entityForClass:targetClassName andId:targetId];
         [callbacks removeObjectForKey:corrMessageId];
-        //Also, the legacy SSDC invoked the following, thus loading the ivar of the target object.
         [targetObject setValue:value forKey:pushCWResponse.fieldName];
     }else{
-        //This is a result of our new [PFModelObject requestServerSideDerivedCollectionWithRootObject:changeWatcherFieldName:param:callbackTarget:callbackSelector:]
+        /*
+         |This is a 2014 [PFModelObject requestServerSideDerivedCollectionWithRootObject:
+         |                                                       changeWatcherFieldName:
+         |                                                                        param:
+         |                                                               callbackTarget:
+         |                                                             callbackSelector:]
+         
+         |and it could be either an incoming CWupdate from the server or the initial response from the PSSDC request.
+         */
+        
         pushCWResponse.value=value;
-        [callback invokeWithArgument:pushCWResponse];
-        [callbacks removeObjectForKey:corrMessageId];
+        
+        //If this is the initial pass, then the following statement is true
+        if (![self objectForKey2014:pushCWResponse]){
+            
+            //Initial Pass
+            
+            //let's invoke the callback
+            [callback invokeWithArgument:pushCWResponse];
+            // and let's save the callback with a more permanent and unique key that contains the
+            // fieldName + _2014_ + calssIDPair.ID + Parameters
+            
+             id valueForKey = [callbacks objectForKey:corrMessageId];//Grab the callback object for corrMessageId
+            [callbacks setObject:valueForKey forKey:[self stringForKey2014:pushCWResponse]];//Add new key for this callback object
+            [callbacks removeObjectForKey:corrMessageId];//remove old key
+        }else{
+
+            //Since this is an update response from the server, let's get the callback and invoke it
+            callback = [self objectForKey2014:pushCWResponse];
+            [callback invokeWithArgument:pushCWResponse];
+        }
     }
 }
 
-- (void) processSyncResponse:(SyncResponse *) syncResponse{
 
+-(NSString*)stringForKey2014: (PushCWUpdateResponse *)pushCWResponse{
+    return [NSString stringWithFormat:@"%@_2014_%@_%@",pushCWResponse.fieldName,pushCWResponse.classIDPair.ID,paramString(pushCWResponse.params)];
+}
+
+-(id)objectForKey2014: (PushCWUpdateResponse *)pushCWResponse{
+    return [callbacks objectForKey:[self stringForKey2014:pushCWResponse]];
+}
+
+
+NSString *paramString(NSArray *params) {
+    if (!params || [params isKindOfClass:[NSNull class]]){
+        return @"";
+    }
+    NSString *paramString=@"";
+    for (int i=0; i<params.count; i++) {
+        paramString=[NSString stringWithFormat:@"%@%@",paramString,params[i]];
+    }
+    return paramString;
+}
+
+
+- (void) processSyncResponse:(SyncResponse *) syncResponse{
+  
     id <NSCopying> key = [syncResponse.correspondingMessageId copy];
 
     if([syncResponse isKindOfClass:[ConnectResponse class]]){
@@ -234,6 +290,7 @@ static PFSocketManager* sharedInstance;
     }
     // check to see if there is a matching request
     SyncRequest *matchingRequest = self.syncRequests[key];
+    
     
     if (matchingRequest) {
         // handle various response classes
@@ -323,7 +380,7 @@ static PFSocketManager* sharedInstance;
 
         } else if ([syncResponse isKindOfClass:[PushCWUpdateResponse class]]) {
             
-                [self processPushCWResponse:(PushCWUpdateResponse *)syncResponse];
+                [self processPushCWResponse:(PushCWUpdateResponse *)syncResponse];//√
                 
             } else {
             // since we didn't request this and the server didn't push it, just ignore this request
@@ -414,7 +471,8 @@ static PFSocketManager* sharedInstance;
 }
 
 /*
- * Method that gets called when a message is recieved from the socket
+ * JGC
+ * Method that gets called when a message is received from the socket
  */
 - (void) socketIO:(SocketIO *)socket didReceiveEvent:(SocketIOPacket *)packet{
     NSDictionary* data = [packet dataAsJSON];    
@@ -436,9 +494,9 @@ static PFSocketManager* sharedInstance;
         if([result isKindOfClass:[AuthResponse class]]){
             corrMessageId = ((AuthResponse*)result).correspondingMessageId;
         }
-        else if([result isKindOfClass:[SyncResponse class]]){
+        else if([result isKindOfClass:[SyncResponse class]]){//√
             corrMessageId = ((SyncResponse*)result).correspondingMessageId;
-            [self processSyncResponse:result];
+           [self processSyncResponse:result];
         }
         
         if (corrMessageId && [corrMessageId isKindOfClass:[NSString class]]){
@@ -450,6 +508,7 @@ static PFSocketManager* sharedInstance;
             [socketIO sendJSON:ack];
         }
         
+        //JGC -
         PFInvocation* callback = [callbacks objectForKey:corrMessageId];
         
         //If this is a PushCWUpdateResponse then let's deal with it in processPushCWResponse, not here.
