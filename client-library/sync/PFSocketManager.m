@@ -44,11 +44,14 @@
 static PFSocketManager* sharedInstance;
 
 @implementation PFSocketManager
+
+NSString *paramString(NSArray *params);
+
 @synthesize socketIO, /*model,*/ isConnected;
 
 - (void) notifyModelDidChange{
     
-//    NSLog(@"notifyModelDidChange");
+    //    NSLog(@"notifyModelDidChange");
     NSNotificationCenter *nc = [NSNotificationCenter defaultCenter];
     NSString* notificationName = [NSString stringWithFormat:@"modelDidChange"];
     [nc postNotificationName:notificationName object:self];
@@ -75,8 +78,8 @@ static PFSocketManager* sharedInstance;
 - (void) connect{
     if(!isConnecting && !isConnected){
         /*
-        * Setup the socket connection
-        */
+         * Setup the socket connection
+         */
         EnvConfig* config = [EnvConfig sharedInstance];
         [socketIO connectToHost:[config getEnvProperty:@"socket.host"] onPort:[[config getEnvProperty:@"socket.port"] intValue]];
         isConnecting = true;
@@ -97,14 +100,14 @@ static PFSocketManager* sharedInstance;
         isConnecting = false;
         callbacks = [[NSMutableDictionary alloc] init];
         socketIO = [[SocketIO alloc] initWithDelegate:self];
-
+        
         [self connect];
     }
     return self;
 }
 
 - (void) messageTimer{
-
+    
     static BOOL messageTimerIsLocked;
     if (messageTimerIsLocked) {
         return;
@@ -176,8 +179,15 @@ static PFSocketManager* sharedInstance;
     [self messageTimer];
 }
 
+
+
 - (void) processPushCWResponse:(PushCWUpdateResponse *) pushCWResponse {
+    static int count=0;
+    count++;
     
+    if ([pushCWResponse.fieldName isEqualToString:@"harvestWarehouseTotalIndividualInventory"]){
+        
+    }
     
     ClassIDPair *theTargetClassIdPair = [pushCWResponse valueForKey:@"classIDPair"];
     NSString * targetClassName = [Utility translateRemoteClassName:theTargetClassIdPair.className];
@@ -206,34 +216,85 @@ static PFSocketManager* sharedInstance;
     NSString* corrMessageId = pushCWResponse.correspondingMessageId;
     PFInvocation* callback = [callbacks objectForKey:corrMessageId];
     
-    //If the callback target and selector are nil, then this is a legacy SSDC so let's do what we would have done had we not filtered out these actions in the last few lines of [self socketIO:didReceiveEvent]
-    if (callback.target==nil || callback.selector==nil) {
-        PFModelObject *targetObject = [[EntityManager sharedInstance] entityForClass:targetClassName andId:targetId];
+    if (callback==nil && ![self objectForKey2014:pushCWResponse]) {
+        /*
+         If the callback is nil and callbacks dictionary does not contain an objectForKey2014
+         then this is a legacy SSDC
+         */
         
-        //In the last few lines of [self socketIO:didReceiveEvent:] we branched around the following methods because this is a PushCWUpdateResponse but
-        //since this turns out to be a legacy SSDC, it would have previously invoked both these methods, so let's do it here.
-        [callback invokeWithArgument:pushCWResponse];
+        
+        //Legacy
+        PFModelObject *targetObject = [[EntityManager sharedInstance] entityForClass:targetClassName andId:targetId];
         [callbacks removeObjectForKey:corrMessageId];
-        //Also, the legacy SSDC invoked the following, thus loading the ivar of the target object.
         [targetObject setValue:value forKey:pushCWResponse.fieldName];
     }else{
-        //This is a result of our new [PFModelObject requestServerSideDerivedCollectionWithRootObject:changeWatcherFieldName:param:callbackTarget:callbackSelector:]
+        /*
+         |This is a 2014 [PFModelObject requestServerSideDerivedCollectionWithRootObject:
+         |                                                       changeWatcherFieldName:
+         |                                                                        param:
+         |                                                               callbackTarget:
+         |                                                             callbackSelector:]
+         
+         |and it could be either an incoming CWupdate from the server or the initial response from the PSSDC request.
+         */
+        
         pushCWResponse.value=value;
-        [callback invokeWithArgument:pushCWResponse];
-        [callbacks removeObjectForKey:corrMessageId];
+        
+        //If this is the initial pass, then the following statement is true
+        if (![self objectForKey2014:pushCWResponse]){
+            
+            //Initial Pass
+            
+            //let's invoke the callback
+            [callback invokeWithArgument:pushCWResponse];
+            // and let's save the callback with a more permanent and unique key that contains the
+            // fieldName + _2014_ + calssIDPair.ID + Parameters
+            
+            id valueForKey = [callbacks objectForKey:corrMessageId];//Grab the callback object for corrMessageId
+            [callbacks setObject:valueForKey forKey:[self stringForKey2014:pushCWResponse]];//Add new key for this callback object
+            [callbacks removeObjectForKey:corrMessageId];//remove old key
+        }else{
+            
+            //Since this is an update response from the server, let's get the callback and invoke it
+            callback = [self objectForKey2014:pushCWResponse];
+            [callback invokeWithArgument:pushCWResponse];
+        }
     }
 }
 
+
+-(NSString*)stringForKey2014: (PushCWUpdateResponse *)pushCWResponse{
+    return [NSString stringWithFormat:@"%@_2014_%@_%@",pushCWResponse.fieldName,pushCWResponse.classIDPair.ID,paramString(pushCWResponse.params)];
+}
+
+-(id)objectForKey2014: (PushCWUpdateResponse *)pushCWResponse{
+    return [callbacks objectForKey:[self stringForKey2014:pushCWResponse]];
+}
+
+
+NSString *paramString(NSArray *params) {
+    if (!params || [params isKindOfClass:[NSNull class]]){
+        return @"";
+    }
+    NSString *paramString=@"";
+    for (int i=0; i<params.count; i++) {
+        paramString=[NSString stringWithFormat:@"%@%@",paramString,params[i]];
+    }
+    return paramString;
+}
+
+
 - (void) processSyncResponse:(SyncResponse *) syncResponse{
-
+    
     id <NSCopying> key = [syncResponse.correspondingMessageId copy];
-
+    
     if([syncResponse isKindOfClass:[ConnectResponse class]]){
         NSNotificationCenter *nc = [NSNotificationCenter defaultCenter];
         [nc postNotificationName:@"PFSocketReady" object:nil];
     }
     // check to see if there is a matching request
     SyncRequest *matchingRequest = self.syncRequests[key];
+    
     
     if (matchingRequest) {
         // handle various response classes
@@ -286,13 +347,13 @@ static PFSocketManager* sharedInstance;
             [PFPersistence addObject:foundObject];
             
             [self notifyModelDidChange];
-
+            
         }else if ([syncResponse isKindOfClass:[FindByExampleResponse class]]) {
             FindByExampleResponse* findByExampleResponse = (FindByExampleResponse *) syncResponse;
             FindByExampleRequest* findByExampleRequest = (FindByExampleRequest *) matchingRequest;
-
+            
             NSArray *result = findByExampleResponse.result;
-
+            
             if((result.count == 1) && [findByExampleRequest.theObject conformsToProtocol:@protocol(IUserAnchor)]){
                 PFModelObject<IUserAnchor> *requestUser = findByExampleRequest.theObject;
                 PFModelObject<IUserAnchor> *responseUser = result[0];
@@ -302,7 +363,7 @@ static PFSocketManager* sharedInstance;
             }
             
             [self notifyModelDidChange];
-
+            
             
         }
         
@@ -317,21 +378,21 @@ static PFSocketManager* sharedInstance;
             for (PFModelObject *obj in pushUpdateResponse.result) {
                 PFModelObject *dontLeaveMeLikeThisObject = [[EntityManager sharedInstance] getEntity:obj] ;
                 [[EntityManager sharedInstance] addToInverseRelationshipsModelObject:dontLeaveMeLikeThisObject];
-
+                
             }
             [self notifyModelDidChange];
-
+            
         } else if ([syncResponse isKindOfClass:[PushCWUpdateResponse class]]) {
             
-                [self processPushCWResponse:(PushCWUpdateResponse *)syncResponse];
-                
-            } else {
+            [self processPushCWResponse:(PushCWUpdateResponse *)syncResponse];//√
+            
+        } else {
             // since we didn't request this and the server didn't push it, just ignore this request
         }
-    
+        
     }
-
-
+    
+    
 }
 /**
  * This method takes care of assigning a message Id and sending the object across the wire
@@ -348,13 +409,13 @@ static PFSocketManager* sharedInstance;
             // if data.param != nil then
             //
             
-        
+            
         }
         
         
         [self cacheSyncRequest:data];
     }
-
+    
     if(inv){
         [callbacks setObject:inv forKey:requestId];
     }
@@ -368,7 +429,7 @@ static PFSocketManager* sharedInstance;
  * into the entity cache.
  */
 - (id<Serializable>) deserializeObject:(id)obj{
-    return [[EntityManager sharedInstance] deserializeObject:obj];    
+    return [[EntityManager sharedInstance] deserializeObject:obj];
 }
 
 /**************************
@@ -387,7 +448,7 @@ static PFSocketManager* sharedInstance;
     } else {
         [connectMessage setValue:@{@"ensureMessageDelivery":@(YES)} forKey:@"connect"];
     }
-
+    
     [socketIO sendEvent:@"message" withData:connectMessage];
     
     
@@ -395,13 +456,13 @@ static PFSocketManager* sharedInstance;
     [nc postNotificationName:@"PFSocketConnected" object:nil];
     
     self.lastSessionId = [socketIO valueForKey:@"_sid"];
-
+    
     isConnecting = false;
 }
 - (void) socketIODidDisconnect:(SocketIO *)socket{
     NSLog(@"Disonnected from socket :(");
     
-//    self.lastSessionId = [socketIO valueForKey:@"_sid"];
+    //    self.lastSessionId = [socketIO valueForKey:@"_sid"];
     isConnected = false;
     [self connect];
 }
@@ -414,13 +475,35 @@ static PFSocketManager* sharedInstance;
 }
 
 /*
- * Method that gets called when a message is recieved from the socket
+ * JGC
+ * Method that gets called when a message is received from the socket
  */
 - (void) socketIO:(SocketIO *)socket didReceiveEvent:(SocketIOPacket *)packet{
-    NSDictionary* data = [packet dataAsJSON];    
+    NSDictionary* data = [packet dataAsJSON];
     NSArray* args = [data objectForKey:@"args"];
     id message = [args objectAtIndex:0]; // The real data is in the first element
     id<Serializable> result = [self deserializeObject:message];
+    
+    //    NSLog(@"\nJGC Packet Name = %@\nJGC message = %@",[packet name],message);
+    //
+    
+    NSString *fieldNameTriggerString = @"harvestWarehouseTotalIndividualInventory";
+    
+    if([result isKindOfClass:[PushCWUpdateResponse class]]){
+        if ([((PushCWUpdateResponse*)[self deserializeObject:message]).fieldName isEqualToString:fieldNameTriggerString]){
+            
+            
+        }
+    }
+    
+    
+    
+    
+    
+    if([result isKindOfClass:[PushCWUpdateResponse class]]){
+        NSLog(@"\nJGC Packet Name = %@\nJGC message = %@\nJGC ((PushCWUpdateResponse*)[self deserializeObject:message]).fieldName = %@",[packet name],message,((PushCWUpdateResponse*)[self deserializeObject:message]).fieldName);
+    }
+    
     
     if([[packet name] isEqualToString:@"gatewayConnectAck"]){
         self.reconnectID = message;
@@ -428,15 +511,15 @@ static PFSocketManager* sharedInstance;
     
     if(result){
         NSNotificationCenter *nc = [NSNotificationCenter defaultCenter];
-        [nc postNotificationName:[NSString stringWithFormat:@"didReceive%@", [[result class] description]] 
-                          object:nil 
+        [nc postNotificationName:[NSString stringWithFormat:@"didReceive%@", [[result class] description]]
+                          object:nil
                         userInfo:[NSDictionary dictionaryWithObject:result forKey:@"response"]];
         
         NSString* corrMessageId;
         if([result isKindOfClass:[AuthResponse class]]){
             corrMessageId = ((AuthResponse*)result).correspondingMessageId;
         }
-        else if([result isKindOfClass:[SyncResponse class]]){
+        else if([result isKindOfClass:[SyncResponse class]]){//√
             corrMessageId = ((SyncResponse*)result).correspondingMessageId;
             [self processSyncResponse:result];
         }
@@ -450,6 +533,7 @@ static PFSocketManager* sharedInstance;
             [socketIO sendJSON:ack];
         }
         
+        //JGC -
         PFInvocation* callback = [callbacks objectForKey:corrMessageId];
         
         //If this is a PushCWUpdateResponse then let's deal with it in processPushCWResponse, not here.
@@ -462,8 +546,8 @@ static PFSocketManager* sharedInstance;
 }
 
 - (void) socketIO:(SocketIO *)socket didSendMessage:(SocketIOPacket *)packet{
-    NSLog(@"didSendMessage: %@", packet);    
-}   
+    NSLog(@"didSendMessage: %@", packet);
+}
 
 
 /**
@@ -475,7 +559,7 @@ static PFSocketManager* sharedInstance;
     NSNotificationCenter *nc = [NSNotificationCenter defaultCenter];
     
     [nc addObserver:target selector:selector name:@"PFSocketConnected" object:nil];
-
+    
 }
 
 /**
