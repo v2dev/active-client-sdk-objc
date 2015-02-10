@@ -189,6 +189,7 @@ NSString *paramString(NSArray *params);
         
     }
     
+    
     ClassIDPair *theTargetClassIdPair = [pushCWResponse valueForKey:@"classIDPair"];
     NSString * targetClassName = [Utility translateRemoteClassName:theTargetClassIdPair.className];
     NSString * targetId = theTargetClassIdPair.ID;
@@ -250,11 +251,11 @@ NSString *paramString(NSArray *params);
             // and let's save the callback with a more permanent and unique key that contains the
             // fieldName + _2014_ + calssIDPair.ID + Parameters
             
-            id valueForKey = [callbacks objectForKey:corrMessageId];//Grab the callback object for corrMessageId
+             id valueForKey = [callbacks objectForKey:corrMessageId];//Grab the callback object for corrMessageId
             [callbacks setObject:valueForKey forKey:[self stringForKey2014:pushCWResponse]];//Add new key for this callback object
             [callbacks removeObjectForKey:corrMessageId];//remove old key
         }else{
-            
+
             //Since this is an update response from the server, let's get the callback and invoke it
             callback = [self objectForKey2014:pushCWResponse];
             [callback invokeWithArgument:pushCWResponse];
@@ -285,7 +286,7 @@ NSString *paramString(NSArray *params) {
 
 
 - (void) processSyncResponse:(SyncResponse *) syncResponse{
-    
+  
     id <NSCopying> key = [syncResponse.correspondingMessageId copy];
     
     if([syncResponse isKindOfClass:[ConnectResponse class]]){
@@ -384,9 +385,9 @@ NSString *paramString(NSArray *params) {
             
         } else if ([syncResponse isKindOfClass:[PushCWUpdateResponse class]]) {
             
-            [self processPushCWResponse:(PushCWUpdateResponse *)syncResponse];//√
-            
-        } else {
+                [self processPushCWResponse:(PushCWUpdateResponse *)syncResponse];//√
+                
+            } else {
             // since we didn't request this and the server didn't push it, just ignore this request
         }
         
@@ -521,7 +522,7 @@ NSString *paramString(NSArray *params) {
         }
         else if([result isKindOfClass:[SyncResponse class]]){//√
             corrMessageId = ((SyncResponse*)result).correspondingMessageId;
-            [self processSyncResponse:result];
+           [self processSyncResponse:result];
         }
         
         if (corrMessageId && [corrMessageId isKindOfClass:[NSString class]]){
