@@ -241,9 +241,14 @@ NSString *paramString(NSArray *params);
         
         pushCWResponse.value=value;
         
-        //If this is the initial pass, then the following statement is true
+        //If this is the initial response, then the following statement is true
         if (![self objectForKey2014:pushCWResponse]){
             
+            if ([pushCWResponse.fieldName isEqualToString:@"finishedProductContainerDropsSortedByDescendingReservedDateWhichCompletedBetween"]){
+ 
+                NSLog(@"\nJGC InitRecvd PFInvocation=%p Target=%@ Selector=%@",callback,callback.target,NSStringFromSelector(callback.selector));
+                NSLog(@"\n");
+            }
             //Initial Pass
             
             //let's invoke the callback
@@ -255,6 +260,10 @@ NSString *paramString(NSArray *params);
             [callbacks setObject:valueForKey forKey:[self stringForKey2014:pushCWResponse]];//Add new key for this callback object
             [callbacks removeObjectForKey:corrMessageId];//remove old key
         }else{
+            if ([pushCWResponse.fieldName isEqualToString:@"finishedProductContainerDropsSortedByDescendingReservedDateWhichCompletedBetween"]){
+                NSLog(@"\nJGC RecUpdate PFInvocation=%p Target=%@ Selector=%@",callback,callback.target,NSStringFromSelector(callback.selector));
+                NSLog(@"\n");
+            }
 
             //Since this is an update response from the server, let's get the callback and invoke it
             callback = [self objectForKey2014:pushCWResponse];
@@ -409,7 +418,13 @@ NSString *paramString(NSArray *params) {
         if([data isKindOfClass:[PushCWUpdateRequest class]]){
             // if data.param != nil then
             //
-            
+            if ([((PushCWUpdateRequest*)data).fieldName isEqualToString:@"finishedProductContainerDropsSortedByDescendingReservedDateWhichCompletedBetween"]){
+                NSLog(@"\nJGC SendEvent PFInvocation=%p Target=%@ Selector=%@",inv,inv.target,NSStringFromSelector(inv.selector));
+                NSLog(@"\n");
+                
+                
+                
+            }
             
         }
         
@@ -501,9 +516,9 @@ NSString *paramString(NSArray *params) {
     
     
     
-    if([result isKindOfClass:[PushCWUpdateResponse class]]){
-        NSLog(@"\nJGC Packet Name = %@\nJGC message = %@\nJGC ((PushCWUpdateResponse*)[self deserializeObject:message]).fieldName = %@",[packet name],message,((PushCWUpdateResponse*)[self deserializeObject:message]).fieldName);
-    }
+//    if([result isKindOfClass:[PushCWUpdateResponse class]]){
+//        NSLog(@"\nJGC Packet Name = %@\nJGC message = %@\nJGC ((PushCWUpdateResponse*)[self deserializeObject:message]).fieldName = %@",[packet name],message,((PushCWUpdateResponse*)[self deserializeObject:message]).fieldName);
+//    }
     
     
     if([[packet name] isEqualToString:@"gatewayConnectAck"]){
