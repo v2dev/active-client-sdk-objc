@@ -81,6 +81,7 @@ NSString *paramString(NSArray *params);
          * Setup the socket connection
          */
         EnvConfig* config = [EnvConfig sharedInstance];
+        socketIO.useSecure = ([[config getEnvProperty:@"socket.port"] intValue] == 443 ? true : false);
         [socketIO connectToHost:[config getEnvProperty:@"socket.host"] onPort:[[config getEnvProperty:@"socket.port"] intValue]];
         isConnecting = true;
         double delayInSeconds = 5.0;
