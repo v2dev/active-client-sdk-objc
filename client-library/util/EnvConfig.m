@@ -20,6 +20,18 @@ static EnvConfig* sharedInstance;
     return sharedInstance;
 }
 
++ (void)resetSharedInstance {
+    sharedInstance = nil;
+}
+
++ (EnvConfig*) sharedInstanceForQA{
+    if (!sharedInstance) {
+        sharedInstance = [[EnvConfig alloc] initForQA];
+    }
+    
+    return sharedInstance;
+}
+
 /**
  * function getEnvProperty
  *
@@ -59,6 +71,22 @@ static EnvConfig* sharedInstance;
     return prop;
 }
 
+-(id) initForQA{
+    self  = [super init];
+    if(self){
+        //        NSString* configuration = [[[NSBundle mainBundle] infoDictionary] objectForKey:@"Configuration"];
+        NSBundle* bundle = [NSBundle mainBundle];
+        NSString* envsPListPath = [bundle pathForResource:@
+                                   "env_qa" ofType:@"plist"];
+        NSDictionary* environments = [[NSDictionary alloc] initWithContentsOfFile:envsPListPath];
+        //        configs = [environments objectForKey:configuration];
+        configs = [environments objectForKey:@"Environment"];
+    }
+    
+    return self;
+}
+
+
 -(id) init{
     self  = [super init]; 
     if(self){
@@ -73,6 +101,8 @@ static EnvConfig* sharedInstance;
     
     return self;
 }
+
+
 
 - (NSString*) stringForKey:(NSString*) key inDict:(NSDictionary*)dict{
     NSString* result = @"";

@@ -4,7 +4,11 @@
 //
 //  Created by Jonathan Samples on 8/2/12.
 //
-// Last Commit Message: Added requestServerSideDerivedCollectionWithRootObject:changeWatcherFieldName:param:callbackTarget:callbackSelector
+// Commit 2015/04/13 concurrent with Global Vision Build 1.8.118
+//      To EnvConfig class
+//          Added + (EnvConfig*) sharedInstanceForQA;
+//          Added + (void)resetSharedInstance;
+
 
 #import <Foundation/Foundation.h>
 #import <Percero/PFClient.h>

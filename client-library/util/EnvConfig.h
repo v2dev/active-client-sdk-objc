@@ -21,7 +21,9 @@ typedef enum {
 + (NSString *) oauthProviderKeyForPFOauthProviderType:(PFOauthProviderType)pfOauthProviderType;
 + (NSDictionary *) oauthProviderDictForKey:(NSString *) key;
 
++ (void)resetSharedInstance;
 + (EnvConfig*) sharedInstance;
++ (EnvConfig*) sharedInstanceForQA;
 - (NSString*) getEnvProperty:(NSString*) propName;
 - (NSDictionary *) getEnvDictionary:(NSString *)keyPath;
 -(NSArray *) oauthProviderKeys;
