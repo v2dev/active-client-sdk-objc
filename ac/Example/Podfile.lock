@@ -1,0 +1,38 @@
+PODS:
+  - ActiveStack (0.1.0)
+  - Expecta (1.0.2)
+  - Expecta+Snapshots (2.0.0):
+    - Expecta (~> 1.0)
+    - FBSnapshotTestCase/Core (~> 2.0.3)
+  - FBSnapshotTestCase (2.0.4):
+    - FBSnapshotTestCase/SwiftSupport (= 2.0.4)
+  - FBSnapshotTestCase/Core (2.0.4)
+  - FBSnapshotTestCase/SwiftSupport (2.0.4):
+    - FBSnapshotTestCase/Core
+  - socket.IO (0.5.2):
+    - SocketRocket (~> 0.2)
+  - SocketRocket (0.4.1)
+  - Specta (1.0.3)
+
+DEPENDENCIES:
+  - ActiveStack (from `../`)
+  - Expecta
+  - Expecta+Snapshots
+  - FBSnapshotTestCase
+  - socket.IO (~> 0.4)
+  - Specta
+
+EXTERNAL SOURCES:
+  ActiveStack:
+    :path: ../
+
+SPEC CHECKSUMS:
+  ActiveStack: 34a5453992e36310ccdcdb7727467c85093371c8
+  Expecta: 54e8a3530add08f4f0208c111355eda7cde74a53
+  Expecta+Snapshots: 29b38dd695bc72a0ed2bea833937d78df41943ba
+  FBSnapshotTestCase: d94cf34841c9e77390e29009e8e2713479d48753
+  socket.IO: eaaaea33481d8a81d8f78e331f0c72ba44758036
+  SocketRocket: ee0b5c34182d37bb4f1f8d628bbe737718126daa
+  Specta: cf3e4188cf35375c3ee2cd03f8db8f1f4ef98234
+
+COCOAPODS: 0.38.2
