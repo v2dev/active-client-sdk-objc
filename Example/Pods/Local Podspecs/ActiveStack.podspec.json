@@ -9,7 +9,7 @@
     "iosvimbrij": "dj@vimbrij.com"
   },
   "source": {
-    "git": "https://github.com/<GITHUB_USERNAME>/ActiveStack.git",
+    "git": "https://github.com/ActiveStack/active-client-sdk-objc.git",
     "tag": "0.1.0"
   },
   "platforms": {
