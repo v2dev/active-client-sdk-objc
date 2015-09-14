@@ -1,6 +1,6 @@
 //
 //  JsonObject.h
-//  Percero
+//  ActiveStack
 //
 //  Created by Jeff Wolski on 7/22/13.
 //

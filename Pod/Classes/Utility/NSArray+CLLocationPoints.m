@@ -1,6 +1,6 @@
 //
 //  NSArray+CLLocationPoints.m
-//  Percero
+//  ActiveStack
 //
 //  Created by Jeff Wolski on 9/11/13.
 //

@@ -1,0 +1,1 @@
+../../../../../Pod/Classes/embedded/socket.IO/SocketIOTransportWebsocket.h

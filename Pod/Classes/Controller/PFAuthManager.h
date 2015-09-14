@@ -1,6 +1,6 @@
 //
 //  PFAuthManager.h
-//  Percero
+//  ActiveStack
 //
 //  Created by Jeff Wolski on 4/16/13.
 //

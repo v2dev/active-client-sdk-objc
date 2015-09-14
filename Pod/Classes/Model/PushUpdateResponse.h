@@ -1,6 +1,6 @@
 //
 //  PushUpdateResponse.h
-//  Percero
+//  ActiveStack
 //
 //  Created by Jeff Wolski on 3/13/13.
 //

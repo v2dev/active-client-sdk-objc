@@ -1,6 +1,6 @@
 //
 //  SSDC_Response.h
-//  Percero
+//  ActiveStack
 //
 //  Created by John Coumerilh on 12/5/14.
 //

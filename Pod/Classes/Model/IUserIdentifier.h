@@ -1,6 +1,6 @@
 //
 //  IUserIdentifier.h
-//  Percero
+//  ActiveStack
 //
 //  Created by Jeff Wolski on 4/19/13.
 //
