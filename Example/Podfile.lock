@@ -1,0 +1,14 @@
+PODS:
+  - ActiveStack (0.1.0)
+
+DEPENDENCIES:
+  - ActiveStack (from `../`)
+
+EXTERNAL SOURCES:
+  ActiveStack:
+    :path: ../
+
+SPEC CHECKSUMS:
+  ActiveStack: f19b22dab42ec4725e5024a665fcd3caff0fd03b
+
+COCOAPODS: 0.38.2

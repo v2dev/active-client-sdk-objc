@@ -1,0 +1,1 @@
+../../../../../Pod/Classes/Model/GetAllByNameResponse.h

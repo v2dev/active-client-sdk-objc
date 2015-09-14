@@ -1,0 +1,1 @@
+../../../../../Pod/Classes/Model/_Super_RegisteredApplication.h
