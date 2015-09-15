@@ -6,7 +6,7 @@
 //  Copyright (c) 2013 John Coumerilh. All rights reserved.
 //
 
-#import <Percero/Percero.h>
+#import <ActiveStack/ActiveStack.h>
 #import "PFGoogleOauth.h"
 #import "GTMOAuth2ViewControllerTouch.h"
 
@@ -131,7 +131,7 @@ static PFGoogleOauth* sharedInstance=nil;
         NSLog(@"OAuth Error: %@", error);
     } else {
         NSLog(@"OAuth Success!");
-        [PFClient loginWithOAuthCode:[auth code] callbackTarget:[PFGoogleOauth sharedInstance] method:@selector(pfLoginCompleted:)];
+        //!!!! [PFClient loginWithOAuthCode:[auth code] callbackTarget:[PFGoogleOauth sharedInstance] method:@selector(pfLoginCompleted:)];
     }
 }
 
