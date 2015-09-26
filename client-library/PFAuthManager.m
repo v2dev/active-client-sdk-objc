@@ -22,7 +22,7 @@ static PFAuthManager *_sharedInstance = nil;
 @implementation PFAuthManager
 
 + (void)loginWithOauthKeypath:(NSString *)keypath
-             completionTarget:(UIViewController *)clientViewController{
+             delegate:(UIViewController *)clientViewController{
     [self sharedInstance].delegate = nil;
     if ([clientViewController conformsToProtocol:@protocol(PFAuthManagerDelegate)]) {
         [self sharedInstance].delegate =(id<PFAuthManagerDelegate>)clientViewController;
