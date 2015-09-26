@@ -19,6 +19,7 @@
 
 @interface PFAuthManager : NSObject <PFGitHubOauthDelegate>
 + (NSArray *) oauthProviderKeys;
-+ (void) loginWithOauthKeypath:(NSString *) keypath completionTarget:(UIViewController *)clientViewController;
++ (void) loginWithOauthKeypath:(NSString *) keypath delegate:(id<PFAuthManagerDelegate>)delegate;
++ (void) loginWithAuthenticationProvider:(NSString *)authProvider credential:(NSString *)credential delegate:(id<PFAuthManagerDelegate>)delegate;
 @property (nonatomic, weak) id<PFAuthManagerDelegate> delegate;
 @end

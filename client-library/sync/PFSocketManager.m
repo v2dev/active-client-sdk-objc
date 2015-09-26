@@ -32,6 +32,8 @@
 #import "PushCWUpdateRequest.h"
 #import "PFClient.h"
 #import "PFPersistence.h"
+#import "AuthenticationRequest.h"
+#import "AuthenticationResponse.h"
 
 @interface PFSocketManager () {
     NSTimer *messageTimer;
@@ -413,6 +415,9 @@ NSString *paramString(NSArray *params) {
     if([data isKindOfClass:[AuthRequest class]]){
         ((AuthRequest*)data).messageId = requestId;
     }
+    if([data isKindOfClass:[AuthenticationRequest class]]){
+        ((AuthenticationRequest*)data).messageId = requestId;
+    }
     else if([data isKindOfClass:[SyncRequest class]]){
         ((SyncRequest*)data).messageId = requestId;
         
@@ -501,8 +506,7 @@ NSString *paramString(NSArray *params) {
     id message = [args objectAtIndex:0]; // The real data is in the first element
     id<Serializable> result = [self deserializeObject:message];
     
-    //    NSLog(@"\nJGC Packet Name = %@\nJGC message = %@",[packet name],message);
-    //
+    NSLog(@"\n\nRCVD Packet Name = %@\nJGC message = %@",[packet name],message);
     
     NSString *fieldNameTriggerString = @"harvestWarehouseTotalIndividualInventory";
     
@@ -533,6 +537,9 @@ NSString *paramString(NSArray *params) {
                         userInfo:[NSDictionary dictionaryWithObject:result forKey:@"response"]];
         
         NSString* corrMessageId;
+        if([result isKindOfClass:[AuthenticationResponse class]]){
+            corrMessageId = ((AuthResponse*)result).correspondingMessageId;
+        }
         if([result isKindOfClass:[AuthResponse class]]){
             corrMessageId = ((AuthResponse*)result).correspondingMessageId;
         }

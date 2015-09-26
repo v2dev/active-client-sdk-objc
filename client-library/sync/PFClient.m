@@ -10,6 +10,8 @@
 #import "UserToken.h"
 #import "AuthenticateOAuthCodeResponse.h"
 #import "AuthenticateOAuthAccessTokenResponse.h"
+#import "AuthenticationRequest.h"
+#import "AuthenticationResponse.h"
 #import "AuthenticateOAuthAccessTokenRequest.h"
 #import "User.h"
 #import "EnvConfig.h"
@@ -164,6 +166,26 @@ static PFClient* _sharedInstance;
 }
 
 /**
+ * Callback method for when the login response is recieved
+ */
+- (void) receivedAuthenticateUsernamePasswordResponse:(id) result{
+  NSLog(@"PFClient Got auth response");
+  if ([result isMemberOfClass:[AuthenticationResponse class]]) {
+    AuthenticationResponse* response = (AuthenticationResponse*) result;
+    UserToken* userToken = response.result;
+    clientId = response.clientId;
+    userId = userToken.user.ID;
+    token = userToken.token;
+    [PFClient save];
+    if (token == nil) {
+      [self announceAuthenticated:false];
+    }
+    
+  }
+}
+
+
+/**
  * Callback method for when the regAppOAuths response is recieved
  */
 - (void) receivedGetRegAppOAuthsResponse{
@@ -219,6 +241,17 @@ static PFClient* _sharedInstance;
 
 /**
  * Service method to make it easier for the client application to issue a login request
+ */
++ (AuthenticationRequest *)newAuthenticateRequestWithAuthenticationProvider:(NSString *)authProvider Credential:(NSString *)credential {
+  AuthenticationRequest* req = [[AuthenticationRequest alloc] init];
+  req.authProvider = authProvider;
+  req.deviceId = [[NSUUID UUID] UUIDString];
+  req.credential = credential;
+  return req;
+}
+
+/**
+ * Service method to make it easier for the client application to issue a login request
  */ 
 + (bool) loginWithOAuthCode:(NSString *)oauthCode oauthKey:(NSString *)oauthKey callbackTarget:(NSObject *)target method:(SEL)selector{
     [self sharedInstance].lastOauthKey = oauthKey;
@@ -233,6 +266,24 @@ static PFClient* _sharedInstance;
     [[PFSocketManager sharedInstance] sendEvent:@"authenticateOAuthCode" data:req callback:callback];
     
     return true;
+}
+
+/**
+ * Service method to allow the client application to issue a login request using a
+ * custom authentication provider
+ */
++ (bool) loginWithAuthenticationProvider:(NSString *)authProvider credential:(NSString *)credential callbackTarget:(NSObject *)target method:(SEL)selector {
+  if(target && selector)
+    [PFClient addListenerForAuthEvents:target method:selector];
+  
+  AuthenticationRequest *req;
+  req = [self newAuthenticateRequestWithAuthenticationProvider:authProvider Credential:credential];
+  
+  PFInvocation* callback = [[PFInvocation alloc] initWithTarget:[PFClient sharedInstance] method:@selector(receivedAuthenticateUsernamePasswordResponse:)];
+  
+  [[PFSocketManager sharedInstance] sendEvent:@"authenticate" data:req callback:callback];
+  
+  return true;
 }
 
 /**
