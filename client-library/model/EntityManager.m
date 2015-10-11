@@ -95,6 +95,14 @@ static EntityManager* sharedInstance;
 - (id) deserializeObject:(id) obj{
     id <Serializable> result;
     if([obj isKindOfClass:[NSDictionary class]]){
+      NSMutableDictionary *prunedDictionary = [NSMutableDictionary dictionary];
+      for (NSString * key in [obj allKeys])
+      {
+        if (![[obj objectForKey:key] isKindOfClass:[NSNull class]])
+          [prunedDictionary setObject:[obj objectForKey:key] forKey:key];
+      }
+      obj = prunedDictionary;
+      
         BOOL isShell = NO;
 
         NSString* className = [obj objectForKey:@"cn"];
