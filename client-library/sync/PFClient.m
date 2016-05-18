@@ -30,6 +30,9 @@
 #import "ModelUtility.h"
 #import "IUserAnchor.h"
 #import "PFPersistence.h"
+#import "FindByExampleResponse.h"
+
+static CFTimeInterval kLoginTimeoutTime = 90.0;
 
 // The singleton
 static PFClient* _sharedInstance;
@@ -115,15 +118,7 @@ static PFClient* _sharedInstance;
     [PFClient sharedInstance];
 }
 
-/**
- * Sends out a message that the client has been authenticated or not
- */
-- (void) announceAuthenticated:(bool) isSuccessful{
-    NSNumber* success = [NSNumber numberWithBool:isSuccessful];
-    for (PFInvocation* inv in authListeners) {
-        [inv invokeWithArgument:success];
-    }
-}
+
 - (NSString *)userId{
     if (!userId) {
         userId = @"";
@@ -142,9 +137,35 @@ static PFClient* _sharedInstance;
     PFModelObject<IUserAnchor,PFModelObject> *currentUser = [[iUserAnchorClass alloc] init];
     [currentUser setUserId:self.userId];
     [currentUser setID:[[NSUUID UUID] UUIDString]];
-    [[self class] sendFindByExampleRequest:currentUser target:self method:@selector(socketReady)];
-
+    [[self class] sendFindByExampleRequest:currentUser target:self method:@selector(getAuthenticatedUserDidComplete:)];
+    self.currentUser = currentUser;
+    
 }
+
+
+-(void)getAuthenticatedUserDidComplete:(FindByExampleResponse *) response {
+    if ([[response result] isKindOfClass:[NSArray class]]) {
+        //We expect one user to be returned.  Bail otherwise.
+        if ([[response result] count] != 1) {
+            if ([response.result[0] conformsToProtocol:@protocol(IUserAnchor)]) {
+                self.currentUser = response.result[0];
+            }
+        }
+    }
+    
+    [loginTimeOutTimer invalidate];
+
+    
+    if (self.currentUser) {
+        [self.authDelegate authenticationDidSucceed];
+    }
+    else {
+        NSError *error = [NSError errorWithDomain:@"com.activestack.error" code:0 userInfo:@{NSLocalizedDescriptionKey: @"FAiled to load user object from server."}];
+        [self.authDelegate authenticationDidFailWithError:error];
+    }
+    self.authDelegate = nil;
+}
+
 
 /**
  * Callback method for when the login response is recieved
@@ -156,7 +177,7 @@ static PFClient* _sharedInstance;
         UserToken* userToken = response.result;
         clientId = userToken.clientId;
         userId = userToken.user.ID;
-        token = userToken.token;
+        self.token = userToken.token;
         refreshToken = response.refreshToken;
         accessToken = response.accessToken;
         
@@ -170,18 +191,38 @@ static PFClient* _sharedInstance;
  */
 - (void) receivedAuthenticateUsernamePasswordResponse:(id) result{
   NSLog(@"PFClient Got auth response");
-  if ([result isMemberOfClass:[AuthenticationResponse class]]) {
+
+if ([result isMemberOfClass:[AuthenticationResponse class]]) {
     AuthenticationResponse* response = (AuthenticationResponse*) result;
     UserToken* userToken = response.result;
     clientId = response.clientId;
-    userId = userToken.user.ID;
-    token = userToken.token;
-    [PFClient save];
-    if (token == nil) {
-      [self announceAuthenticated:false];
-    }
+    self.userId = userToken.user.ID;
+    self.token = userToken.token;
     
+    if (self.token.length > 0 && self.userId.length > 0 && [[(AuthenticationResponse *)result statusCode] integerValue] == 200) {
+        [PFClient save];
+        return;
+    }
+    else {
+        NSString *errorMessage = [(AuthenticationResponse *)result message];
+        [loginTimeOutTimer invalidate];
+        NSError *error = [NSError errorWithDomain:@"com.activestack.error" code:0 userInfo:@{NSLocalizedDescriptionKey: [NSString stringWithFormat:@"Error: %@",errorMessage]}];
+        [self.authDelegate authenticationDidFailWithError:error];
+        return;
+    }
   }
+    
+    [loginTimeOutTimer invalidate];
+    NSError *error = [NSError errorWithDomain:@"com.activestack.error" code:0 userInfo:@{NSLocalizedDescriptionKey: @"Server did not return a token."}];
+    [self.authDelegate authenticationDidFailWithError:error];
+}
+
+
+-(void) loginDidTimeOut {
+    [loginTimeOutTimer invalidate];
+    
+    NSError *error = [NSError errorWithDomain:@"com.activestack.error" code:0 userInfo:@{NSLocalizedDescriptionKey: NSLocalizedString(@"The server timed out while attempting to login.", nil)}];
+    [self.authDelegate authenticationDidFailWithError:error];
 }
 
 
@@ -204,20 +245,10 @@ static PFClient* _sharedInstance;
  * object from the server... this signifies that we are ready to
  * start generating activity on the wire.
  */
-- (void) socketReady{
-    
-    if (self.currentUser) {
-        [self announceAuthenticated:true];
-    } else {
+- (void) socketReady {
+    if (!self.currentUser) {
         [self getAuthenticatedUser];
     }
-    
-
-}
-
-+ (void) addListenerForAuthEvents:(NSObject*)target method:(SEL)selector{
-    PFInvocation* inv = [[PFInvocation alloc] initWithTarget:target method:selector];
-    [[PFClient sharedInstance].authListeners addObject:inv];
 }
 
 
@@ -253,10 +284,9 @@ static PFClient* _sharedInstance;
 /**
  * Service method to make it easier for the client application to issue a login request
  */ 
-+ (bool) loginWithOAuthCode:(NSString *)oauthCode oauthKey:(NSString *)oauthKey callbackTarget:(NSObject *)target method:(SEL)selector{
++ (bool) loginWithOAuthCode:(NSString *)oauthCode oauthKey:(NSString *)oauthKey callbackTarget:(id<AuthenticationDelegate>)target method:(SEL)selector{
     [self sharedInstance].lastOauthKey = oauthKey;
-    if(target && selector)
-        [PFClient addListenerForAuthEvents:target method:selector];
+    [PFClient sharedInstance].authDelegate = target;
     
     AuthenticateOAuthCodeRequest *req;
     req = [self newAuthenticateOAuthRequestWithOauthCode:oauthCode];
@@ -268,14 +298,19 @@ static PFClient* _sharedInstance;
     return true;
 }
 
+
+-(void) startLoginTimeoutTimer {
+    loginTimeOutTimer = [NSTimer scheduledTimerWithTimeInterval:kLoginTimeoutTime target:self selector:@selector(loginDidTimeOut) userInfo:nil repeats:NO];
+}
+
 /**
  * Service method to allow the client application to issue a login request using a
  * custom authentication provider
  */
-+ (bool) loginWithAuthenticationProvider:(NSString *)authProvider credential:(NSString *)credential callbackTarget:(NSObject *)target method:(SEL)selector {
-  if(target && selector)
-    [PFClient addListenerForAuthEvents:target method:selector];
-  
++ (bool) loginWithAuthenticationProvider:(NSString *)authProvider credential:(NSString *)credential callbackTarget:(id<AuthenticationDelegate>)target method:(SEL)selector {
+  [PFClient sharedInstance].authDelegate = target;
+  [[PFClient sharedInstance] startLoginTimeoutTimer];
+    
   AuthenticationRequest *req;
   req = [self newAuthenticateRequestWithAuthenticationProvider:authProvider Credential:credential];
   
@@ -452,7 +487,7 @@ static PFClient* _sharedInstance;
     NSArray *paths = NSSearchPathForDirectoriesInDomains(NSLibraryDirectory, NSUserDomainMask, YES);
     NSString* path = [paths[0] stringByAppendingPathComponent:@"pfclient"];
     bool successful = [NSKeyedArchiver archiveRootObject:[PFClient sharedInstance] toFile:path];
-    NSLog(@"[PFClient save] was successful = %i",successful);
+   // NSLog(@"[PFClient save] was successful = %i",successful);
 }
 
 
@@ -490,8 +525,9 @@ static PFClient* _sharedInstance;
     _sharedInstance.accessToken = nil;
     _sharedInstance.refreshToken = nil;
     _sharedInstance.userId = nil;
+    _sharedInstance.currentUser = nil;
+    [[EntityManager sharedInstance] reset];
     [PFClient save];
-    
 }
 
 + (void)loginSavedSessionWithCallbackTarget:(NSObject *)target method:(SEL)selector{

@@ -106,7 +106,7 @@ NSString *entityName = @"JsonObject";
     NSError *errorFetchRequest;
     NSArray *fetchResults = [moc executeFetchRequest:request error:&errorFetchRequest];
     if (fetchResults && fetchResults.count) {
-        NSAssert(fetchResults.count == 1, @"Fetch should have returned 1 object instead of %d", fetchResults.count);
+        NSAssert(fetchResults.count == 1, @"Fetch should have returned 1 object instead of %ld", fetchResults.count);
         result = fetchResults[0];
     }
     return result;
@@ -146,8 +146,6 @@ NSString *entityName = @"JsonObject";
         jsonData = object.jsonData;
         newObject.jsonData = jsonData;
         newObject.jsonString = [[NSString alloc]initWithData:jsonData encoding:NSUTF8StringEncoding];
-        NSLog(@"newObject:%@", newObject);
-        
     }
 }
 

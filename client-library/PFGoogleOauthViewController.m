@@ -54,6 +54,7 @@
 }
 
 - (void)viewWillAppear:(BOOL)animated{
+    [super viewWillAppear:animated];
     [self.view addSubview:self.webView];
     self.webView.frame = self.view.bounds;
     [self.webView loadRequest:[self oauthURLRequest]];

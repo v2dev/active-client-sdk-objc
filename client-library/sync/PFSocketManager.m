@@ -53,7 +53,7 @@ NSString *paramString(NSArray *params);
 
 - (void) notifyModelDidChange{
     
-    //    NSLog(@"notifyModelDidChange");
+    //    //NSLog(@"notifyModelDidChange");
     NSNotificationCenter *nc = [NSNotificationCenter defaultCenter];
     NSString* notificationName = [NSString stringWithFormat:@"modelDidChange"];
     [nc postNotificationName:notificationName object:self];
@@ -69,7 +69,7 @@ NSString *paramString(NSArray *params);
     return syncRequests;
 }
 + (PFSocketManager*) sharedInstance{
-    DLog(@"");
+    //DLog(@"");
     if(!sharedInstance){
         sharedInstance = [[PFSocketManager alloc] init];
     }
@@ -229,7 +229,27 @@ NSString *paramString(NSArray *params);
         
         //Legacy
         PFModelObject *targetObject = [[EntityManager sharedInstance] entityForClass:targetClassName andId:targetId];
-        [callbacks removeObjectForKey:corrMessageId];
+        if (corrMessageId) {
+            [callbacks removeObjectForKey:corrMessageId];
+        }
+        else {
+            BOOL devMode = [[NSClassFromString(@"SharedProperties") performSelector:@selector(sharedInstance) withObject:nil] performSelector:@selector(isDevMode) withObject:nil];
+            if (devMode) {
+            static dispatch_once_t onceToken;
+                dispatch_once(&onceToken, ^{
+                    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Error" message:[NSString stringWithFormat:@"PushCWResponse with gatewayMessageID %@ does not have a coorespondingMessageID. This error will not repeat or show in production.",(NSObject *)[pushCWResponse gatewayMessageId]] delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
+                    [alert show];
+                });
+            
+            }
+            else {
+                [ [NSClassFromString(@"Heap") class] performSelector:@selector(track:withProperties:) withObject:@{@"Error":@"Missing CorrespondingId"} ];
+            }
+         }
+        
+        if ([value isKindOfClass:[NSArray class]]) {
+            value = [[NSClassFromString(@"PFObservableMutableArray") alloc] initWithArray:value];
+        }
         [targetObject setValue:value forKey:pushCWResponse.fieldName];
     }else{
         /*
@@ -249,8 +269,8 @@ NSString *paramString(NSArray *params);
             
             if ([pushCWResponse.fieldName isEqualToString:@"finishedProductContainerDropsSortedByDescendingReservedDateWhichCompletedBetween"]){
  
-                NSLog(@"\nJGC InitRecvd PFInvocation=%p Target=%@ Selector=%@",callback,callback.target,NSStringFromSelector(callback.selector));
-                NSLog(@"\n");
+                //NSLog(@"\nJGC InitRecvd PFInvocation=%p Target=%@ Selector=%@",callback,callback.target,NSStringFromSelector(callback.selector));
+                //NSLog(@"\n");
             }
             //Initial Pass
             
@@ -264,8 +284,8 @@ NSString *paramString(NSArray *params);
             [callbacks removeObjectForKey:corrMessageId];//remove old key
         }else{
             if ([pushCWResponse.fieldName isEqualToString:@"finishedProductContainerDropsSortedByDescendingReservedDateWhichCompletedBetween"]){
-                NSLog(@"\nJGC RecUpdate PFInvocation=%p Target=%@ Selector=%@",callback,callback.target,NSStringFromSelector(callback.selector));
-                NSLog(@"\n");
+                //NSLog(@"\nJGC RecUpdate PFInvocation=%p Target=%@ Selector=%@",callback,callback.target,NSStringFromSelector(callback.selector));
+                //NSLog(@"\n");
             }
 
             //Since this is an update response from the server, let's get the callback and invoke it
@@ -411,7 +431,7 @@ NSString *paramString(NSArray *params) {
  * This method takes care of assigning a message Id and sending the object across the wire
  */
 - (void) sendEvent:(NSString*)eventName data:(id<Serializable>)data callback:(PFInvocation *)inv {
-    NSString* requestId = (__bridge_transfer NSString*) CFUUIDCreateString(NULL, CFUUIDCreate(NULL));
+    NSString* requestId = [[NSUUID UUID] UUIDString];
     if([data isKindOfClass:[AuthRequest class]]){
         ((AuthRequest*)data).messageId = requestId;
     }
@@ -425,8 +445,8 @@ NSString *paramString(NSArray *params) {
             // if data.param != nil then
             //
             if ([((PushCWUpdateRequest*)data).fieldName isEqualToString:@"finishedProductContainerDropsSortedByDescendingReservedDateWhichCompletedBetween"]){
-                NSLog(@"\nJGC SendEvent PFInvocation=%p Target=%@ Selector=%@",inv,inv.target,NSStringFromSelector(inv.selector));
-                NSLog(@"\n");
+                //NSLog(@"\nJGC SendEvent PFInvocation=%p Target=%@ Selector=%@",inv,inv.target,NSStringFromSelector(inv.selector));
+                //NSLog(@"\n");
                 
                 
                 
@@ -458,8 +478,8 @@ NSString *paramString(NSArray *params) {
  * SocketIO Delegate Methods
  */
 - (void) socketIODidConnect:(SocketIO *)socket{
-    NSLog(@"Connected to socket!");
-    isConnected = true;
+    //NSLog(@"Connected to socket!");
+    self.isConnected = true;
     /**
      * Custom "connect" message required by PF Gateway
      */
@@ -482,18 +502,18 @@ NSString *paramString(NSArray *params) {
     isConnecting = false;
 }
 - (void) socketIODidDisconnect:(SocketIO *)socket{
-    NSLog(@"Disonnected from socket :(");
+    //NSLog(@"Disonnected from socket :(");
     
     //    self.lastSessionId = [socketIO valueForKey:@"_sid"];
     isConnected = false;
     [self connect];
 }
 - (void) socketIO:(SocketIO *)socket didReceiveMessage:(SocketIOPacket *)packet{
-    NSLog(@"Got Message: %@", packet.data);
+    //NSLog(@"Got Message: %@", packet.data);
     
 }
 - (void) socketIO:(SocketIO *)socket didReceiveJSON:(SocketIOPacket *)packet{
-    NSLog(@"didReceiveJSON: %@", packet);
+    //NSLog(@"didReceiveJSON: %@", packet);
 }
 
 /*
@@ -506,7 +526,7 @@ NSString *paramString(NSArray *params) {
     id message = [args objectAtIndex:0]; // The real data is in the first element
     id<Serializable> result = [self deserializeObject:message];
     
-    NSLog(@"\n\nRCVD Packet Name = %@\nJGC message = %@",[packet name],message);
+    //NSLog(@"\n\nRCVD Packet Name = %@\nJGC message = %@",[packet name],message);
     
     NSString *fieldNameTriggerString = @"harvestWarehouseTotalIndividualInventory";
     
@@ -522,7 +542,7 @@ NSString *paramString(NSArray *params) {
     
     
 //    if([result isKindOfClass:[PushCWUpdateResponse class]]){
-//        NSLog(@"\nJGC Packet Name = %@\nJGC message = %@\nJGC ((PushCWUpdateResponse*)[self deserializeObject:message]).fieldName = %@",[packet name],message,((PushCWUpdateResponse*)[self deserializeObject:message]).fieldName);
+//        //NSLog(@"\nJGC Packet Name = %@\nJGC message = %@\nJGC ((PushCWUpdateResponse*)[self deserializeObject:message]).fieldName = %@",[packet name],message,((PushCWUpdateResponse*)[self deserializeObject:message]).fieldName);
 //    }
     
     
@@ -561,7 +581,7 @@ NSString *paramString(NSArray *params) {
         PFInvocation* callback = [callbacks objectForKey:corrMessageId];
         
         //If this is a PushCWUpdateResponse then let's deal with it in processPushCWResponse, not here.
-        if(callback && ![result isKindOfClass:[PushCWUpdateResponse class]]){
+        if(corrMessageId && callback && ![result isKindOfClass:[PushCWUpdateResponse class]]){
             [callback invokeWithArgument:result];
             [callbacks removeObjectForKey:corrMessageId];
         }
@@ -570,7 +590,7 @@ NSString *paramString(NSArray *params) {
 }
 
 - (void) socketIO:(SocketIO *)socket didSendMessage:(SocketIOPacket *)packet{
-    NSLog(@"didSendMessage: %@", packet);
+    //NSLog(@"didSendMessage: %@", packet);
 }
 
 

@@ -14,6 +14,13 @@
 @class PFSocketManager;
 @class PushCWUpdateRequest;
 
+@protocol AuthenticationDelegate <NSObject>
+
+-(void) authenticationDidSucceed;
+-(void) authenticationDidFailWithError:(NSError *)error;
+
+@end
+
 @interface PFClient : NSObject <NSCoding>{
     PFSocketManager* syncManager;
     NSString* clientId;
@@ -25,6 +32,7 @@
     NSString* accessToken;
     NSString* refreshToken;
     NSMutableSet* authListeners;
+    NSTimer *loginTimeOutTimer;
 }
 @property (nonatomic, copy) NetworkReachable reachableBlock;
 @property (nonatomic, copy) NetworkUnreachable unReachableBlock;
@@ -38,6 +46,9 @@
 @property (nonatomic, readonly) NSMutableArray* regAppOAuths;
 @property (nonatomic, retain) NSMutableSet* authListeners;
 @property (nonatomic, strong) id<IUserAnchor> currentUser;
+
+@property (nonatomic, strong) id <AuthenticationDelegate> authDelegate;
+
 
 + (Class) iUserAnchorClass;
 + (NSString *) appName;

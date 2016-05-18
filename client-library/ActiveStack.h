@@ -25,3 +25,8 @@
 #import <ActiveStack/EnvConfig.h>
 #import <ActiveStack/IUserAnchor.h>
 #import <ActiveStack/IUserRole.h>
+
+#import <ActiveStack/PFTargetRelationship.h>
+#import <ActiveStack/PFSourceRelationship.h>
+#import <ActiveStack/NSMutableArray+PFUpdate.h>
+

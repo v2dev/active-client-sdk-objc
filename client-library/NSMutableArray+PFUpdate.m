@@ -35,13 +35,12 @@
     // sort objects
     // only preexsiting objects or candidates for being out of position
     
-    NSMutableIndexSet *currentIndiciesOfPreexistingObjects = [NSMutableIndexSet indexSetWithIndexesInRange:NSRangeFromString([NSString stringWithFormat:@"%d-%d",0,self.count])]; // build a set of all indexes
-    [currentIndiciesOfPreexistingObjects removeIndexes:indiciesOfObjectsToInsert]; // Drop indicies of objects that were removed. This leaves the indicies of preexisting objects.  This is independent of whether it's calculated before or after the deletions occur. JW
+    NSMutableIndexSet *currentIndiciesOfPreexistingObjects = [NSMutableIndexSet indexSetWithIndexesInRange:NSRangeFromString([NSString stringWithFormat:@"%d-%d",0,self.count])];[currentIndiciesOfPreexistingObjects removeIndexes:indiciesOfObjectsToInsert]; // Drop indicies of objects that were removed. This leaves the indicies of preexisting objects.  This is independent of whether it's calculated before or after the deletions occur. JW
     
     // perform the sort
     [currentIndiciesOfPreexistingObjects enumerateIndexesUsingBlock:^(NSUInteger currentPositionOfObject, BOOL *stop) {
         id preexistingObject = self[currentPositionOfObject];
-        if (preexistingObject != sourceArray[currentPositionOfObject]) {
+        if (sourceArray.count > currentPositionOfObject && preexistingObject != sourceArray[currentPositionOfObject]) {
             NSUInteger correctPositionOfObject = [sourceArray indexOfObject:preexistingObject];
             [self exchangeObjectAtIndex:currentPositionOfObject withObjectAtIndex:correctPositionOfObject];
         }

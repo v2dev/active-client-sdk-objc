@@ -20,11 +20,15 @@ static EntityManager* sharedInstance;
 
 @implementation EntityManager
 
+- (void) reset {
+    entityModel = [[NSMutableDictionary alloc] init];
+}
+
 - (id) init{
     self = [super init];
     if(self){
-        entityModel = [[NSMutableDictionary alloc] init];
         sharedInstance = self;
+        [self reset];
     }
     
     return self;
@@ -95,6 +99,14 @@ static EntityManager* sharedInstance;
 - (id) deserializeObject:(id) obj{
     id <Serializable> result;
     if([obj isKindOfClass:[NSDictionary class]]){
+      NSMutableDictionary *prunedDictionary = [NSMutableDictionary dictionary];
+      for (NSString * key in [obj allKeys])
+      {
+        if (![[obj objectForKey:key] isKindOfClass:[NSNull class]])
+          [prunedDictionary setObject:[obj objectForKey:key] forKey:key];
+      }
+      obj = prunedDictionary;
+      
         BOOL isShell = NO;
 
         NSString* className = [obj objectForKey:@"cn"];
@@ -105,7 +117,7 @@ static EntityManager* sharedInstance;
         }
         
         if(!className){
-            NSLog(@"unable to deserialize object.  Could not find classname.");
+            //NSLog(@"unable to deserialize object.  Could not find classname.");
             return nil;
         }
         
@@ -121,7 +133,7 @@ static EntityManager* sharedInstance;
         }
     }
     else if([obj isKindOfClass:[NSArray class]]){
-        NSMutableArray* obArray = [[NSMutableArray alloc] init];
+        NSMutableArray* obArray = [[NSClassFromString(@"PFObservableMutableArray") alloc] init];
                     
         for(id o in obj){
             id deserializedObject = [self deserializeObject:o];
@@ -180,8 +192,10 @@ static EntityManager* sharedInstance;
                 // target relationship is bi-directional
                 if (relationship.isCollection) {
                     if (!modelObject.isShell) {
-                        NSMutableArray *collection = [modelObject mutableArrayValueForKey:relationship.propertyName];
-                        [collection removeObject:modelObject];
+                        if ([modelObject valueForKey:relationship.propertyName]) {
+                            NSMutableArray *collection = [modelObject mutableArrayValueForKey:relationship.propertyName];
+                            [collection removeObject:modelObject];
+                        }
                     }
                     
                     
@@ -395,6 +409,9 @@ static EntityManager* sharedInstance;
 
 - (void) loadEntity:(id<PFModelObject>)entity{
     
+    if ([entity isKindOfClass:NSClassFromString(@"TimecardEntry")]) {
+        //NSLog(@"");
+    }
 //    PFClient* ad = [PFClient sharedInstance];
     [PFPersistence sendFindByIdRequestWithRemoteClassName:[entity remoteClassName] objectId:entity.ID callBackTarget:nil callbackMethod:nil];
     

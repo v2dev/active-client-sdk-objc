@@ -12,10 +12,14 @@
 @interface AuthResponse : NSObject <Serializable>{
     NSString* clientId;
 	NSString* correspondingMessageId;
+    NSNumber* statusCode;
+    NSString* message;
 }
 
 @property(nonatomic, retain) NSString* clientId;
 @property(nonatomic, retain) NSString* correspondingMessageId;
+@property(nonatomic, retain) NSNumber* statusCode;
+@property(nonatomic, retain) NSString* message;
 
 
 @end

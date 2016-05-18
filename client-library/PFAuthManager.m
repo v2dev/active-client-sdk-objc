@@ -21,25 +21,26 @@ static PFAuthManager *_sharedInstance = nil;
 
 @implementation PFAuthManager
 
+
 + (void)loginWithOauthKeypath:(NSString *)keypath
-             completionTarget:(UIViewController *)clientViewController{
+             delegate:(UIViewController *)clientViewController{
     [self sharedInstance].delegate = nil;
+    self.sharedInstance.isAuthenticating = true;
     if ([clientViewController conformsToProtocol:@protocol(PFAuthManagerDelegate)]) {
         [self sharedInstance].delegate =(id<PFAuthManagerDelegate>)clientViewController;
     }
     [[self sharedInstance] authorizeWithGitHubKeypath:keypath completionTarget:clientViewController];
 }
 
-+ (void) loginWithAuthenticationProvider:(NSString *)authProvider
+- (void) loginWithAuthenticationProvider:(NSString *)authProvider
                               credential:(NSString *)credential
                                 delegate:(id<PFAuthManagerDelegate>)delegate {
-  [self sharedInstance].delegate = nil;
-  if ([delegate conformsToProtocol:@protocol(PFAuthManagerDelegate)]) {
-    [self sharedInstance].delegate = delegate;
-  }
-  [[self sharedInstance] authorizeWithAuthenticationProver:authProvider credential:credential];
-  
+  self.isAuthenticating = true;
+  self.delegate = delegate;
+  [PFClient loginWithAuthenticationProvider:authProvider credential:credential callbackTarget:self method:@selector(providerBasedAuthenticationDidCompleteWithSuccess:)];
+    
 }
+
 
 + (NSArray *)oauthProviderKeys{
     NSArray * result = [[EnvConfig sharedInstance] oauthProviderKeys];
@@ -48,39 +49,39 @@ static PFAuthManager *_sharedInstance = nil;
 
 - (void) authorizeWithGitHubKeypath:(NSString *)keyPath
                    completionTarget:(UIViewController *)clientViewController{
+    self.isAuthenticating = true;
     self.oauthAuthenticationViewController = [[PFOauthViewController alloc] init];
     PFOauthViewController *controller = (PFOauthViewController *)self.oauthAuthenticationViewController;
     controller.oauthKey = keyPath;
     controller.delegate = self;
-    [clientViewController presentModalViewController:controller animated:YES];
+    [clientViewController presentViewController:controller animated:YES completion:nil];
 }
 
--(void) authorizeWithAuthenticationProver:(NSString *)authProvider credential:(NSString *)credential {
-  [PFClient loginWithAuthenticationProvider:authProvider credential:credential callbackTarget:self method:@selector(providerBasedAuthenticationDidCompleteWithSuccess:)];
-}
 
 #pragma mark - Provider Based Login Callback
--(void) providerBasedAuthenticationDidCompleteWithSuccess:(NSNumber *)success {
-  if ([success boolValue]) {
+-(void) authenticationDidSucceed {
     [self.delegate authenticationSucceeded];
-  }
-  else {
-    [self.delegate authenticationFailed];
-    self.delegate = nil;
-  }
 }
+
+-(void) authenticationDidFailWithError:(NSError *)error {
+    [self.delegate authenticationFailedWithError:error];
+}
+
 
 #pragma mark - PFGitHubOauthDelegate
 
 - (void)authenticationFailed{
-    [self.delegate authenticationFailed];
+    self.isAuthenticating = false;
+    NSError *error = [NSError errorWithDomain:@"com.activestack.error" code:0 userInfo:@{NSLocalizedDescriptionKey: @"Authentication Failed."}];
+    [self.delegate authenticationFailedWithError:error];
 }
 
 - (void)authenticationSucceededWithCode:(NSString *)code{
-
+    self.isAuthenticating = false;
     [PFClient loginWithOAuthCode:code oauthKey:self.oauthAuthenticationViewController.oauthKey callbackTarget:self method:@selector(didLogin:)];
 }
 - (void) didLogin:(id) package{
+  self.isAuthenticating = false;
   [self.delegate authenticationSucceeded];
 }
 

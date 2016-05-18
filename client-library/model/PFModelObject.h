@@ -8,6 +8,11 @@
 
 #import <Foundation/Foundation.h>
 #import "Serializable.h"
+
+
+void PF_PRINT_MODEL_STATS();
+char * PF_MODEL_STATS();
+
 @class  ClassIDPair;
 
 #pragma mark - PFModelObject protocol
@@ -34,6 +39,8 @@
 	BOOL isShell;
 	BOOL isLoading;
     NSString * ID;
+    
+    NSMutableDictionary *changeWatcherCache;
 };
 
 
@@ -46,6 +53,7 @@
 
 - (void) overwriteWith:(id<PFModelObject>) object;
 - (void) save;
+- (void) saveWithCompletionTarget:(id)target method:(SEL)method;
 - (void) delete;
 - (void) requestUpdate;
 - (ClassIDPair *) classIDPair; // populates class and ID only
@@ -55,7 +63,7 @@
 - (NSString*) remoteClassName;
 - (void)restoreDeletedRelationships;
 - (void) getChangeWatcherWithFieldName:(NSString *) fieldName parameters:(NSArray *) parameters;
-//- (void) getChangeWatcherWithFieldName:(NSString *) fieldName parameters:(NSArray *) parameters callBackTarget:(NSObject*) target callbackMethod:(SEL) method;
+//- (void) getUniqueChangeWatcherWithFieldName:(NSString *) fieldName parameters:(NSArray *) parameters callBackTarget:(NSObject*) target callbackMethod:(SEL) method;
 +(void)requestServerSideDerivedCollectionWithRootObject:(id)rootObject
                                  changeWatcherFieldName:(NSString *)changeWatcherFieldName
                                                   param:(NSArray*)param
@@ -65,4 +73,5 @@
 + (NSString *)remoteClassName;
 
 + (NSArray *) relationships;
+- (void) getUniqueChangeWatcherWithFieldName:(NSString *) fieldName parameters:(NSArray *) parameters;
 @end

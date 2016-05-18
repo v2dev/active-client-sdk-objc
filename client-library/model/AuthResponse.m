@@ -9,13 +9,15 @@
 #import "AuthResponse.h"
 
 @implementation AuthResponse
-@synthesize clientId, correspondingMessageId;
+@synthesize clientId, correspondingMessageId, statusCode, message;
 
 - (id) initFromDictionary:(NSDictionary *)dict{
     self = [super init];
     if(self){
         clientId = [dict valueForKey:@"clientId"];
         correspondingMessageId = [dict valueForKey:@"correspondingMessageId"];
+        statusCode = [dict valueForKey:@"statusCode"];
+        message = [dict valueForKey:@"message"];
     }
     
     return self;
@@ -32,6 +34,8 @@
     if(!isShell){
         [dict setObject:correspondingMessageId forKey:@"correspondingMessageId"];
         [dict setObject:clientId  forKey:@"clientId"];
+        [dict setObject:statusCode  forKey:@"statusCode"];
+        [dict setObject:message  forKey:@"message"];
     }
     
     return dict;

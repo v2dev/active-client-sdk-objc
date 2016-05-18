@@ -80,7 +80,7 @@
 }
 
 - (id)initWithDataObject:(PFModelObject *)dataObject keyPaths:(NSArray *)keypaths{
-    if ([self init]){
+    if (self = [super init]){
         _dataObject = dataObject;
         _keypaths = keypaths;
         

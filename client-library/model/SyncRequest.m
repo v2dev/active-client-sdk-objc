@@ -14,7 +14,7 @@
 - (id) init{
     self = [super init];
     if(self){
-        DLog(@"");
+//        DLog(@"");
         token = @"";
         clientId = @"";
         deviceId = @"";
@@ -54,7 +54,12 @@
     
     if(!isShell){
         [dict setObject:token forKey:@"token"];
-        [dict setObject:clientId forKey:@"clientId"];
+        
+        if (clientId!=nil) {
+             [dict setObject:clientId forKey:@"clientId"];
+        }
+        
+       
         [dict setObject:deviceId forKey:@"deviceId"];
         [dict setObject:userId  forKey:@"userId"];
         [dict setObject:messageId  forKey:@"messageId"];

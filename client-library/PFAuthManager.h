@@ -13,13 +13,20 @@
 @protocol PFAuthManagerDelegate <NSObject>
 
 - (void) authenticationSucceeded;
-- (void) authenticationFailed;
+- (void) authenticationFailedWithError:(NSError *)error;
 
 @end
 
 @interface PFAuthManager : NSObject <PFGitHubOauthDelegate>
+
 + (NSArray *) oauthProviderKeys;
 + (void) loginWithOauthKeypath:(NSString *) keypath delegate:(id<PFAuthManagerDelegate>)delegate;
-+ (void) loginWithAuthenticationProvider:(NSString *)authProvider credential:(NSString *)credential delegate:(id<PFAuthManagerDelegate>)delegate;
+
+- (void) loginWithAuthenticationProvider:(NSString *)authProvider credential:(NSString *)credential delegate:(id<PFAuthManagerDelegate>)delegate;
+
 @property (nonatomic, weak) id<PFAuthManagerDelegate> delegate;
+@property BOOL isAuthenticating;
+
++ (PFAuthManager *)sharedInstance;
+
 @end

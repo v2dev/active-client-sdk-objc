@@ -64,6 +64,7 @@
 }
 
 - (void)viewWillAppear:(BOOL)animated{
+    [super viewWillAppear:animated];
     self.webView = [[UIWebView alloc] init];
     self.webView.delegate = self;
     [self.view addSubview:self.webView];
@@ -129,8 +130,8 @@
     NSError *error;
     NSData *responseData = [NSURLConnection sendSynchronousRequest:oauthRequest returningResponse:&response error:&error];
     responseData = nil;
-//    NSString *responseString = [[NSString alloc] initWithData:responseData encoding:NSUTF8StringEncoding];
-//    NSLog(@"responseData:%@",responseString);
+    NSString *responseString = [[NSString alloc] initWithData:responseData encoding:NSUTF8StringEncoding];
+    NSLog(@"responseData:%@",responseString);
     
 }
 - (BOOL)webView:(UIWebView *)webView shouldStartLoadWithRequest:(NSURLRequest *)request navigationType:(UIWebViewNavigationType)navigationType{
