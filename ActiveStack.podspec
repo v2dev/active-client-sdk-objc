@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|
   s.name               = "ActiveStack"
-  s.version            = "0.2.1"
+  s.version            = "0.2.3"
   s.summary            = "Active Mobile Service Layer for ActiveStack iOS Clients."
   s.homepage           = "https://github.com/ActiveStack/active-client-sdk-objc"
   s.license            = 'MIT'
