@@ -15,6 +15,5 @@ Pod::Spec.new do |s|
   s.dependency 'Reachability'
   s.dependency 'socket.IO', '0.2.2'
   
-  s.description      = <<-DESC
-                       DESC
+  s.description      = 'ActiveStack Client Library'
 end
