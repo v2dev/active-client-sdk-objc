@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|
   s.name               = "ActiveStack"
-  s.version            = "0.2.3"
+  s.version            = "0.2.4"
   s.summary            = "Active Mobile Service Layer for ActiveStack iOS Clients."
   s.homepage           = "https://github.com/ActiveStack/active-client-sdk-objc"
   s.license            = 'MIT'
@@ -11,7 +11,7 @@ Pod::Spec.new do |s|
   s.prefix_header_file = 'client-library/ActiveStack-Prefix.pch'
   s.source_files       = 'client-library/**/*'
   
-  s.dependency 'gtm-oauth2'
+  s.dependency 'GTMOAuth2'
   s.dependency 'Reachability'
   s.dependency 'socket.IO', '0.2.2'
   
