@@ -40,6 +40,13 @@ static PFAuthManager *_sharedInstance = nil;
   [PFClient loginWithAuthenticationProvider:authProvider credential:credential callbackTarget:self method:@selector(providerBasedAuthenticationDidCompleteWithSuccess:)];
     
 }
+- (void) registerWithAuthenticationProvider:(NSString *)authProvider
+                              credential:(NSString *)credential
+                                delegate:(id<PFAuthManagerDelegate>)delegate {
+    self.isAuthenticating = true;
+    self.delegate = delegate;
+    [PFClient registerWithAuthenticationProvider:authProvider credential:credential callbackTarget:self method:@selector(providerBasedAuthenticationDidCompleteWithSuccess:)];
+}
 
 
 + (NSArray *)oauthProviderKeys{

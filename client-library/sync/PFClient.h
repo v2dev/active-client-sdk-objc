@@ -10,6 +10,7 @@
 #import "PFModelObject.h"
 #import "IUserAnchor.h"
 #import "Reachability.h"
+#import "AuthenticationRequest.h"
 
 @class PFSocketManager;
 @class PushCWUpdateRequest;
@@ -69,5 +70,11 @@
 + (void) autoLogin;
 + (void) logout;
 + (void) save;
+
++ (bool) registerWithAuthenticationProvider:(NSString *)authProvider credential:(NSString *)credential callbackTarget:(id<AuthenticationDelegate>)target method:(SEL)selector;
++ (AuthenticationRequest *)newRegisterRequestWithAuthenticationProvider:(NSString *)authProvider Credential:(NSString *)credential;
+
++ (void) sendRunProcessWithName:(NSString *) name parameters:(NSArray *) args target:(NSObject*) target method:(SEL) selector;
+
 
 @end

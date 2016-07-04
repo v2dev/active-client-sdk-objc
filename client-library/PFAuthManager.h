@@ -29,4 +29,8 @@
 
 + (PFAuthManager *)sharedInstance;
 
+- (void) registerWithAuthenticationProvider:(NSString *)authProvider
+                                 credential:(NSString *)credential
+                                   delegate:(id<PFAuthManagerDelegate>)delegate;
+
 @end
