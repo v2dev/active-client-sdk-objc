@@ -31,6 +31,7 @@
 #import "IUserAnchor.h"
 #import "PFPersistence.h"
 #import "FindByExampleResponse.h"
+#import "RunProcessRequest.h"
 
 static CFTimeInterval kLoginTimeoutTime = 90.0;
 
