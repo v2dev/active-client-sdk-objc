@@ -12,7 +12,6 @@
 #import "Reachability.h"
 #import "AuthenticationRequest.h"
 
-CLANG_ALLOW_NON_MODULAR_INCLUDES_IN_FRAMEWORK_MODULES = 'YES';
 
 @class PFSocketManager;
 @class PushCWUpdateRequest;
