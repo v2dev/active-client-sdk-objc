@@ -35,6 +35,9 @@
 #import "AuthenticationRequest.h"
 #import "AuthenticationResponse.h"
 
+#import "RunProcessRequest.h"
+#import "RunProcessResponse.h"
+
 @interface PFSocketManager () {
     NSTimer *messageTimer;
 }
@@ -235,17 +238,17 @@ NSString *paramString(NSArray *params);
         else {
             BOOL devMode = [[NSClassFromString(@"SharedProperties") performSelector:@selector(sharedInstance) withObject:nil] performSelector:@selector(isDevMode) withObject:nil];
             if (devMode) {
-            static dispatch_once_t onceToken;
+                static dispatch_once_t onceToken;
                 dispatch_once(&onceToken, ^{
                     UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Error" message:[NSString stringWithFormat:@"PushCWResponse with gatewayMessageID %@ does not have a coorespondingMessageID. This error will not repeat or show in production.",(NSObject *)[pushCWResponse gatewayMessageId]] delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
                     [alert show];
                 });
-            
+                
             }
             else {
                 [ [NSClassFromString(@"Heap") class] performSelector:@selector(track:withProperties:) withObject:@{@"Error":@"Missing CorrespondingId"} ];
             }
-         }
+        }
         
         if ([value isKindOfClass:[NSArray class]]) {
             value = [[NSClassFromString(@"PFObservableMutableArray") alloc] initWithArray:value];
@@ -268,7 +271,7 @@ NSString *paramString(NSArray *params);
         if (![self objectForKey2014:pushCWResponse]){
             
             if ([pushCWResponse.fieldName isEqualToString:@"finishedProductContainerDropsSortedByDescendingReservedDateWhichCompletedBetween"]){
- 
+                
                 //NSLog(@"\nJGC InitRecvd PFInvocation=%p Target=%@ Selector=%@",callback,callback.target,NSStringFromSelector(callback.selector));
                 //NSLog(@"\n");
             }
@@ -279,7 +282,7 @@ NSString *paramString(NSArray *params);
             // and let's save the callback with a more permanent and unique key that contains the
             // fieldName + _2014_ + calssIDPair.ID + Parameters
             
-             id valueForKey = [callbacks objectForKey:corrMessageId];//Grab the callback object for corrMessageId
+            id valueForKey = [callbacks objectForKey:corrMessageId];//Grab the callback object for corrMessageId
             [callbacks setObject:valueForKey forKey:[self stringForKey2014:pushCWResponse]];//Add new key for this callback object
             [callbacks removeObjectForKey:corrMessageId];//remove old key
         }else{
@@ -287,7 +290,7 @@ NSString *paramString(NSArray *params);
                 //NSLog(@"\nJGC RecUpdate PFInvocation=%p Target=%@ Selector=%@",callback,callback.target,NSStringFromSelector(callback.selector));
                 //NSLog(@"\n");
             }
-
+            
             //Since this is an update response from the server, let's get the callback and invoke it
             callback = [self objectForKey2014:pushCWResponse];
             [callback invokeWithArgument:pushCWResponse];
@@ -318,7 +321,7 @@ NSString *paramString(NSArray *params) {
 
 
 - (void) processSyncResponse:(SyncResponse *) syncResponse{
-  
+    
     id <NSCopying> key = [syncResponse.correspondingMessageId copy];
     
     if([syncResponse isKindOfClass:[ConnectResponse class]]){
@@ -400,6 +403,46 @@ NSString *paramString(NSArray *params) {
             
         }
         
+        // ProcessHelper
+        else if ([syncResponse isKindOfClass:[RunProcessResponse class]]) {
+            RunProcessResponse* runProcessResponse = (RunProcessResponse *) syncResponse;
+            RunProcessRequest* runProcessRequest = (RunProcessRequest *) matchingRequest;
+            
+            /*
+             
+             Currently server run process returnes BOOL flag hance PFModel Processing is not required but if in case server sends the PFModel object that would be required
+             
+             */
+//            NSArray *result = runProcessResponse.result;
+//            
+//            if((result.count == 1) && [runProcessRequest.theObject conformsToProtocol:@protocol(IUserAnchor)]){
+//                PFModelObject<IUserAnchor> *requestUser = runProcessRequest.theObject;
+//                PFModelObject<IUserAnchor> *responseUser = result[0];
+//                if ([requestUser.userId isEqualToString:responseUser.userId]) {
+//                    [[PFClient sharedInstance] setCurrentUser:responseUser];
+//                }
+//            }
+            
+            if (runProcessResponse.result) {
+                // TODO: notify the user that the Put was successful
+            } else {
+                // since the Put failed, we request an update from the server
+              
+
+                // TODO: notify the user that the Put failed
+            }
+
+            
+            NSLog(@"=== RunProcessResponse Result ==> %@ =====",runProcessResponse.result?@"YES":@"NO");
+            
+            /* The response will have result containing BOOL flag, which will tell Success or Failure of the process*/
+            [self notifyModelDidChange];
+            
+            
+        }
+        
+        
+        
         // remove matchingRequest
         
         [self.syncRequests removeObjectForKey:key];
@@ -417,9 +460,9 @@ NSString *paramString(NSArray *params) {
             
         } else if ([syncResponse isKindOfClass:[PushCWUpdateResponse class]]) {
             
-                [self processPushCWResponse:(PushCWUpdateResponse *)syncResponse];//√
-                
-            } else {
+            [self processPushCWResponse:(PushCWUpdateResponse *)syncResponse];//√
+            
+        } else {
             // since we didn't request this and the server didn't push it, just ignore this request
         }
         
@@ -541,9 +584,9 @@ NSString *paramString(NSArray *params) {
     
     
     
-//    if([result isKindOfClass:[PushCWUpdateResponse class]]){
-//        //NSLog(@"\nJGC Packet Name = %@\nJGC message = %@\nJGC ((PushCWUpdateResponse*)[self deserializeObject:message]).fieldName = %@",[packet name],message,((PushCWUpdateResponse*)[self deserializeObject:message]).fieldName);
-//    }
+    //    if([result isKindOfClass:[PushCWUpdateResponse class]]){
+    //        //NSLog(@"\nJGC Packet Name = %@\nJGC message = %@\nJGC ((PushCWUpdateResponse*)[self deserializeObject:message]).fieldName = %@",[packet name],message,((PushCWUpdateResponse*)[self deserializeObject:message]).fieldName);
+    //    }
     
     
     if([[packet name] isEqualToString:@"gatewayConnectAck"]){
@@ -565,7 +608,7 @@ NSString *paramString(NSArray *params) {
         }
         else if([result isKindOfClass:[SyncResponse class]]){//√
             corrMessageId = ((SyncResponse*)result).correspondingMessageId;
-           [self processSyncResponse:result];
+            [self processSyncResponse:result];
         }
         
         if (corrMessageId && [corrMessageId isKindOfClass:[NSString class]]){
@@ -582,6 +625,12 @@ NSString *paramString(NSArray *params) {
         
         //If this is a PushCWUpdateResponse then let's deal with it in processPushCWResponse, not here.
         if(corrMessageId && callback && ![result isKindOfClass:[PushCWUpdateResponse class]]){
+            [callback invokeWithArgument:result];
+            [callbacks removeObjectForKey:corrMessageId];
+        }
+        //If this is a PushCWUpdateResponse then let's deal with it in processPushCWResponse, not here.
+        else if(corrMessageId && callback && ![result isKindOfClass:[RunProcessResponse class]]){
+            
             [callback invokeWithArgument:result];
             [callbacks removeObjectForKey:corrMessageId];
         }
